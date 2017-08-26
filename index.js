@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var mongodb = require('mongodb');
 var bodyParser = require('body-parser');
@@ -48,15 +49,15 @@ app.use(expressValidator({
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-	var errors = req.session.errors;
-	req.session.errors = null;
-	var success = req.session.success;
-	req.session.success = null;
-	if(errors){
-		res.render('pages/index', {errors: errors});
+	let error = req.session.error;
+	req.session.error = null;
+	let message = req.session.message;
+	req.session.message = null;
+	if(error){
+		res.render('pages/index', {error: error});
 	}
-	else if(success){
-		res.render('pages/index', {success: success});
+	else if(message){
+		res.render('pages/index', {message: message});
 	}
 	else{
 		res.render('pages/index');
@@ -64,18 +65,62 @@ app.get('/', function(req, res) {
 });
 
 app.post('/mailingList/add', function(req, res){
-	req.checkBody('email', 'Enter your email').notEmpty();
-	req.checkBody('email', 'Enter a correct email').isEmail();
+	req.checkBody('email', 'Please enter your email address').notEmpty();
+	req.checkBody('email', 'Please enter a valid email address').isEmail();
 
-	var errors = req.validationErrors();
+	let error = req.validationErrors();
+	let message = null;
 
-	if(errors){
-		req.session.errors = errors;
+	if(error){
+		req.session.error = error[0].msg;
 		res.redirect('/');
 	}
 	else{
-		req.session.success = "You have been added to the mailing list";
-		res.redirect('/');
+		let newEmail = {email: req.body.email};
+		mongodb.MongoClient.connect(uri, function (err, db) {
+		    if(err){
+		    	console.log(err, newEmail);
+    			req.session.error = "Error adding to mailing list. Please try again later";
+			   	db.close();
+    			res.redirect('/');
+		    }
+		    else{
+    			db.collection("mailing_list").findOne({"email": newEmail.email}, function(err, doc){
+		    		if(err){
+		    			console.log(err, newEmail);
+		    			req.session.error = "Error adding to mailing list. Please try again later";
+					   	db.close();
+		    			res.redirect('/');
+    				}
+    				else{
+    					if(!doc){
+	    					db.collection("mailing_list").insertOne(newEmail, function(err, response){
+					    		if(err){
+					    			console.log(err, newEmail);
+					    			req.session.error = "Error adding to mailing list. Please try again later";
+								   	db.close();
+					    			res.redirect('/');
+
+					    		}
+					    		else{
+					    			console.log("Email Inserted");
+					    			req.session.message = "You have been added to the mailing list";
+								   	db.close();
+					    			res.redirect('/');	
+					    		}
+							});
+    					}
+    					else{
+			    			console.log("The email entered is already in the mailing list", newEmail);
+			    			req.session.error = "The email entered is already in the mailing list";
+						   	db.close();
+			    			res.redirect('/');
+    					}
+    				}
+    			});
+
+		    }
+		});
 	}
 });
 

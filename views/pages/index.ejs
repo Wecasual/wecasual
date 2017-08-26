@@ -2,23 +2,39 @@
 
 		<div class="logo"> </div>
 		<h2>eSports for everyone</h2>
-		<h3>Casual Dota 2 Leagues Coming soon!</h3>
+		<h3>Casual Dota 2 Leagues coming soon!</h3>
 		<div class="mailing-list">
-			<% if(typeof success !== 'undefined'){ %>
-				<p><%= success %></p>
-			<% }
-			else{ %>
-				<p>Join our mailing list for updates</p>
-				<form method="POST" action="/mailingList/add">
-					<div id="email-textbox-container">
-						<input type="text" name="email" placeholder='Enter email' id="email-textbox">
-						<% if(typeof errors !== 'undefined'){ %>
-							<span id="email-error"><%= errors[0].msg %></span>
-						<% } %>
-					</div>
-					<br>
-					<input type="submit" value="Submit" class="button">
-				</form>
-			<% } %>
+			<p>Join our mailing list for updates</p>
+			<form method="POST" action="/mailingList/add">
+				<div id="email-textbox-container">
+					<input type="text" name="email" placeholder='Enter email' id="email-textbox">
+				</div>
+				<input type="submit" value="Submit" class="button">
+				<div class=alert>
+					<% if(typeof error !== 'undefined'){ %>
+						<div class="alert-red">
+						 	<%= error %>
+						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						</div>
+					<% }
+					else if(typeof message !== 'undefined'){ %>
+						<div class="alert-green">
+						  <%= message %>
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						</div>
+					<% } %>
+				</div>
+			</form>
 		</div>
+		<script>
+			var close = document.getElementsByClassName("closebtn");
+			var i;
+			for (i = 0; i < close.length; i++) {
+			    close[i].onclick = function(){
+			        var div = this.parentElement.parentElement;
+			        div.style.opacity = "0";
+			        setTimeout(function(){ div.style.display = "none"; }, 600);
+			    }
+			}
+		</script>
 <% include ../partials/footer.ejs %>
