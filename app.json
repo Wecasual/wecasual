@@ -1,0 +1,6 @@
+{
+  "name": "Wecasual",
+  "description": "Wecasual site",
+  "repository": "https://git.heroku.com/wecasual.git",
+  "keywords": ["node", "express", "heroku"],
+}

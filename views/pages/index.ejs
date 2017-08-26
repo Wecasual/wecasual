@@ -1,0 +1,24 @@
+<% include ../partials/header.ejs %>
+
+		<div class="logo"> </div>
+		<h2>eSports for everyone</h2>
+		<h3>Casual Dota 2 Leagues Coming soon!</h3>
+		<div class="mailing-list">
+			<% if(typeof success !== 'undefined'){ %>
+				<p><%= success %></p>
+			<% }
+			else{ %>
+				<p>Join our mailing list for updates</p>
+				<form method="POST" action="/mailingList/add">
+					<div id="email-textbox-container">
+						<input type="text" name="email" placeholder='Enter email' id="email-textbox">
+						<% if(typeof errors !== 'undefined'){ %>
+							<span id="email-error"><%= errors[0].msg %></span>
+						<% } %>
+					</div>
+					<br>
+					<input type="submit" value="Submit" class="button">
+				</form>
+			<% } %>
+		</div>
+<% include ../partials/footer.ejs %>
