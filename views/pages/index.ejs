@@ -1,5 +1,5 @@
 <% include ../partials/header.ejs %>
-
+		<!-- MUST UPDATE LOGO -->
 		<div class="logo"> </div>
 		<h2>eSports for everyone</h2>
 		<h3>Casual Dota 2 Leagues coming soon!</h3>
@@ -14,13 +14,13 @@
 					<% if(typeof error !== 'undefined'){ %>
 						<div class="alert-red">
 						 	<%= error %>
-						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
 					<% }
 					else if(typeof message !== 'undefined'){ %>
 						<div class="alert-green">
 						  <%= message %>
-						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
 					<% } %>
 				</div>
