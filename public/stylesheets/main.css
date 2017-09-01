@@ -1,6 +1,7 @@
 body{
   font-size: 14px;
-  font-family: 'Saira Semi Condensed', sans-serif;
+  /*font-family: 'Saira Semi Condensed', sans-serif;*/
+  font-family: 'Questrial', sans-serif;
   text-align: center;
   background-color: #fff;
   margin: 0;
@@ -21,7 +22,7 @@ h2{
   color: #000;
   font-style: italic;
   font-weight: lighter;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 h3{
@@ -36,10 +37,10 @@ h3{
   text-align: center;
   margin:auto;
   margin-top: 140px;
-  height: 176px;
-  width: 945px;
+  height: 531px;
+  width: 788px;
   background-image: url("logo.png");
-  background-size: 945px 176px;
+  background-size: 788px 531px;
   background-repeat: no-repeat;
 
 }
@@ -77,7 +78,7 @@ h3{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-family: 'Saira Semi Condensed', sans-serif;
+    font-family: 'Questrial', sans-serif;
     font-size: 0.70em;
 }
 
