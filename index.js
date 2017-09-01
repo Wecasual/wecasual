@@ -106,7 +106,7 @@ app.post('/mailingList/add', function(req, res){
 					    			console.log("Email Inserted");
 					    			req.session.message = "You have been added to the mailing list";
 								   	db.close();
-					    			res.redirect('/');	
+					    			res.redirect('/');
 					    		}
 							});
     					}
@@ -127,3 +127,5 @@ app.post('/mailingList/add', function(req, res){
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+//Comment
