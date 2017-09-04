@@ -18,13 +18,13 @@
 				</div>
 				<input type="submit" value="Submit" class="button">
 				<div class=alert>
-					<% if(typeof error !== 'undefined'){ %>
+					<% if(error){ %>
 						<div class="alert-red">
 						 	<%= error %>
 						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
 					<% }
-					else if(typeof message !== 'undefined'){ %>
+					else if(message){ %>
 						<div class="alert-green">
 						  <%= message %>
 						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>

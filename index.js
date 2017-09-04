@@ -7,9 +7,8 @@ var session = require('express-session');
 var passport = require('passport');
 var passportSteam = require('passport-steam');
 
-
 var ObjectId = require('mongodb').ObjectId;
-var uri = process.env.MONGODB_URI;
+const MONGO_URI = process.env.MONGODB_URI;
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
@@ -92,15 +91,7 @@ app.get('/', function(req, res) {
 	req.session.error = null;
 	let message = req.session.message;
 	req.session.message = null;
-	if(error){
-		res.render('pages/index', {error: error});
-	}
-	else if(message){
-		res.render('pages/index', {message: message});
-	}
-	else{
-		res.render('pages/index', { user: req.user });
-	}
+	res.render('pages/index', { user: req.user, message: message, error: error});
 });
 
 app.get('/about', function(req, res){
@@ -137,6 +128,7 @@ app.post('/mailingList/add', function(req, res){
 
 	let error = req.validationErrors();
 	let message = null;
+  console.log(MONGO_URI);
 
 	if(error){
 		req.session.error = error[0].msg;
@@ -144,7 +136,7 @@ app.post('/mailingList/add', function(req, res){
 	}
 	else{
 		let newEmail = {email: req.body.email};
-		mongodb.MongoClient.connect(uri, function (err, db) {
+		mongodb.MongoClient.connect(MONGO_URI, function (err, db) {
 		    if(err){
 		    	console.log(err, newEmail);
     			req.session.error = "Error adding to mailing list. Please try again later";
