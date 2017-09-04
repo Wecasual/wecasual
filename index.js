@@ -4,7 +4,8 @@ var mongodb = require('mongodb');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var session = require('express-session');
-
+var passport = require('passport');
+var passportSteam = require('passport-steam');
 
 
 var ObjectId = require('mongodb').ObjectId;
@@ -22,7 +23,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 //Session middleware
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({
+    secret: 'aqua secret',
+    name: 'wecasual session',
+    resave: true,
+    saveUninitialized: true}));
 
 //Body Parser Middleware
 app.use(bodyParser.json());
@@ -46,6 +51,40 @@ app.use(expressValidator({
   }
 }));
 
+//passport-steam Middleware https://github.com/liamcurry/passport-steam
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+passport.use(new passportSteam.Strategy({
+    returnURL: 'http://localhost:5000/auth/steam/return',
+    realm: 'http://localhost:5000/',
+    apiKey: '162FD43454D97C2E629FAE6026C4BD53'
+  },
+  function(identifier, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's Steam profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Steam account with a user record in your database,
+      // and return that user instead.
+      profile.identifier = identifier;
+      return done(null, profile);
+    });
+  }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
@@ -60,9 +99,37 @@ app.get('/', function(req, res) {
 		res.render('pages/index', {message: message});
 	}
 	else{
-		res.render('pages/index');
+		res.render('pages/index', { user: req.user });
 	}
 });
+
+app.get('/about', function(req, res){
+  res.render('pages/about');
+});
+
+//==========Steam login stuff==========
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/auth/steam/return',
+  passport.authenticate('steam', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+app.get('/auth/steam',
+  passport.authenticate('steam', { failureRedirect: '/' }),
+  function(req, res) {
+    console.log('redirect');
+    res.redirect('/');
+});
+//==========End steam login stuff==========
 
 app.post('/mailingList/add', function(req, res){
 	req.checkBody('email', 'Please enter your email address').notEmpty();
@@ -127,3 +194,8 @@ app.post('/mailingList/add', function(req, res){
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}

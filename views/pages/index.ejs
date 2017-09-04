@@ -3,6 +3,13 @@
 		<div class="logo"> </div>
 		<h2>eSports for everyone</h2>
 		<h3>Casual Dota 2 Leagues coming soon!</h3>
+		<p><a href="/about"> About </a></p>
+		<% if (!user) { %>
+			<h2>Welcome! Please log in.</h2>
+			<p><a href="auth/steam">Sign On with Steam</a></p>
+		<% } else { %>
+			<h2>Hello, <%= user.displayName %>. - <a href='logout'>Logout</a></h2>
+		<% } %>
 		<div class="mailing-list">
 			<p>Join our mailing list for updates</p>
 			<form method="POST" action="/mailingList/add">
@@ -14,13 +21,13 @@
 					<% if(typeof error !== 'undefined'){ %>
 						<div class="alert-red">
 						 	<%= error %>
-						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						 	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
 					<% }
 					else if(typeof message !== 'undefined'){ %>
 						<div class="alert-green">
 						  <%= message %>
-						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
 					<% } %>
 				</div>
