@@ -6,9 +6,13 @@ var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
 var passportSteam = require('passport-steam');
+var user = require('./repos/profiles');
+
+
 
 var ObjectId = require('mongodb').ObjectId;
-const MONGO_URI = process.env.MONGODB_URI;
+//Can't use the .env mongodb uri because it is undefined for some reason. Worked before 4/9/2017, now it doesn't
+const MONGO_URI = 'mongodb://heroku_ht4hl31j:9voqfjcq47cr9tlg7l07isp4po@ds157873.mlab.com:57873/heroku_ht4hl31j';//process.env.MONGODB_URI;
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
@@ -67,16 +71,8 @@ passport.use(new passportSteam.Strategy({
     apiKey: '162FD43454D97C2E629FAE6026C4BD53'
   },
   function(identifier, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-
-      // To keep the example simple, the user's Steam profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Steam account with a user record in your database,
-      // and return that user instead.
-      profile.identifier = identifier;
-      return done(null, profile);
-    });
+    //Get user from account.js with identifier
+    //return user
   }
 ));
 
