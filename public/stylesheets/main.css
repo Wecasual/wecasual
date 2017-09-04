@@ -1,114 +1,35 @@
-body{
-  font-size: 14px;
-  font-family: 'Saira Semi Condensed', sans-serif;
-  text-align: center;
-  background-color: #fff;
-  margin: 0;
-  color: #fff;
+.body{
+  font-family: 'Questrial', sans-serif;
+}
+.container{
+    font-family: 'Questrial', sans-serif;
 }
 
-h1{
-  text-align: left;
-  padding-left: 25px;
-  font-weight: lighter;
-  margin-top: 21px;
-
-}
-
-h2{
-  font-size: 3em;
-  text-align: center;
-  color: #000;
-  font-style: italic;
-  font-weight: lighter;
-  margin-top: 5px;
-}
-
-h3{
-  margin-top: 120px;
-  font-size: 3.5em;
-  color: #000;
-  font-weight: lighter;
-}
-
-
-.logo{
-  text-align: center;
-  margin:auto;
-  margin-top: 140px;
-  height: 176px;
-  width: 945px;
-  background-image: url("logo.png");
-  background-size: 945px 176px;
-  background-repeat: no-repeat;
-
-}
-#header-nav{
+.navbar-brand{
+  font-family: 'Questrial', sans-serif;
   font-size: 1.5em;
-  text-align: center;
-  list-style-type: none;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  padding: 0;
-  height: 95px;
-  background-color: #000;
-  border-bottom: 5px;
-  border-color: #000;
-
 }
+
+#jumbotron_img{
+  padding-bottom: 50px;
+}
+
 
 .mailing-list{
-  margin-top: auto;
-  margin-bottom: 20px;
+    font-family: 'Questrial', sans-serif;
+  margin:50px;
   font-size: 1.5em;
-  color: #000;
-  font-weight: lighter;
 }
-
-.button{
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: black;
-    padding: 6px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-family: 'Saira Semi Condensed', sans-serif;
-    font-size: 0.70em;
-}
-
-#email-textbox{
-  margin-bottom: 20px;
-}
-
-
-#bottom-bar{
-  position: fixed;
-  z-index: 100;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #000;
-  height: 50px;
-
-}
-
-.bottom{
-    padding-top: 10px;
-}
-
 /* The alert message box */
 .alert {
+    text-align: center;
     font-size: 1.0em;
     margin-bottom: 20px;
     color: white;
     transition: opacity 0.6s;
     margin-left: auto;
     margin-right: auto;
+    padding: 0px;
 }
 
 .alert-red{
