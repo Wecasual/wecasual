@@ -1,7 +1,5 @@
 <% include ../partials/header.ejs %>
-<!-- Login: <a href="auth/steam">Sign On with Steam</a>
-Logout: <a href='logout'>Logout</a>
-Display Info Example: <%= user.displayName %> -->
+
 	<!-- Header nav-->
 	<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #555;">
 		<a class="navbar-brand" href="#">
@@ -62,13 +60,13 @@ Display Info Example: <%= user.displayName %> -->
 
 		<!-- Message for email input correct or not -->
 		<div class=alert>
-			<% if(typeof error !== 'undefined'){ %>
+			<% if(error){ %>
 				<div class="alert-red">
 					<%= error %>
 					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 				</div>
 			<% }
-			else if(typeof message !== 'undefined'){ %>
+			else if(message){ %>
 				<div class="alert-green">
 					<%= message %>
 					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
