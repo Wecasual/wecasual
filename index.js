@@ -6,7 +6,7 @@ var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
 var passportSteam = require('passport-steam');
-var user = require('./repos/profiles');
+var profiles = require('./repos/profiles');
 
 
 
@@ -71,8 +71,18 @@ passport.use(new passportSteam.Strategy({
     apiKey: '162FD43454D97C2E629FAE6026C4BD53'
   },
   function(identifier, profile, done) {
-    //Get user from account.js with identifier
-    //return user
+    mongodb.MongoClient.connect(MONGO_URI, function (err, db) {
+      if(err){
+        Alert("Error connecting to database");
+        db.close();
+      }
+      else{
+        profiles.getUser(db, identifier, profile, function(user){
+            db.close();
+            return done(null, user);
+        })
+      }
+    });
   }
 ));
 
