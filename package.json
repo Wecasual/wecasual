@@ -19,6 +19,8 @@
     "express-validator": "^3.2.1",
     "jquery": "^3.2.1",
     "mongodb": "^2.2.31",
+    "passport": "^0.4.0",
+    "passport-steam": "^1.0.8",
     "nodemon": "^1.11.0",
     "popper.js": "^1.12.3",
     "session": "^0.1.0"
