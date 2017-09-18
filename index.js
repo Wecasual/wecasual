@@ -101,7 +101,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/about', function(req, res){
-  res.render('pages/about');
+  res.render('pages/about', { user: req.user});
+});
+
+app.get('/signup', function(req, res) {
+	let error = req.session.error;
+	req.session.error = null;
+	let message = req.session.message;
+	req.session.message = null;
+	res.render('pages/signup', { user: req.user, message: message, error: error});
 });
 
 //==========Steam login stuff==========
