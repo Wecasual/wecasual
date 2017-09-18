@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Wecasual site",
   "engines": {
-    "node": "6.11.1"
+    "node": "6.11.3"
   },
   "main": "index.js",
   "scripts": {
@@ -19,9 +19,10 @@
     "express-validator": "^3.2.1",
     "jquery": "^3.2.1",
     "mongodb": "^2.2.31",
+    "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-steam": "^1.0.8",
-    "nodemon": "^1.11.0",
+    "pg": "7.3.0",
     "popper.js": "^1.12.3",
     "session": "^0.1.0"
   },
