@@ -1,25 +1,17 @@
-.body{
-  font-family: 'Questrial', sans-serif;
-}
-.container{
-    font-family: 'Questrial', sans-serif;
-}
-
 .navbar-brand{
-  font-family: 'Questrial', sans-serif;
   font-size: 1.5em;
+}
+.nav-link{
+  color: #fff !important;
+}
+.nav-link:hover{
+  background-color: #D3D0C8 !important;
 }
 
 #jumbotron_img{
   padding-bottom: 50px;
 }
 
-
-.mailing-list{
-    font-family: 'Questrial', sans-serif;
-  margin:50px;
-  font-size: 1.5em;
-}
 /* The alert message box */
 .alert {
     text-align: center;
