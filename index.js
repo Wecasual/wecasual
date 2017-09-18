@@ -6,13 +6,29 @@ var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
 var passportSteam = require('passport-steam');
+var url = require('url');
+var pg = require('pg');
+const pgParams = url.parse(process.env.DATABASE_URL || 'postgres://mdbmqyhxoghdju:4a974026b7af90957de377fcc1952f2f1b406e1ff4110176fb0937f6f3a36cb2@ec2-184-73-189-221.compute-1.amazonaws.com:5432/da56qf31hm82e5');
+const pgAuth = pgParams.auth.split(':');
+const config = {
+  user: pgAuth[0],
+  password: pgAuth[1],
+  host: pgParams.hostname,
+  port: pgParams.port,
+  database: pgParams.pathname.split('/')[1],
+  ssl: true
+};
+
+var pool = new pg.Pool(config);
 var profiles = require('./repos/profiles');
 
 
-
+//Mongodb
 var ObjectId = require('mongodb').ObjectId;
 //Can't use the .env mongodb uri because it is undefined for some reason. Worked before 4/9/2017, now it doesn't
 const MONGO_URI = 'mongodb://heroku_ht4hl31j:9voqfjcq47cr9tlg7l07isp4po@ds157873.mlab.com:57873/heroku_ht4hl31j';//process.env.MONGODB_URI;
+
+
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
@@ -71,17 +87,18 @@ passport.use(new passportSteam.Strategy({
     apiKey: '162FD43454D97C2E629FAE6026C4BD53'
   },
   function(identifier, profile, done) {
-    mongodb.MongoClient.connect(MONGO_URI, function (err, db) {
-      if(err){
-        Alert("Error connecting to database");
-        db.close();
-      }
-      else{
-        profiles.getUser(db, identifier, profile, function(user){
-            db.close();
+    pool.connect(function(err, client) {
+        if(err){
+          Alert("Error connecting to database");
+          client.end();
+        }
+        else{
+          profiles.getUser(client, identifier, profile, function(user){
+            client.end();
             return done(null, user);
-        })
-      }
+          });
+        }
+
     });
   }
 ));
