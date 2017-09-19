@@ -24,8 +24,6 @@ const config = {
 var pool = new pg.Pool(config);
 var profiles = require('./repos/profiles');
 
-console.log(returnURL);
-console.log(realm);
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
