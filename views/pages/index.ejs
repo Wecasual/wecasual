@@ -3,99 +3,70 @@
 
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron-fluid">
-		<div class="text-center">
-      <img class = "img-fluid" src="/images/logo.png" alt="">
-      <h1 class="mt-3 display-5 text-center">eSports for Casual Players </h1>
-		</div>
+  <div class="jumbotron">
+    <div class="container">
+      <% if(!user){ %>
+        <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
+          <h1 class ="display-2 text-center m-3" >Sick of toxic pubs?</h1>
+          <h2 class= "text-center d-md-block d-none">A social and inclusive environment for the casual Dota 2 player</h2>
+        </div>
+        <div class = "pt-5 pb-2 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="auth/steam" role="button">Join Wecasual </a></div>
+        <div style ="color: #fff; text-shadow: #000 0 3px 3px;">
+            <h2 class= "text-center">$5/month</h2>
+        </div>
+      <% }
+      else{ %>
+        <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
+          <h1 class ="display-2 text-center m-3" >Thank you for signing up for Wecasual!</h1>
+          <h2 class= "text-center d-md-block d-none">Unfortunately you caught us during our website creation. We will send you an email when the website is complete.</h2>
+        </div>
+      <% } %>
+    </div>
   </div>
 
 
 
-	<div class="container">
-
+	<div class="mt-5 pt-1 container ">
 		<!-- Landing page section if not logged in-->
 		<% if(!user){ %>
         <!-- Three columns of text below the carousel -->
        <div class="row text-center">
          <div class="col-lg-4">
-           <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+           <img class="rounded" src="/images/monitor-icon.png" alt="Weekly games image" width="140" height="140">
            <h2>Play weekly games</h2>
-           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+           <p>Join a team or create your own! Play weekly organized games against the chillest Dota players around. No more last pick Invokers.</p>
          </div><!-- /.col-lg-4 -->
          <div class="col-lg-4">
-           <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+           <img class="rounded" src="/images/globe-icon.png" alt="Community image" width="140" height="140">
            <h2>Join the community</h2>
-           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+           <p>Be apart of the social, inclusive, and casual communtiy!</p>
          </div><!-- /.col-lg-4 -->
          <div class="col-lg-4">
-           <img class="rounded-circle" src="/images/IO-giff.jpg" alt="Extra events image" width="140" height="140">
+           <img class="rounded" src="/images/calendar-icon.png" alt="Extra events image" width="140" height="140">
            <h2>Extra events</h2>
-           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+           <p>Play extra games outside your team, and meet new people.</p>
          </div><!-- /.col-lg-4 -->
        </div><!-- /.row -->
-
-
-
-  		<h2 class="text-center">Casual Dota 2 Leagues starting October 2017!</h2>
-      Contact us at <a href="mailto:info@wecasual.gg">info@wecasual.gg</a> for any inquiries
-
-
-      <img class = "img-fluid" src="/images/treant-tiny.png" alt="">
-      <div id="join-league"> Join the League</div>
-		<% }
-		else{ %>
-			<h1 class="display-4 text-center">Thank you for signing up for Wecasual!</h1>
-			<h2 class="pb-4 text-center font-italic">Games will begin <p class="font-weight-bold" >first week of October</p></h2>
-			<h4 class =" mt-4 text-center">Unfortunately you caught us during our website creation. We will send you an email when the website is complete. </h3>
-		<% } %>
-
-
-		<footer>
-			<hr>
-			<p>Wecasual 2017</p>
-		</footer>
+      <h1 class="mt-5 text-center display-5">Casual Dota 2 Leagues starting October 2017!</h2>
   </div>
 
-		<!-- Message for email input correct or not -->
-		<div class=alert>
-			<% if(error){ %>
-				<div class="alert-red">
-					<%= error %>
-					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-				</div>
-			<% }
-			else if(message){ %>
-				<div class="alert-green">
-					<%= message %>
-					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-				</div>
-			<% } %>
-		</div>
+  <div class = "grey-text">
+    <img class = " mt-5 img-fluid mx-auto d-block" src="/images/logo.png" alt="">
+    <h1 class="mt-3 display-5 text-center">eSports for Casual Players </h1>
+
+  </div>
+  <% }
+  else{ %>
+  	<h2 class="pb-4 text-center font-italic">Games will begin <p class="font-weight-bold" >first week of October</p></h2>
+  <% } %>
+  <div class="container">
+    <footer>
+      <hr>
+      <p>Contact us at <a href="mailto:info@wecasual.gg">info@wecasual.gg</a> for any inquiries</p>
+      <p>Wecasual 2017</p>
+    </footer>
+  </div>
 
 
 
-
-
-
-
-
-
-
-
-		<!-- Close ALERT code -->
-		<script>
-			var close = document.getElementsByClassName("closebtn");
-			var i;
-			for (i = 0; i < close.length; i++) {
-			    close[i].onclick = function(){
-			        var div = this.parentElement.parentElement;
-			        div.style.opacity = "0";
-			        setTimeout(function(){ div.style.display = "none"; }, 600);
-			    }
-			}
-		</script>
 <% include ../partials/footer.ejs %>

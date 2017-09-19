@@ -12,25 +12,38 @@
   color: #555;
 }
 
-.jumbotron-fluid{
-  color: #555;
-  padding-top: 70px;
-  position: relative;
+.jumbotron{
+  margin-top:65px;
+  height: 750px;
+  background: url("/images/treant-tiny.png")  no-repeat center center;
+  background-size: cover;
 }
 
-#join-league {
-   position: absolute;
-   top: 100px;
-   left: 10px;
 
-   padding: 5px;
-   padding-left: 20px;
-   padding-right: 20px;
-   color: white;
-   font-size: 2em;
-   background-color: #ff9da2 ;
-   border: 2px solid white;
-   z-index: 1100;
+
+#join-league {
+  padding: 0px;
+  margin: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+  font-size: 2.2em;
+  background-color: #ff9da2 ;
+  border: 2px solid white;
+  overflow: hidden;
+}
+
+.push-spaces
+{
+    height: 100px;
+}
+
+.grey-text{
+  color: #555;
+}
+
+.signup-top{
+  margin-top:95px; /* to account for navbar*/
 }
 
 /* The alert message box */
