@@ -42,7 +42,7 @@
   color: #555;
 }
 
-.signup-top{
+.top-spacer{
   margin-top:95px; /* to account for navbar*/
 }
 
@@ -82,4 +82,9 @@
 /* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
+}
+
+footer{
+  bottom: 0;
+  text-align: center;
 }

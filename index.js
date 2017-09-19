@@ -105,24 +105,22 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-	let error = req.session.error;
-	req.session.error = null;
-	let message = req.session.message;
-	req.session.message = null;
-	res.render('pages/index', { user: req.user, message: message, error: error});
+	res.render('pages/index', { user: req.user});
 });
 
 app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
 
-
-
 app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('pages/account', { user: req.user });
+app.get('/profile', ensureAuthenticated, function(req, res){
+  let error = req.session.error;
+  req.session.error = null;
+  let message = req.session.message;
+  req.session.message = null;
+  res.render('pages/profile', { user: req.user, message: message, error: error });
 });
 //==========Steam login stuff==========
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -134,24 +132,28 @@ app.get(loginRoute.signup.route, loginRoute.signup.handler);
 app.post('/profile/updateEmail', function(req, res){
 	req.checkBody('email', 'Please enter your email address').notEmpty();
 	req.checkBody('email', 'Please enter a valid email address').isEmail();
-
 	let error = req.validationErrors();
 	let message = null;
 
 	if(error){
 		req.session.error = error[0].msg;
-		res.redirect('/signup');
+    res.redirect(req.get('referer'));
 	}
 	else{
 		let newEmail = req.body.email;
     profiles.updateEmail(newEmail, function(err){
       if(err){
         req.session.error = "Error adding email. Please try again later";
-        res.redirect('/signup')
+        res.redirect(req.get('referer'));
       }
       else{
-        req.session.message = "Email added successfully";
-        res.redirect('/');
+        if(req.get('referer') ==  realm + 'signup'){
+          res.redirect('/');
+        }
+        else if(req.get('referer') == realm + 'profile'){
+          req.session.message = "Email added successfully";
+          res.redirect('/profile');
+        }
       }
     }, req, res);
   }
