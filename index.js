@@ -149,6 +149,7 @@ app.post('/profile/updateEmail', function(req, res){
       else{
         req.user.email = newEmail;
         var postingURL = req.get('referer').slice(req.get('referer').lastIndexOf('/')+1, req.get('referer').length);
+        console.log(postingURL);
         if(postingURL ==  'signup'){
           res.redirect('/');
         }
