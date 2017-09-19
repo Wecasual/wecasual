@@ -1,5 +1,6 @@
 "use strict";
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var session = require('express-session');
@@ -7,6 +8,8 @@ var passport = require('passport');
 var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
+var returnURL = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
+var realm = process.env.SITE_URL || 'http://localhost:5000/';
 const pgParams = url.parse(process.env.DATABASE_URL);
 const pgAuth = pgParams.auth.split(':');
 const config = {
@@ -21,7 +24,8 @@ const config = {
 var pool = new pg.Pool(config);
 var profiles = require('./repos/profiles');
 
-
+console.log(returnURL);
+console.log(realm);
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -76,15 +80,14 @@ passport.deserializeUser(function(obj, done) {
 
 
 passport.use(new passportSteam.Strategy({
-    returnURL: 'http://localhost:5000/auth/steam/return',
-    realm: 'http://localhost:5000/',
+    returnURL: returnURL,
+    realm: realm,
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
     pool.connect(function(err, client) {
         if(err){
-          Alert("Error connecting to database");
-          client.end();
+          return console.error('error', err);
         }
         else{
           profiles.getUser(client, identifier, profile, function(user){
@@ -135,7 +138,12 @@ app.get('/logout', function(req, res){
 app.get('/auth/steam/return',
   passport.authenticate('steam', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/');
+    if(!req.user.email){
+      res.redirect('/signup');
+    }
+    else{
+      res.redirect('/');
+    }
 });
 
 app.get('/auth/steam',
