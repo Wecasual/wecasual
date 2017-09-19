@@ -1,14 +1,10 @@
-var mongodb = require('mongodb');
-
 function createUser(client, id, profile, callback){
   var queryString = "INSERT INTO users (steamInfo) VALUES (" + "'" + [JSON.stringify(profile)].join("','") + "'" + ")";
   client.query(queryString, function(err, result){
      if(err){
        return console.error('error', err);
      }
-     else{
-       console.log("Added user");
-     }
+     console.log("Added user");
    });
 }
 
