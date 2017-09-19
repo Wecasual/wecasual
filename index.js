@@ -147,10 +147,12 @@ app.post('/profile/updateEmail', function(req, res){
         res.redirect(req.get('referer'));
       }
       else{
-        if(req.get('referer') ==  realm + 'signup'){
+        req.user.email = newEmail;
+        var postingURL = req.get('referer').slice(req.get('referer').lastIndexOf('/')+1, req.get('referer').length);
+        if(postingURL ==  'signup'){
           res.redirect('/');
         }
-        else if(req.get('referer') == realm + 'profile'){
+        else if(postingURL == 'profile'){
           req.session.message = "Email added successfully";
           res.redirect('/profile');
         }
