@@ -28,12 +28,12 @@ const config = {
 var pool = new pg.Pool(config);
 
 //repositories
-var profiles = require('./repos/profiles');
-var teams = require('./repos/teams');
+var profiles = require('./repos/profiles')(pool);
+var teams = require('./repos/teams')(pool);
 
 //routes
-var teamsRoute = require('./lib/routes/teams-route');
-var loginRoute = require('./lib/routes/login-route');
+var teamsRoute = require('./lib/routes/teams-route')(teams);
+var loginRoute = require('./lib/routes/login-route')();
 
 //==========Middleware==========
 var app = express();
@@ -92,16 +92,8 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    pool.connect(function(err, client) {
-        if(err){
-          return console.error('error', err);
-        }
-        else{
-          profiles.getUser(client, identifier, profile, function(user){
-            client.end();
-            return done(null, user);
-          });
-        }
+    profiles.getUser(identifier, profile, function(user){
+      return done(null, user);
     });
   }
 ));
@@ -139,7 +131,7 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 app.get(loginRoute.signup.route, loginRoute.signup.handler);
 //==========End steam login stuff==========
 
-app.post('/mailingList/add', function(req, res){
+app.post('/profile/updateEmail', function(req, res){
 	req.checkBody('email', 'Please enter your email address').notEmpty();
 	req.checkBody('email', 'Please enter a valid email address').isEmail();
 
@@ -148,27 +140,23 @@ app.post('/mailingList/add', function(req, res){
 
 	if(error){
 		req.session.error = error[0].msg;
-		res.redirect('/');
+		res.redirect('/signup');
 	}
 	else{
 		let newEmail = req.body.email;
-    pool.connect(function(err, client){
+    profiles.updateEmail(newEmail, function(err){
       if(err){
         req.session.error = "Error adding email. Please try again later";
-        return console.error('error', err);
+        res.redirect('/signup')
       }
-        profiles.updateEmail(client, newEmail, function(err){
-          if(err){
-            req.session.error = "Error adding email. Please try again later";
-            return console.error('error', err);
-          }
-          client.end();
-        })
-    });
+      else{
+        req.session.message = "Email added successfully";
+        res.redirect('/');
+      }
+    }, req, res);
   }
-  req.session.message = "Email added successfully";
-  res.redirect('/');
 });
+app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

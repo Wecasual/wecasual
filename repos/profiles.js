@@ -8,8 +8,11 @@ function createUser(client, id, profile, callback){
    });
 }
 
-module.exports = {
-  getUser: function(client, identifier, profile, callback){
+function getUser(pool, identifier, profile, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      return console.error('error', err);
+    }
     id = identifier.slice(identifier.lastIndexOf('/')+1, identifier.length);
     var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
     client.query(queryString, function(err, result){
@@ -34,10 +37,14 @@ module.exports = {
           return console.error('error', err);
         }
         callback && callback(result.rows[0].row_to_json);
+        client.end();
       });
     });
-  },
-  updateEmail: function(client, newEmail, callback){
+  });
+}
+
+function updateEmail(pool, newEmail, callback, req, res){
+  pool.connect(function(err, client){
     if(err){
       callback && callback(true);
       return console.error('error', err);
@@ -50,5 +57,12 @@ module.exports = {
       }
       callback && callback(false);
     });
+  });
+}
+
+module.exports = pool => {
+  return {
+    getUser: getUser.bind(null, pool),
+    updateEmail: updateEmail.bind(null, pool)
   }
 }

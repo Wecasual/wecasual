@@ -1,18 +1,32 @@
-module.exports = {
-    getTeam: function(client, teamid, callback){
+function getTeam(pool, teamid, callback){
 
-    },
+}
 
-    getAllTeams: function(client, callback){
+function getAllTeams(pool, callback){
 
-    },
+}
 
-    createTeam: function(client, user, cabllback){
-
-
-    },
-
-    joinTeam: function(client, user, callback){
-
+function createTeam(pool, user, body, callback){
+  pool.connect(function(err, client){
+    if(err){
+      return console.error('error', err);
     }
+    console.log(body.email);
+    console.log(body.password);
+    console.log(body.checkbox);
+    client.end();
+  });
+}
+
+function joinTeam(client, user, callback){
+
+}
+
+module.exports = pool => {
+  return{
+    getTeam: getTeam.bind(null, pool),
+    getAllTeams: getAllTeams.bind(null, pool),
+    createTeam: createTeam.bind(null, pool),
+    joinTeam: joinTeam.bind(null, pool)
+  }
 }
