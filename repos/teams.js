@@ -1,17 +1,18 @@
 module.exports = {
-    getTeam: function(client, id, callback){
+    getTeam: function(client, teamid, callback){
 
-    }
+    },
 
     getAllTeams: function(client, callback){
 
-    }
-    
-    createTeam: function(client, id, cabllback){
+    },
 
-    }
+    createTeam: function(client, user, cabllback){
 
-    joinTeam: function(client id, callback){
+
+    },
+
+    joinTeam: function(client, user, callback){
 
     }
 }

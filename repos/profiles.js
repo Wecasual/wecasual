@@ -36,7 +36,7 @@ module.exports = {
         callback && callback(result.rows[0].row_to_json);
       });
     });
-  }
+  },
   updateEmail: function(client, newEmail, callback){
     if(err){
       callback && callback(true);

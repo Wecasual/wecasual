@@ -130,7 +130,7 @@ app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.hand
 app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
+  res.render('pages/account', { user: req.user });
 });
 //==========Steam login stuff==========
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
