@@ -1,4 +1,5 @@
 "use strict";
+//NPM
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -8,6 +9,8 @@ var passport = require('passport');
 var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
+
+//Steam API Info
 var returnURL = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
 var realm = process.env.SITE_URL || 'http://localhost:5000/';
 const pgParams = url.parse(process.env.DATABASE_URL);
@@ -21,14 +24,20 @@ const config = {
   ssl: true
 };
 
+//Postgres
 var pool = new pg.Pool(config);
+
+//repositories
 var profiles = require('./repos/profiles');
+var teams = require('./repos/teams');
 
-
-var app = express();
-app.set('port', (process.env.PORT || 5000));
+//routes
+var teamsRoute = require('./lib/routes/teams-route');
+var loginRoute = require('./lib/routes/login-route');
 
 //==========Middleware==========
+var app = express();
+app.set('port', (process.env.PORT || 5000));
 
 //Static path for CSS
 app.use(express.static(__dirname + '/public'));
@@ -115,41 +124,19 @@ app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
 
-app.get('/signup', function(req, res) {
-	let error = req.session.error;
-	req.session.error = null;
-	let message = req.session.message;
-	req.session.message = null;
-	res.render('pages/signup', { user: req.user, message: message, error: error});
-});
 
-//==========Steam login stuff==========
+
+app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
+app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
+
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/auth/steam/return',
-  passport.authenticate('steam', { failureRedirect: '/' }),
-  function(req, res) {
-    if(!req.user.email){
-      res.redirect('/signup');
-    }
-    else{
-      res.redirect('/');
-    }
-});
-
-app.get('/auth/steam',
-  passport.authenticate('steam', { failureRedirect: '/' }),
-  function(req, res) {
-    console.log('redirect');
-    res.redirect('/');
-});
+//==========Steam login stuff==========
+app.get(loginRoute.logout.route, loginRoute.logout.handler);
+app.get(loginRoute.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamReturn.handler);
+app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamAuth.handler);
+app.get(loginRoute.signup.route, loginRoute.signup.handler);
 //==========End steam login stuff==========
 
 app.post('/mailingList/add', function(req, res){
@@ -167,16 +154,16 @@ app.post('/mailingList/add', function(req, res){
 		let newEmail = req.body.email;
     pool.connect(function(err, client){
       if(err){
-        req.session.error = "Error adding to mailing list. Please try again later";
+        req.session.error = "Error adding email. Please try again later";
         return console.error('error', err);
       }
-      var queryString = "UPDATE users SET email = \'" + newEmail + "\'WHERE id=" + req.user.id;
-      client.query(queryString, function(err, result){
-        if(err){
-          return console.error('error', err);
-        }
-        client.end();
-      });
+        profiles.updateEmail(client, newEmail, function(err){
+          if(err){
+            req.session.error = "Error adding email. Please try again later";
+            return console.error('error', err);
+          }
+          client.end();
+        })
     });
   }
   req.session.message = "Email added successfully";

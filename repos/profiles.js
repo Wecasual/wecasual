@@ -37,4 +37,18 @@ module.exports = {
       });
     });
   }
+  updateEmail: function(client, newEmail, callback){
+    if(err){
+      callback && callback(true);
+      return console.error('error', err);
+    }
+    var queryString = "UPDATE users SET email = \'" + newEmail + "\'WHERE id=" + req.user.id;
+    client.query(queryString, function(err, result){
+      if(err){
+        callback && callback(true);
+        return console.error('error', err);
+      }
+      callback && callback(false);
+    });
+  }
 }
