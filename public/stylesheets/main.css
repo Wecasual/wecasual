@@ -1,25 +1,51 @@
-.body{
-  font-family: 'Questrial', sans-serif;
-}
-.container{
-    font-family: 'Questrial', sans-serif;
-}
-
 .navbar-brand{
-  font-family: 'Questrial', sans-serif;
   font-size: 1.5em;
 }
+.nav-link{
+  color: #fff !important;
+}
+.nav-link:hover{
+  background-color: #D3D0C8 !important;
+}
 
-#jumbotron_img{
-  padding-bottom: 50px;
+.container{
+  color: #555;
+}
+
+.jumbotron{
+  margin-top:65px;
+  height: 750px;
+  background: url("/images/treant-tiny.png")  no-repeat center center;
+  background-size: cover;
 }
 
 
-.mailing-list{
-    font-family: 'Questrial', sans-serif;
-  margin:50px;
-  font-size: 1.5em;
+
+#join-league {
+  padding: 0px;
+  margin: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+  font-size: 2.2em;
+  background-color: #ff9da2 ;
+  border: 2px solid white;
+  overflow: hidden;
 }
+
+.push-spaces
+{
+    height: 100px;
+}
+
+.grey-text{
+  color: #555;
+}
+
+.top-spacer{
+  margin-top:95px; /* to account for navbar*/
+}
+
 /* The alert message box */
 .alert {
     text-align: center;
@@ -56,4 +82,9 @@
 /* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
+}
+
+footer{
+  bottom: 0;
+  text-align: center;
 }
