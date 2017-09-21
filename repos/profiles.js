@@ -17,6 +17,7 @@ function getUser(pool, identifier, profile, callback){
     var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
     client.query(queryString, function(err, result){
       if(err){
+        client.end();
         return console.error('error', err);
       }
 
@@ -36,8 +37,8 @@ function getUser(pool, identifier, profile, callback){
         if(err){
           return console.error('error', err);
         }
-        callback && callback(result.rows[0].row_to_json);
         client.end();
+        callback && callback(result.rows[0].row_to_json);
       });
     });
   });
@@ -55,8 +56,8 @@ function updateEmail(pool, newEmail, callback, req, res){
         callback && callback(true);
         return console.error('error', err);
       }
-      callback && callback(false);
       client.end();
+      callback && callback(false);
     });
   });
 }
@@ -73,6 +74,7 @@ function getAllUsers(pool, callback, req, res){
         callback && callback();
         return console.error('error', err);
       }
+      client.end();
       callback && callback(result.rows);
     });
   });
