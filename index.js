@@ -34,6 +34,7 @@ var teams = require('./repos/teams')(pool);
 //routes
 var teamsRoute = require('./lib/routes/teams-route')(teams);
 var loginRoute = require('./lib/routes/login-route')();
+var profileRoute = require('./lib/routes/profile-route')(profiles);
 
 //==========Middleware==========
 var app = express();
@@ -115,13 +116,6 @@ app.get('/about', function(req, res){
 app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 
-app.get('/profile', ensureAuthenticated, function(req, res){
-  let error = req.session.error;
-  req.session.error = null;
-  let message = req.session.message;
-  req.session.message = null;
-  res.render('pages/profile', { user: req.user, message: message, error: error });
-});
 //==========Steam login stuff==========
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
 app.get(loginRoute.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamReturn.handler);
@@ -129,37 +123,9 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 app.get(loginRoute.signup.route, loginRoute.signup.handler);
 //==========End steam login stuff==========
 
-app.post('/profile/updateEmail', function(req, res){
-	req.checkBody('email', 'Please enter your email address').notEmpty();
-	req.checkBody('email', 'Please enter a valid email address').isEmail();
-	let error = req.validationErrors();
-	let message = null;
+app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 
-	if(error){
-		req.session.error = error[0].msg;
-    res.redirect(req.get('referer'));
-	}
-	else{
-		let newEmail = req.body.email;
-    profiles.updateEmail(newEmail, function(err){
-      if(err){
-        req.session.error = "Error adding email. Please try again later";
-        res.redirect(req.get('referer'));
-      }
-      else{
-        req.user.email = newEmail;
-        var postingURL = req.get('referer').slice(req.get('referer').lastIndexOf('/')+1, req.get('referer').length);
-        if(postingURL ==  'signup'){
-          res.redirect('/');
-        }
-        else if(postingURL == 'profile'){
-          req.session.message = "Email added successfully";
-          res.redirect('/profile');
-        }
-      }
-    }, req, res);
-  }
-});
+app.post(profileRoute.updateEmail.route, profileRoute.updateEmail.handler);
 app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 
 app.listen(app.get('port'), function() {
