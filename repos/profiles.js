@@ -56,6 +56,24 @@ function updateEmail(pool, newEmail, callback, req, res){
         return console.error('error', err);
       }
       callback && callback(false);
+      client.end();
+    });
+  });
+}
+
+function getAllUsers(pool, callback, req, res){
+  pool.connect(function(err, client){
+    if(err) {
+      callback && callback();
+      return console.error('error', err);
+    }
+    var queryString = "SELECT * FROM users";
+    client.query(queryString, function(err, result){
+      if(err){
+        callback && callback();
+        return console.error('error', err);
+      }
+      callback && callback(result.rows);
     });
   });
 }
@@ -63,6 +81,7 @@ function updateEmail(pool, newEmail, callback, req, res){
 module.exports = pool => {
   return {
     getUser: getUser.bind(null, pool),
-    updateEmail: updateEmail.bind(null, pool)
+    updateEmail: updateEmail.bind(null, pool),
+    getAllUsers: getAllUsers.bind(null, pool)
   }
 }
