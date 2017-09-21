@@ -17,6 +17,7 @@ function getUser(pool, identifier, profile, callback){
     var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
     client.query(queryString, function(err, result){
       if(err){
+        client.end();
         return console.error('error', err);
       }
 
@@ -36,8 +37,8 @@ function getUser(pool, identifier, profile, callback){
         if(err){
           return console.error('error', err);
         }
-        callback && callback(result.rows[0].row_to_json);
         client.end();
+        callback && callback(result.rows[0].row_to_json);
       });
     });
   });
@@ -55,7 +56,26 @@ function updateEmail(pool, newEmail, callback, req, res){
         callback && callback(true);
         return console.error('error', err);
       }
+      client.end();
       callback && callback(false);
+    });
+  });
+}
+
+function getAllUsers(pool, callback, req, res){
+  pool.connect(function(err, client){
+    if(err) {
+      callback && callback();
+      return console.error('error', err);
+    }
+    var queryString = "SELECT * FROM users";
+    client.query(queryString, function(err, result){
+      if(err){
+        callback && callback();
+        return console.error('error', err);
+      }
+      client.end();
+      callback && callback(result.rows);
     });
   });
 }
@@ -63,6 +83,7 @@ function updateEmail(pool, newEmail, callback, req, res){
 module.exports = pool => {
   return {
     getUser: getUser.bind(null, pool),
-    updateEmail: updateEmail.bind(null, pool)
+    updateEmail: updateEmail.bind(null, pool),
+    getAllUsers: getAllUsers.bind(null, pool)
   }
 }
