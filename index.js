@@ -112,6 +112,22 @@ app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
 
+app.get('/rules', function(req, res){
+  res.render('pages/rules', { user: req.user});
+});
+
+app.get('/schedule', function(req, res){
+  res.render('pages/schedule', { user: req.user});
+});
+
+app.get('/events', function(req, res){
+  res.render('pages/events', { user: req.user});
+});
+
+app.get('/teams', function(req, res) {
+	res.render('pages/teams', { user: req.user});
+});
+
 app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 
