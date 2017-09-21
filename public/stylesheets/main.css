@@ -3,7 +3,7 @@
 }
 .nav-link{
   color: #fff !important;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 .nav-link:hover{
   background-color: #D3D0C8 !important;
@@ -49,6 +49,14 @@
 
 .pre-scrollable{
   height: 800px;
+}
+
+.collapse-text{
+  color: #555;
+  text-decoration: none;
+}
+.collapse-text:hover{
+  color:#555;
 }
 /* The alert message box */
 .alert {
