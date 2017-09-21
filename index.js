@@ -143,8 +143,9 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 //==========End steam login stuff==========
 
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
+app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
 
-app.post(signupRoute.signupSubmit.route, signupRoute.signupSubmit.handler);
+app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
 app.post('/profile/updateEmail', function(req, res){
 	req.checkBody('email', 'Please enter your email address').notEmpty();
 	req.checkBody('email', 'Please enter a valid email address').isEmail();

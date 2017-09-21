@@ -12,20 +12,20 @@
 			<div class = "text-center col col-5">Please enter your email</div>
 		</div>
 		<div class="row justify-content-center">
-		<!--Rorbert, Look up bootstrapvalidator feedback icons if you want to have the feedback icons. The jQuery code is setup for it, it just needs CSS -->
+		<!--Rorbert, Look up "bootstrapvalidator feedback icons" if you want to have the feedback icons. The jQuery code is setup for it, it just needs CSS -->
 			<!-- Email input field-->
 			<div class="text-center col col-5">
 				<form id="signup-form" method="post" action="/signup/submit">
 					<div class="form-group ">
-						<input type="text" name="email" class="form-control" placeholder='Enter email'>
+							<input type="text" name="email" class="form-control" placeholder='Enter email'>
 					</div>
 					<div class="m-3 row justify-content-center">
 						<div class = "text-center col col-10">Enter the <b>Steam names</b> of any players you would like to be on a team with</div>
 					</div>
+					<button type="button" class="btn btn-default" id="add-player">Add player</button>
 					<div class="form-group" id="player-requests">
 						<input type="text" name="player-request" class="form-control" placeholder='Enter Steam name'>
 					</div>
-					<button type="button" class="btn btn-default" id="add-player">Add player</button>
 					<div class="form-group text-center">
 						<input type="submit" value="Submit" class = "btn btn-default">
 					</div>

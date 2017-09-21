@@ -17,22 +17,23 @@ $(document).ready(function() {
         }
       }
     }
-  })
-  .on('success.form.bv', function(e) {
-    e.preventDefault();
-    var $form = $(e.target);
-    var bv = $form.data('bootstrapValidator');
-    $.ajax({
-      type: 'POST',
-      url: '/signup/submit',
-      data: $form.serialize(),
-      dataType: 'json',
-      success: function(responseText, statusText, xhr, $form) {
-          // Process the response returned by the server ...
-          console.log(responseText);
-      }
-    });
   });
+  // .on('success.form.bv', function(e) {
+  //   e.preventDefault();
+  //   var $form = $(e.target);
+  //   //var bv = $form.data('bootstrapValidator');
+  //   $.post('/signup/submit', $form.serialize(), 'json');
+  //   // $.ajax({
+  //   //   type: 'POST',
+  //   //   url: '/signup/submit',
+  //   //   data: $form.serialize(),
+  //   //   dataType: 'json',
+  //   //   success: function(responseText, statusText, xhr, $form) {
+  //   //       // Process the response returned by the server ...
+  //   //       console.log(statusText);
+  //   //   }
+  //   //});
+  // });
   var numPlayerRequests = 1;
   $('#add-player').click(function(){
     if(numPlayerRequests < 4){
