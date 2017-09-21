@@ -5,12 +5,12 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <% if(!user){ %>
+      <% if(!user || !user.paid){ %>
         <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
           <h1 class ="display-2 text-center m-3" >Sick of toxic pubs?</h1>
           <h2 class= "text-center d-md-block d-none">A social and inclusive environment for the casual Dota 2 player</h2>
         </div>
-        <div class = "pt-5 pb-2 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="auth/steam" role="button">Join Wecasual </a></div>
+        <div class = "pt-5 pb-2 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="/signup" role="button">Join Wecasual </a></div>
         <div style ="color: #fff; text-shadow: #000 0 3px 3px;">
             <h2 class= "text-center">$5/month</h2>
         </div>
@@ -34,7 +34,7 @@
 
 	<div class="mt-5 pt-1 container ">
 		<!-- Landing page section if not logged in-->
-		<% if(!user){ %>
+		<% if(!user || !user.paid){ %>
         <!-- Three columns of text below the carousel -->
        <div class="row text-center">
          <div class="col-lg-4">
