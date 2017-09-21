@@ -32,7 +32,7 @@ var profiles = require('./repos/profiles')(pool);
 var teams = require('./repos/teams')(pool);
 
 //routes
-var teamsRoute = require('./lib/routes/teams-route')(teams);
+var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
 
 //==========Middleware==========
@@ -124,10 +124,7 @@ app.get('/events', function(req, res){
   res.render('pages/events', { user: req.user});
 });
 
-app.get('/teams', function(req, res) {
-	res.render('pages/teams', { user: req.user});
-});
-
+app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
 app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 
