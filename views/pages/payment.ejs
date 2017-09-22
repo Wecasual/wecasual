@@ -1,1 +1,16 @@
 <% include ../partials/header.ejs %>
+<div class="container top-spacer">
+  <form action="/signup/charge" method="POST">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_dg2xhcsnbD9ZOCT07hE7XJby"
+      data-amount="500"
+      data-name="Wecasual"
+      data-description="Payment"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto"
+      data-currency="usd"
+      data-zip-code="true">
+    </script>
+  </form>
+</div>
