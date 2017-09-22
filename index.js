@@ -10,6 +10,12 @@ var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
 
+
+//Stripe
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+var stripe = require('stripe')(keySecret);
+
 //Steam API Info
 var returnURL = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
 var realm = process.env.SITE_URL || 'http://localhost:5000/';
@@ -34,7 +40,7 @@ var teams = require('./repos/teams')(pool);
 //routes
 var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
-var signupRoute = require('./lib/routes/signup-route')();
+var signupRoute = require('./lib/routes/signup-route')(stripe, keyPublishable);
 
 //==========Middleware==========
 var app = express();
@@ -93,8 +99,13 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.getUser(identifier, profile, function(user){
-      return done(null, user);
+    profiles.getUser(identifier, profile, function(err, user){
+      if(err) {
+        alert("Unable to login");
+      }
+      else {
+        return done(null, user);
+      }
     });
   }
 ));
@@ -146,6 +157,7 @@ app.get(signupRoute.signup.route, signupRoute.signup.handler);
 app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
 
 app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
+app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
 app.post('/profile/updateEmail', function(req, res){
 	req.checkBody('email', 'Please enter your email address').notEmpty();
 	req.checkBody('email', 'Please enter a valid email address').isEmail();
