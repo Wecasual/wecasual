@@ -5,11 +5,37 @@
   	<div class = "my-3">
       <h1>Your Profile</h1>
       <hr>
-      <img src='<%= user.steaminfo.photos[2].value %>' alt='Your Avatar Image' />
-      <span class="mr-3 display-3 align-middle p-5"><%= user.steaminfo.displayName %></span>
+      <img class = "rounded" src='<%= user.steaminfo.photos[1].value %>' alt='Your Avatar Image' />
+      <span class="mr-3 display-4 align-middle p-5"><%= user.steaminfo.displayName %></span>
+      <hr>
       <div class="row my-4">
         <div class="col">
-          <h3>Email: <%= user.email %></h3>
+          <div class="card" style="width: 40rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3><b>Email: </b>
+                <% if(user.email){ %>
+
+                <%= user.email %>
+
+                <%}else{ %>
+                  <i>No email</i>
+                <%}%>
+                </h3>
+              </li>
+              <li class="list-group-item">
+                <h3><b>Team: </b>
+                  <% if(user.team){ %>
+
+                  <%= user.team %>
+
+                  <%}else{ %>
+                    <i>No team</i>
+                  <%}%>
+                </h3>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="col">
           <h3>Update email:</h3>
