@@ -38,6 +38,14 @@
             <li>At Wecasual it is not just about playing Dota 2. Wecasual is the place to <span class="font-weight-bold">unwind and chill</span> out for people who love Dota 2.</li>
             <li>Before and after every game we offer activities to encourage players to <span class="font-weight-bold">hangout in our Discord</span> with their team and other teams too.</li>
           </ul>
+          <h3 class="card-title">Discord Link</h3>
+            <ul class="card-text">
+              <% if(!user.paid){ %>
+                <li><i>You must sign up to see the Discord link</i></li>
+              <%}else{ %>
+                <li><a href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a></li>
+              <%}%>
+            </ul>
 
         <!--<h3 class="card-title">Future expansion</h3>
         <p class="card-text">Currently Wecasual only has a community and leagues for Dota 2, but Wecasual plans on expanding to other major eSports in the near future!</p>-->
