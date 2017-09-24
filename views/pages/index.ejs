@@ -5,7 +5,7 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <% if(!user || !user.paid){ %>
+      <% if(!user || !user.email){ %>
         <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
           <h1 class ="display-2 text-center m-3" >Sick of toxic pubs?</h1>
           <h2 class= "text-center d-md-block d-none">A social and inclusive community for the casual Dota 2 player</h2>
@@ -21,7 +21,7 @@
           <h2 class= "text-center d-md-block d-none">Your team is being created, and we will let you know when it is complete.</h2>
           <h2 class= "text-center d-md-block d-none">
             In the mean time, join the Discord to get to know the community:
-            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank">https://discord.gg/3Q2n2Dt</a>
+            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a>
           </h2>
 
           <!-- Mobile text -->
@@ -29,7 +29,7 @@
           <h5 class= "text-center d-sm-block d-md-none">Your team is being created, and we will let you know when it is complete.</h5>
           <h5 class= "text-center d-sm-block d-md-none">
             In the mean time, join the Discord to get to know the community:
-            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank">https://discord.gg/3Q2n2Dt</a>
+            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a>
           </h5>
 
 
@@ -42,7 +42,7 @@
 
 	<div class="mt-5 pt-1 container ">
 		<!-- Landing page section if not logged in-->
-		<% if(!user || !user.paid){ %>
+		<% if(!user || !user.email){ %>
         <!-- Three columns of text below the carousel -->
        <div class="row text-center">
          <h1 class = "mb-5">Wecasual is a Dota 2 community that hosts leagues and other events for fun, casual, and positive Dota 2 players.</h1>
