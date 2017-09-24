@@ -129,7 +129,12 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-	res.render('pages/index', { user: req.user});
+  if(req.user && !req.user.paid){
+    res.redirect('/logout');
+  }
+	else{
+    res.render('pages/index', { user: req.user});
+  }
 });
 
 app.get('/about', function(req, res){
