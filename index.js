@@ -40,7 +40,7 @@ var teams = require('./repos/teams')(pool);
 //routes
 var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
-var signupRoute = require('./lib/routes/signup-route')(stripe, keyPublishable);
+var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
 var profileRoute = require('./lib/routes/profile-route')(profiles);
 
 

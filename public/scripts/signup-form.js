@@ -6,13 +6,10 @@ $(document).ready(function() {
       validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-      email: {
+      rules: {
         validators: {
           notEmpty: {
-            message: 'Email address is required'
-          },
-          emailAddress: {
-            message: 'The input is not a valid email address'
+            message: 'Required'
           }
         }
       }
