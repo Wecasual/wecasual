@@ -6,9 +6,10 @@ function getAllTeams(pool, callback){
 
 }
 
-function createTeam(pool, user, body, callback){
+function createTeam(pool, user, userList, body, callback){
   pool.connect(function(err, client){
     if(err){
+      callback && callback(true);
       return console.error('error', err);
     }
     console.log(body.email);

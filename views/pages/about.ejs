@@ -1,5 +1,85 @@
 <% include ../partials/header.ejs %>
+  <div class="container top-spacer">
+    <div class="card">
+      <div class="card-header display-4 text-center">
+        About Wecasual
+      </div>
+      <div class="card-body about-text">
+        <h3 class="card-title">The spirit of real life recreational sport leagues brought to eSports</h3>
+        <ul class="card-text">
+          <li>Wecasual is a Dota 2 community that <span class="font-weight-bold">hosts leagues and other events</span> for players looking to have a fun and positive Dota 2 experience.</li>
+          <li>Wecasual is a <span class="font-weight-bold">toxic-player free environment</span> where players can play with a consistent team every week in our leagues and also
+              participate in pick-up style games for those who want to play even more.</li>
+        </ul>
 
-    <h3 class="m-5"> It's the about page! </h3>
+        <h3 class="card-title">How does Wecasual work?</h3>
+          <ul class="card-text">
+            <li>To participate in the Wecasual community there is <span class="font-weight-bold">$5/month subscription</span>.</li>
+            <li>Once you join Wecasual you will have <span class="font-weight-bold">a team to play weekly games with</span>.</li>
+            <li>There is no prize pool and there are no individual player rankings; Wecasual is strictly for those looking to hang out
+            with friends and enjoy playing their games.</li>
+            <li>In addition to weekly games with a team there are tons of <span class="font-weight-bold">extra events</span> like inhouse games and mini-tournaments.</li>
+            <li>Players can <span class="font-weight-bold">join solo or join with friends!</span> If you are solo or need more players to round out your stack,
+            don’t worry, we will find you a team or fill in any remaining spots for you.</li>
+            <li>Because Wecasual focuses on fun and social play players are not expected to have set roles (eg. mid, support, etc…). Teams are expected to have players swapping positions.</li>
+          </ul>
 
+        <h3 class="card-title">Who is Wecasual for?</h3>
+          <ul class="card-text">
+            <li>We are looking for casual players whose primary objective is to have fun playing Dota 2.</li>
+            <li>Our community is open to all players who are <b>less than 4k MMR </b> (Case by case exceptions can be made).</li>
+            <li>Other than that, anyway can join Wecasual, as long as you are friendly person.</li>
+            <li>         We strongly encourage <span class="font-weight-bold">newer players</span> to join!</li>
+
+          </ul>
+
+        <h3 class="card-title">It's more than just Dota 2</h3>
+          <ul class="card-text">
+            <li>At Wecasual it is not just about playing Dota 2. Wecasual is the place to <span class="font-weight-bold">unwind and chill</span> out for people who love Dota 2.</li>
+            <li>Before and after every game we offer activities to encourage players to <span class="font-weight-bold">hangout in our Discord</span> with their team and other teams too.</li>
+          </ul>
+          <h3 class="card-title">Discord Link</h3>
+            <ul class="card-text">
+              <% if(!user.paid){ %>
+                <li><i>You must sign up to see the Discord link</i></li>
+              <%}else{ %>
+                <li><a href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a></li>
+              <%}%>
+            </ul>
+
+        <!--<h3 class="card-title">Future expansion</h3>
+        <p class="card-text">Currently Wecasual only has a community and leagues for Dota 2, but Wecasual plans on expanding to other major eSports in the near future!</p>-->
+      </div>
+    </div>
+    <div class="mt-4 card text-center">
+      <div class="card-header display-4">
+        The Team
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h3 class="card-title">Robert</h3>
+            <p class="card-text font-italic font-weight-bold">The organizer</p>
+            <p>The man that keeps this whole thing together. Have any questions about anything ask Robert.</p>
+            <p><a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></p>
+          </div>
+          <div class="col">
+            <h3 class="card-title">James</h3>
+            <p class="card-text font-italic font-weight-bold">The coder</p>
+            <p>James keeps this operation on the web and makes sure things don't crash.</p>
+            <p><a href="mailto:james@wecasual.gg">james@wecasual.gg</a></p>
+          </div>
+          <div class="col">
+            <h3 class="card-title">Stewart</h3>
+            <p class="card-text font-italic font-weight-bold">The money man</p>
+            <p>Stewart makes sure we do not run out of money to keep Wecasual alive.</p>
+            <p><a href="mailto:stewart@wecasual.gg">stewart@wecasual.gg</a></p>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
 <% include ../partials/footer.ejs %>

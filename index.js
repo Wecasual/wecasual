@@ -10,6 +10,12 @@ var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
 
+
+//Stripe
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+var stripe = require('stripe')(keySecret);
+
 //Steam API Info
 var returnURL = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
 var realm = process.env.SITE_URL || 'http://localhost:5000/';
@@ -32,8 +38,12 @@ var profiles = require('./repos/profiles')(pool);
 var teams = require('./repos/teams')(pool);
 
 //routes
-var teamsRoute = require('./lib/routes/teams-route')(teams);
+var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
+var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
+var profileRoute = require('./lib/routes/profile-route')(profiles);
+
+
 
 //==========Middleware==========
 var app = express();
@@ -45,6 +55,15 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+// HTTPS redirect (Comment if not working locally)
+app.use(function(req, res, next) {
+    if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
+        res.redirect('https://' + req.get('Host') + req.url);
+    }
+    else
+        next();
+});
 
 //Session middleware
 app.use(session({
@@ -92,8 +111,13 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.getUser(identifier, profile, function(user){
-      return done(null, user);
+    profiles.getUser(identifier, profile, function(err, user){
+      if(err) {
+        console.log("Unable to login");
+      }
+      else {
+        return done(null, user);
+      }
     });
   }
 ));
@@ -105,63 +129,49 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-	res.render('pages/index', { user: req.user});
+  if(req.user && !req.user.paid){
+    res.redirect('/logout');
+  }
+	else{
+    res.render('pages/index', { user: req.user});
+  }
 });
 
 app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
 
-app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
-app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
-
-app.get('/profile', ensureAuthenticated, function(req, res){
-  let error = req.session.error;
-  req.session.error = null;
-  let message = req.session.message;
-  req.session.message = null;
-  res.render('pages/profile', { user: req.user, message: message, error: error });
+app.get('/rules', function(req, res){
+  res.render('pages/rules', { user: req.user});
 });
+
+app.get('/schedule', function(req, res){
+  res.render('pages/schedule', { user: req.user});
+});
+
+app.get('/events', function(req, res){
+  res.render('pages/events', { user: req.user});
+});
+
+app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
+// app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
+// app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
+
 //==========Steam login stuff==========
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
 app.get(loginRoute.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamReturn.handler);
 app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamAuth.handler);
-app.get(loginRoute.signup.route, loginRoute.signup.handler);
 //==========End steam login stuff==========
 
-app.post('/profile/updateEmail', function(req, res){
-	req.checkBody('email', 'Please enter your email address').notEmpty();
-	req.checkBody('email', 'Please enter a valid email address').isEmail();
-	let error = req.validationErrors();
-	let message = null;
+app.get(signupRoute.signup.route, signupRoute.signup.handler);
+app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
+app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 
-	if(error){
-		req.session.error = error[0].msg;
-    res.redirect(req.get('referer'));
-	}
-	else{
-		let newEmail = req.body.email;
-    profiles.updateEmail(newEmail, function(err){
-      if(err){
-        req.session.error = "Error adding email. Please try again later";
-        res.redirect(req.get('referer'));
-      }
-      else{
-        req.user.email = newEmail;
-        var postingURL = req.get('referer').slice(req.get('referer').lastIndexOf('/')+1, req.get('referer').length);
-        console.log(postingURL);
-        if(postingURL ==  'signup'){
-          res.redirect('/');
-        }
-        else if(postingURL == 'profile'){
-          req.session.message = "Email added successfully";
-          res.redirect('/profile');
-        }
-      }
-    }, req, res);
-  }
-});
-app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
+app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
+// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
