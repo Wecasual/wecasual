@@ -10,7 +10,6 @@ var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
 
-
 //Stripe
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
@@ -42,8 +41,6 @@ var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
 var profileRoute = require('./lib/routes/profile-route')(profiles);
-
-
 
 //==========Middleware==========
 var app = express();
