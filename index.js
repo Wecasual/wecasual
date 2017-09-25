@@ -146,8 +146,8 @@ app.get('/schedule', function(req, res){
   res.render('pages/schedule', { user: req.user});
 });
 
-app.get('/events', function(req, res){
-  res.render('pages/events', { user: req.user});
+app.get('/pick-up-games', function(req, res){
+  res.render('pages/pick-up-games', { user: req.user});
 });
 
 app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
