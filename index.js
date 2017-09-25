@@ -174,6 +174,7 @@ app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updat
 
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
+app.get(adminRoute.adminTeams.route, ensureAuthenticated, adminRoute.adminTeams.handler);
 
 
 app.listen(app.get('port'), function() {
