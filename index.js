@@ -41,6 +41,7 @@ var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
 var profileRoute = require('./lib/routes/profile-route')(profiles);
+var adminRoute = require('./lib/routes/admin-route')(teams, profiles);
 
 //==========Middleware==========
 var app = express();
@@ -108,7 +109,7 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.getUser(identifier, profile, function(err, user){
+    profiles.userLogin(identifier, profile, function(err, user){
       if(err) {
         console.log("Unable to login");
       }
@@ -150,24 +151,29 @@ app.get('/events', function(req, res){
   res.render('pages/events', { user: req.user});
 });
 
+//Teams route
 app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
+// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 
-//==========Steam login stuff==========
+//Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
 app.get(loginRoute.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamReturn.handler);
 app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/' }), loginRoute.steamAuth.handler);
-//==========End steam login stuff==========
 
+//signup route
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
 app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
-app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
-
 app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
 app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
-// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+
+//profile route
+app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
+
+//Admin route
+app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
 
 
 app.listen(app.get('port'), function() {
