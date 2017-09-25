@@ -1,9 +1,6 @@
-.navbar-brand{
-  font-size: 1.5em;
-}
 .nav-link{
   color: #fff !important;
-  font-size: 1.4em;
+  font-size: 24px;
 }
 .nav-link:hover{
   background-color: #D3D0C8 !important;
@@ -68,6 +65,9 @@
 }
 ul,li{
   margin-top: 4px;
+}
+.navbar-nav{
+  margin-top: 0px;
 }
 /* The alert message box */
 .alert {

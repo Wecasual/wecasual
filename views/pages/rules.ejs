@@ -1,12 +1,344 @@
-<% include ../partials/header.ejs %>
+<%if(user && !user.paid){%>
+  <% include ../partials/header-not-paid.ejs %>
+<%}
+else{%>
+  <% include ../partials/header.ejs %>
+<%}%>
   <div class="container top-spacer">
     <div class="card">
       <div class="card-header display-4 text-center">
         Rules
       </div>
-      <div class="card-body">
-        <h4 class="card-title">Version 22/09/2017
-          <p><i>Rules will be released first week of October!</i></p></h4>
+      <div style="font:"class="card-body">
+<style type="text/css">ol.lst-kix_rew8plbi6ykb-7{list-style-type:none}ol.lst-kix_rew8plbi6ykb-6{list-style-type:none}ol.lst-kix_2xcf1cfidnh-7.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-7 0}ol.lst-kix_rew8plbi6ykb-8{list-style-type:none}.lst-kix_x1wdcjovoquf-8>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-8}ol.lst-kix_ooj1iklid97w-8.start{counter-reset:lst-ctn-kix_ooj1iklid97w-8 0}.lst-kix_kpj77bc27a65-4>li{counter-increment:lst-ctn-kix_kpj77bc27a65-4}.lst-kix_nglpwg99ne7y-6>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-6}.lst-kix_kpj77bc27a65-6>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-6,decimal) ". "}.lst-kix_kpj77bc27a65-8>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-8,lower-roman) ". "}ol.lst-kix_x1wdcjovoquf-1.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-1 0}.lst-kix_kpj77bc27a65-7>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-7,lower-latin) ". "}ol.lst-kix_rew8plbi6ykb-1{list-style-type:none}ol.lst-kix_rew8plbi6ykb-0{list-style-type:none}.lst-kix_58diebicn6ad-5>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-5,lower-roman) ". "}ol.lst-kix_rew8plbi6ykb-3{list-style-type:none}ol.lst-kix_rew8plbi6ykb-2{list-style-type:none}ol.lst-kix_kpj77bc27a65-6.start{counter-reset:lst-ctn-kix_kpj77bc27a65-6 0}.lst-kix_58diebicn6ad-4>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-4,lower-latin) ". "}ol.lst-kix_rew8plbi6ykb-5{list-style-type:none}ol.lst-kix_rew8plbi6ykb-4{list-style-type:none}.lst-kix_58diebicn6ad-3>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-3,decimal) ". "}ol.lst-kix_rew8plbi6ykb-3.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-3 0}.lst-kix_hvhynpvun3zm-0>li:before{content:"\0025cf  "}.lst-kix_58diebicn6ad-2>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-2,lower-roman) ". "}ol.lst-kix_2xcf1cfidnh-1.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-1 0}ol.lst-kix_58diebicn6ad-7.start{counter-reset:lst-ctn-kix_58diebicn6ad-7 0}.lst-kix_kpj77bc27a65-0>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-0,decimal) ". "}.lst-kix_58diebicn6ad-1>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-1,lower-latin) ". "}.lst-kix_58diebicn6ad-0>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-0,decimal) ". "}.lst-kix_hvhynpvun3zm-5>li:before{content:"\0025a0  "}.lst-kix_hvhynpvun3zm-6>li:before{content:"\0025cf  "}ol.lst-kix_kpj77bc27a65-0.start{counter-reset:lst-ctn-kix_kpj77bc27a65-0 0}.lst-kix_x1wdcjovoquf-6>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-6}.lst-kix_kpj77bc27a65-2>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-2,lower-roman) ". "}.lst-kix_kpj77bc27a65-4>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-4,lower-latin) ". "}.lst-kix_hvhynpvun3zm-4>li:before{content:"\0025cb  "}.lst-kix_kpj77bc27a65-1>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-1,lower-latin) ". "}.lst-kix_kpj77bc27a65-5>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-5,lower-roman) ". "}.lst-kix_hvhynpvun3zm-1>li:before{content:"\0025cb  "}.lst-kix_hvhynpvun3zm-2>li:before{content:"\0025a0  "}ol.lst-kix_ooj1iklid97w-2.start{counter-reset:lst-ctn-kix_ooj1iklid97w-2 0}.lst-kix_ooj1iklid97w-7>li{counter-increment:lst-ctn-kix_ooj1iklid97w-7}.lst-kix_hvhynpvun3zm-3>li:before{content:"\0025cf  "}ol.lst-kix_nglpwg99ne7y-3.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-3 0}.lst-kix_kpj77bc27a65-3>li:before{content:"" counter(lst-ctn-kix_kpj77bc27a65-3,decimal) ". "}.lst-kix_c3h7tekxmyt6-6>li:before{content:"-  "}.lst-kix_c3h7tekxmyt6-7>li:before{content:"-  "}.lst-kix_pet9moim6psq-1>li:before{content:"-  "}.lst-kix_c3h7tekxmyt6-8>li:before{content:"-  "}.lst-kix_rew8plbi6ykb-7>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-7}.lst-kix_pet9moim6psq-2>li:before{content:"-  "}ol.lst-kix_2xcf1cfidnh-2.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-2 0}.lst-kix_hvhynpvun3zm-7>li:before{content:"\0025cb  "}.lst-kix_pet9moim6psq-0>li:before{content:"-  "}.lst-kix_pet9moim6psq-8>li:before{content:"-  "}.lst-kix_pet9moim6psq-7>li:before{content:"-  "}ol.lst-kix_kpj77bc27a65-1.start{counter-reset:lst-ctn-kix_kpj77bc27a65-1 0}.lst-kix_hvhynpvun3zm-8>li:before{content:"\0025a0  "}.lst-kix_pet9moim6psq-6>li:before{content:"-  "}ol.lst-kix_rew8plbi6ykb-8.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-8 0}.lst-kix_pet9moim6psq-3>li:before{content:"-  "}.lst-kix_pet9moim6psq-5>li:before{content:"-  "}.lst-kix_x1wdcjovoquf-4>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-4}.lst-kix_rew8plbi6ykb-0>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-0}.lst-kix_pet9moim6psq-4>li:before{content:"-  "}.lst-kix_f39iprzd7i25-7>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-7,lower-latin) ". "}ol.lst-kix_ooj1iklid97w-3{list-style-type:none}.lst-kix_kpj77bc27a65-8>li{counter-increment:lst-ctn-kix_kpj77bc27a65-8}.lst-kix_58diebicn6ad-8>li{counter-increment:lst-ctn-kix_58diebicn6ad-8}ol.lst-kix_ooj1iklid97w-2{list-style-type:none}ol.lst-kix_ooj1iklid97w-1{list-style-type:none}.lst-kix_ooj1iklid97w-3>li{counter-increment:lst-ctn-kix_ooj1iklid97w-3}ol.lst-kix_ooj1iklid97w-0{list-style-type:none}.lst-kix_ooj1iklid97w-0>li{counter-increment:lst-ctn-kix_ooj1iklid97w-0}.lst-kix_f39iprzd7i25-6>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-6,decimal) ". "}ol.lst-kix_ooj1iklid97w-8{list-style-type:none}.lst-kix_f39iprzd7i25-1>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-1,lower-roman) ". "}ol.lst-kix_ooj1iklid97w-7{list-style-type:none}ol.lst-kix_ooj1iklid97w-6{list-style-type:none}.lst-kix_f39iprzd7i25-0>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-0,decimal) ". "}.lst-kix_f39iprzd7i25-8>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-8,lower-roman) ". "}ol.lst-kix_ooj1iklid97w-5{list-style-type:none}ol.lst-kix_ooj1iklid97w-4{list-style-type:none}.lst-kix_nglpwg99ne7y-4>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-4}.lst-kix_f39iprzd7i25-2>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-2,lower-latin) ". "}.lst-kix_f39iprzd7i25-3>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-3,decimal) ". "}ol.lst-kix_rew8plbi6ykb-2.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-2 0}.lst-kix_f39iprzd7i25-8>li{counter-increment:lst-ctn-kix_f39iprzd7i25-8}.lst-kix_f39iprzd7i25-5>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-5,lower-roman) ". "}ol.lst-kix_nglpwg99ne7y-8.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-8 0}.lst-kix_kpj77bc27a65-2>li{counter-increment:lst-ctn-kix_kpj77bc27a65-2}.lst-kix_f39iprzd7i25-4>li:before{content:"" counter(lst-ctn-kix_f39iprzd7i25-4,lower-latin) ". "}.lst-kix_2xcf1cfidnh-8>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-8}ol.lst-kix_ooj1iklid97w-7.start{counter-reset:lst-ctn-kix_ooj1iklid97w-7 0}.lst-kix_pjqitp4ttvtd-5>li:before{content:"-  "}ul.lst-kix_pet9moim6psq-7{list-style-type:none}ul.lst-kix_pet9moim6psq-8{list-style-type:none}ul.lst-kix_pet9moim6psq-5{list-style-type:none}ol.lst-kix_ooj1iklid97w-1.start{counter-reset:lst-ctn-kix_ooj1iklid97w-1 0}ul.lst-kix_pet9moim6psq-6{list-style-type:none}ul.lst-kix_pet9moim6psq-3{list-style-type:none}ul.lst-kix_pet9moim6psq-4{list-style-type:none}ul.lst-kix_pet9moim6psq-1{list-style-type:none}ul.lst-kix_pet9moim6psq-2{list-style-type:none}.lst-kix_rew8plbi6ykb-7>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-7,lower-latin) ". "}ul.lst-kix_pet9moim6psq-0{list-style-type:none}.lst-kix_pjqitp4ttvtd-7>li:before{content:"-  "}.lst-kix_rew8plbi6ykb-4>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-4}.lst-kix_nglpwg99ne7y-1>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-1}.lst-kix_f39iprzd7i25-3>li{counter-increment:lst-ctn-kix_f39iprzd7i25-3}.lst-kix_pjqitp4ttvtd-1>li:before{content:"-  "}.lst-kix_ooj1iklid97w-2>li{counter-increment:lst-ctn-kix_ooj1iklid97w-2}.lst-kix_pjqitp4ttvtd-3>li:before{content:"-  "}.lst-kix_2xcf1cfidnh-3>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-3}.lst-kix_f39iprzd7i25-4>li{counter-increment:lst-ctn-kix_f39iprzd7i25-4}ol.lst-kix_f39iprzd7i25-8.start{counter-reset:lst-ctn-kix_f39iprzd7i25-8 0}.lst-kix_x1wdcjovoquf-1>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-1}ol.lst-kix_2xcf1cfidnh-8.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-8 0}ol.lst-kix_x1wdcjovoquf-5.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-5 0}.lst-kix_rew8plbi6ykb-1>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-1,lower-latin) ". "}.lst-kix_2xcf1cfidnh-4>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-4}.lst-kix_x1wdcjovoquf-3>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-3}.lst-kix_rew8plbi6ykb-3>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-3,decimal) ". "}.lst-kix_ooj1iklid97w-1>li{counter-increment:lst-ctn-kix_ooj1iklid97w-1}ol.lst-kix_kpj77bc27a65-7.start{counter-reset:lst-ctn-kix_kpj77bc27a65-7 0}ol.lst-kix_x1wdcjovoquf-8.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-8 0}.lst-kix_nglpwg99ne7y-3>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-3}ol.lst-kix_58diebicn6ad-0.start{counter-reset:lst-ctn-kix_58diebicn6ad-0 0}.lst-kix_58diebicn6ad-1>li{counter-increment:lst-ctn-kix_58diebicn6ad-1}ol.lst-kix_58diebicn6ad-3.start{counter-reset:lst-ctn-kix_58diebicn6ad-3 0}ol.lst-kix_2xcf1cfidnh-5.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-5 0}.lst-kix_rew8plbi6ykb-5>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-5,lower-roman) ". "}ol.lst-kix_rew8plbi6ykb-7.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-7 0}.lst-kix_c3h7tekxmyt6-5>li:before{content:"-  "}ol.lst-kix_x1wdcjovoquf-6.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-6 0}ol.lst-kix_rew8plbi6ykb-4.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-4 0}.lst-kix_c3h7tekxmyt6-3>li:before{content:"-  "}.lst-kix_kpj77bc27a65-1>li{counter-increment:lst-ctn-kix_kpj77bc27a65-1}ol.lst-kix_58diebicn6ad-1.start{counter-reset:lst-ctn-kix_58diebicn6ad-1 0}.lst-kix_kpj77bc27a65-6>li{counter-increment:lst-ctn-kix_kpj77bc27a65-6}.lst-kix_c3h7tekxmyt6-1>li:before{content:"-  "}.lst-kix_58diebicn6ad-0>li{counter-increment:lst-ctn-kix_58diebicn6ad-0}ol.lst-kix_kpj77bc27a65-4.start{counter-reset:lst-ctn-kix_kpj77bc27a65-4 0}.lst-kix_kpj77bc27a65-0>li{counter-increment:lst-ctn-kix_kpj77bc27a65-0}.lst-kix_58diebicn6ad-6>li{counter-increment:lst-ctn-kix_58diebicn6ad-6}.lst-kix_kpj77bc27a65-7>li{counter-increment:lst-ctn-kix_kpj77bc27a65-7}.lst-kix_nglpwg99ne7y-8>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-8}ol.lst-kix_ooj1iklid97w-3.start{counter-reset:lst-ctn-kix_ooj1iklid97w-3 0}ol.lst-kix_58diebicn6ad-2.start{counter-reset:lst-ctn-kix_58diebicn6ad-2 0}ol.lst-kix_2xcf1cfidnh-6.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-6 0}ol.lst-kix_x1wdcjovoquf-7.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-7 0}.lst-kix_nglpwg99ne7y-2>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-2}.lst-kix_58diebicn6ad-6>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-6,decimal) ". "}ol.lst-kix_kpj77bc27a65-0{list-style-type:none}ol.lst-kix_kpj77bc27a65-5.start{counter-reset:lst-ctn-kix_kpj77bc27a65-5 0}ol.lst-kix_kpj77bc27a65-1{list-style-type:none}.lst-kix_58diebicn6ad-8>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-8,lower-roman) ". "}ol.lst-kix_rew8plbi6ykb-5.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-5 0}ol.lst-kix_kpj77bc27a65-8{list-style-type:none}ol.lst-kix_ooj1iklid97w-4.start{counter-reset:lst-ctn-kix_ooj1iklid97w-4 0}ol.lst-kix_kpj77bc27a65-6{list-style-type:none}ol.lst-kix_kpj77bc27a65-7{list-style-type:none}ol.lst-kix_kpj77bc27a65-4{list-style-type:none}ol.lst-kix_kpj77bc27a65-5{list-style-type:none}ol.lst-kix_kpj77bc27a65-2{list-style-type:none}ol.lst-kix_kpj77bc27a65-3{list-style-type:none}.lst-kix_x1wdcjovoquf-2>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-2}.lst-kix_rew8plbi6ykb-5>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-5}ol.lst-kix_nglpwg99ne7y-6.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-6 0}.lst-kix_nglpwg99ne7y-8>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-8,lower-roman) ". "}.lst-kix_2xcf1cfidnh-3>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-3,decimal) ". "}.lst-kix_2xcf1cfidnh-4>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-4,lower-latin) ". "}ol.lst-kix_x1wdcjovoquf-4.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-4 0}ol.lst-kix_2xcf1cfidnh-4.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-4 0}.lst-kix_nglpwg99ne7y-6>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-6,decimal) ". "}.lst-kix_2xcf1cfidnh-2>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-2,lower-roman) ". "}.lst-kix_kpj77bc27a65-3>li{counter-increment:lst-ctn-kix_kpj77bc27a65-3}ol.lst-kix_rew8plbi6ykb-6.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-6 0}.lst-kix_nglpwg99ne7y-7>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-7,lower-latin) ". "}.lst-kix_ooj1iklid97w-8>li{counter-increment:lst-ctn-kix_ooj1iklid97w-8}.lst-kix_nglpwg99ne7y-4>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-4,lower-latin) ". "}.lst-kix_2xcf1cfidnh-0>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-0,decimal) ". "}.lst-kix_nglpwg99ne7y-5>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-5}.lst-kix_2xcf1cfidnh-1>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-1,lower-latin) ". "}.lst-kix_nglpwg99ne7y-5>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-5,lower-roman) ". "}.lst-kix_x1wdcjovoquf-7>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-7}.lst-kix_nglpwg99ne7y-0>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-0,decimal) ". "}.lst-kix_nglpwg99ne7y-2>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-2,lower-roman) ". "}ol.lst-kix_f39iprzd7i25-1.start{counter-reset:lst-ctn-kix_f39iprzd7i25-1 0}ol.lst-kix_kpj77bc27a65-3.start{counter-reset:lst-ctn-kix_kpj77bc27a65-3 0}ol.lst-kix_nglpwg99ne7y-0.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-0 0}.lst-kix_nglpwg99ne7y-3>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-3,decimal) ". "}.lst-kix_f39iprzd7i25-7>li{counter-increment:lst-ctn-kix_f39iprzd7i25-7}ol.lst-kix_ooj1iklid97w-5.start{counter-reset:lst-ctn-kix_ooj1iklid97w-5 0}ol.lst-kix_rew8plbi6ykb-1.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-1 0}.lst-kix_2xcf1cfidnh-7>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-7}.lst-kix_2xcf1cfidnh-5>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-5,lower-roman) ". "}.lst-kix_nglpwg99ne7y-1>li:before{content:"" counter(lst-ctn-kix_nglpwg99ne7y-1,lower-roman) ". "}.lst-kix_2xcf1cfidnh-6>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-6,decimal) ". "}.lst-kix_58diebicn6ad-7>li{counter-increment:lst-ctn-kix_58diebicn6ad-7}.lst-kix_2xcf1cfidnh-7>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-7,lower-latin) ". "}.lst-kix_2xcf1cfidnh-8>li:before{content:"" counter(lst-ctn-kix_2xcf1cfidnh-8,lower-roman) ". "}.lst-kix_ooj1iklid97w-4>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-4,lower-latin) ". "}.lst-kix_ooj1iklid97w-5>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-5,lower-roman) ". "}ol.lst-kix_x1wdcjovoquf-8{list-style-type:none}ol.lst-kix_ooj1iklid97w-6.start{counter-reset:lst-ctn-kix_ooj1iklid97w-6 0}.lst-kix_ooj1iklid97w-2>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-2,lower-roman) ". "}.lst-kix_ooj1iklid97w-3>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-3,decimal) ". "}.lst-kix_ooj1iklid97w-6>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-6,decimal) ". "}.lst-kix_ooj1iklid97w-7>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-7,lower-latin) ". "}ol.lst-kix_x1wdcjovoquf-2{list-style-type:none}.lst-kix_ooj1iklid97w-0>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-0,decimal) ". "}.lst-kix_ooj1iklid97w-1>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-1,lower-latin) ". "}.lst-kix_ooj1iklid97w-8>li:before{content:"" counter(lst-ctn-kix_ooj1iklid97w-8,lower-roman) ". "}ol.lst-kix_x1wdcjovoquf-3{list-style-type:none}ol.lst-kix_x1wdcjovoquf-0{list-style-type:none}ol.lst-kix_x1wdcjovoquf-1{list-style-type:none}ol.lst-kix_x1wdcjovoquf-6{list-style-type:none}.lst-kix_rew8plbi6ykb-1>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-1}ol.lst-kix_x1wdcjovoquf-7{list-style-type:none}ol.lst-kix_x1wdcjovoquf-4{list-style-type:none}ol.lst-kix_f39iprzd7i25-0.start{counter-reset:lst-ctn-kix_f39iprzd7i25-0 0}ol.lst-kix_x1wdcjovoquf-5{list-style-type:none}ol.lst-kix_nglpwg99ne7y-1.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-1 0}.lst-kix_rew8plbi6ykb-6>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-6}.lst-kix_x1wdcjovoquf-0>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-0}ol.lst-kix_nglpwg99ne7y-7.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-7 0}ol.lst-kix_f39iprzd7i25-7.start{counter-reset:lst-ctn-kix_f39iprzd7i25-7 0}ol.lst-kix_58diebicn6ad-4.start{counter-reset:lst-ctn-kix_58diebicn6ad-4 0}.lst-kix_x1wdcjovoquf-8>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-8,lower-roman) ". "}.lst-kix_x1wdcjovoquf-7>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-7,lower-latin) ". "}.lst-kix_kpj77bc27a65-5>li{counter-increment:lst-ctn-kix_kpj77bc27a65-5}.lst-kix_58diebicn6ad-5>li{counter-increment:lst-ctn-kix_58diebicn6ad-5}.lst-kix_58diebicn6ad-2>li{counter-increment:lst-ctn-kix_58diebicn6ad-2}.lst-kix_x1wdcjovoquf-5>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-5,lower-roman) ". "}.lst-kix_x1wdcjovoquf-6>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-6,decimal) ". "}.lst-kix_x1wdcjovoquf-3>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-3,decimal) ". "}ol.lst-kix_kpj77bc27a65-8.start{counter-reset:lst-ctn-kix_kpj77bc27a65-8 0}ol.lst-kix_ooj1iklid97w-0.start{counter-reset:lst-ctn-kix_ooj1iklid97w-0 0}ul.lst-kix_c3h7tekxmyt6-6{list-style-type:none}ul.lst-kix_c3h7tekxmyt6-7{list-style-type:none}.lst-kix_x1wdcjovoquf-4>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-4,lower-latin) ". "}ul.lst-kix_c3h7tekxmyt6-8{list-style-type:none}.lst-kix_ooj1iklid97w-6>li{counter-increment:lst-ctn-kix_ooj1iklid97w-6}ol.lst-kix_58diebicn6ad-5.start{counter-reset:lst-ctn-kix_58diebicn6ad-5 0}.lst-kix_2xcf1cfidnh-5>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-5}ul.lst-kix_c3h7tekxmyt6-2{list-style-type:none}.lst-kix_nglpwg99ne7y-7>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-7}ul.lst-kix_c3h7tekxmyt6-3{list-style-type:none}.lst-kix_f39iprzd7i25-2>li{counter-increment:lst-ctn-kix_f39iprzd7i25-2}ol.lst-kix_x1wdcjovoquf-3.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-3 0}ul.lst-kix_c3h7tekxmyt6-4{list-style-type:none}ul.lst-kix_c3h7tekxmyt6-5{list-style-type:none}.lst-kix_x1wdcjovoquf-1>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-1,lower-roman) ". "}ol.lst-kix_2xcf1cfidnh-3.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-3 0}.lst-kix_x1wdcjovoquf-2>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-2,lower-roman) ". "}.lst-kix_2xcf1cfidnh-2>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-2}ul.lst-kix_c3h7tekxmyt6-0{list-style-type:none}ul.lst-kix_c3h7tekxmyt6-1{list-style-type:none}ol.lst-kix_f39iprzd7i25-6.start{counter-reset:lst-ctn-kix_f39iprzd7i25-6 0}ol.lst-kix_kpj77bc27a65-2.start{counter-reset:lst-ctn-kix_kpj77bc27a65-2 0}.lst-kix_f39iprzd7i25-5>li{counter-increment:lst-ctn-kix_f39iprzd7i25-5}.lst-kix_x1wdcjovoquf-0>li:before{content:"" counter(lst-ctn-kix_x1wdcjovoquf-0,decimal) ". "}ol.lst-kix_2xcf1cfidnh-0{list-style-type:none}ol.lst-kix_2xcf1cfidnh-1{list-style-type:none}ol.lst-kix_2xcf1cfidnh-2{list-style-type:none}.lst-kix_pjqitp4ttvtd-4>li:before{content:"-  "}.lst-kix_pjqitp4ttvtd-8>li:before{content:"-  "}.lst-kix_rew8plbi6ykb-8>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-8,lower-roman) ". "}ol.lst-kix_nglpwg99ne7y-0{list-style-type:none}.lst-kix_pjqitp4ttvtd-6>li:before{content:"-  "}ol.lst-kix_58diebicn6ad-6.start{counter-reset:lst-ctn-kix_58diebicn6ad-6 0}.lst-kix_rew8plbi6ykb-3>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-3}.lst-kix_58diebicn6ad-3>li{counter-increment:lst-ctn-kix_58diebicn6ad-3}ol.lst-kix_f39iprzd7i25-5.start{counter-reset:lst-ctn-kix_f39iprzd7i25-5 0}ol.lst-kix_nglpwg99ne7y-2.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-2 0}.lst-kix_pjqitp4ttvtd-0>li:before{content:"-  "}ol.lst-kix_2xcf1cfidnh-7{list-style-type:none}ol.lst-kix_2xcf1cfidnh-8{list-style-type:none}ol.lst-kix_2xcf1cfidnh-3{list-style-type:none}ol.lst-kix_f39iprzd7i25-2.start{counter-reset:lst-ctn-kix_f39iprzd7i25-2 0}ol.lst-kix_2xcf1cfidnh-4{list-style-type:none}.lst-kix_pjqitp4ttvtd-2>li:before{content:"-  "}ol.lst-kix_2xcf1cfidnh-5{list-style-type:none}ol.lst-kix_2xcf1cfidnh-6{list-style-type:none}ol.lst-kix_x1wdcjovoquf-2.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-2 0}.lst-kix_2xcf1cfidnh-1>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-1}.lst-kix_rew8plbi6ykb-0>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-0,decimal) ". "}.lst-kix_f39iprzd7i25-1>li{counter-increment:lst-ctn-kix_f39iprzd7i25-1}ol.lst-kix_nglpwg99ne7y-5{list-style-type:none}ol.lst-kix_nglpwg99ne7y-6{list-style-type:none}ol.lst-kix_f39iprzd7i25-0{list-style-type:none}.lst-kix_rew8plbi6ykb-2>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-2,lower-roman) ". "}.lst-kix_rew8plbi6ykb-4>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-4,lower-latin) ". "}ol.lst-kix_nglpwg99ne7y-7{list-style-type:none}ol.lst-kix_nglpwg99ne7y-8{list-style-type:none}ol.lst-kix_nglpwg99ne7y-1{list-style-type:none}ol.lst-kix_nglpwg99ne7y-2{list-style-type:none}ol.lst-kix_nglpwg99ne7y-3{list-style-type:none}.lst-kix_ooj1iklid97w-4>li{counter-increment:lst-ctn-kix_ooj1iklid97w-4}ol.lst-kix_nglpwg99ne7y-4{list-style-type:none}ol.lst-kix_f39iprzd7i25-6{list-style-type:none}.lst-kix_58diebicn6ad-4>li{counter-increment:lst-ctn-kix_58diebicn6ad-4}ol.lst-kix_f39iprzd7i25-5{list-style-type:none}.lst-kix_nglpwg99ne7y-0>li{counter-increment:lst-ctn-kix_nglpwg99ne7y-0}ol.lst-kix_f39iprzd7i25-8{list-style-type:none}.lst-kix_rew8plbi6ykb-6>li:before{content:"" counter(lst-ctn-kix_rew8plbi6ykb-6,decimal) ". "}ol.lst-kix_f39iprzd7i25-7{list-style-type:none}ol.lst-kix_f39iprzd7i25-2{list-style-type:none}ol.lst-kix_f39iprzd7i25-1{list-style-type:none}ol.lst-kix_f39iprzd7i25-4{list-style-type:none}ol.lst-kix_f39iprzd7i25-3{list-style-type:none}ol.lst-kix_58diebicn6ad-8.start{counter-reset:lst-ctn-kix_58diebicn6ad-8 0}.lst-kix_c3h7tekxmyt6-4>li:before{content:"-  "}.lst-kix_2xcf1cfidnh-6>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-6}.lst-kix_x1wdcjovoquf-5>li{counter-increment:lst-ctn-kix_x1wdcjovoquf-5}ul.lst-kix_pjqitp4ttvtd-8{list-style-type:none}ul.lst-kix_pjqitp4ttvtd-7{list-style-type:none}.lst-kix_c3h7tekxmyt6-2>li:before{content:"-  "}ul.lst-kix_pjqitp4ttvtd-6{list-style-type:none}.lst-kix_f39iprzd7i25-6>li{counter-increment:lst-ctn-kix_f39iprzd7i25-6}ul.lst-kix_pjqitp4ttvtd-5{list-style-type:none}ul.lst-kix_pjqitp4ttvtd-4{list-style-type:none}ul.lst-kix_pjqitp4ttvtd-3{list-style-type:none}ul.lst-kix_pjqitp4ttvtd-2{list-style-type:none}ul.lst-kix_pjqitp4ttvtd-1{list-style-type:none}ol.lst-kix_f39iprzd7i25-4.start{counter-reset:lst-ctn-kix_f39iprzd7i25-4 0}ol.lst-kix_rew8plbi6ykb-0.start{counter-reset:lst-ctn-kix_rew8plbi6ykb-0 0}.lst-kix_c3h7tekxmyt6-0>li:before{content:"-  "}ol.lst-kix_nglpwg99ne7y-4.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-4 0}.lst-kix_f39iprzd7i25-0>li{counter-increment:lst-ctn-kix_f39iprzd7i25-0}.lst-kix_ooj1iklid97w-5>li{counter-increment:lst-ctn-kix_ooj1iklid97w-5}.lst-kix_2xcf1cfidnh-0>li{counter-increment:lst-ctn-kix_2xcf1cfidnh-0}ol.lst-kix_x1wdcjovoquf-0.start{counter-reset:lst-ctn-kix_x1wdcjovoquf-0 0}.lst-kix_58diebicn6ad-7>li:before{content:"" counter(lst-ctn-kix_58diebicn6ad-7,lower-latin) ". "}ol.lst-kix_nglpwg99ne7y-5.start{counter-reset:lst-ctn-kix_nglpwg99ne7y-5 0}ul.lst-kix_pjqitp4ttvtd-0{list-style-type:none}ol.lst-kix_58diebicn6ad-0{list-style-type:none}ol.lst-kix_58diebicn6ad-1{list-style-type:none}ol.lst-kix_58diebicn6ad-2{list-style-type:none}ul.lst-kix_hvhynpvun3zm-0{list-style-type:none}ol.lst-kix_58diebicn6ad-3{list-style-type:none}ol.lst-kix_58diebicn6ad-4{list-style-type:none}ol.lst-kix_f39iprzd7i25-3.start{counter-reset:lst-ctn-kix_f39iprzd7i25-3 0}ol.lst-kix_58diebicn6ad-5{list-style-type:none}ul.lst-kix_hvhynpvun3zm-3{list-style-type:none}ol.lst-kix_58diebicn6ad-6{list-style-type:none}.lst-kix_rew8plbi6ykb-2>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-2}ul.lst-kix_hvhynpvun3zm-4{list-style-type:none}ol.lst-kix_58diebicn6ad-7{list-style-type:none}ul.lst-kix_hvhynpvun3zm-1{list-style-type:none}ol.lst-kix_58diebicn6ad-8{list-style-type:none}ul.lst-kix_hvhynpvun3zm-2{list-style-type:none}.lst-kix_rew8plbi6ykb-8>li{counter-increment:lst-ctn-kix_rew8plbi6ykb-8}ul.lst-kix_hvhynpvun3zm-7{list-style-type:none}ul.lst-kix_hvhynpvun3zm-8{list-style-type:none}ul.lst-kix_hvhynpvun3zm-5{list-style-type:none}ol.lst-kix_2xcf1cfidnh-0.start{counter-reset:lst-ctn-kix_2xcf1cfidnh-0 0}ul.lst-kix_hvhynpvun3zm-6{list-style-type:none}ol{margin:0;padding:0}table td,table th{padding:0}.c0{margin-left:72pt;padding-top:0pt;padding-left:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c3{margin-left:108pt;padding-top:0pt;padding-left:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c4{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left;height:11pt}.c2{color:#555;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:"Questrial";font-style:normal}.c1{color:#555;font-weight:700;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:"Questrial";font-style:normal}.c14{color:#555;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:"Questrial"}.c6{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c15{color:#24292e;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Questrial";font-style:normal}.c7{background-color:#ffffff;max-width:468pt;padding:72pt 72pt 72pt 72pt}.c9{margin-left:36pt;padding-left:0pt}.c5{padding:0;margin:0}.c11{color:inherit;text-decoration:inherit}.c12{margin-left:144pt;padding-left:0pt}.c13{color:#1155cc;text-decoration:underline}.c8{font-style:italic}.c10{font-weight:700}.title{padding-top:0pt;color:#555;font-size:26pt;padding-bottom:3pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#555;font-size:14pt;font-family:"Questrial"}p{margin:0;color:#555;font-size:14pt;font-family:"Questrial"}h1{padding-top:20pt;color:#555;font-size:20pt;padding-bottom:6pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:18pt;color:#555;font-size:16pt;padding-bottom:6pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h5{padding-top:12pt;color:#666666;font-size:14pt;padding-bottom:4pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:12pt;color:#666666;font-size:14pt;padding-bottom:4pt;font-family:"Questrial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style>
+        <h4 class="card-title">Version 25/09/2017</h4>
+		    <div>
+    			<p class="c4"><span class="c2"></span></p>
+    		</div>
+    		<p class="c6"><span class="display-4">Condensed version</span></p>
+        <ul class="c5 lst-kix_hvhynpvun3zm-0 start">
+    			<li class="c6 c9"><span class="c2">Be nice</span></li>
+    			<li class="c6 c9"><span class="c2">Confirm your attendance for games</span></li>
+    			<li class="c6 c9"><span class="c2">Join and use the Discord</span></li>
+    			<li class="c6 c9"><span class="c2">Report any violations or bad behaviour to the Wecasual team</span></li>
+    			<li class="c6 c9"><span class="c2">Failing to abide by the rules can result in the removal of Wecasual without refund</span></li>
+    			<li class="c6 c9"><span>If you have questions or concerns email: </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span class="c2">&nbsp;or dm Robert on discord</span></li>
+    		</ul>
+    		<p class="c4"><span class="c2"></span></p>
+    		<p class="c6"><span class="display-4">Full version</span></p>
+    		<p class="c4"><span class="c1"></span></p>
+    		<p class="c6"><span class="c1" >Table of contents</span></p>
+    		<ol class="c5 lst-kix_58diebicn6ad-0 start" start="1">
+    			<li class="c6 c9"><span class="c1">Registration Rules</span></li>
+    			<li class="c6 c9"><span class="c1">Player rules</span></li>
+    			<li class="c6 c9"><span class="c1">Team rules</span></li>
+    			<li class="c6 c9"><span class="c1">League rules</span></li>
+    			<li class="c6 c9"><span class="c1">Pick-up Game rules</span></li>
+    			<li class="c6 c9"><span class="c1">Tournament rules</span></li>
+    			<li class="c6 c9"><span class="c10">In-game rules</span></li>
+    			<li class="c6 c9"><span class="c1">Substitute players</span></li>
+    			<li class="c6 c9"><span class="c1">Reporting</span></li>
+    			<li class="c6 c9"><span class="c10">Disciplinary Actions</span><span>&nbsp;</span></li>
+    		</ol>
+    		<p class="c4"><span class="c1"></span></p>
+    		<p class="c6"><span>Wecasual has a mission to ELIMINATE ALL TOXIC BEHAVIOUR FROM ESPORT GAMES THROUGH ORGANIZED, FRIENDLY, AND WELCOMING PLAY. The following rules are designed to allow Wecasual to maintain a positive, and welcoming community. </span></p>
+    		<p class="c4"><span class="c1"></span></p>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0 start" start="1">
+    			<li class="c6 c9"><span class="c1">Registration Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">To participate in Wecasual players must be under 4000 solo MMR</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>Exceptions will be made on a case-by-case basis, contact </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span></li>
+    			<li class="c3"><span class="c2">MMR must be publicly visible on your Dota 2 account in-client and on Dotabuff/OpenDota </span></li>
+    			<li class="c3"><span class="c2">Party MMR will not be taken into account </span></li>
+    			<li class="c3"><span class="c2">If you are not calibrated you can&rsquo;t be playing in very high skill games </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-3 start" start="1">
+    			<li class="c6 c12"><span class="c2">Dotabuff and OpenDota will be referenced</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span class="c2">Each player may only register one account with Wecasual</span></li>
+    			<li class="c0"><span class="c2">Players are not allowed to share accounts with any other players </span></li>
+    			<li class="c0"><span class="c2">There is no registration cut off date</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">If you register after September 30th, 2017, we will place you on a team if possible to start playing the week after you register</span></li>
+    			<li class="c3"><span class="c2">Your payment period will start the week of your first game</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-3 start" start="1">
+    			<li class="c6 c12"><span class="c2">You will not be charged for any waiting time</span></li>
+    			<li class="c6 c12"><span class="c2">You may be asked to participate as a substitute player in Wecasual league matches, these matches will not start your payment period</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="5">
+    			<li class="c0"><span class="c2">Once registered there are no refunds available </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">If you decide to not play prior to Wecasual finding you a team you will not be eligible for a refund</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-3 start" start="1">
+    			<li class="c6 c12"><span>This can be changed case-by-case for extreme circumstances</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2" start="2">
+    			<li class="c3"><span class="c2">If you are removed from the league for poor behaviour/breaking the rules you will not be eligible for a refund </span></li>
+    			<li class="c3"><span class="c2">If you are unable to play in your team&rsquo;s scheduled games you will not be eligible for a refund </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="2">
+    			<li class="c6 c9"><span class="c1">Player Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c10">&nbsp;</span><span class="c2">While in Wecasual players must stay below the MMR cap </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>Exceptions will be made on a case-by-case basis, contact </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span class="c2">Your in-game Dota 2 name, pro info display name and Discord server name must remain the same as your Steam display name while participating in any Wecasual hosted events.</span></li>
+    			<li class="c0"><span class="c2">Players may not switch or leave teams while apart of Wecasual</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>If you wish to switch teams requests may be sent to </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span class="c2">&nbsp;and will processed at the end of every month, you will remain on your current team until then</span></li>
+    			<li class="c3"><span class="c2">Leaving a team removes you from Wecasual and no refund is provided</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="4">
+    			<li class="c0"><span class="c2">Wecasual reserves the right to remove a player from the league due to skill level disparity </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">You will receive a full refund for your current payment period</span></li>
+    			<li class="c3"><span class="c2">This manner of player removal is for play balancing reasons</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="3">
+    			<li class="c6 c9"><span class="c1">Conduct</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">All community members must act in a respectful manner while in the Wecasul community</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>This includes on the Wecasual Discord, Wecasual Website, and any </span><span class="c2">Wecasual games</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span>N</span><span class="c2">o verbal attacks or rude remarks to any other person</span></li>
+    			<li class="c0"><span class="c2">No harassment of any Wecasual community members </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">This includes repeated, unwanted communications</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="4">
+    			<li class="c0"><span class="c2">No spam</span></li>
+    			<li class="c0"><span>No sharing or posting of offensive or NSFW content anywhere in the Wecasual community space.</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="4">
+    			<li class="c6 c9"><span class="c1">Team Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">Team formation will be organized and finalized by Wecasual</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>Teammates can be requested during the registration process or by contacting </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span class="c2">&nbsp;</span></li>
+    			<li class="c3"><span class="c2">First team formation will be complete October 1st</span></li>
+    			<li class="c3"><span class="c2">Any requested changes will become effective the 1st of every month</span></li>
+    			<li class="c3"><span class="c2">Team&rsquo;s will be assigned a temporary name upon creation, and they will have 1 week to request a team name change</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span class="c2">Each team will consist of 5 members</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">There are no official captains that represent each team</span></li>
+    			<li class="c3"><span class="c2">There are no coaches for teams</span></li>
+    			<li class="c3"><span class="c2">There are no official team specific substitute players, substitute players will be pulled from a pool as needed </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="3">
+    			<li class="c0"><span class="c2">Teams are expected to attend and play both their weekly league games</span></li>
+    			<li class="c0"><span class="c2">When playing matches, teams rosters may consist of</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Official team members</span></li>
+    			<li class="c3"><span class="c2">Official substitute players</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="5">
+    			<li class="c6 c9"><span class="c10">League Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">Teams will play two games per week</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Your month&rsquo;s schedule will be set at the beginning of each month</span></li>
+    			<li class="c3"><span class="c2">Each week games will be scheduled for 9:00PM EST, Monday through Thursday </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span class="c2">The league is continuous and there are no playoffs or end to a &lsquo;season&rsquo;</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Team rankings will be used for seeding Wecasual events such as seasonal tournaments and battle cup like mini tournaments </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="3">
+    			<li class="c0"><span class="c2">All games will be played in Captain&rsquo;s Mode</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Games are best of 1</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="4">
+    			<li class="c0"><span class="c2">Lobbies will be hosted by Wecasual</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">You will be contacted via Discord with your lobby details</span></li>
+    			<li class="c3"><span class="c2">Lobbies will be non-ticketed</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="5">
+    			<li class="c0"><span class="c2">If you are unable to attend your scheduled game please make sure your attendance schedule reflects that </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>Attendance schedule can be found here: </span><span class="c8">(Link will be available October 1st)</span><span class="c2">&nbsp;</span></li>
+    			<li class="c3"><span class="c2">You must give at least 48 hours notice of your absence, continued late notice will result in disciplinary action</span></li>
+    			<li class="c3"><span class="c2">We cannot guarantee substitute players for teams that request them</span></li>
+    			<li class="c3"><span class="c2">Please ensure your schedule is open on game days</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="6">
+    			<li class="c0"><span>Teams missing 3 or more players for a scheduled game will forfeit the ga</span><span class="c2">me, and the remaining players will be placed into the sub pool</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Teams may play games with a maximum of 2 substitute players</span></li>
+    		</ol>
+    		<p class="c4"><span class="c2"></span></p>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="6">
+    			<li class="c6 c9"><span class="c1">Substitute Players</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">The substitute player pool consists of any players who do not have an official scheduled match that evening </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Players who are not part of Wecasual cannot be substitute players for any Wecasual matches </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="2">
+    			<li class="c0"><span class="c2">The substitute player pool will be contacted primarily via email and also in-client and Discord 48 hours prior to the game</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>Exceptions to the 48 hour rule may be made if players drop out unexpectedly </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="7">
+    			<li class="c6 c9"><span class="c1">Pick-up Game Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">Pick-up games are events hosted by Wecasual outside of regular league matches </span></li>
+    			<li class="c0"><span class="c2">All Wecasual members are eligible to sign up and attend</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Wecasual members are not required to play with their league teams</span></li>
+    			<li class="c3"><span>Pick up games will generally be a variety of game modes such as Ability Draft, All Random, Captain&rsquo;s Mode, and custom games. Suggestions for a specific game mode can be sent to </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span class="c2">&nbsp;</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="3">
+    			<li class="c0"><span class="c2">Pick-up games will be posted on a weekly basis</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Additional pick up games may be scheduled if in high demand</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="4">
+    			<li class="c0"><span class="c2">Your attendance must be confirmed for the Pick-up game 24 hours before the start time</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Failure to show up to a Pick-up game after you have confirmed your attendance will result in disciplinary action</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="5">
+    			<li class="c0"><span class="c2">Pick-up games with insufficient players 24 hours before the start time will be cancelled</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="8">
+    			<li class="c6 c9"><span class="c1">Tournament Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">Wecasual plans to host one-off tournaments in different formats along the same lines as the pick-up games (e.g. weekend battle cup) </span></li>
+    			<li class="c0"><span class="c2">Wecasual tournaments are available to all Wecasual teams</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Only full Wecasual teams may register for Wecasual tournaments</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="3">
+    			<li class="c0"><span class="c8">Tournament rules are being finalized. Will be updated soon</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="9">
+    			<li class="c6 c9"><span class="c1">Lobbies and In-Game Rules</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">All teams must use their official registered team name </span></li>
+    			<li class="c0"><span class="c2">All players in-lobby names must be the same as their Steam display name</span></li>
+    			<li class="c0"><span class="c2">Any substitute players must be appointed by Wecasual</span></li>
+    			<li class="c0"><span class="c2">All players in lobby must be registered Wecasual players </span></li>
+    			<li class="c0"><span class="c2">All games will be played on the USE server</span></li>
+    			<li class="c0"><span class="c2">Pick order/side will be decided via in-game coin toss</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">The teams playing can facilitate the coin toss themselves, no admin is required </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="7">
+    			<li class="c0"><span class="c2">All players should be in lobby 5 minutes prior to the official start time</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Teams are encouraged to join their team&rsquo;s Discord channel 15 minutes early to strategize and socialize</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="8">
+    			<li class="c0"><span class="c2">Teams or players can be late to their scheduled game up to 15 minutes after the scheduled start time, being late by more than 15 minutes will result in a forfeit </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Wecasual searching for substitute players on your team&rsquo;s behalf counts towards this 15 minutes </span></li>
+    			<li class="c3"><span class="c2">Should the late player show up or a substitute be found after the 15 minute period, the game may still be played but the results will remain a forfeit for the late team</span></li>
+    			<li class="c3"><span class="c2">Continued tardiness may result in disciplinary action</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="9">
+    			<li class="c0"><span class="c2">Pauses are permitted for any reasonable issues</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">This includes: lag and packet loss, a disconnect, urgent bathroom break, someone at the door, etc. Please use your best judgement when it comes to pauses</span></li>
+    			<li class="c3"><span class="c2">If there is an issue with pausing in-game contact a Wecasual team member via email or on Discord</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="10">
+    			<li class="c0"><span class="c2">No all chat of any variations of &ldquo;gg&rdquo; outside of forfeiting the match</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Any accidental all chat of &ldquo;gg&rdquo; without the intention of forfeiting should be immediately followed by all chat informing the opposing team that they will not be forfeiting </span></li>
+    			<li class="c3"><span class="c2">Any fake &ldquo;gg&rdquo; calls with be result in a warning and then a forfeit</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-3 start" start="1">
+    			<li class="c6 c12"><span class="c2">Teams will only be given one warning per month </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="11">
+    			<li class="c0"><span class="c2">Positive and friendly all chat is permitted</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Any negative (even with playful or good intentions) will not be permitted</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="12">
+    			<li class="c0"><span class="c2">All players must use voice chat in the Wecasual Discord to communicate with their team</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Please report any team members who are not using voice chat in the Discord to communicate to a Wecasual team member </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1" start="13">
+    			<li class="c0"><span class="c2">Players from both teams of a match are encouraged to join the post game Discord channel to discuss the game and socialize with other community members &nbsp;</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="10">
+    			<li class="c6 c9"><span class="c1">Reporting</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">Players may report any violations of the Wecasual rules </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span>All and any reports can be sent to </span><span class="c13"><a class="c11" href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span class="c2">&nbsp;or to Robert on Discord</span></li>
+    			<li class="c3"><span class="c2">Please include the match ID, team names, and player names of those involved</span></li>
+    			<li class="c3"><span class="c2">It is recommended to include other evidence such as screenshots or recordings as well as having consensus among the players in the match that the rules were broken</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-0" start="11">
+    			<li class="c6 c9"><span class="c10">Disciplinary Actions</span><span class="c2">&nbsp;</span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-1 start" start="1">
+    			<li class="c0"><span class="c2">The first two violations of the rules will result in warnings</span></li>
+    			<li class="c0"><span class="c2">The third violation of the rules will result in a removal from the league with no refund </span></li>
+    		</ol>
+    		<ol class="c5 lst-kix_ooj1iklid97w-2 start" start="1">
+    			<li class="c3"><span class="c2">Any Wecasual team member reserves the right to remove any player from the league with no prior warnings under extreme circumstances </span></li>
+    		</ol>
+    		<p class="c6"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+    		<p class="c4"><span class="c2"></span></p>
+
       </div>
     </div>
   </div>

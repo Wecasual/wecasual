@@ -1,3 +1,4 @@
+//Create user if user does not already exist in database
 function createUser(client, id, profile, callback){
   var queryString = "INSERT INTO users (steamInfo) VALUES (" + "'" + [JSON.stringify(profile)].join("','") + "'" + ")";
   client.query(queryString, function(err, result){
@@ -9,7 +10,8 @@ function createUser(client, id, profile, callback){
    });
 }
 
-function getUser(pool, identifier, profile, callback){
+//When user logs in using steam login, grab steam profile info, create new user if user does not exist, update database with steam info, and return user
+function userLogin(pool, identifier, profile, callback){
   pool.connect(function(err, client) {
     if(err){
       client.end();
@@ -47,7 +49,12 @@ function getUser(pool, identifier, profile, callback){
     });
   });
 }
-function updateInfo(pool, info, callback, req, res){
+
+//info: Info to update
+//Formatted as an array of objects [{field: "email", value: "example@example.com"}, {field": paid, value: true}];
+//id: id of user that info is being updated for
+//*note* this does not update req.user information. It only updates the database
+function updateUser(pool, info, id, callback, req, res){
   pool.connect(function(err, client){
     if(err){
       client.end();
@@ -56,13 +63,12 @@ function updateInfo(pool, info, callback, req, res){
     }
     var count = 0;
     info.forEach(function(ele) {
-      var queryString = "UPDATE users SET " + ele.field + " = \'" + ele.value + "\'WHERE id=" + req.user.id;
+      var queryString = "UPDATE users SET " + ele.field + " = \'" + ele.value + "\'WHERE id=" + id;
       client.query(queryString, function(err, result){
         if(err){
           callback && callback(err);
           return console.error(err);
         }
-        req.user[ele.field] = ele.value;
         count++;
         if(count == info.length) {
           client.end();
@@ -73,6 +79,12 @@ function updateInfo(pool, info, callback, req, res){
   });
 }
 
+//Returns data for single user
+function getUser(pool, id, callback, req, res){
+
+}
+
+//Returns all user data
 function getAllUsers(pool, callback, req, res){
   pool.connect(function(err, client){
     if(err) {
@@ -92,10 +104,12 @@ function getAllUsers(pool, callback, req, res){
   });
 }
 
+
 module.exports = pool => {
   return {
+    userLogin: userLogin.bind(null, pool),
+    updateUser: updateUser.bind(null, pool),
     getUser: getUser.bind(null, pool),
-    updateInfo: updateInfo.bind(null, pool),
     getAllUsers: getAllUsers.bind(null, pool)
   }
 }
