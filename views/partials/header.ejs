@@ -39,11 +39,16 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <!--Navbar Buttons-->
-          <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/teams">Teams</a>
-          </li>
-          <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/schedule">Schedule</a>
+          <li class="nav-item dropdown">
+            <a class="rounded nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              League
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="nav-link rounded" href="/league-info">Info</a>
+              <a class="nav-link rounded" href="/players">Players</a>
+              <a class="nav-link rounded" href="/teams">Teams</a>
+              <a class="nav-link rounded" href="/schedule">Schedule</a>
+            </div>
           </li>
           <li class="nav-item px-1">
             <a class="nav-link rounded" href="/pick-up-games">Pick-up Games</a>
