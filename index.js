@@ -147,6 +147,14 @@ app.get('/schedule', function(req, res){
   res.render('pages/schedule', { user: req.user});
 });
 
+app.get('/players', function(req, res){
+  res.render('pages/players', { user: req.user});
+});
+
+app.get('/league-info', function(req, res){
+  res.render('pages/league-info', { user: req.user});
+});
+
 app.get('/pick-up-games', function(req, res){
   res.render('pages/pick-up-games', { user: req.user});
 });
