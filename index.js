@@ -127,7 +127,7 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-  if(req.user && !req.user.paid){
+  if(req.user && !req.user.registered){
     res.redirect('/logout');
   }
 	else{
@@ -174,7 +174,8 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
 app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
 app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
-app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
+//No payment for free beta
+//app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
 
 //profile route
 app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
