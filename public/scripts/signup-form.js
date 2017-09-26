@@ -12,6 +12,16 @@ $(document).ready(function() {
             message: 'Required'
           }
         }
+      },
+      email: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter your email address'
+          },
+          emailAddress: {
+            message: 'Please enter a valid email address'
+          }
+        }
       }
     }
   });
