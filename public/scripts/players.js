@@ -8,7 +8,7 @@ $(document).ready(function(){
       }
       else if(res.success){
         res.data.forEach(function(ele){
-          $('#player-list').append('<p><img class="rounded-circle" src=' + ele.avatar + '> ' + ele.displayName + ' ' + ele.team + ' ' + '</p>');
+          $('#player-list').append('<tr><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName + '</td><td>' + ele.team + '</td> ' + '</tr>');
         });
       }
     }
