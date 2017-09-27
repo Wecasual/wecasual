@@ -5,61 +5,19 @@
         Players in Wecasual
       </div>
       <div class="card-body pre-scrollable">
-        <div id="accordion" role="tablist">
-          <!-- Can delete this line-->
-          <!-- Add search bar -->
-          <!-- <h4 class= "font-italic text-center">Team creation will be completed the first week of October!</h4>
-          <div class="card">
-            <div class="card-header" role="tab" id="headingOne">
-              <h5 class="mb-0">
-                <a class =" collapsed collapse-text" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Example team 1
-                </a>
-              </h5>
-            </div>
-
-            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-              <div class="card-body">
-                <p>Player 1</p>
-                <hr>
-                <p>Player 2</p>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" role="tab" id="headingTwo">
-              <h5 class="mb-0">
-                <a class="collapsed collapse-text" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Example team 2
-                </a>
-              </h5>
-            </div>
-            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-              <div class="card-body">
-                <p>Player 1</p>
-                <hr>
-                <p>Player 2</p>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" role="tab" id="headingThree">
-              <h5 class="mb-0">
-                <a class="collapsed collapse-text" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Example team 3
-                </a>
-              </h5>
-            </div>
-            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-              <div class="card-body">
-                <p>Player 1</p>
-                <hr>
-                <p>Player 2</p>
-              </div>
-            </div>
-          </div> -->
-        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Username</th>
+              <th>Team</th>
+            </tr>
+          </thead>
+          <tbody id="player-list">
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+<script src="scripts/players.js"></script>
 <% include ../partials/footer.ejs %>

@@ -42,6 +42,7 @@ var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
 var profileRoute = require('./lib/routes/profile-route')(profiles);
 var adminRoute = require('./lib/routes/admin-route')(teams, profiles);
+var playersRoute = require('./lib/routes/players-route')(profiles);
 
 //==========Middleware==========
 var app = express();
@@ -147,9 +148,8 @@ app.get('/schedule', function(req, res){
   res.render('pages/schedule', { user: req.user});
 });
 
-app.get('/players', function(req, res){
-  res.render('pages/players', { user: req.user});
-});
+app.get(playersRoute.players.route, playersRoute.players.handler);
+app.post(playersRoute.getPlayers.route, playersRoute.getPlayers.handler);
 
 app.get('/league-info', function(req, res){
   res.render('pages/league-info', { user: req.user});
@@ -173,7 +173,7 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 //signup route
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
 app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
-app.post(signupRoute.signupSubmit.route, ensureAuthenticated, signupRoute.signupSubmit.handler);
+app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handler);
 //No payment for free beta
 //app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
 
