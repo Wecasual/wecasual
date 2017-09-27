@@ -164,7 +164,7 @@ app.get('/pick-up-games', function(req, res){
 app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
-// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -184,7 +184,9 @@ app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updat
 
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
+app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
 app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
+app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
 
 
 app.listen(app.get('port'), function() {

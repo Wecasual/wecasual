@@ -6,16 +6,21 @@ function getAllTeams(pool, callback){
 
 }
 
-function createTeam(pool, user, userList, body, callback){
+function createTeam(pool, roster, callback){
   pool.connect(function(err, client){
     if(err){
-      callback && callback(true);
-      return console.error('error', err);
+      callback && callback(err);
+      return console.error(err);
     }
-    console.log(body.email);
-    console.log(body.password);
-    console.log(body.checkbox);
-    client.end();
+    var queryString = "INSERT INTO teams (roster) VALUES (" + "'" + [JSON.stringify(roster)].join("','") + "'" + ")";
+    client.query(queryString, function(err, result){
+      if(err){
+        callback && callback(err);
+        return console.error(err);
+      }
+      callback && callback(null);
+      client.end();
+    });
   });
 }
 
