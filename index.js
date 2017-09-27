@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var session = require('express-session');
+var cookieSession = require('cookie-session')
 var passport = require('passport');
 var passportSteam = require('passport-steam');
 var url = require('url');
@@ -65,11 +65,12 @@ app.use(function(req, res, next) {
 });
 
 //Session middleware
-app.use(session({
-    secret: 'aqua secret',
-    name: 'wecasual session',
-    resave: true,
-    saveUninitialized: true}));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['Aqua secret'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 * 365 // 24 hours
+}))
 
 //Body Parser Middleware
 app.use(bodyParser.json());
