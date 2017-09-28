@@ -45,6 +45,7 @@ function updateUser(pool, info, id, callback, req, res){
       }
     }
     queryString = queryString + ' WHERE id=\'' + id + '\'';
+    console.log("Query String");
     client.query(queryString, function(err, result){
       if(err){
         client.end();
@@ -53,6 +54,7 @@ function updateUser(pool, info, id, callback, req, res){
       }
       else{
         client.end();
+        console.log("Update success");
         callback && callback();
       }
     });
