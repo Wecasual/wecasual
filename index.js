@@ -114,6 +114,7 @@ passport.use(new passportSteam.Strategy({
     profiles.userLogin(identifier, profile, function(err, user){
       if(err) {
         console.log("Unable to login");
+        return done(null, null);
       }
       else {
         return done(null, user);

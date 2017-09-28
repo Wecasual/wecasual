@@ -3,10 +3,22 @@ function createUser(client, id, profile, callback){
   var queryString = "INSERT INTO users (steamInfo) VALUES (" + "'" + [JSON.stringify(profile)].join("','") + "'" + ")";
   client.query(queryString, function(err, result){
      if(err){
+       client.end();
        callback && callback(err);
-       return console.error("Error creating new user", err);
      }
-     console.log("Added user");
+     else{
+       var queryString = "SELECT row_to_json(users) FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
+       client.query(queryString, function(err, result){
+         if(err){
+           client.end();
+           callback && callback(err);
+         }
+         else{
+           client.end();
+           callback && callback(null, result.rows[0].row_to_json);
+         }
+       });
+     }
    });
 }
 
@@ -14,39 +26,45 @@ function createUser(client, id, profile, callback){
 function userLogin(pool, identifier, profile, callback){
   pool.connect(function(err, client) {
     if(err){
-      client.end();
       callback && callback(err);
-      return console.error("Error connecting", err);
     }
-    id = identifier.slice(identifier.lastIndexOf('/')+1, identifier.length);
-    var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
-    client.query(queryString, function(err, result){
-      if(err){
-        callback && callback(err);
-        return console.error("Error selecting user", err);
-      }
-      if(result.rowCount == 0){
-        createUser(client, id, profile, callback);
-      }
-      else{
-        var queryString = "UPDATE users SET steaminfo = \'" + JSON.stringify(profile) + "\'WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
-        client.query(queryString, function(err, result){
-          if(err){
-            callback && callback(err);
-            return console.error("Error updating user info", err);
-          }
-        });
-      }
-      var queryString = "SELECT row_to_json(users) FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
+    else{
+      id = identifier.slice(identifier.lastIndexOf('/')+1, identifier.length);
+      var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
       client.query(queryString, function(err, result){
         if(err){
+          client.end();
           callback && callback(err);
-          return console.error("Error fetching user info", err);
         }
-        client.end();
-        callback && callback(null, result.rows[0].row_to_json);
+        else{
+          if(result.rowCount == 0){
+            createUser(client, id, profile, callback);
+          }
+          else{
+            var queryString = "UPDATE users SET steaminfo = \'" + JSON.stringify(profile) + "\'WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
+            client.query(queryString, function(err, result){
+              if(err){
+                client.end();
+                callback && callback(err);
+              }
+              else{
+                var queryString = "SELECT row_to_json(users) FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
+                client.query(queryString, function(err, result){
+                  if(err){
+                    client.end();
+                    callback && callback(err);
+                  }
+                  else{
+                    client.end();
+                    callback && callback(null, result.rows[0].row_to_json);
+                  }
+                });
+              }
+            });
+          }
+        }
       });
-    });
+    }
   });
 }
 
@@ -57,9 +75,7 @@ function userLogin(pool, identifier, profile, callback){
 function updateUser(pool, info, id, callback, req, res){
   pool.connect(function(err, client){
     if(err){
-      client.end();
       callback && callback(err);
-      return console.error(err);
     }
     var count = 0;
     info.forEach(function(ele) {
@@ -67,12 +83,13 @@ function updateUser(pool, info, id, callback, req, res){
       client.query(queryString, function(err, result){
         if(err){
           callback && callback(err);
-          return console.error(err);
         }
-        count++;
-        if(count == info.length) {
-          client.end();
-          callback && callback();
+        else{
+          count++;
+          if(count == info.length) {
+            client.end();
+            callback && callback();
+          }
         }
       });
     });
@@ -88,19 +105,21 @@ function getUser(pool, id, callback, req, res){
 function getAllUsers(pool, callback, req, res){
   pool.connect(function(err, client){
     if(err) {
-      client.end();
       callback && callback(err);
-      return console.error(err);
     }
-    var queryString = "SELECT * FROM users";
-    client.query(queryString, function(err, result){
-      if(err){
-        callback && callback(err);
-        return console.error(err);
-      }
-      client.end();
-      callback && callback(null, result.rows);
-    });
+    else{
+      var queryString = "SELECT * FROM users";
+      client.query(queryString, function(err, result){
+        if(err){
+          client.end();
+          callback && callback(err);
+        }
+        else{
+          client.end();
+          callback && callback(null, result.rows);
+        }
+      });
+    }
   });
 }
 
