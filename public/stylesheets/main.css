@@ -6,7 +6,39 @@
   background-color: #D3D0C8 !important;
 }
 
+.blog-link{
+  text-decoration: none;
+  color: inherit;
 
+
+
+}
+
+.blog-link:hover{
+   text-decoration: none;
+   color: inherit;
+}
+
+.blog-header{
+  background-color: rgba(55, 55, 55, 0.45)!important;
+}
+
+.blog-title{
+  font-size: 1.2em;
+}
+
+.blog-image{
+  height: 200px;
+  width:80%;
+  display: table;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+}
+
+}
 .dropdown-menu{
   background-color: #555;
 }
