@@ -111,13 +111,21 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.userLogin(identifier, profile, function(err, user){
+    profiles.userLogin(identifier, profile, function(err){
       if(err) {
-        console.log("Unable to login");
+        console.log("Unable to update db");
         return done(null, null);
       }
       else {
-        return done(null, user);
+        profiles.getUser(profile.id, function(err, user){
+          if(err) {
+            console.log("Unable to login");
+            return done(null, null);
+          }
+          else{
+            return done(null, user);
+          }
+        });
       }
     });
   }
