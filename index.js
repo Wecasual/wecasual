@@ -10,6 +10,18 @@ var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
 
+//Butter createTeamSubmit
+var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
+// butter.post.list({page: 1, page_size: 10}).then(function(response) {
+//   console.log(response)
+// })
+//
+// butter.post.list({page: 1, page_size: 10}).then(function(response) {
+//   console.log(response)
+// })
+
+
+
 //Stripe
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
@@ -169,6 +181,13 @@ app.get('/pick-up-games', function(req, res){
   res.render('pages/pick-up-games', { user: req.user});
 });
 
+//butter
+app.get('/blog', renderHome)
+app.get('/blog/p/:page', renderHome)
+app.get('/blog/:slug', renderPost)
+
+
+
 //Teams route
 app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
@@ -202,4 +221,32 @@ app.listen(app.get('port'), function() {
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
+}
+
+
+//Butter display
+function renderHome(req, res) {
+  var page = req.params.page || 1;
+
+  butter.post.list({page_size: 10, page: page}).then(function(resp) {
+    res.render('pages/blog', {
+      user: req.user,
+      posts: resp.data.data,
+      next_page: resp.data.meta.next_page,
+      previous_page: resp.data.meta.previous_page
+    })
+  })
+}
+
+function renderPost(req, res) {
+  var slug = req.params.slug;
+
+  butter.post.retrieve(slug).then(function(resp) {
+    res.render('pages/post', {
+      user: req.user,
+      title: resp.data.data.title,
+      post: resp.data.data,
+      published: new Date(resp.data.data.published)
+    })
+  })
 }
