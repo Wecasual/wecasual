@@ -1,67 +1,23 @@
-//Create user if user does not already exist in database
-function createUser(client, id, profile, callback){
-  var queryString = "INSERT INTO users (steamInfo) VALUES (" + "'" + [JSON.stringify(profile)].join("','") + "'" + ")";
-  client.query(queryString, function(err, result){
-     if(err){
-       client.end();
-       callback && callback(err);
-     }
-     else{
-       var queryString = "SELECT row_to_json(users) FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
-       client.query(queryString, function(err, result){
-         if(err){
-           client.end();
-           callback && callback(err);
-         }
-         else{
-           client.end();
-           callback && callback(null, result.rows[0].row_to_json);
-         }
-       });
-     }
-   });
-}
-
-//When user logs in using steam login, grab steam profile info, create new user if user does not exist, update database with steam info, and return user
+//When user logs in using steam login, grab steam profile info, create new user if user does not exist, update database with steam info
 function userLogin(pool, identifier, profile, callback){
   pool.connect(function(err, client) {
     if(err){
       callback && callback(err);
     }
     else{
-      id = identifier.slice(identifier.lastIndexOf('/')+1, identifier.length);
-      var queryString = "SELECT * FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
+      var steaminfo = {
+        avatar: profile._json.avatar,
+        displayName: profile.displayName
+      }
+      var queryString = 'INSERT INTO users (steaminfo, id) VALUES (\'' + JSON.stringify(steaminfo) + '\', ' + '\'' + profile.id + '\') ON CONFLICT (id) DO UPDATE SET steaminfo = \'' + JSON.stringify(steaminfo) + '\'';
       client.query(queryString, function(err, result){
         if(err){
           client.end();
           callback && callback(err);
         }
-        else{
-          if(result.rowCount == 0){
-            createUser(client, id, profile, callback);
-          }
-          else{
-            var queryString = "UPDATE users SET steaminfo = \'" + JSON.stringify(profile) + "\'WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
-            client.query(queryString, function(err, result){
-              if(err){
-                client.end();
-                callback && callback(err);
-              }
-              else{
-                var queryString = "SELECT row_to_json(users) FROM users WHERE steaminfo @> \'{\"id\": \"" + id + "\"}\'";
-                client.query(queryString, function(err, result){
-                  if(err){
-                    client.end();
-                    callback && callback(err);
-                  }
-                  else{
-                    client.end();
-                    callback && callback(null, result.rows[0].row_to_json);
-                  }
-                });
-              }
-            });
-          }
+        else {
+          client.end();
+          callback && callback();
         }
       });
     }
@@ -69,7 +25,8 @@ function userLogin(pool, identifier, profile, callback){
 }
 
 //info: Info to update
-//Formatted as an array of objects [{field: "email", value: "example@example.com"}, {field": paid, value: true}];
+//Formatted as an array of objects [{field: "email", value: "example@example.com"}, {field: "paid", value: true}];
+//ANY STRING FIELD VALUES MUST BE IN QUOTES
 //id: id of user that info is being updated for
 //*note* this does not update req.user information. It only updates the database
 function updateUser(pool, info, id, callback, req, res){
@@ -77,28 +34,46 @@ function updateUser(pool, info, id, callback, req, res){
     if(err){
       callback && callback(err);
     }
-    var count = 0;
-    info.forEach(function(ele) {
-      var queryString = "UPDATE users SET " + ele.field + " = \'" + ele.value + "\'WHERE id=" + id;
-      client.query(queryString, function(err, result){
-        if(err){
-          callback && callback(err);
-        }
-        else{
-          count++;
-          if(count == info.length) {
-            client.end();
-            callback && callback();
-          }
-        }
-      });
+    var queryString = 'UPDATE users SET ';
+    for(var i = 0; i < info.length; i++){
+      queryString = queryString + info[i].field + '=' + info[i].value;
+      if(i < info.length -1){
+         queryString = queryString + ', ';
+      }
+    }
+    queryString = queryString + ' WHERE id=\'' + id + '\'';
+    client.query(queryString, function(err, result){
+      if(err){
+        callback && callback(err);
+      }
+      else{
+        client.end();
+        callback && callback();
+      }
     });
   });
 }
 
 //Returns data for single user
-function getUser(pool, id, callback, req, res){
-
+function getUser(pool, id, callback){
+  pool.connect(function(err, client){
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = "SELECT row_to_json(users) FROM users WHERE id = \'" + id + '\'';
+      client.query(queryString, function(err, result){
+        if(err){
+          client.end();
+          callback && callback(err);
+        }
+        else{
+          client.end();
+          callback && callback(null, result.rows[0].row_to_json);
+        }
+      });
+    }
+  });
 }
 
 //Returns all user data
