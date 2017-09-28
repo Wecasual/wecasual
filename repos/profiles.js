@@ -13,12 +13,12 @@ function userLogin(pool, identifier, profile, callback){
       var queryString = 'INSERT INTO users (steaminfo, id) VALUES (\'' + JSON.stringify(steaminfo) + '\', ' + '\'' + profile.id + '\') ON CONFLICT (id) DO UPDATE SET steaminfo = \'' + JSON.stringify(steaminfo) + '\'';
       client.query(queryString, function(err, result){
         if(err){
-          client.end();
+          client.release();
           console.log(err);
           callback && callback(err);
         }
         else {
-          client.end();
+          client.release();
           callback && callback();
         }
       });
@@ -48,12 +48,12 @@ function updateUser(pool, info, id, callback, req, res){
     console.log("Query String");
     client.query(queryString, function(err, result){
       if(err){
-        client.end();
+        client.release();
         console.log(err);
         callback && callback(err);
       }
       else{
-        client.end();
+        client.release();
         console.log("Update success");
         callback && callback();
       }
@@ -72,12 +72,12 @@ function getUser(pool, id, callback){
       var queryString = "SELECT row_to_json(users) FROM users WHERE id = \'" + id + '\'';
       client.query(queryString, function(err, result){
         if(err){
-          client.end();
+          client.release();
           console.log(err);
           callback && callback(err);
         }
         else{
-          client.end();
+          client.release();
           callback && callback(null, result.rows[0].row_to_json);
         }
       });
@@ -96,12 +96,12 @@ function getAllUsers(pool, callback, req, res){
       var queryString = "SELECT * FROM users";
       client.query(queryString, function(err, result){
         if(err){
-          client.end();
+          client.release();
           console.log(err);
           callback && callback(err);
         }
         else{
-          client.end();
+          client.release();
           callback && callback(null, result.rows);
         }
       });
