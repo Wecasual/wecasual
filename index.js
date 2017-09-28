@@ -33,16 +33,16 @@ const config = {
 var pool = new pg.Pool(config);
 
 //repositories
-var profiles = require('./repos/profiles')(pool);
-var teams = require('./repos/teams')(pool);
+var profilesRepo = require('./repos/profiles-repo')(pool);
+var teamsRepo = require('./repos/teams-repo')(pool);
 
 //routes
-var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
+var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
-var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
-var profileRoute = require('./lib/routes/profile-route')(profiles);
-var adminRoute = require('./lib/routes/admin-route')(teams, profiles);
-var playersRoute = require('./lib/routes/players-route')(profiles);
+var signupRoute = require('./lib/routes/signup-route')(profilesRepo, stripe, keyPublishable);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
+var playersRoute = require('./lib/routes/players-route')(profilesRepo);
 
 //==========Middleware==========
 var app = express();
@@ -111,7 +111,7 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.userLogin(identifier, profile, function(err){
+    profilesRepo.userLogin(identifier, profile, function(err, user){
       if(err) {
         console.log("Unable to update db");
         return done(null, null);
@@ -170,10 +170,10 @@ app.get('/pick-up-games', function(req, res){
 });
 
 //Teams route
-app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
+app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
-// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -193,6 +193,9 @@ app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updat
 
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
+app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
+app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
+app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
 
 
 app.listen(app.get('port'), function() {
