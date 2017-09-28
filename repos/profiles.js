@@ -2,6 +2,7 @@
 function userLogin(pool, identifier, profile, callback){
   pool.connect(function(err, client) {
     if(err){
+      console.log(err);
       callback && callback(err);
     }
     else{
@@ -13,6 +14,7 @@ function userLogin(pool, identifier, profile, callback){
       client.query(queryString, function(err, result){
         if(err){
           client.end();
+          console.log(err);
           callback && callback(err);
         }
         else {
@@ -32,6 +34,7 @@ function userLogin(pool, identifier, profile, callback){
 function updateUser(pool, info, id, callback, req, res){
   pool.connect(function(err, client){
     if(err){
+      console.log(err);
       callback && callback(err);
     }
     var queryString = 'UPDATE users SET ';
@@ -44,6 +47,8 @@ function updateUser(pool, info, id, callback, req, res){
     queryString = queryString + ' WHERE id=\'' + id + '\'';
     client.query(queryString, function(err, result){
       if(err){
+        client.end();
+        console.log(err);
         callback && callback(err);
       }
       else{
@@ -58,6 +63,7 @@ function updateUser(pool, info, id, callback, req, res){
 function getUser(pool, id, callback){
   pool.connect(function(err, client){
     if(err){
+      console.log(err);
       callback && callback(err);
     }
     else{
@@ -65,6 +71,7 @@ function getUser(pool, id, callback){
       client.query(queryString, function(err, result){
         if(err){
           client.end();
+          console.log(err);
           callback && callback(err);
         }
         else{
@@ -80,6 +87,7 @@ function getUser(pool, id, callback){
 function getAllUsers(pool, callback, req, res){
   pool.connect(function(err, client){
     if(err) {
+      console.log(err);
       callback && callback(err);
     }
     else{
@@ -87,6 +95,7 @@ function getAllUsers(pool, callback, req, res){
       client.query(queryString, function(err, result){
         if(err){
           client.end();
+          console.log(err);
           callback && callback(err);
         }
         else{
