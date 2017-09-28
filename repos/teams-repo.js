@@ -3,24 +3,48 @@ function getTeam(pool, teamid, callback){
 }
 
 function getAllTeams(pool, callback){
-
+  pool.connect(function(err, client){
+    if(err) {
+      console.log(err);
+      callback && callback(err);
+    }
+    else{
+      var queryString = "SELECT * FROM teams";
+      client.query(queryString, function(err, result){
+        if(err){
+          client.release();
+          console.log(err);
+          callback && callback(err);
+        }
+        else{
+          client.release();
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
 }
 
 function createTeam(pool, roster, callback){
   pool.connect(function(err, client){
     if(err){
+      console.log(err);
       callback && callback(err);
-      return console.error(err);
     }
-    var queryString = "INSERT INTO teams (roster) VALUES (" + "'" + [JSON.stringify(roster)].join("','") + "'" + ")";
-    client.query(queryString, function(err, result){
-      if(err){
-        callback && callback(err);
-        return console.error(err);
-      }
-      callback && callback(null);
-      client.end();
-    });
+    else{
+      var queryString = "INSERT INTO teams (roster) VALUES (" + "'" + [JSON.stringify(roster)].join("','") + "'" + ") RETURNING id";
+      client.query(queryString, function(err, result){
+        if(err){
+          client.release();
+          console.log(err);
+          callback && callback(err);
+        }
+        else{
+          client.release();
+          callback && callback(null, result.rows[0].id);
+        }
+      });
+    }
   });
 }
 

@@ -117,7 +117,7 @@ passport.use(new passportSteam.Strategy({
         return done(null, null);
       }
       else {
-        profiles.getUser(profile.id, function(err, user){
+        profilesRepo.getUser(profile.id, function(err, user){
           if(err) {
             console.log("Unable to login");
             return done(null, null);
@@ -174,6 +174,7 @@ app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
