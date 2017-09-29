@@ -1,3 +1,13 @@
+/*General*/
+.container{
+  color: #555;
+}
+
+/*End general*/
+
+
+/*nav*/
+
 .nav-link{
   color: #fff !important;
   font-size: 24px;
@@ -6,17 +16,33 @@
   background-color: #D3D0C8 !important;
 }
 
+.navbar-nav{
+  margin-top: 0px;
+}
 
 .dropdown-menu{
   background-color: #555;
 }
+
+/*End nav*/
+
+/*Misc spacing*/
+.top-spacer{
+  margin-top:95px; /* to account for navbar*/
+}
+.push-spaces{
+    height: 100px;
+}
+/*End misc spacing*/
+
+
+
+/*Index page*/
+
 .discord-link{
   color: #fff !important;
 }
 
-.container{
-  color: #555;
-}
 
 .jumbotron{
   margin-top:65px;
@@ -24,7 +50,6 @@
   background: url("/images/treant-tiny.png")  no-repeat center center;
   background-size: cover;
 }
-
 
 
 #join-league {
@@ -38,23 +63,58 @@
   border: 2px solid white;
   overflow: hidden;
 }
+/*End index page*/
 
 
-.push-spaces
-{
-    height: 100px;
+/*Blog css*/
+.blog-link{
+  text-decoration: none;
+  color: inherit;
+  margin:20px;
+  padding:3px;
+  float:left;
+  width: 100%;
 }
 
-.grey-text{
-  color: #555;
+
+.blog-link:hover{
+   text-decoration: none;
+   color: inherit;
 }
 
-.top-spacer{
-  margin-top:95px; /* to account for navbar*/
+.blog-header{
+  background-color: rgba(55, 55, 55, 0.45)!important;
 }
 
+.blog-title{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.blog-image{
+  height: 200px;
+  width:80%;
+  display: table;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.blog-home{
+  padding: 3px;
+}
+
+.blog-body{
+  font-family: 'Slabo 27px', serif;
+  color: #000;
+}
+
+/*Blog end*/
+
+/*Bootstrap edits*/
 .pre-scrollable{
-  height: 800px;
+  max-height: 650px;
 }
 
 .collapse-text{
@@ -65,15 +125,30 @@
   color:#555;
 }
 
+.card{
+  border-radius: 0rem;
+}
+/*Bootstrap edits end*/
+
+
+/*Random*/
+.grey-text{
+  color: #555;
+}
 .about-text{
   font-size: 1.1em;
 }
+
 ul,li{
   margin-top: 4px;
 }
-.navbar-nav{
-  margin-top: 0px;
+/*Random end*/
+
+footer{
+  bottom: 0;
+  text-align: center;
 }
+
 /* The alert message box */
 .alert {
     text-align: center;
@@ -112,7 +187,50 @@ ul,li{
     color: black;
 }
 
+
+tr.add-player:hover{
+  background-color: #d1d1d1;
+}
+tr.add-player:active{
+  background-color: #555555;
+}
+
+.remove-player:hover{
+  background-color: #d1d1d1;
+}
+
+.remove-player:active{
+  background-color: #555555;
+}
+
+.remove-player{
+  padding:15px;
+  border-style: solid;
+  border-color: #d1d1d1;
+  border-width: 1px
+}
+
 footer{
   bottom: 0;
   text-align: center;
+}
+
+
+/*Hover.css stuff*/
+
+/* Float */
+.hvr-float {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
 }

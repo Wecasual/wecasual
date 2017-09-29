@@ -10,6 +10,10 @@ var passportSteam = require('passport-steam');
 var url = require('url');
 var pg = require('pg');
 
+//Butter
+var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
+
+
 //Stripe
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
@@ -33,16 +37,16 @@ const config = {
 var pool = new pg.Pool(config);
 
 //repositories
-var profiles = require('./repos/profiles')(pool);
-var teams = require('./repos/teams')(pool);
+var profilesRepo = require('./repos/profiles-repo')(pool);
+var teamsRepo = require('./repos/teams-repo')(pool);
 
 //routes
-var teamsRoute = require('./lib/routes/teams-route')(teams, profiles);
+var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
-var signupRoute = require('./lib/routes/signup-route')(profiles, stripe, keyPublishable);
-var profileRoute = require('./lib/routes/profile-route')(profiles);
-var adminRoute = require('./lib/routes/admin-route')(teams, profiles);
-var playersRoute = require('./lib/routes/players-route')(profiles);
+var signupRoute = require('./lib/routes/signup-route')(profilesRepo, stripe, keyPublishable);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
+var playersRoute = require('./lib/routes/players-route')(profilesRepo);
 
 //==========Middleware==========
 var app = express();
@@ -111,13 +115,13 @@ passport.use(new passportSteam.Strategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-    profiles.userLogin(identifier, profile, function(err){
+    profilesRepo.userLogin(identifier, profile, function(err, user){
       if(err) {
         console.log("Unable to update db");
         return done(null, null);
       }
       else {
-        profiles.getUser(profile.id, function(err, user){
+        profilesRepo.getUser(profile.id, function(err, user){
           if(err) {
             console.log("Unable to login");
             return done(null, null);
@@ -169,11 +173,19 @@ app.get('/pick-up-games', function(req, res){
   res.render('pages/pick-up-games', { user: req.user});
 });
 
+//butter
+app.get('/blog', renderHome)
+app.get('/blog/p/:page', renderHome)
+app.get('/blog/:slug', renderPost)
+
+
+
 //Teams route
-app.get(teamsRoute.teamsPage.route, teamsRoute.teamsPage.handler);
+app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
-// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -190,9 +202,13 @@ app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handl
 //profile route
 app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
+app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
 
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
+app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
+app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
+app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
 
 
 app.listen(app.get('port'), function() {
@@ -202,4 +218,32 @@ app.listen(app.get('port'), function() {
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
+}
+
+
+//Butter display
+function renderHome(req, res) {
+  var page = req.params.page || 1;
+
+  butter.post.list({page_size: 10, page: page}).then(function(resp) {
+    res.render('pages/blog', {
+      user: req.user,
+      posts: resp.data.data,
+      next_page: resp.data.meta.next_page,
+      previous_page: resp.data.meta.previous_page,
+    })
+  })
+}
+
+function renderPost(req, res) {
+  var slug = req.params.slug;
+
+  butter.post.retrieve(slug).then(function(resp) {
+    res.render('pages/post', {
+      user: req.user,
+      title: resp.data.data.title,
+      post: resp.data.data,
+      published: new Date(resp.data.data.published)
+    })
+  })
 }

@@ -1,0 +1,37 @@
+<% include ../partials/header.ejs %>
+  <div class="container top-spacer">
+
+
+
+      <aside class="callout rounded">
+        <div class="text-vertical-center">
+            <h1 class = "rounded blog-header">Blog Home</h1>
+        </div>
+    </aside>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-lg-offset-1">
+                    <% posts.forEach(function(post) { %>
+                        <a class= "blog-link" href="/blog/<%= post.slug %>">
+                            <div class="card mb-3 hvr-float">
+                              <p class="lead card-header"><span class ="blog-title"><%= post.title %> &nbsp; </span>by <%= post.author.first_name %> <%= post.author.last_name %>
+                                <span class = "text-right">(<%= post.published %>)</span>
+                              </p>
+
+                              <div class="ml-4 mt-3">
+                                <p class = "mb-1 card-text font-italic"><%= post.summary %> </p>
+                                <p class = "rounded blog-image" style = "background-image: url('<%= post.featured_image %>');"/>
+                              </div>
+                            </div>
+                        </a>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  </div>
+<% include ../partials/footer.ejs %>

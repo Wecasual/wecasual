@@ -31,7 +31,7 @@ function userLogin(pool, identifier, profile, callback){
 //ANY STRING FIELD VALUES MUST BE IN QUOTES
 //id: id of user that info is being updated for
 //*note* this does not update req.user information. It only updates the database
-function updateUser(pool, info, id, callback, req, res){
+function updateUser(pool, info, id, callback){
   pool.connect(function(err, client){
     if(err){
       console.log(err);
@@ -45,7 +45,7 @@ function updateUser(pool, info, id, callback, req, res){
       }
     }
     queryString = queryString + ' WHERE id=\'' + id + '\'';
-    console.log("Query String");
+    //console.log(queryString);
     client.query(queryString, function(err, result){
       if(err){
         client.release();
@@ -54,7 +54,7 @@ function updateUser(pool, info, id, callback, req, res){
       }
       else{
         client.release();
-        console.log("Update success");
+        //console.log("Update success");
         callback && callback();
       }
     });
@@ -86,7 +86,7 @@ function getUser(pool, id, callback){
 }
 
 //Returns all user data
-function getAllUsers(pool, callback, req, res){
+function getAllUsers(pool, callback){
   pool.connect(function(err, client){
     if(err) {
       console.log(err);
