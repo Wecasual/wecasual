@@ -27,7 +27,7 @@
                   <h3><b>Team: </b>
                     <% if(user.team){ %>
 
-                    <%= user.team %>
+                    <%= user.team.name %>
 
                     <%}else{ %>
                       <i>No team</i>
@@ -58,9 +58,19 @@
     						<input type="text" name="email" class="form-control" placeholder='Update email'>
     					</div>
     					<div class="form-group text-center">
-    							<input type="submit" value="Submit" class = "btn btn-default">
+    							<input type="submit" value="Submit" class = "btn btn-secondary btn-lg btn-block">
     					</div>
     				</form>
+            <% if(!user.team){ %>
+              <form method="POST" action="/profile/updatePlayerRequests" id="teammate-request-update">
+                <h3>Update teammate requests:</h3>
+                <input type="text" name="player-request" class="my-3 form-control" <% if(user.playerrequests.player1){%> value=<%= user.playerrequests.player1 %> <%}else{%>placeholder="Enter Steam display name"<%}%>>
+                <input type="text" name="player-request" class="my-3 form-control" <% if(user.playerrequests.player2){%> value=<%= user.playerrequests.player2 %> <%}else{%>placeholder="Enter Steam display name"<%}%>>
+                <input type="text" name="player-request" class="my-3 form-control" <% if(user.playerrequests.player3){%> value=<%= user.playerrequests.player3 %> <%}else{%>placeholder="Enter Steam display name"<%}%>>
+                <input type="text" name="player-request" class="my-3 form-control" <% if(user.playerrequests.player4){%> value=<%= user.playerrequests.player4 %> <%}else{%>placeholder="Enter Steam display name"<%}%>>
+                <input type="submit" value="Submit" class = "btn btn-secondary btn-lg btn-block" id="submit-player-requests">
+              </form>
+            <% } %>
           </div>
         </div>
       </div>
@@ -94,4 +104,5 @@
 		}
 	</script>
 
+<script src="scripts/profile.js"></script>
 <% include ../partials/footer.ejs %>
