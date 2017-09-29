@@ -32,7 +32,7 @@ function createTeam(pool, roster, callback){
       callback && callback(err);
     }
     else{
-      var queryString = "INSERT INTO teams (name, roster) VALUES ('Not Set', " + "'" + [JSON.stringify(roster)].join("','") + "'" + ") RETURNING id";
+      var queryString = "INSERT INTO teams (name, roster) VALUES ('No Name', " + "'" + [JSON.stringify(roster)].join("','") + "'" + ") RETURNING id";
       client.query(queryString, function(err, result){
         if(err){
           client.release();

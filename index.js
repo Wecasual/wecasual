@@ -191,6 +191,7 @@ app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handl
 //profile route
 app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
+app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
 
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
