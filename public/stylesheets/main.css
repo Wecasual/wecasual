@@ -144,7 +144,6 @@ ul,li{
 }
 /*Random end*/
 
-
 footer{
   bottom: 0;
   text-align: center;
@@ -188,7 +187,7 @@ footer{
     color: black;
 }
 
-<<<<<<< HEAD
+
 tr.add-player:hover{
   background-color: #d1d1d1;
 }
@@ -214,8 +213,7 @@ tr.add-player:active{
 footer{
   bottom: 0;
   text-align: center;
-=======
-
+}
 
 
 /*Hover.css stuff*/
@@ -235,5 +233,4 @@ footer{
 .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
->>>>>>> butter-merge
 }
