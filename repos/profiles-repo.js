@@ -1,3 +1,5 @@
+var gf = require('./globalFuncs')();
+
 //When user logs in using steam login, grab steam profile info, create new user if user does not exist, update database with steam info
 function userLogin(pool, identifier, profile, callback){
   pool.connect(function(err, client) {
@@ -6,9 +8,13 @@ function userLogin(pool, identifier, profile, callback){
       callback && callback(err);
     }
     else{
+      //Check name for apostrophes and add escape apostrophe if needed
+      var displayName = gf.addEscape(profile.displayName);
+
+
       var steaminfo = {
         avatar: profile._json.avatar,
-        displayName: profile.displayName
+        displayName: displayName
       }
       var queryString = 'INSERT INTO users (steaminfo, id) VALUES (\'' + JSON.stringify(steaminfo) + '\', ' + '\'' + profile.id + '\') ON CONFLICT (id) DO UPDATE SET steaminfo = \'' + JSON.stringify(steaminfo) + '\'';
       client.query(queryString, function(err, result){
@@ -108,6 +114,8 @@ function getAllUsers(pool, callback){
     }
   });
 }
+
+
 
 
 module.exports = pool => {
