@@ -61,7 +61,7 @@
     							<input type="submit" value="Submit" class = "btn btn-secondary btn-lg btn-block">
     					</div>
     				</form>
-            <% if(user.team){ %>
+            <% if(!user.team){ %>
               <form method="POST" action="/profile/updatePlayerRequests" id="teammate-request-update">
                 <h3>Update teammate requests:</h3>
                 <input type="text" name="player-request" class="my-3 form-control" <% if(user.playerrequests.player1){%> value=<%= user.playerrequests.player1 %> <%}else{%>placeholder="Enter Steam display name"<%}%>>
