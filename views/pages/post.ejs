@@ -1,6 +1,6 @@
 <% include ../partials/header.ejs %>
   <div class="container top-spacer">
-    <div class="card">
+
 
 
 
@@ -9,12 +9,11 @@
           <h1 class = "rounded blog-header"><%= post.title %></h1>
       </div>
   </aside>
-
+  <p class="ml-3 mt-1 lead"><a class ="rounded blog-home button btn-secondary"href="/blog">&lt; Blog Home</a>
   <section id="portfolio" class="portfolio">
       <div class="container">
           <div class="row">
               <div class="col-lg-12 col-lg-offset-1">
-                  <p class="lead"><a class ="rounded blog-link"href="/blog">&lt; Blog Home</a>
                   <p class="lead">By <%= post.author.first_name %> <%= post.author.last_name %> on <%= published.getMonth()+1 %>/<%= published.getDate() %>/<%= published.getFullYear() %></p>
 
                   <% if (post.categories.length > 0) { %>
@@ -26,7 +25,7 @@
 
                   <br>
 
-                  <div>
+                  <div class = "blog-body">
                     <%- post.body %>
                   </div>
 
@@ -34,6 +33,6 @@
           </div>
       </div>
   </section>
-  </div>
+
 </div>
 <% include ../partials/footer.ejs %>
