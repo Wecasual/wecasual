@@ -7,7 +7,9 @@ $(document).ready(function(){
         alert(res.error);
       }
       else if(res.success){
-        toDateString(),
+        res.data.forEach(function(ele){
+          $('#schedule-list').append('<tr class="games"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td>' + '</tr>');
+        });
       }
     }
   });
