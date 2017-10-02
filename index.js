@@ -39,6 +39,7 @@ var pool = new pg.Pool(config);
 //repositories
 var profilesRepo = require('./repos/profiles-repo')(pool);
 var teamsRepo = require('./repos/teams-repo')(pool);
+var scheduleRepo = require('./repos/schedule-repo')(pool);
 
 //routes
 var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
@@ -47,6 +48,7 @@ var signupRoute = require('./lib/routes/signup-route')(profilesRepo, stripe, key
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
 var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
 var playersRoute = require('./lib/routes/players-route')(profilesRepo);
+var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, teamsRepo);
 
 //==========Middleware==========
 var app = express();
@@ -73,7 +75,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['Aqua secret'],
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 * 365 // 24 hours
+  maxAge: 24 * 60 * 60 * 1000 * 365 // 1 year
 }))
 
 //Body Parser Middleware
@@ -204,11 +206,17 @@ app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.ha
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
 app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
 
+//schedule route
+app.post(scheduleRoute.getSchedule.route, ensureAuthenticated, scheduleRoute.getSchedule.handler);
+app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
+
 //Admin route
 app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
 app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
 app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
 app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
+app.get(adminRoute.schedule.route, ensureAuthenticated, adminRoute.schedule.handler);
+app.get(adminRoute.scheduleCreate.route, ensureAuthenticated, adminRoute.scheduleCreate.handler);
 
 
 app.listen(app.get('port'), function() {

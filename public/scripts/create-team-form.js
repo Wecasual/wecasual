@@ -13,7 +13,7 @@ $(document).ready(function(){
       else if(res.success){
         res.data.forEach(function(ele){
           if(ele.team == 'No team'){
-            $('#player-list').append('<tr class="add-player" id="' + ele.id + '"><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName +
+            $('#player-list').append('<tr class="add-row" id="' + ele.id + '"><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName +
             '</td><td>' + ele.playerRequests.player1 + ', ' + ele.playerRequests.player2 + ', ' + ele.playerRequests.player3 + ', ' +
             ele.playerRequests.player4 + '</td></tr>');
           }
@@ -21,16 +21,16 @@ $(document).ready(function(){
       }
     }
   });
-  $(document).on("click", ".add-player", function(){
+  $(document).on("click", ".add-row", function(){
     if(!rosterID.includes(this.id) && rosterID.length < 5){
-      $('#roster').append('<div class="remove-player" id="user-' + this.id + '">' + this.cells[0].innerHTML + ' ' + this.cells[1].innerHTML + '</div>');
+      $('#roster').append('<div class="remove-row" id="user-' + this.id + '">' + this.cells[0].innerHTML + ' ' + this.cells[1].innerHTML + '</div>');
       rosterID.push(this.id);
       rosterName.push(this.cells[1].innerHTML);
       rosterPic.push(this.cells[0].getElementsByTagName('img')[0].src);
       toRemove.push(this);
     }
   });
-  $(document).on("click", ".remove-player", function(){
+  $(document).on("click", ".remove-row", function(){
     id = this.id.replace("user-", "");
     var i = rosterID.indexOf(id);
     if(i != -1) {
@@ -61,7 +61,7 @@ $(document).ready(function(){
             rosterID = new Array();
             rosterName = new Array();
             rosterPic = new Array();
-            $(".remove-player").remove();
+            $(".remove-row").remove();
             toRemove.forEach(function(ele){
               ele.remove();
             })

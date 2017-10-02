@@ -1,0 +1,62 @@
+<% include partials/header.ejs %>
+  <h1>Schedule</h1>
+  <div class="card-body pre-scrollable">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <td>Date</td>
+          <th>Team 1</th>
+          <th>Team 2</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-list">
+      </tbody>
+    </table>
+  </div>
+  <div>
+  <h1>Team List</h1>
+  <div class="card-body pre-scrollable">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Team Name (id)</th>
+          <th>Player 1</th>
+          <th>Player 2</th>
+          <th>Player 3</th>
+          <th>Player 4</th>
+          <th>Player 5</th>
+        </tr>
+      </thead>
+      <tbody id="team-list">
+      </tbody>
+    </table>
+  </div>
+  <h1>Schedule Game</h1>
+  <div class="card-body pre-scrollable">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Team 1</th>
+          <th>Team 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th id="date"><input type="date" name="game-date"></th>
+          <td id="team1"></td>
+          <td id="team2"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button type="button" style="margin-top: 10px; margin-bottom: 10px" id="schedule-game">Schedule Game</button>
+  </div>
+  <a href="/admin">Back</a>
+  <script src="../../scripts/teams.js"></script>
+  <script src="../../scripts/schedule.js"></script>
+  <script src="../../scripts/schedule-game-form.js"></script>
+<% include partials/footer.ejs %>
