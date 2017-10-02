@@ -107,8 +107,23 @@
 
 .blog-body{
   font-family: 'Merriweather', serif;
-  font-size: 1.2em;
+
   color: #000;
+  width: 80%;
+  margin: auto;
+  /*text-align: justify;*/
+}
+.blog-body h1,.blog-body h2 {
+  margin-top: 60px;
+}
+.blog-body p{
+  margin-top: 15px;
+}
+
+@media (min-width: 769px) {
+    .blog-body  {
+        font-size: 1.2em !important;
+     }
 }
 
 /*Blog end*/
