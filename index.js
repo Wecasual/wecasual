@@ -45,7 +45,7 @@ var scheduleRepo = require('./repos/schedule-repo')(pool);
 var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo, stripe, keyPublishable);
-var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo, scheduleRepo);
 var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
 var playersRoute = require('./lib/routes/players-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, teamsRepo);
@@ -205,9 +205,11 @@ app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handl
 app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
 app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
+app.post(profileRoute.upcomingGames.route, ensureAuthenticated, profileRoute.upcomingGames.handler);
+
 
 //schedule route
-app.post(scheduleRoute.getSchedule.route, ensureAuthenticated, scheduleRoute.getSchedule.handler);
+app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
 
 //Admin route

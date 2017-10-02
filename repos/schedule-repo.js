@@ -22,7 +22,7 @@ function createGame(pool, team1, team2, date, callback){
   });
 }
 
-function getSchedule(pool, callback){
+function getAllSchedule(pool, callback){
   pool.connect(function(err, client){
     if(err){
       console.log(err);
@@ -84,11 +84,42 @@ function getSchedule(pool, callback){
   });
 }
 
+function getOneSchedule(pool, teamid, callback){
+  pool.connect(function(err, client){
+    if(err){
+      console.log(err);
+      callback && callback(err);
+    }
+    else{
+      var queryString = "SELECT * FROM schedule\
+                        WHERE\
+                        team1 = " + teamid + "\
+                        OR\
+                        team2 = " + teamid + "\
+                        AND\
+                        date > now()";
+      //console.log(queryString);
+      client.query(queryString, function(err, result){
+        if(err){
+          client.release();
+          console.log(err);
+          callback && callback(err);
+        }
+        else{
+          client.release();
+          callback && callback(null, result);
+        }
+      });
+    }
+  });
+}
+
 
 
 module.exports = pool => {
   return{
     createGame: createGame.bind(null, pool),
-    getSchedule: getSchedule.bind(null, pool)
+    getAllSchedule: getAllSchedule.bind(null, pool),
+    getOneSchedule: getOneSchedule.bind(null, pool)
   }
 }

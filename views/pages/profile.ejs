@@ -73,6 +73,26 @@
             <% } %>
           </div>
         </div>
+        <% if(user.team){ %>
+          <li class="list-group-item">
+            <h3><b>Upcoming Games</b></h3>
+              <div class="card-body pre-scrollable">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Game ID</th>
+                      <th>Date</th>
+                      <th>Team 1</th>
+                      <th>Team 2</th>
+                    </tr>
+                  </thead>
+                  <tbody id="schedule-list">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </li>
+        <% } %>
       </div>
 
   <!-- Message for email input correct or not -->
@@ -103,6 +123,6 @@
 				}
 		}
 	</script>
-
+<script src="../../scripts/schedule.js"></script>
 <script src="scripts/profile.js"></script>
 <% include ../partials/footer.ejs %>
