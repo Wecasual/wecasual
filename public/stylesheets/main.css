@@ -204,22 +204,22 @@ footer{
 }
 
 
-tr.add-player:hover{
+tr.add-row:hover{
   background-color: #d1d1d1;
 }
-tr.add-player:active{
+tr.add-row:active{
   background-color: #555555;
 }
 
-.remove-player:hover{
+.remove-row:hover{
   background-color: #d1d1d1;
 }
 
-.remove-player:active{
+.remove-row:active{
   background-color: #555555;
 }
 
-.remove-player{
+.remove-row{
   padding:15px;
   border-style: solid;
   border-color: #d1d1d1;
