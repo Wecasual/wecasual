@@ -1,8 +1,8 @@
+var schedule;
+var userTeamNum;
 $(document).ready(function(){
-  var schedule;
   var userid = $("#uid").html();
   var gameid;
-  var userTeamNum;
   $.ajax({
     type: 'POST',
     url: '/profile/upcomingGames',
@@ -66,10 +66,11 @@ $(document).ready(function(){
     $(".modal-add").remove();
   });
   $(document).on('click','#attendance-yes', function(){
-    updateAttendance(gameid, userid, "Yes");
+    //console.log(userTeamNum);
+    updateAttendance(gameid, userid, "Yes", userTeamNum);
   });
   $(document).on('click','#attendance-no', function(){
-    updateAttendance(gameid, userid, "No");
+    updateAttendance(gameid, userid, "No", userTeamNum);
   });
 
 });
@@ -90,17 +91,22 @@ function displayAttendance(listid, userid, player, attendance, teamNum){
   }
 }
 
-function updateAttendance(gameid, userid, attendance){
+function updateAttendance(gameid, userid, attendance, teamNum){
   $.ajax({
     type: 'POST',
     url: '/profile/updateAttendance',
-    data: {gameid: gameid, userid: userid, attendance: attendance, teamNum: userTeamNum},
+    data: {gameid: gameid, userid: userid, attendance: attendance, teamNum: teamNum},
     success: function(res) {
       if(!res.success){
         alert(res.error);
       }
       else if(res.success){
         document.getElementById(userid).innerHTML = attendance;
+        for(var i = 0; i < schedule.length; i++){
+          if(schedule[i].gameid == gameid){
+            schedule[i]["attendance" + teamNum][userid] = attendance;
+          }
+        }
       }
     }
   });
