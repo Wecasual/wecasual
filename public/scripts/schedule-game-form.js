@@ -53,7 +53,7 @@ $(document).ready(function(){
                   }
                   else if(res.success){
                     res.data.forEach(function(ele){
-                        $('#schedule-list').append('<tr class="games"><td>' + ele.gameid + '</td><td>' + ele.date + '</td><td>' + ele.team1.name +
+                        $('#schedule-list').append('<tr class="games" id="game-' + ele.gameid + '"><td>' + ele.gameid + '</td><td>' + ele.date + '</td><td>' + ele.team1.name +
                         ' (' + ele.team1.id + ')' + '</td><td>' + ele.team2.name + ' (' + ele.team2.id + ')' + '</td>' + '</tr>');
                     });
                   }
