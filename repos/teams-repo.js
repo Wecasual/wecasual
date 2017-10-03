@@ -1,5 +1,24 @@
 function getTeam(pool, teamid, callback){
-
+  pool.connect(function(err, client){
+    if(err) {
+      console.log(err);
+      callback && callback(err);
+    }
+    else{
+      var queryString = "SELECT * FROM teams WHERE id = " + teamid;
+      client.query(queryString, function(err, result){
+        if(err){
+          client.release();
+          console.log(err);
+          callback && callback(err);
+        }
+        else{
+          client.release();
+          callback && callback(null, result.rows[0]);
+        }
+      });
+    }
+  });
 }
 
 function getAllTeams(pool, callback){

@@ -188,6 +188,7 @@ app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
+app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -206,6 +207,7 @@ app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.ha
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
 app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
 app.post(profileRoute.upcomingGames.route, ensureAuthenticated, profileRoute.upcomingGames.handler);
+app.post(profileRoute.updateAttendance.route, ensureAuthenticated, profileRoute.updateAttendance.handler);
 
 
 //schedule route
