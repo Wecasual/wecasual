@@ -1,5 +1,6 @@
 <% include ../partials/header.ejs %>
   <h2 style="display:none;" id="uid"><%=user.id %></h2>
+  <h2 style="display:none;" id="schedule-type">/profile/upcomingGames</h2>
   <div class="container top-spacer">
   	<!-- Intro section -->
   	<div class = "my-3">
@@ -83,6 +84,7 @@
                       <th>Date</th>
                       <th>Team 1</th>
                       <th>Team 2</th>
+                      <th>Your Response</th>
                     </tr>
                   </thead>
                   <tbody id="schedule-list">
@@ -97,10 +99,10 @@
         <div class="modal fade" id="game-modal" role="dialog">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <div class="modal-header">
+              <!-- <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="modal-close">&times;</button>
 
-              </div>
+              </div> -->
               <div class="modal-body">
                 <div id="team1-header">
                 </div>
@@ -109,6 +111,7 @@
                       <tr>
                         <th>Player</th>
                         <th>Going</th>
+                        <th>Update Your Response</th>
                       </tr>
                     </thead>
                     <tbody id="player-list-1">
@@ -121,6 +124,7 @@
                       <tr>
                         <th>Player</th>
                         <th>Going</th>
+                        <th>Update Your Response</th>
                       </tr>
                     </thead>
                     <tbody id="player-list-2">

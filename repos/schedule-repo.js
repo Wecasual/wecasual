@@ -33,8 +33,12 @@ function getAllSchedule(pool, callback){
       var queryString = "SELECT\
                             t.name,\
                             t.id,\
+                            s.team1,\
+                            s.team2,\
                             s.date,\
-                            s.id AS gameID\
+                            s.id AS gameID,\
+                            s.attendance1,\
+                            s.attendance2\
                           FROM schedule AS s\
                           INNER JOIN teams AS t ON s.team1 = t.id\
                           OR\
@@ -60,18 +64,33 @@ function getAllSchedule(pool, callback){
           for(var i = 0; i < result.rows.length;  i+=2){
             var row1= sorted[i];
             var row2= sorted[i+1];
-            data.push({
-              team1: {
+            var playerObj = {
+              date: row1.date.toDateString(),
+              gameid: row1.gameid,
+              attendance1: row1.attendance1,
+              attendance2: row1.attendance2
+            };
+            if(row1.team1 == row1.id){
+              playerObj.team1 = {
                 name: row1.name,
                 id: row1.id
-              },
-              team2: {
+              }
+              playerObj.team2 = {
                 name: row2.name,
                 id: row2.id
-              },
-              date: row1.date.toDateString(),
-              gameid: row1.gameid
-            });
+              }
+            }
+            else if(row1.team2 == row1.id){
+              playerObj.team2 = {
+                name: row1.name,
+                id: row1.id
+              }
+              playerObj.team1 = {
+                name: row2.name,
+                id: row2.id
+              }
+            }
+            data.push(playerObj);
           }
           data.sort(function(a,b){
             var c = new Date(a.date);
