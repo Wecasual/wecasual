@@ -175,6 +175,10 @@ app.get('/pick-up-games', function(req, res){
   res.render('pages/pick-up-games', { user: req.user});
 });
 
+app.get('/FAQ', function(req, res){
+  res.render('pages/FAQ', { user: req.user});
+});
+
 //butter
 app.get('/blog', renderHome)
 app.get('/blog/p/:page', renderHome)
