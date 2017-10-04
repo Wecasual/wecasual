@@ -189,6 +189,7 @@ app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
 app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
+app.post(teamsRoute.changeName.route, teamsRoute.changeName.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);

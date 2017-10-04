@@ -14,7 +14,7 @@ $(document).ready(function(){
         res.data.forEach(function(ele){
           if(ele.team == 'No team'){
             $('#player-list').append('<tr class="add-row" id="' + ele.id + '"><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName +
-            '</td><td>' + ele.playerRequests.player1 + ', ' + ele.playerRequests.player2 + ', ' + ele.playerRequests.player3 + ', ' +
+            '</td><td>' + ele.skillLevel + '</td><td>' + ele.playerRequests.player1 + ', ' + ele.playerRequests.player2 + ', ' + ele.playerRequests.player3 + ', ' +
             ele.playerRequests.player4 + '</td></tr>');
           }
         });
@@ -23,7 +23,7 @@ $(document).ready(function(){
   });
   $(document).on("click", ".add-row", function(){
     if(!rosterID.includes(this.id) && rosterID.length < 5){
-      $('#roster').append('<div class="remove-row" id="user-' + this.id + '">' + this.cells[0].innerHTML + ' ' + this.cells[1].innerHTML + '</div>');
+      $('#roster').append('<div class="remove-row" id="user-' + this.id + '">' + this.cells[0].innerHTML + '&nbsp; &nbsp;' + this.cells[1].innerHTML + '&nbsp; | &nbsp;' + this.cells[2].innerHTML + '</div>');
       rosterID.push(this.id);
       rosterName.push(this.cells[1].innerHTML);
       rosterPic.push(this.cells[0].getElementsByTagName('img')[0].src);

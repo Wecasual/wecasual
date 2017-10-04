@@ -8,7 +8,8 @@ $(document).ready(function(){
       }
       else if(res.success){
         res.data.forEach(function(ele){
-          $('#team-list').append('<tr class="add-row"><td scope="row"> </td><td id="' + ele.id + '">' + ele.name + ' (' + ele.id + ')</td>' +
+          $('#team-list').append('<tr class="add-row teams"><td scope="row"> </td><td id="' + ele.id + '">' + ele.name + '</td>' +
+          '<td>' + ele.id + '</td>' + 
           '<td id="' + ele.p1.id + '">' + '<img class="rounded-circle" src=' + ele.p1.avatar + '> ' + ele.p1.displayName + '</td>' +
           '<td id="' + ele.p2.id + '">' + '<img class="rounded-circle" src=' + ele.p2.avatar + '> ' + ele.p2.displayName + '</td>' +
           '<td id="' + ele.p3.id + '">' + '<img class="rounded-circle" src=' + ele.p3.avatar + '> ' + ele.p3.displayName + '</td>' +
