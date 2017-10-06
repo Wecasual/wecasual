@@ -82,6 +82,13 @@
               <a class="nav-link rounded" href="/about">About</a>
               <a class="nav-link rounded" href="/FAQ">FAQ</a>
               <a class="nav-link rounded" href="/rules">Rules</a>
+
+              <!-- Only shows when players are logged in -->
+              <% if(user){ %>
+                <hr>
+                <a class="nav-link rounded" href="/playing-guide">Playing Guide</a>
+              <% } %>
+
             </div>
           </li>
           <li class="nav-item px-1">

@@ -179,6 +179,14 @@ app.get('/FAQ', function(req, res){
   res.render('pages/FAQ', { user: req.user});
 });
 
+app.get('/playing-guide', function(req, res){
+  res.render('pages/playing-guide', { user: req.user});
+});
+
+app.get('/thank-you-signup', function(req, res){
+  res.render('pages/thank-you-signup', { user: req.user});
+});
+
 //butter
 app.get('/blog', renderHome)
 app.get('/blog/p/:page', renderHome)
