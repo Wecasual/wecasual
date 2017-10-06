@@ -52,9 +52,9 @@
               </ul>
             </div>
           </div>
-          
+
           <div class="col-md-6 col mt-3">
-            <h3>Update email:</h3>
+            <h3><b>Update email:</b></h3>
             <form method="POST" action="/profile/updateEmail">
     					<div class="form-group ">
     						<input type="text" name="email" class="form-control" placeholder='Update email'>
@@ -78,6 +78,7 @@
         <% if(user.team){ %>
           <li class="list-group-item">
             <h3><b>Upcoming Games</b></h3>
+            <h5>Click to change your response</h5>
               <div class="card-body pre-scrollable">
                 <table class="table">
                   <thead>
