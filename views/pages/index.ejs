@@ -3,42 +3,56 @@
 
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
+<%if(!user || !user.registered){%>
   <div class="jumbotron">
-    <div class="container">
-      <%if(!user || !user.registered){%>
-        <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
-          <h1 class ="display-2 text-center m-3" >Sick of toxic pubs?</h1>
-          <h2 class= "text-center d-md-block d-none">Wecasual, a social and inclusive community for the casual Dota 2 player</h2>
-        </div>
-        <div class = "pt-5 pb-4 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="/signup" role="button">Sign Up For Free</a></div>
-        <div style ="color: #fff; text-shadow: #000 0 3px 3px;">
-            <!-- <h1 class= "text-center">Free Beta</h1> -->
-            <h2 class = "d-md-block d-none text-center font-italic">Wecasual is currently in a Free Beta, so players will have access to everything for free!</h2>
-            <h2 class = "text-center font-italic">Sign-up by <b>Tuesday, October 6th </b>to make it for the first round of games.</h2>
-        </div>
-      <% }
-      else{ %>
-        <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
-          <h1 class ="display-2 text-center m-3 d-none d-md-block" >Thank you for joining Wecasual!</h1>
-          <h2 class= "text-center d-md-block d-none">Teams and schedules will be released Saturday October 7th. We will send an email with more details soon. The first game is Tuesday October 10th at 9:00 PM EST.</h2>
-          <h2 class= "text-center d-md-block d-none">
-            In the meantime, join the Discord to get to know the community:
-            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a>
-          </h2>
+    <div class="container">\
 
-          <!-- Mobile text -->
-          <h4 class ="text-center m-3 d-sm-block d-md-none" >Thank you for joining Wecasual!</h4>
-          <h5 class= "text-center d-sm-block d-md-none">Teams and schedules will be released Oct 7th. We will send an email with details. The first game is Tuesday Oct 10th at 9:00 PM EST.</h5>
-          <h5 class= "text-center d-sm-block d-md-none">
-            In the meantime, join the Discord to get to know the community:
-            <a class = "discord-link rounded" href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a>
-          </h5>
+      <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 3px 3px;">
+        <h1 class ="display-2 text-center m-3" >Sick of toxic pubs?</h1>
+        <h2 class= "text-center d-md-block d-none">Wecasual, a social and inclusive community for the casual Dota 2 player</h2>
+      </div>
+      <div class = "pt-5 pb-4 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="/signup" role="button">Sign Up For Free</a></div>
+      <div style ="color: #fff; text-shadow: #000 0 3px 3px;">
+          <!-- <h1 class= "text-center">Free Beta</h1> -->
+          <h2 class = "d-md-block d-none text-center font-italic">Wecasual is currently in a Free Beta, so players will have access to everything for free!</h2>
+          <h2 class = "text-center font-italic">Sign-up by <b>Tuesday, October 6th </b>to make it for the first round of games.</h2>
+      </div>
 
 
-        </div>
-      <% } %>
     </div>
+
+
+
   </div>
+<% }
+
+else{ %>
+<div class="container top-spacer homepage-bg">
+  <img class = " my-5 img-fluid mx-auto d-block" src="/images/logo.png" alt="Wecasual Logo">
+
+
+
+  <div class = "my-3">
+    <hr>
+      <div class="row my-4">
+        <div class="col-lg-12 col">
+          <a class=" mb-3 btn btn-secondary btn-lg btn-block"href="/profile" target="_blank">Confirm your attendance here</a>
+          <a class="mb-3 btn btn-secondary btn-lg btn-block" href="/playing-guide" target="_blank">How to join a Wecasual game</a>
+          <a  class="mb-3 btn btn-secondary btn-lg btn-block" href="/pick-up-games" target="_blank">Sign up for a pick-up game</a>
+        </div>
+        <div class="col-lg-12 col mt-5 text-center">
+          <h3>Join the Discord: <a href="https://discord.gg/3Q2n2Dt" target="_blank"><b>https://discord.gg/3Q2n2Dt</b></a></h3>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+
+
+<% } %>
+
 
 
 <%if(!user || !user.registered){%>
@@ -80,16 +94,14 @@
   </div>
 
   <div class = "grey-text">
-    <img class = " mt-5 img-fluid mx-auto d-block" src="/images/logo.png" alt="">
+    <img class = " mt-5 img-fluid mx-auto d-block" src="/images/logo.png" alt="Wecasual Logo">
     <h1 class="mt-3 display-5 text-center">eSports for Casual Players </h1>
 
   </div>
           <div class = "pt-5 pb-4 text-center"><a id="join-league" class="btn btn-lg btn-primary" href="/signup" role="button">Sign Up For Free</a></div>
   <% }
   else{ %>
-  	<!-- <h2 class="pb-4 text-center">
-      Games will begin first week of October.
-    </h2> -->
+
   <% } %>
 
 

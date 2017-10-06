@@ -1,5 +1,6 @@
 <% include ../partials/header.ejs %>
-
+  <h2 style="display:none;" id="uid"><%=user.id %></h2>
+  <h2 style="display:none;" id="schedule-type">/profile/upcomingGames</h2>
   <div class="container top-spacer">
   	<!-- Intro section -->
   	<div class = "my-3">
@@ -51,8 +52,9 @@
               </ul>
             </div>
           </div>
+
           <div class="col-md-6 col mt-3">
-            <h3>Update email:</h3>
+            <h3><b>Update email:</b></h3>
             <form method="POST" action="/profile/updateEmail">
     					<div class="form-group ">
     						<input type="text" name="email" class="form-control" placeholder='Update email'>
@@ -76,6 +78,7 @@
         <% if(user.team){ %>
           <li class="list-group-item">
             <h3><b>Upcoming Games</b></h3>
+            <h5>Click to change your response</h5>
               <div class="card-body pre-scrollable">
                 <table class="table">
                   <thead>
@@ -83,6 +86,7 @@
                       <th>Date</th>
                       <th>Team 1</th>
                       <th>Team 2</th>
+                      <th>Your Response</th>
                     </tr>
                   </thead>
                   <tbody id="schedule-list">
@@ -92,6 +96,49 @@
             </div>
           </li>
         <% } %>
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="game-modal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="modal-close">&times;</button>
+
+              </div> -->
+              <div class="modal-body">
+                <div id="team1-header">
+                </div>
+                  <table class="table" id="team1-table">
+                    <thead>
+                      <tr>
+                        <th>Player</th>
+                        <th>Going</th>
+                        <th>Update Your Response</th>
+                      </tr>
+                    </thead>
+                    <tbody id="player-list-1">
+                    </tbody>
+                  </table>
+                <div id="team2-header">
+                </div>
+                  <table class="table" id="team2-table">
+                    <thead>
+                      <tr>
+                        <th>Player</th>
+                        <th>Going</th>
+                        <th>Update Your Response</th>
+                      </tr>
+                    </thead>
+                    <tbody id="player-list-2">
+                    </tbody>
+                  </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
   <!-- Message for email input correct or not -->
@@ -122,5 +169,9 @@
 				}
 		}
 	</script>
+
+<% if(user.team){ %>
+  <script src="scripts/upcomingGames.js"></script>
+<% } %>
 <script src="scripts/profile.js"></script>
 <% include ../partials/footer.ejs %>

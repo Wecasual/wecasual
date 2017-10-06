@@ -152,6 +152,10 @@ app.get('/', function(req, res) {
   }
 });
 
+app.get('/thank-you-signup', function(req, res) {
+  res.render('pages/thank-you-signup', { user: req.user});
+});
+
 app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
@@ -175,6 +179,18 @@ app.get('/pick-up-games', function(req, res){
   res.render('pages/pick-up-games', { user: req.user});
 });
 
+app.get('/FAQ', function(req, res){
+  res.render('pages/FAQ', { user: req.user});
+});
+
+app.get('/playing-guide', function(req, res){
+  res.render('pages/playing-guide', { user: req.user});
+});
+
+app.get('/thank-you-signup', function(req, res){
+  res.render('pages/thank-you-signup', { user: req.user});
+});
+
 //butter
 app.get('/blog', renderHome)
 app.get('/blog/p/:page', renderHome)
@@ -188,6 +204,8 @@ app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
 // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
 app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
 app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
+app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
+app.post(teamsRoute.changeName.route, teamsRoute.changeName.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -206,6 +224,7 @@ app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.ha
 app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
 app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
 app.post(profileRoute.upcomingGames.route, ensureAuthenticated, profileRoute.upcomingGames.handler);
+app.post(profileRoute.updateAttendance.route, ensureAuthenticated, profileRoute.updateAttendance.handler);
 
 
 //schedule route

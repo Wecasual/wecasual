@@ -1,11 +1,13 @@
 <% include partials/header.ejs %>
   <h1>Teams Admin Page</h1>
+  <h5>(Click to Change Name)</h5>
   <div class="card-body pre-scrollable">
     <table class="table">
       <thead>
         <tr>
           <th></th>
-          <th>Team Name (ID)</th>
+          <th>Team Name</th>
+          <!-- <th>ID</th> -->
           <th>Player 1</th>
           <th>Player 2</th>
           <th>Player 3</th>
@@ -20,5 +22,20 @@
   <a href="/admin/teams/create">Create a new team</a>
   <br>
   <a href="/admin">Back</a>
+  <div class="modal fade" id="team-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
   <script src="../../scripts/teams.js"></script>
+  <script src="../../scripts/teams-changeName.js"></script>
 <% include partials/footer.ejs %>
