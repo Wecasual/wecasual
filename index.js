@@ -152,6 +152,10 @@ app.get('/', function(req, res) {
   }
 });
 
+app.get('/thank-you-signup', function(req, res) {
+  res.render('pages/thank-you-signup', { user: req.user});
+});
+
 app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
 });
