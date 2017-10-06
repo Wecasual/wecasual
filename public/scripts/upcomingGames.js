@@ -2,10 +2,11 @@ var schedule;
 var userTeamNum;
 $(document).ready(function(){
   var userid = $("#uid").html();
+  var scheduleType = $("#schedule-type").html();
   var gameid;
   $.ajax({
     type: 'POST',
-    url: '/profile/upcomingGames',
+    url: scheduleType,
     success: function(res) {
       if(!res.success){
         alert(res.error);
@@ -13,7 +14,15 @@ $(document).ready(function(){
       else if(res.success){
         schedule = res.data;
         schedule.forEach(function(ele){
-          $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td>' + '</tr>');
+          if(ele.attendance1.hasOwnProperty(userid)){
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance1[userid] + '</td></tr>');
+          }
+          else if(ele.attendance2.hasOwnProperty(userid)){
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance2[userid] + '</td></tr>');
+          }
+          else {
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td>' + '</tr>');
+          }
         });
       }
     }
@@ -25,7 +34,7 @@ $(document).ready(function(){
       return game.gameid == gameid;
     })[0];
     $('#game-modal').modal('show');
-    $('.modal-header').append('<h4 class="modal-title modal-add">' + this.cells[1].innerHTML  + ' vs ' + this.cells[2].innerHTML + '</h4>');
+    //$('.modal-header').append('<h4 class="modal-title modal-add">' + this.cells[1].innerHTML  + ' vs ' + this.cells[2].innerHTML + '</h4>');
     $('#team1-header').append('<h4 class="modal-add">' + this.cells[1].innerHTML + '</h4>');
     $('#team2-header').append('<h4 class="modal-add">' + this.cells[2].innerHTML + '</h4>');
     $.ajax({
@@ -102,6 +111,7 @@ function updateAttendance(gameid, userid, attendance, teamNum){
       }
       else if(res.success){
         document.getElementById(userid).innerHTML = attendance;
+        document.getElementById("game-" + gameid).cells[3].innerHTML = attendance;
         for(var i = 0; i < schedule.length; i++){
           if(schedule[i].gameid == gameid){
             schedule[i]["attendance" + teamNum][userid] = attendance;

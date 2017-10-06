@@ -1,4 +1,6 @@
 <% include ../partials/header.ejs %>
+<h2 style="display:none;" id="uid"><%=user.id %></h2>
+<h2 style="display:none;" id="schedule-type">/schedule/getAllSchedule</h2>
   <div class="container top-spacer">
     <div class="card">
       <div class="card-header display-4 text-center">
@@ -12,6 +14,74 @@
         <!-- <hr>
         <h4 class="card-title">Wecasual pick-up games schedule will be released first week of October.</h4> -->
       </div>
+      </div>
+      <% if(user.team){ %>
+        <li class="list-group-item">
+          <h3><b>Upcoming Games</b></h3>
+            <div class="card-body pre-scrollable">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                    <th>Your Response</th>
+                  </tr>
+                </thead>
+                <tbody id="schedule-list">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </li>
+      <% } %>
+      <!-- Trigger the modal with a button -->
+      <!-- Modal -->
+      <div class="modal fade" id="game-modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" id="modal-close">&times;</button>
+
+            </div> -->
+            <div class="modal-body">
+              <div id="team1-header">
+              </div>
+                <table class="table" id="team1-table">
+                  <thead>
+                    <tr>
+                      <th>Player</th>
+                      <th>Going</th>
+                      <th>Update Your Response</th>
+                    </tr>
+                  </thead>
+                  <tbody id="player-list-1">
+                  </tbody>
+                </table>
+              <div id="team2-header">
+              </div>
+                <table class="table" id="team2-table">
+                  <thead>
+                    <tr>
+                      <th>Player</th>
+                      <th>Going</th>
+                      <th>Update Your Response</th>
+                    </tr>
+                  </thead>
+                  <tbody id="player-list-2">
+                  </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
+<% if(user.team){ %>
+  <script src="scripts/upcomingGames.js"></script>
+<% } %>
 <% include ../partials/footer.ejs %>
