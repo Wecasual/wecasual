@@ -6,7 +6,7 @@ $(document).ready(function(){
     <form method="POST" action="/teams/changeName" id="team-name-change">\
      <input type="text" name="teamName" class="my-3 form-control" value=\"' + this.cells[1].innerHTML + '\">\
      <h5>Team ID</h5>\
-     <input type="text" name="teamid" class="my-3 form-control" value=\"' + this.cells[2].innerHTML + '\" readonly>\
+     <input type="text" name="teamid" class="my-3 form-control" value=\"' + this.cells[1].id + '\" readonly>\
      <input type="submit" value="Submit" class = "btn btn-default" id="submit-team-name-change">\
      </form></h5>');
 
