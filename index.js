@@ -228,7 +228,7 @@ app.post(profileRoute.updateAttendance.route, ensureAuthenticated, profileRoute.
 
 
 //schedule route
-app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
+app.post(scheduleRoute.getAllSchedule.route, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
 
 //Admin route
