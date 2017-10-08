@@ -15,13 +15,13 @@ $(document).ready(function(){
         schedule = res.data;
         schedule.forEach(function(ele){
           if(ele.attendance1.hasOwnProperty(userid)){
-            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance1[userid] + '</td></tr>');
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + ', 9:00 PM EST</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance1[userid] + '</td></tr>');
           }
           else if(ele.attendance2.hasOwnProperty(userid)){
-            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance2[userid] + '</td></tr>');
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + ', 9:00 PM EST</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td><td>' + ele.attendance2[userid] + '</td></tr>');
           }
           else {
-            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + '</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td>' + '</tr>');
+            $('#schedule-list').append('<tr class="games add-row" id="game-' + ele.gameid + '"><td>' + ele.date + ', 9:00 PM EST</td><td>' + ele.team1.name + '</td><td>' + ele.team2.name + '</td>' + '</tr>');
           }
         });
       }
