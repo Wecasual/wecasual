@@ -101,12 +101,34 @@ function updateTeam(pool, info, teamid, callback){
   });
 }
 
+function deleteTeam(pool, teamid, callback){
+  pool.connect(function(err, client){
+    if(err){
+      console.log(err);
+      callback && callback(err);
+    }
+    var queryString = 'DELETE FROM teams WHERE id=' + teamid;
+    console.log(queryString);
+    client.query(queryString, function(err, result){
+      if(err){
+        client.release();
+        console.log(err);
+        callback && callback(err);
+      }
+      else{
+        client.release();
+        callback && callback(null);
+      }
+    });
+  });
+}
 module.exports = pool => {
   return{
     getTeam: getTeam.bind(null, pool),
     getAllTeams: getAllTeams.bind(null, pool),
     createTeam: createTeam.bind(null, pool),
     joinTeam: joinTeam.bind(null, pool),
-    updateTeam: updateTeam.bind(null, pool)
+    updateTeam: updateTeam.bind(null, pool),
+    deleteTeam: deleteTeam.bind(null, pool)
   }
 }
