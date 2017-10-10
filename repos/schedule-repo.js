@@ -44,7 +44,7 @@ function getAllSchedule(pool, callback){
                           OR\
                           s.team2 = t.id\
                           WHERE\
-                          s.date > now();";
+                          s.date >= (CURRENT_DATE - INTERVAL '1 day')::date";
       //console.log(queryString);
       client.query(queryString, function(err, result){
         if(err){
@@ -97,6 +97,7 @@ function getAllSchedule(pool, callback){
             var d = new Date(b.date);
             return c-d;
           });
+          //console.log(data);
           callback && callback(null, data);
         }
       });
@@ -105,6 +106,7 @@ function getAllSchedule(pool, callback){
 }
 
 function getOneSchedule(pool, teamid, callback){
+  // console.log('team id', teamid);
   pool.connect(function(err, client){
     if(err){
       console.log(err);
@@ -129,7 +131,7 @@ function getOneSchedule(pool, teamid, callback){
                         OR\
                         team2 = " + teamid + "\
                         AND\
-                        s.date > now();";
+                        s.date >= (CURRENT_DATE - INTERVAL '1 day')::date";
       // "SELECT schedule.date, schedule.team1, schedule.team2, teams.name FROM schedule\
       //                   WHERE\
       //                   team1 = " + teamid + "\

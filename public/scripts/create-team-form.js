@@ -11,11 +11,13 @@ $(document).ready(function(){
         alert(res.error);
       }
       else if(res.success){
+        var i = 1;
         res.data.forEach(function(ele){
           if(ele.team == 'No team'){
-            $('#player-list').append('<tr class="add-row" id="' + ele.id + '"><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName +
+            $('#player-list').append('<tr class="add-row" id="' + ele.id + '"><td>' + i + '</td><th scope="row"><img class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.displayName +
             '</td><td>' + ele.skillLevel + '</td><td>' + ele.playerRequests.player1 + ', ' + ele.playerRequests.player2 + ', ' + ele.playerRequests.player3 + ', ' +
             ele.playerRequests.player4 + '</td></tr>');
+            i++;
           }
         });
       }
@@ -23,10 +25,10 @@ $(document).ready(function(){
   });
   $(document).on("click", ".add-row", function(){
     if(!rosterID.includes(this.id) && rosterID.length < 5){
-      $('#roster').append('<div class="remove-row" id="user-' + this.id + '">' + this.cells[0].innerHTML + '&nbsp; &nbsp;' + this.cells[1].innerHTML + '&nbsp; | &nbsp;' + this.cells[2].innerHTML + '</div>');
+      $('#roster').append('<div class="remove-row" id="user-' + this.id + '">' + this.cells[1].innerHTML + '&nbsp; &nbsp;' + this.cells[2].innerHTML + '&nbsp; | &nbsp;' + this.cells[3].innerHTML + '</div>');
       rosterID.push(this.id);
-      rosterName.push(this.cells[1].innerHTML);
-      rosterPic.push(this.cells[0].getElementsByTagName('img')[0].src);
+      rosterName.push(this.cells[2].innerHTML);
+      rosterPic.push(this.cells[1].getElementsByTagName('img')[0].src);
       toRemove.push(this);
     }
   });
