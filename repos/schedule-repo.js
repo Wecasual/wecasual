@@ -106,7 +106,7 @@ function getAllSchedule(pool, callback){
 }
 
 function getOneSchedule(pool, teamid, callback){
-  console.log('team id', teamid);
+  // console.log('team id', teamid);
   pool.connect(function(err, client){
     if(err){
       console.log(err);
