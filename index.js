@@ -207,6 +207,7 @@ app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
 app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
 app.post(teamsRoute.changeName.route, teamsRoute.changeName.handler);
 app.post(teamsRoute.deleteTeam.route, teamsRoute.deleteTeam.handler);
+app.post(teamsRoute.removePlayer.route, teamsRoute.removePlayer.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);

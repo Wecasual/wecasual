@@ -1,21 +1,71 @@
 $(document).ready(function(){
+  var index;
   var teamid;
+  var teams = new Array();
+  $.ajax({
+    type: 'POST',
+    url: '/teams/getTeams',
+    success: function(res) {
+      if(!res.success){
+        alert(res.error);
+      }
+      else if(res.success){
+        var i = 0;
+        res.data.forEach(function(ele){
+          $('#team-list').append('<tr class="add-row teams" id="index-' + i + '"><td scope="row"> </td><td id="' + ele.id + '">' + ele.name + '</td>' +
+          '<td>' + ele.id + '</td>' +
+          '<td id="' + ele.p1.id + '">' + '<img class="rounded-circle" src=' + ele.p1.avatar + '> ' + ele.p1.displayName + '</td>' +
+          '<td id="' + ele.p2.id + '">' + '<img class="rounded-circle" src=' + ele.p2.avatar + '> ' + ele.p2.displayName + '</td>' +
+          '<td id="' + ele.p3.id + '">' + '<img class="rounded-circle" src=' + ele.p3.avatar + '> ' + ele.p3.displayName + '</td>' +
+          '<td id="' + ele.p4.id + '">' + '<img class="rounded-circle" src=' + ele.p4.avatar + '> ' + ele.p4.displayName + '</td>' +
+          '<td id="' + ele.p5.id + '">' + '<img class="rounded-circle" src=' + ele.p5.avatar + '> ' + ele.p5.displayName + '</td>' +
+          '</tr>');
+          teams.push(ele);
+          i++;
+        });
+      }
+    }
+  });
   $(document).on("click", ".teams", function(){
     $('#team-modal').modal('show');
-    $('.modal-header').append('<h4 class="modal-title modal-add" id="title-team-name">' + this.cells[1].innerHTML + '</h4>');
+    index = this.id.substring(6, this.id.length);
+    var team = teams[index];
+    teamid = team.id;
+
+    $('.modal-header').append('<h4 class="modal-title modal-add" id="title-team-name">' + team.name + '</h4>');
     $('.modal-body').append('<h5 class="modal-add">Team Name Change\
     <form method="POST" action="/teams/changeName" id="team-name-change">\
-     <input type="text" name="teamName" class="my-3 form-control" value=\"' + this.cells[1].innerHTML + '\">\
+     <input type="text" name="teamName" class="my-3 form-control" value=\"' + team.name + '\">\
      <input type="submit" value="Submit" class = "btn btn-default" id="submit-team-name-change">\
      <hr>\
      <h5>Team ID</h5>\
-     <input type="text" name="teamid" class="my-3 form-control" id="team-id" value=\"' + this.cells[1].id + '\" readonly>\
+     <input type="text" name="teamid" class="my-3 form-control" id="team-id" value=\"' + teamid + '\" readonly>\
     </form>\
     <hr>\
-    <button class = "btn btn-danger" id="delete-team">Delete Team</button>\
-    <hr>\
+    <h5 class="modal-add" id="roster">Roster\
+      <h6 class="modal-add">\
+        <table class="table table-striped">\
+          <thead>\
+            <tr>\
+              <th></th>\
+              <th></th>\
+              <th></th>\
+            </tr>\
+          </thead>\
+          <tbody id="player-list"></tbody>\
+        </table>\
+      </h6>\
+    </h5>\
+    <hr class="modal-add">\
+    <button class = "btn btn-danger modal-add" id="delete-team">Delete Team</button>\
+    <hr class="modal-add">\
     </h5>');
-    teamid = this.cells[1].id;
+    for(var i = 0; i < 5; i++){
+      var player = team["p" + (i+1)];
+      $('#player-list').append('<tr id="user-' + player.id + '">' + '<td><img class="rounded-circle" src=' + player.avatar + '></td><td>'
+      + player.displayName +
+      '</td><td><button class="btn remove-user" id="remove-user-' + player.id + '">Remove</button></td></tr>');
+    }
   });
   $(document).on('hide.bs.modal','#team-modal', function(){
     $(".modal-add").remove();
@@ -34,6 +84,7 @@ $(document).ready(function(){
           alert(res.message);
           document.getElementById(res.data.teamid).innerHTML = res.data.teamName;
           document.getElementById('title-team-name').innerHTML = res.data.teamName;
+          teams[index].name = res.data.teamName;
         }
       }
     });
@@ -50,7 +101,24 @@ $(document).ready(function(){
           }
           else if(res.success){
             alert(res.message);
-
+            $("#index-" + index).remove();
+          }
+        }
+      });
+    }
+  });
+  $(document).on('click', '.remove-user', function(e){
+    if(confirm("Are you sure?")){
+      $.ajax({
+        type: 'POST',
+        url: '/teams/removePlayer',
+        data: {teamid: teamid, playerid: this.id.substring(12, this.id.length)},
+        success: function(res) {
+          if(!res.success){
+            alert(res.error);
+          }
+          else if(res.success){
+            alert(res.message);
           }
         }
       });
