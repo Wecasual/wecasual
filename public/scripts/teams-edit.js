@@ -12,14 +12,17 @@ $(document).ready(function(){
       else if(res.success){
         var i = 0;
         res.data.forEach(function(ele){
-          $('#team-list').append('<tr class="add-row teams" id="index-' + i + '"><td scope="row"> </td><td id="' + ele.id + '">' + ele.name + '</td>' +
-          '<td>' + ele.id + '</td>' +
-          '<td id="' + ele.p1.id + '">' + '<img class="rounded-circle" src=' + ele.p1.avatar + '> ' + ele.p1.displayName + '</td>' +
-          '<td id="' + ele.p2.id + '">' + '<img class="rounded-circle" src=' + ele.p2.avatar + '> ' + ele.p2.displayName + '</td>' +
-          '<td id="' + ele.p3.id + '">' + '<img class="rounded-circle" src=' + ele.p3.avatar + '> ' + ele.p3.displayName + '</td>' +
-          '<td id="' + ele.p4.id + '">' + '<img class="rounded-circle" src=' + ele.p4.avatar + '> ' + ele.p4.displayName + '</td>' +
-          '<td id="' + ele.p5.id + '">' + '<img class="rounded-circle" src=' + ele.p5.avatar + '> ' + ele.p5.displayName + '</td>' +
-          '</tr>');
+          var appendString = '<tr class="add-row teams" id="index-' + i + '"><td scope="row"> </td><td id="' + ele.id + '">' + ele.name + '</td>' + '<td>' + ele.id + '</td>';
+          for(var j = 0; j < 5; j++){
+            if(ele["p" + (j+1)]){
+              appendString = appendString + '<td id="' + ele["p" + (j+1)].id + '">' + '<img class="rounded-circle" src=' + ele["p" + (j+1)].avatar + '> ' + ele["p" + (j+1)].displayName + '</td>';
+            }
+            else{
+              appendString = appendString + '<td>No player</td>';
+            }
+          }
+          appendString = appendString + '</tr>';
+          $('#team-list').append(appendString);
           teams.push(ele);
           i++;
         });
@@ -101,7 +104,7 @@ $(document).ready(function(){
           }
           else if(res.success){
             alert(res.message);
-            $("#index-" + index).remove();
+            window.location.reload();
           }
         }
       });
@@ -119,6 +122,7 @@ $(document).ready(function(){
           }
           else if(res.success){
             alert(res.message);
+            window.location.reload();
           }
         }
       });
