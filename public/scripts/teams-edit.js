@@ -35,8 +35,8 @@ $(document).ready(function(){
     var team = teams[index];
     teamid = team.id;
 
-    $('.modal-header').append('<h4 class="modal-title modal-add" id="title-team-name">' + team.name + '</h4>');
-    $('.modal-body').append('<h5 class="modal-add">Team Name Change\
+    $('#modal-header-teams').append('<h4 class="modal-title modal-add" id="title-team-name">' + team.name + '</h4>');
+    $('#modal-body-teams').append('<h5 class="modal-add">Team Name Change\
     <form method="POST" action="/teams/changeName" id="team-name-change">\
      <input type="text" name="teamName" class="my-3 form-control" value=\"' + team.name + '\">\
      <input type="submit" value="Submit" class = "btn btn-default" id="submit-team-name-change">\
@@ -59,6 +59,10 @@ $(document).ready(function(){
         </table>\
       </h6>\
     </h5>\
+    <hr class="modal-add">\
+    <button class = "btn modal-add" id="add-player">Add Player</button>\
+    <h2 style="display:none;" id="teamid">' + teamid + '</h2>\
+    <hr class="modal-add">\
     <hr class="modal-add">\
     <button class = "btn btn-danger modal-add" id="delete-team">Delete Team</button>\
     <hr class="modal-add">\
@@ -91,6 +95,9 @@ $(document).ready(function(){
         }
       }
     });
+  });
+  $(document).on('click', '#add-player', function(e){
+    $('#player-modal').modal('show');
   });
   $(document).on('click', '#delete-team', function(e){
     if(confirm("Are you sure?")){

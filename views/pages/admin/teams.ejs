@@ -25,9 +25,37 @@
   <div class="modal fade" id="team-modal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        <div class="modal-header" id="modal-header-teams">
+        </div>
+        <div class="modal-body" id="modal-body-teams">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="player-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
         <div class="modal-header">
         </div>
         <div class="modal-body">
+          <div class="card-body pre-scrollable">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th></th>
+                  <th>Username</th>
+                  <th>Skill Level</th>
+                  <th>Player Requests</th>
+                </tr>
+              </thead>
+              <tbody id="player-list">
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
@@ -37,4 +65,5 @@
   </div>
   <div>
   <script src="../../scripts/teams-edit.js"></script>
+  <script src="../../scripts/add-player-form.js"></script>
 <% include partials/footer.ejs %>
