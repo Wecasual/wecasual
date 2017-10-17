@@ -166,11 +166,12 @@ function getUser(base, id, callback){
 }
 
 function createUser(base, profile, callback){
+  // console.log(profile);
   base('Users').create({
   "Steam Name": profile.displayName,
   "Steam Id": profile.id,
   "Status": "Not Registered",
-  "Avatar": profile.photos[0].value
+  "Avatar": profile._json.avatar
   }, function(err, record) {
     if (err) { callback && callback(err, null)}
     callback && callback(null, record);
