@@ -3,8 +3,8 @@
 	<div class="container top-spacer">
 		<!-- Intro section -->
 		<h1 class = "my-2 text-center">Sign up</h1>
-		<h2 class="text-center"><span class="mt-2 mr-2"><%= user.steaminfo.displayName %></span>
-			<img class="rounded-circle" src= <%= user.steaminfo.avatar %> >
+		<h2 class="text-center"><span class="mt-2 mr-2"><%= user['Steam Name'] %></span>
+			<img class="rounded-circle" src= <%= user['Avatar'] %> >
 		</h2>
 
 
@@ -57,7 +57,7 @@
 					</div>
 					<hr>
 					<!-- Teammate request -->
-					<div class="my-3 row justify-content-center">
+					<!-- <div class="my-3 row justify-content-center">
 						<h4 class = "py-1 col col-12">Please enter your teammate requests</h4>
 						<div class = "py-1 col col-12">
 							<ul>
@@ -66,14 +66,14 @@
 								<li>We cannot guarantee you will be on the same team, but we will try our best.<i> If you enter 4 names you will most likely be on the same team.</i></li>
 							</ul>
 						</div>
-					</div>
-					<div class="text-center ">
+					</div> -->
+					<!-- <div class="text-center ">
 						<button type="button" class="btn btn-secondary" id="add-player">Add player</button>
 					</div>
 					<div class="form-group" id="player-requests">
 						<input type="text" name="player-request" class="my-3 form-control" placeholder='Enter Steam display name'>
 					</div>
-					<hr>
+					<hr> -->
 					<div class="form-group my-3 row justify-content-center">
 						<h4 class = "py-1 col col-12">Please read the rules</h4>
 						<div class = "py-1 col col-12">

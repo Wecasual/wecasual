@@ -1,4 +1,4 @@
-<%if(user && !user.registered){%>
+<%if(user && user['Status'] == 'Not Registered'){%>
   <% include ../partials/header-not-paid.ejs %>
 <%}
 else{%>
