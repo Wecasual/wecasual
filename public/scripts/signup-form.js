@@ -41,11 +41,11 @@ $(document).ready(function() {
   //   //   }
   //   //});
   // });
-  var numPlayerRequests = 1;
-  $('#add-player').click(function(){
-    if(numPlayerRequests < 4){
-      numPlayerRequests++;
-      $('#player-requests').append('<input type="text" name="player-request" class="my-3 form-control" placeholder="Enter Steam display name">');
-    }
-  });
+  // var numPlayerRequests = 1;
+  // $('#add-player').click(function(){
+  //   if(numPlayerRequests < 4){
+  //     numPlayerRequests++;
+  //     $('#player-requests').append('<input type="text" name="player-request" class="my-3 form-control" placeholder="Enter Steam display name">');
+  //   }
+  // });
 });

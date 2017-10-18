@@ -8,11 +8,15 @@ var cookieSession = require('cookie-session')
 var passport = require('passport');
 var passportSteam = require('passport-steam');
 var url = require('url');
-var pg = require('pg');
+var Airtable = require('airtable');
+
+// var pg = require('pg');
 
 //Butter
 var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
 
+//Airtable
+var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
 
 //Stripe
 const keyPublishable = process.env.PUBLISHABLE_KEY;
@@ -34,21 +38,21 @@ const config = {
 };
 
 //Postgres
-var pool = new pg.Pool(config);
+// var pool = new pg.Pool(config);
 
 //repositories
-var profilesRepo = require('./repos/profiles-repo')(pool);
-var teamsRepo = require('./repos/teams-repo')(pool);
-var scheduleRepo = require('./repos/schedule-repo')(pool);
-
-//routes
-var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
+var profilesRepo = require('./repos/profiles-repo')(base);
+// var teamsRepo = require('./repos/teams-repo')(pool);
+// var scheduleRepo = require('./repos/schedule-repo')(pool);
+//
+// //routes
+// var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
-var signupRoute = require('./lib/routes/signup-route')(profilesRepo, stripe, keyPublishable);
-var profileRoute = require('./lib/routes/profile-route')(profilesRepo, scheduleRepo);
-var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
-var playersRoute = require('./lib/routes/players-route')(profilesRepo);
-var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, teamsRepo);
+var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
+// var profileRoute = require('./lib/routes/profile-route')(profilesRepo, scheduleRepo);
+// var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
+// var playersRoute = require('./lib/routes/players-route')(profilesRepo);
+// var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, teamsRepo);
 
 //==========Middleware==========
 var app = express();
@@ -75,7 +79,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['Aqua secret'],
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 * 365 // 1 year
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
 }))
 
 //Body Parser Middleware
@@ -119,20 +123,11 @@ passport.use(new passportSteam.Strategy({
   function(identifier, profile, done) {
     profilesRepo.userLogin(identifier, profile, function(err, user){
       if(err) {
-        console.log("Unable to update db");
+        console.log(err);
         return done(null, null);
       }
-      else {
-        profilesRepo.getUser(profile.id, function(err, user){
-          if(err) {
-            console.log("Unable to login");
-            return done(null, null);
-          }
-          else{
-            return done(null, user);
-          }
-        });
-      }
+      // console.log(user);
+      return done(null, user);
     });
   }
 ));
@@ -144,17 +139,21 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-  if(req.user && !req.user.registered){
+  if(req.user && req.user['Status'] != 'Not Registered'){
+    res.render('pages/home', { user: req.user});
+  }
+	else if(req.user && req.user['Status'] == 'Not Registered'){
+    console.log(req.user['Status']);
     res.redirect('/logout');
   }
-	else{
-    res.render('pages/index', { user: req.user});
+  else{
+    res.render('pages/index', {user: req.user});
   }
 });
 
-app.get('/thank-you-signup', function(req, res) {
-  res.render('pages/thank-you-signup', { user: req.user});
-});
+// app.get('/thank-you-signup', function(req, res) {
+//   res.render('pages/thank-you-signup', { user: req.user});
+// });
 
 app.get('/about', function(req, res){
   res.render('pages/about', { user: req.user});
@@ -164,20 +163,20 @@ app.get('/rules', function(req, res){
   res.render('pages/rules', { user: req.user});
 });
 
-app.get('/schedule', function(req, res){
-  res.render('pages/schedule', { user: req.user});
-});
+// app.get('/schedule', function(req, res){
+//   res.render('pages/schedule', { user: req.user});
+// });
 
-app.get(playersRoute.players.route, playersRoute.players.handler);
-app.post(playersRoute.getPlayers.route, playersRoute.getPlayers.handler);
+// app.get(playersRoute.players.route, playersRoute.players.handler);
+// app.post(playersRoute.getPlayers.route, playersRoute.getPlayers.handler);
 
 app.get('/league-info', function(req, res){
   res.render('pages/league-info', { user: req.user});
 });
 
-app.get('/pick-up-games', function(req, res){
-  res.render('pages/pick-up-games', { user: req.user});
-});
+// app.get('/pick-up-games', function(req, res){
+//   res.render('pages/pick-up-games', { user: req.user});
+// });
 
 app.get('/FAQ', function(req, res){
   res.render('pages/FAQ', { user: req.user});
@@ -187,9 +186,10 @@ app.get('/playing-guide', function(req, res){
   res.render('pages/playing-guide', { user: req.user});
 });
 
-app.get('/thank-you-signup', function(req, res){
-  res.render('pages/thank-you-signup', { user: req.user});
-});
+
+// app.get('/thank-you-signup', function(req, res){
+//   res.render('pages/thank-you-signup', { user: req.user});
+// });
 
 //butter
 app.get('/blog', renderHome)
@@ -199,16 +199,16 @@ app.get('/blog/:slug', renderPost)
 
 
 //Teams route
-app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
-// app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
-// app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
-app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
-app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
-app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
-app.post(teamsRoute.changeName.route, teamsRoute.changeName.handler);
-app.post(teamsRoute.deleteTeam.route, teamsRoute.deleteTeam.handler);
-app.post(teamsRoute.removePlayer.route, teamsRoute.removePlayer.handler);
-app.post(teamsRoute.addPlayer.route, teamsRoute.addPlayer.handler);
+// app.get(teamsRoute.teams.route, teamsRoute.teams.handler);
+// // app.get(teamsRoute.joinTeam.route, ensureAuthenticated, teamsRoute.joinTeam.handler);
+// // app.get(teamsRoute.createTeam.route, ensureAuthenticated, teamsRoute.createTeam.handler);
+// app.post(teamsRoute.createTeamSubmit.route, teamsRoute.createTeamSubmit.handler);
+// app.post(teamsRoute.getTeams.route, teamsRoute.getTeams.handler);
+// app.post(teamsRoute.getTeam.route, teamsRoute.getTeam.handler);
+// app.post(teamsRoute.changeName.route, teamsRoute.changeName.handler);
+// app.post(teamsRoute.deleteTeam.route, teamsRoute.deleteTeam.handler);
+// app.post(teamsRoute.removePlayer.route, teamsRoute.removePlayer.handler);
+// app.post(teamsRoute.addPlayer.route, teamsRoute.addPlayer.handler);
 
 //Steam login route
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
@@ -217,30 +217,30 @@ app.get(loginRoute.steamAuth.route, passport.authenticate('steam', { failureRedi
 
 //signup route
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
-app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
+// app.get(signupRoute.payment.route, ensureAuthenticated, signupRoute.payment.handler);
 app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handler);
 //No payment for free beta
 //app.post(signupRoute.signupCharge.route, ensureAuthenticated, signupRoute.signupCharge.handler);
 
 //profile route
-app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
-app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
-app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
-app.post(profileRoute.upcomingGames.route, ensureAuthenticated, profileRoute.upcomingGames.handler);
-app.post(profileRoute.updateAttendance.route, ensureAuthenticated, profileRoute.updateAttendance.handler);
+// app.get(profileRoute.profile.route, ensureAuthenticated, profileRoute.profile.handler);
+// app.post(profileRoute.updateEmail.route, ensureAuthenticated, profileRoute.updateEmail.handler);
+// app.post(profileRoute.updatePlayerRequests.route, ensureAuthenticated, profileRoute.updatePlayerRequests.handler);
+// app.post(profileRoute.upcomingGames.route, ensureAuthenticated, profileRoute.upcomingGames.handler);
+// app.post(profileRoute.updateAttendance.route, ensureAuthenticated, profileRoute.updateAttendance.handler);
 
 
 //schedule route
-app.post(scheduleRoute.getAllSchedule.route, scheduleRoute.getAllSchedule.handler);
-app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
+// app.post(scheduleRoute.getAllSchedule.route, scheduleRoute.getAllSchedule.handler);
+// app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
 
 //Admin route
-app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
-app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
-app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
-app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
-app.get(adminRoute.schedule.route, ensureAuthenticated, adminRoute.schedule.handler);
-app.get(adminRoute.scheduleCreate.route, ensureAuthenticated, adminRoute.scheduleCreate.handler);
+// app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
+// app.get(adminRoute.profiles.route, ensureAuthenticated, adminRoute.profiles.handler);
+// app.get(adminRoute.teams.route, ensureAuthenticated, adminRoute.teams.handler);
+// app.get(adminRoute.teamsCreate.route, ensureAuthenticated, adminRoute.teamsCreate.handler);
+// app.get(adminRoute.schedule.route, ensureAuthenticated, adminRoute.schedule.handler);
+// app.get(adminRoute.scheduleCreate.route, ensureAuthenticated, adminRoute.scheduleCreate.handler);
 
 
 app.listen(app.get('port'), function() {
