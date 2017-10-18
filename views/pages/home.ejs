@@ -1,5 +1,26 @@
 <% include ../partials/header.ejs %>
 
+<%if(message){%>
+  <div class="modal fade" id="message-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5><%= message%></h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('#message-modal').modal("show");
+    });
+  </script>
+<%}%>
+
+
 <div class="container top-spacer homepage-bg">
   <img class = " my-5 img-fluid mx-auto d-block" src="/images/logo.png" alt="Wecasual Logo">
   <div class = "my-3">

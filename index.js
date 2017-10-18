@@ -140,7 +140,9 @@ app.use(passport.session());
 
 app.get('/', function(req, res) {
   if(req.user && req.user['Status'] != 'Not Registered'){
-    res.render('pages/home', { user: req.user});
+    var message = req.session.message;
+    req.session.message = null;
+    res.render('pages/home', { user: req.user, message: message});
   }
 	else if(req.user && req.user['Status'] == 'Not Registered'){
     console.log(req.user['Status']);
