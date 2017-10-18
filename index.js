@@ -165,9 +165,9 @@ app.get('/rules', function(req, res){
   res.render('pages/rules', { user: req.user});
 });
 
-// app.get('/schedule', function(req, res){
-//   res.render('pages/schedule', { user: req.user});
-// });
+app.get('/schedule', function(req, res){
+  res.render('pages/schedule', { user: req.user});
+});
 
 // app.get(playersRoute.players.route, playersRoute.players.handler);
 // app.post(playersRoute.getPlayers.route, playersRoute.getPlayers.handler);
