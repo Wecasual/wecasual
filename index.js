@@ -170,9 +170,9 @@ app.get('/rules', function(req, res){
 // app.get(playersRoute.players.route, playersRoute.players.handler);
 // app.post(playersRoute.getPlayers.route, playersRoute.getPlayers.handler);
 
-app.get('/league-info', function(req, res){
-  res.render('pages/league-info', { user: req.user});
-});
+// app.get('/league-info', function(req, res){
+//   res.render('pages/league-info', { user: req.user});
+// });
 
 // app.get('/pick-up-games', function(req, res){
 //   res.render('pages/pick-up-games', { user: req.user});

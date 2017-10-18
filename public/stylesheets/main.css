@@ -167,6 +167,7 @@ ul,li{
 footer{
   bottom: 0;
   text-align: center;
+  background-color: #D3D0C8 !important;
 }
 
 /* The alert message box */
