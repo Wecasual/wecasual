@@ -79,7 +79,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['Aqua secret'],
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 * 365 // 1 year
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
 }))
 
 //Body Parser Middleware
