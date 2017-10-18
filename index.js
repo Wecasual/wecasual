@@ -43,7 +43,7 @@ const config = {
 //repositories
 var profilesRepo = require('./repos/profiles-repo')(base);
 // var teamsRepo = require('./repos/teams-repo')(pool);
-// var scheduleRepo = require('./repos/schedule-repo')(pool);
+var scheduleRepo = require('./repos/schedule-repo')(base);
 //
 // //routes
 // var teamsRoute = require('./lib/routes/teams-route')(teamsRepo, profilesRepo);
@@ -52,7 +52,7 @@ var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 // var profileRoute = require('./lib/routes/profile-route')(profilesRepo, scheduleRepo);
 // var adminRoute = require('./lib/routes/admin-route')(teamsRepo, profilesRepo);
 // var playersRoute = require('./lib/routes/players-route')(profilesRepo);
-// var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, teamsRepo);
+var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo);
 
 //==========Middleware==========
 var app = express();
@@ -140,7 +140,9 @@ app.use(passport.session());
 
 app.get('/', function(req, res) {
   if(req.user && req.user['Status'] != 'Not Registered'){
-    res.render('pages/home', { user: req.user});
+    var message = req.session.message;
+    req.session.message = null;
+    res.render('pages/home', { user: req.user, message: message});
   }
 	else if(req.user && req.user['Status'] == 'Not Registered'){
     console.log(req.user['Status']);
@@ -231,8 +233,9 @@ app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handl
 
 
 //schedule route
-// app.post(scheduleRoute.getAllSchedule.route, scheduleRoute.getAllSchedule.handler);
+app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 // app.post(scheduleRoute.createScheduleSubmit.route, ensureAuthenticated, scheduleRoute.createScheduleSubmit.handler);
+app.post(scheduleRoute.gameSignup.route, ensureAuthenticated, scheduleRoute.gameSignup.handler);
 
 //Admin route
 // app.get(adminRoute.admin.route, ensureAuthenticated, adminRoute.admin.handler);
