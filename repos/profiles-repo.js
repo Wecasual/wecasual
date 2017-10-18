@@ -132,8 +132,12 @@ function userLogin(base, identifier, profile, callback){
       }
       else{
         // console.log(record);
-        record.fields['Id'] = record.id;
-        callback && callback(null, record.fields);
+        updateUser(base, {"Steam Name": profile.displayName, "Avatar": profile._json.avatar}, record.id, function(err, new_record_fields){
+          if (err) { callback && callback(err, null)}
+          else{
+            callback && callback(null, new_record_fields);
+          }
+        })
       }
     }
   })
@@ -171,7 +175,8 @@ function createUser(base, profile, callback){
   "Steam Name": profile.displayName,
   "Steam Id": profile.id,
   "Status": "Not Registered",
-  "Avatar": profile._json.avatar
+  "Avatar": profile._json.avatar,
+  "Original Steam Name": profile.displayName
   }, function(err, record) {
     if (err) { callback && callback(err, null)}
     callback && callback(null, record);
