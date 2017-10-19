@@ -49,7 +49,7 @@ $(document).ready(function(){
           }
           $('#my-game-list').append('<tr><td>' +
           ele.fields.Game + '</td><td>' +
-          ele.fields['Team 1 Slots'] + '</td> <td>' + ele.fields['Team 2 Slots'] + '</td><td>' + team + '</td></tr>');
+          ele.fields['Team 1 Slots'] + '</td> <td>' + ele.fields['Team 2 Slots'] + '</td><td>' + team + '</td><td>' + ele.fields['Discord Room'] + '</td></tr>');
         });
 
       }
