@@ -147,7 +147,7 @@ function getUser(base, id, callback){
   var found = false;
   base('Users').select({
       // Selecting the first 3 records in Value by Stage:
-      view: "Value by Stage"
+      view: "Grid View"
   }).eachPage(function page(records, fetchNextPage) {
       // This function (`page`) will get called for each page of records.
       records.forEach(function(record) {
