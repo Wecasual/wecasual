@@ -69,7 +69,7 @@
             <div class="card rounded">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  <h3><b>Email: </b>
+                  <h4><b>Email: </b>
                   <% if(user['Email']){ %>
 
                   <%= user['Email'] %>
@@ -80,19 +80,60 @@
 
 
 
-                  </h3>
+                </h4>
                 </li>
               </ul>
             </div>
             <div class="card rounded mt-3">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-center">
-                  <h3>
+                  <h4>
                     <img class="rounded mb-2" src="/images/discord-image.png" alt="Community image" width="64" height="64">
                       <span>Join the Discord</span>
 
                     <a href="https://discord.gg/3Q2n2Dt" target="_blank">https://discord.gg/3Q2n2Dt</a>
-                  </h3>
+                  </h4>
+                </li>
+              </ul>
+            </div>
+            <div class="card rounded mt-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h1 class = "mb-0">Read Before Playing</h1>
+                  <hr>
+                  <div class="card-body pre-scrollable pre-scrollable-mini">
+                      <h3 class="card-title">Before the Game</h3>
+                      <ul class="card-text">
+                        <li>Show up 15 minutes early and join the <b>Hangout</b> voice channel in your assigned Discord Room (ex. Icewrack)</li>
+
+                      </ul>
+                      <h3 class="card-title">How to join a game</h3>
+                      <ul class="card-text">
+                        <li>5 minutes before game start join the <b>Team 1</b> or <b>Team 2</b> voice channel in your assigned Discord Room (depending on what team you signed up for)</li>
+                        <li>In Dota 2 search the custom lobbies for Wecasual.</li>
+                        <li>You should be able to find a lobby called <b>"Wecasual [Your Discord Room Name]"</b></li>
+                        <li>Join the lobby with the password <b>wecasual2017</b></li>
+                        <li>Have your team join either Dire or Radiant (it does not matter, as it will automatically switch you after the coin toss).</li>
+                        <li>First Pick/Side pick will be determined by an automatic coin toss (it is a system built into Dota).</li>
+                        <li>Make sure you have a <b>team name set</b> because the automatic coin toss will not work without one.</li>
+                        <li>Wait for the lobby host to start the coin toss, and follow the instructions.</li>
+                      </ul>
+                      <h3 class="card-title">During the game</h3>
+                      <ul class="card-text">
+                        <li>No team has a designated captain or drafter, so have fun with it and switch it up every game.</li>
+                        <li>There is <b>no limit to pausing</b> in game, but be reasonable. Only pause for technical issues or bathroom breaks.</li>
+                        <li><b>DO NOT</b> call false/early gg's. Make sure your team agrees with any gg call.</li>
+                        <li>All chat is permitted provided that it is <b>ALWAYS POSITIVE</b> no matter the circumstance.</li>
+                        <li>Please submit a player report for any false gg calls or excessive pauses. Email <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or send Robert a message on Discord</li>
+                      </ul>
+                      <h3 class="card-title">After the game</h3>
+                      <ul class="card-text">
+                        <li>Head back to your <b>Hangout</b> voice channel, and chill!</li>
+                        <li>We encourage you to stick around, discuss the game, and have fun!</li>
+                      </ul>
+                      <hr>
+                      <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/rules" target="_blank">rules</a></i></h5>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -111,7 +152,7 @@
                   <h1>Game Signup</h1>
                   <form id="game-signup" method="post" action="/schedule/gameSignup">
                     <div class="form-group ">
-                      <div class="card-body pre-scrollable">
+                      <div class="card-body pre-scrollable pre-scrollable-mini">
                         <table class="table table-striped">
                           <thead>
                               <tr>
@@ -146,6 +187,8 @@
           </div>
         </div>
         <div class="card rounded p-3">
+          <h1 class = "mb-0">Schedule</h1>
+          <hr>
           <iframe class="airtable-embed" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
         </div>
       </div>
