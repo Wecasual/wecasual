@@ -8,7 +8,7 @@ $(document).ready(function(){
       }
       else if(res.success){
         res.data.other_games.forEach(function(ele){
-          $('#game-list').append('<tr><td>' + ele.fields.Game + '</td> <td><label><input type="radio" name="game" value="' + ele.id + '"></label></td> </tr>');
+          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '"> ' + ele.fields.Game + '</label></td> </tr>');
         });
         $('#game-signup').bootstrapValidator({
           feedbackIcons: {
