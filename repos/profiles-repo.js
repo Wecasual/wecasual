@@ -132,7 +132,7 @@ function userLogin(base, identifier, profile, callback){
       }
       else{
         // console.log(record);
-        updateUser(base, {"Steam Name": profile.displayName, "Avatar": profile._json.avatar}, record.id, function(err, new_record_fields){
+        updateUser(base, {"Steam Name": profile.displayName, "Avatar": profile._json.avatar, "Id": record.id}, record.id, function(err, new_record_fields){
           if (err) { callback && callback(err, null)}
           else{
             callback && callback(null, new_record_fields);

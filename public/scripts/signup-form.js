@@ -13,6 +13,13 @@ $(document).ready(function() {
           }
         }
       },
+      conduct: {
+        validators: {
+          notEmpty: {
+            message: 'Required'
+          }
+        }
+      },
       email: {
         validators: {
           notEmpty: {
