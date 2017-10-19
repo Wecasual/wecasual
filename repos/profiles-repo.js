@@ -137,7 +137,7 @@ function userLogin(base, identifier, profile, callback){
           else{
             callback && callback(null, new_record_fields);
           }
-        })
+        });
       }
     }
   })
