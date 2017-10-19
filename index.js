@@ -145,7 +145,7 @@ app.get('/', function(req, res) {
     res.render('pages/home', { user: req.user, message: message});
   }
 	else if(req.user && req.user['Status'] == 'Not Registered'){
-    console.log(req.user['Status']);
+    // console.log(req.user['Status']);
     res.redirect('/logout');
   }
   else{
