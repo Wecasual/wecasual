@@ -8,7 +8,9 @@ $(document).ready(function(){
       }
       else if(res.success){
         res.data.other_games.forEach(function(ele){
-          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '"> ' + ele.fields.Game + '</label></td> </tr>');
+          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '"></label></td><td>' +
+          ele.fields.Game + '</td><td>' +
+          ele.fields['Team 1 Slots'] + '</td> <td>' + ele.fields['Team 2 Slots'] + '</td></tr>');
         });
         $('#game-signup').bootstrapValidator({
           feedbackIcons: {
@@ -45,7 +47,9 @@ $(document).ready(function(){
               team = 'Team 2';
             }
           }
-          $('#my-game-list').append('<tr><td>' + ele.fields.Game + '</td><td>' + team + '</td></tr>');
+          $('#my-game-list').append('<tr><td>' +
+          ele.fields.Game + '</td><td>' +
+          ele.fields['Team 1 Slots'] + '</td> <td>' + ele.fields['Team 2 Slots'] + '</td><td>' + team + '</td></tr>');
         });
 
       }
