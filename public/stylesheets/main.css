@@ -2,6 +2,9 @@
 .container{
   color: #555;
 }
+.body{
+
+}
 
 /*End general*/
 
@@ -135,6 +138,8 @@
 /*Bootstrap edits*/
 .pre-scrollable{
   max-height: 650px;
+  border: 0px;
+  padding: 20px;
 }
 
 .collapse-text{
@@ -147,6 +152,9 @@
 
 .card{
   border-radius: 0rem;
+}
+.card-header{
+  background-color: #e6e6e6;
 }
 /*Bootstrap edits end*/
 
