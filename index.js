@@ -139,14 +139,14 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res) {
-  if(req.user && req.user['Status'] != 'Not Registered'){
+  if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Steam Id'])){
+    // console.log(req.user['Status']);
+    res.redirect('/logout');
+  }
+  else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
     req.session.message = null;
     res.render('pages/home', { user: req.user, message: message});
-  }
-	else if(req.user && req.user['Status'] == 'Not Registered'){
-    // console.log(req.user['Status']);
-    res.redirect('/logout');
   }
   else{
     res.render('pages/index', {user: req.user});
