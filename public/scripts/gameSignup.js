@@ -9,7 +9,8 @@ $(document).ready(function(){
       else if(res.success){
         // console.log(res.data);
         res.data.other_games.forEach(function(ele){
-          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '"></label></td><td>' +
+          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '|' +
+          ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '"></label></td><td>' +
           ele.fields.Game + '</td><td>' +
           ele.fields['Game Time'] + '</td><td>' +
           ele.fields['Team 1 Slots'] + '</td><td>' + ele.fields['Team 2 Slots'] + '</td></tr>');

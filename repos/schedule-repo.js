@@ -226,18 +226,20 @@
 //   });
 // }
 
-function gameSignup(base, team, game_id, user_id, callback){
+function gameSignup(base, team, game_id, user_id, team1, team2, callback){
   if(team == "Team 1"){
+    team1.unshift(user_id);
     base('Schedule').update(game_id, {
-      "Team 1": [user_id]
+      "Team 1": team1
     }, function(err) {
       if (err) { callback && callback(err, null)}
       callback && callback(null, null);
     });
   }
   else if(team == "Team 2"){
+    team2.unshift(user_id);
     base('Schedule').update(game_id, {
-      "Team 2": [user_id]
+      "Team 2": team2
     }, function(err) {
       if (err) { callback && callback(err, null)}
       callback && callback(null, null);
