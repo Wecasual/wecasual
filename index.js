@@ -26,16 +26,17 @@ var stripe = require('stripe')(keySecret);
 //Steam API Info
 var returnURL = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
 var realm = process.env.SITE_URL || 'http://localhost:5000/';
-const pgParams = url.parse(process.env.DATABASE_URL);
-const pgAuth = pgParams.auth.split(':');
-const config = {
-  user: pgAuth[0],
-  password: pgAuth[1],
-  host: pgParams.hostname,
-  port: pgParams.port,
-  database: pgParams.pathname.split('/')[1],
-  ssl: true
-};
+
+// const pgParams = url.parse(process.env.DATABASE_URL);
+// const pgAuth = pgParams.auth.split(':');
+// const config = {
+//   user: pgAuth[0],
+//   password: pgAuth[1],
+//   host: pgParams.hostname,
+//   port: pgParams.port,
+//   database: pgParams.pathname.split('/')[1],
+//   ssl: true
+// };
 
 //Postgres
 // var pool = new pg.Pool(config);
