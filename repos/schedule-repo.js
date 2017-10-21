@@ -238,6 +238,7 @@ function gameSignup(base, team, game_id, user_id, team1, team2, callback){
   }
   else if(team == "Team 2"){
     team2.unshift(user_id);
+    // console.log(team2);
     base('Schedule').update(game_id, {
       "Team 2": team2
     }, function(err) {
