@@ -1,8 +1,8 @@
 <%if(user && user['Status'] == 'Not Registered'){%>
-  <% include ../partials/header-not-paid.ejs %>
+  <% include ../../partials/lol/header-not-paid.ejs %>
 <%}
 else{%>
-  <% include ../partials/header.ejs %>
+  <% include ../../partials/lol/header.ejs %>
 <%}%>
 
 
@@ -17,11 +17,11 @@ else{%>
       <iframe class="airtable-embed" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
       <!-- Display the "sign up to schedule a game" whenever the user has not signed up fully -->
       <%if(!user || (user && user['Status'] == 'Not Registered')){%>
-        <h2 class = "mt-2 text-center"><a href="/signup">Sign up</a> to join a game</h2>
+        <h2 class = "mt-2 text-center"><a href="/lol/signup">Sign up</a> to join a game</h2>
       <%}
 
       else{%>
-        <h2 class = "mt-2 text-center">Sign up for a game on the <a href="/">home page</a></h2>
+        <h2 class = "mt-2 text-center">Sign up for a game on the <a href="/lol">home page</a></h2>
       <%}%>
 
 
@@ -107,4 +107,4 @@ else{%>
 </div>
 
   <script src="scripts/upcomingGames.js"></script>
-<% include ../partials/footer.ejs %>
+<% include ../../partials/footer.ejs %>

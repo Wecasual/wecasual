@@ -1,4 +1,4 @@
-<% include ../partials/header.ejs %>
+<% include ../../partials/dota/header.ejs %>
 
 <%if(message){%>
   <div class="modal fade" id="message-modal" role="dialog">
@@ -132,7 +132,7 @@
                         <li>We encourage you to stick around, discuss the game, and have fun!</li>
                       </ul>
                       <hr>
-                      <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/rules" target="_blank">rules</a></i></h5>
+                      <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/dota/rules" target="_blank">rules</a></i></h5>
                   </div>
                 </li>
               </ul>
@@ -151,7 +151,7 @@
                 <li class="list-group-item">
                   <h1>Game Signup</h1>
                   <p>You can sign up as 6/5. You will be the official sub if someone drops.</p>
-                  <form id="game-signup" method="post" action="/schedule/gameSignup">
+                  <form id="game-signup" method="post" action="/dota/schedule/gameSignup">
                     <div class="form-group ">
                       <div class="card-body pre-scrollable pre-scrollable-mini">
                         <table class="table table-striped">
@@ -198,4 +198,4 @@
     </div>
 </div>
 <script src="../../scripts/gameSignup.js"></script>
-<% include ../partials/footer.ejs %>
+<% include ../../partials/footer.ejs %>

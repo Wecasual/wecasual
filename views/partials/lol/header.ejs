@@ -48,7 +48,7 @@
 
     <!-- Header nav-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #555;">
-      <a class="navbar-brand nav-link rounded" href="/">
+      <a class="navbar-brand nav-link rounded" href="/dota">
         <img src="/images/justRobo_BG.svg" width="44" height="44" alt="" >
           <span class = "align-middle p-2">Wecasual</span>
       </a>
@@ -97,20 +97,20 @@
 
 
           <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/about">About</a>
+            <a class="nav-link rounded" href="/lol/about">About</a>
           </li>
           <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/FAQ">FAQ</a>
+            <a class="nav-link rounded" href="/lol/FAQ">FAQ</a>
           </li>
           <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/rules">Rules</a>
+            <a class="nav-link rounded" href="/lol/rules">Rules</a>
           </li>
           <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/schedule">Schedule</a>
+            <a class="nav-link rounded" href="/lol/schedule">Schedule</a>
           </li>
-          <li class="nav-item px-1">
-            <a class="nav-link rounded" href="/blog">Blog</a>
-          </li>
+          <!-- <li class="nav-item px-1">
+            <a class="nav-link rounded" href="/dota/blog">Blog</a>
+          </li> -->
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -124,13 +124,13 @@
             </li>
           <% } else{ %>
             <li class="nav-item">
-              <a class="nav-link rounded px-1" href="/">
+              <a class="nav-link rounded px-1" href="/lol">
                 <span class="mr-3"><%= user['Steam Name'] %></span>
                 <img class="rounded-circle" src= <%= user['Avatar']%> >
               </a>
             </li>
             <li class="nav-item align-middle">
-              <a class="nav-link rounded px-1" href="logout">
+              <a class="nav-link rounded px-1" href="/logout">
                 <span>Logout</span>
               </a>
             </li>
