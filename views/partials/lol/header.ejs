@@ -48,7 +48,7 @@
 
     <!-- Header nav-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #555;">
-      <a class="navbar-brand nav-link rounded" href="/dota">
+      <a class="navbar-brand nav-link rounded" href="/lol">
         <img src="/images/justRobo_BG.svg" width="44" height="44" alt="" >
           <span class = "align-middle p-2">Wecasual</span>
       </a>
@@ -117,7 +117,7 @@
           <!-- Steam login -->
           <% if(!user){ %>
             <li class="nav-item">
-              <a class="nav-link rounded px-1" href="auth/steam">
+              <a class="nav-link rounded px-1" href="/login">
                 <img src="/images/steam_logo.png" width="42" height="42" alt="">
                 <span>Sign in</span>
               </a>
@@ -125,8 +125,8 @@
           <% } else{ %>
             <li class="nav-item">
               <a class="nav-link rounded px-1" href="/lol">
-                <span class="mr-3"><%= user['Steam Name'] %></span>
-                <img class="rounded-circle" src= <%= user['Avatar']%> >
+                <span class="mr-3"><%= user['Summoner Name'] %></span>
+                  <img height="40" width="40" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
               </a>
             </li>
             <li class="nav-item align-middle">

@@ -14,7 +14,7 @@ else{%>
 
 
     <div class="card rounded p-3">
-      <iframe class="airtable-embed" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+      <iframe class="airtable-embed" src="https://airtable.com/embed/shrSkV5i5Qj7cUj7n?backgroundColor=yellow" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
       <!-- Display the "sign up to schedule a game" whenever the user has not signed up fully -->
       <%if(!user || (user && user['Status'] == 'Not Registered')){%>
         <h2 class = "mt-2 text-center"><a href="/lol/signup">Sign up</a> to join a game</h2>
@@ -105,6 +105,4 @@ else{%>
       </div> -->
   </div>
 </div>
-
-  <script src="scripts/upcomingGames.js"></script>
 <% include ../../partials/footer.ejs %>
