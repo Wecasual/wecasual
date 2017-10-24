@@ -1,4 +1,4 @@
-<% include ../partials/header.ejs %>
+<% include ../../partials/dota/header.ejs %>
   <div class="container top-spacer">
 
 
@@ -30,7 +30,7 @@
 
                 <div class="col-lg-12 col-lg-offset-1">
                     <% posts.forEach(function(post) { %>
-                        <a class= "blog-link" href="/blog/<%= post.slug %>">
+                        <a class= "blog-link" href="/dota/blog/<%= post.slug %>">
                             <div class="card mb-3 hvr-float">
                               <p class="lead card-header"><span class ="blog-title"><%= post.title %> &nbsp; </span>by <%= post.author.first_name %> <%= post.author.last_name %>
                                 <span class = "text-right">(<%= post.published %>)</span>
@@ -50,4 +50,4 @@
 
 
   </div>
-<% include ../partials/footer.ejs %>
+<% include ../../partials/footer.ejs %>

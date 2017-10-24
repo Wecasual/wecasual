@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $.ajax({
     type: 'POST',
-    url: '/schedule/getAllSchedule',
+    url: '/lol/schedule/getAllSchedule',
     success: function(res){
       if(!res.success){
         alert(res.error);

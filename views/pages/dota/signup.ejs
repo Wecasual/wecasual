@@ -1,4 +1,4 @@
-<% include ../partials/header-not-paid.ejs %>
+<% include ../../partials/dota/header-not-paid.ejs %>
 
 	<div class="container top-spacer">
 		<!-- Intro section -->
@@ -33,7 +33,7 @@
 				</ul>
 
 				<hr>
-				<form id="signup-form" method="post" action="/signup/submit">
+				<form id="signup-form" method="post" action="/dota/signup/submit">
 					<!-- Email input field -->
 					<div class="my-3 row justify-content-center">
 						<h4 class = "py-1 col col-12">Please enter your email address</h4>
@@ -83,7 +83,7 @@
 						<h4 class = "py-1 col col-12">Please read the rules</h4>
 						<div class = "py-1 col col-12">
 							<div class="mb-3">
-								<a href="/rules" target="_blank">Read them here</a>
+								<a href="/dota/rules" target="_blank">Read them here</a>
 							</div>
 							<label class="form-check-label">
 								<input type="checkbox" name="rules" class="form-check-input">
@@ -110,5 +110,5 @@
 			</div>
 		</div>
 	</div>
-<script src="scripts/signup-form.js"></script>
-<% include ../partials/footer.ejs %>
+<script src="scripts/dota/signup-form.js"></script>
+<% include ../../partials/footer.ejs %>
