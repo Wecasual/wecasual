@@ -10,6 +10,9 @@ var passportSteam = require('passport-steam');
 var Auth0Strategy = require('passport-auth0');
 var url = require('url');
 var Airtable = require('airtable');
+var sitemap = require('express-sitemap')();
+
+
 
 // var pg = require('pg');
 
@@ -87,6 +90,10 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 * 365// 1 day
 }))
+
+//Sitemap middleware
+
+
 
 //Body Parser Middleware
 app.use(bodyParser.json());
@@ -280,6 +287,10 @@ app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit
 app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
 app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
 
+app.get('/sitemap.xml', function(req, res){
+  sitemap.generate(app);
+  sitemap.XMLtoWeb(res);
+});
 
 
 
