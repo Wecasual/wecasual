@@ -3,7 +3,6 @@ $(document).ready(function(){
   var i = 0;
   $(elements[0]).slideToggle();
   setInterval( function(){
-    console.log(i);
     $(elements[i]).slideToggle();
     setTimeout(function(){
       if(i + 2 > elements.length)
