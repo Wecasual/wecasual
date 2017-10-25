@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var elements = new Array('#dota-scroll', '#lol-scroll', '#esports-scroll');
+  var elements = new Array('.dota-scroll', '.lol-scroll', '.esports-scroll');
   var i = 0;
   $(elements[0]).slideToggle();
   setInterval( function(){

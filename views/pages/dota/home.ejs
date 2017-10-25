@@ -32,12 +32,117 @@
       </div> -->
     	<div class = "my-3">
         <h1 class = "text-center">
-          <!-- <span >Wecasual Home:  </span> -->
-          <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
-          <span class="mr-3 align-middle p-5" style="font-size: 1.5em"><%= user['Steam Name'] %></span>
+          <div class="row my-4">
+            <div class="col-md-6 col">
+              <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+              <span class="align-middle pl-3" style="font-size: 1.5em"><%= user['Steam Name'] %></span>
+            </div>
+            <div class="col-md-6 col">
+
+                <img class="rounded mt-3" src="/images/discord-image.png" alt="Community image" width="46" height="46">
+                <a class="align-middle" style = "color:#555; text-decoration:none;" href="https://discord.gg/3Q2n2Dt" target="_blank">
+                  <span class="mr-3 align-bottom" >Join the Discord</span>
+                </a>
+            </div>
+
         </h1>
         <hr>
-        <div class="card rounded">
+        <!-- PLAYING GUIDE -->
+        <div class="card rounded mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a style="border: 1px solid #555;"  class="btn btn-primary mb-2" id="join-league" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <h1 class = "mb-0">Please Read</h1>
+              </a>
+
+              <div class="collapse card-body pre-scrollable pre-scrollable-mini" id="readBeforePlaying">
+                <hr>
+                  <h3 class="card-title">Before the Game</h3>
+                  <ul class="card-text">
+                    <li>Show up 15 minutes early and join the <b>Hangout</b> voice channel in your assigned Discord Room (ex. Icewrack).</li>
+
+                  </ul>
+                  <h3 class="card-title">How to join a game</h3>
+                  <ul class="card-text">
+                    <li>5 minutes before game start join the <b>Team 1</b> or <b>Team 2</b> voice channel in your assigned Discord Room (depending on what team you signed up for).</li>
+                    <li>In Dota 2 search the custom lobbies for Wecasual.</li>
+                    <li>You should be able to find a lobby called <b>"Wecasual [Your Discord Room Name]"</b> (ex. Wecasual Icewrack).</li>
+                    <li>Join the lobby with the password <b>wecasual2017</b></li>
+                    <li>Have your team join either Dire or Radiant (it does not matter, as it will automatically switch you after the coin toss).</li>
+                    <li>First Pick/Side pick will be determined by an automatic coin toss (it is a system built into Dota).</li>
+                    <li>Make sure you have a <b>team name set</b> because the automatic coin toss will not work without one.</li>
+                    <li>Wait for the lobby host to start the coin toss, and follow the instructions.</li>
+                  </ul>
+                  <h3 class="card-title">During the game</h3>
+                  <ul class="card-text">
+                    <li>No team has a designated captain or drafter, so have fun with it and switch it up every game.</li>
+                    <li>There is <b>no limit to pausing</b> in game, but be reasonable. Only pause for technical issues or bathroom breaks.</li>
+                    <li><b>DO NOT</b> call false/early gg's. Make sure your team agrees with any gg call.</li>
+                    <li>All chat is permitted provided that it is <b>ALWAYS POSITIVE</b> no matter the circumstance.</li>
+                    <li>Please submit a player report for any false gg calls or excessive pauses. Email <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or send Robert a message on Discord</li>
+                  </ul>
+                  <h3 class="card-title">After the game</h3>
+                  <ul class="card-text">
+                    <li>Head back to your <b>Hangout</b> voice channel, and chill!</li>
+                    <li>We encourage you to stick around, discuss the game, and have fun!</li>
+                  </ul>
+                  <hr>
+                  <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/dota/rules" target="_blank">rules</a></i></h5>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GAME SIGNUP -->
+        <div class="card rounded mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h1>Game Signup</h1>
+              <p>Sign up for a game, all members welcome!</p>
+              <form id="game-signup" method="post" action="/dota/schedule/gameSignup">
+                <div class="form-group ">
+                  <div class="card-body pre-scrollable pre-scrollable-mini">
+                    <table class="table table-striped">
+                      <thead>
+                          <tr>
+                            <th></th>
+                            <th>Game</th>
+                            <th>Time</th>
+                            <th>Team 1 Slots</th>
+                            <th>Team 2 Slots</th>
+                          </tr>
+                      </thead>
+                      <tbody id="game-list">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <h5>Select a Team</h5>
+                <div class="form-group ">
+                  <div class="radio">
+                    <label><input type="radio" name="team" value="Team 1"> Team 1</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio" name="team" value="Team 2"> Team 2</label>
+                  </div>
+                </div>
+                <div class="form-group ">
+                  <input type="submit" value="Sign up" class = "btn btn-secondary">
+                </div>
+              </form>
+              <hr>
+              <ul>
+                <li>If you sign up you MUST ATTEND.</li>
+                <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <!-- YOUR GAMES -->
+        <div class="card rounded mt-3">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <h1 class = "mb-0">Your Games</h1>
@@ -67,9 +172,14 @@
             </li>
           </ul>
         </div>
-        <div class="row my-4">
-          <div class="col-md-6 col">
-            <div class="card rounded">
+        <!-- SCHEUDLE -->
+        <div class="card rounded p-3 mt-3">
+          <h1 class = "mb-0" id="my-schedule">Schedule</h1>
+          <hr>
+          <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+        </div>
+            <!-- EMAIL -->
+            <!-- <div class="card rounded">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <h4><b>Email: </b>
@@ -83,7 +193,11 @@
                 </h4>
                 </li>
               </ul>
-            </div>
+            </div> -->
+
+
+
+            <!-- DISCORD LINK
             <div class="card rounded mt-3">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-center">
@@ -95,105 +209,12 @@
                   </h4>
                 </li>
               </ul>
-            </div>
-            <div class="card rounded mt-3">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h1 class = "mb-0">Read Before Playing</h1>
-                  <hr>
-                  <div class="card-body pre-scrollable pre-scrollable-mini">
-                      <h3 class="card-title">Before the Game</h3>
-                      <ul class="card-text">
-                        <li>Show up 15 minutes early and join the <b>Hangout</b> voice channel in your assigned Discord Room (ex. Icewrack).</li>
-
-                      </ul>
-                      <h3 class="card-title">How to join a game</h3>
-                      <ul class="card-text">
-                        <li>5 minutes before game start join the <b>Team 1</b> or <b>Team 2</b> voice channel in your assigned Discord Room (depending on what team you signed up for).</li>
-                        <li>In Dota 2 search the custom lobbies for Wecasual.</li>
-                        <li>You should be able to find a lobby called <b>"Wecasual [Your Discord Room Name]"</b> (ex. Wecasual Icewrack).</li>
-                        <li>Join the lobby with the password <b>wecasual2017</b></li>
-                        <li>Have your team join either Dire or Radiant (it does not matter, as it will automatically switch you after the coin toss).</li>
-                        <li>First Pick/Side pick will be determined by an automatic coin toss (it is a system built into Dota).</li>
-                        <li>Make sure you have a <b>team name set</b> because the automatic coin toss will not work without one.</li>
-                        <li>Wait for the lobby host to start the coin toss, and follow the instructions.</li>
-                      </ul>
-                      <h3 class="card-title">During the game</h3>
-                      <ul class="card-text">
-                        <li>No team has a designated captain or drafter, so have fun with it and switch it up every game.</li>
-                        <li>There is <b>no limit to pausing</b> in game, but be reasonable. Only pause for technical issues or bathroom breaks.</li>
-                        <li><b>DO NOT</b> call false/early gg's. Make sure your team agrees with any gg call.</li>
-                        <li>All chat is permitted provided that it is <b>ALWAYS POSITIVE</b> no matter the circumstance.</li>
-                        <li>Please submit a player report for any false gg calls or excessive pauses. Email <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or send Robert a message on Discord</li>
-                      </ul>
-                      <h3 class="card-title">After the game</h3>
-                      <ul class="card-text">
-                        <li>Head back to your <b>Hangout</b> voice channel, and chill!</li>
-                        <li>We encourage you to stick around, discuss the game, and have fun!</li>
-                      </ul>
-                      <hr>
-                      <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/dota/rules" target="_blank">rules</a></i></h5>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!-- <div class="card rounded mt-3">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">
-                  <iframe src="https://discord.gg/3Q2n2Dt" width="100%" height="800px"></iframe>
-                </li>
-              </ul>
             </div> -->
-          </div>
-          <div class="col-md-6 col">
-            <div class="card rounded">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h1>Game Signup</h1>
-                  <p>You can sign up as 6/5. You will be the official sub if someone drops.</p>
-                  <form id="game-signup" method="post" action="/dota/schedule/gameSignup">
-                    <div class="form-group ">
-                      <div class="card-body pre-scrollable pre-scrollable-mini">
-                        <table class="table table-striped">
-                          <thead>
-                              <tr>
-                                <th></th>
-                                <th>Game</th>
-                                <th>Time</th>
-                                <th>Team 1 Slots</th>
-                                <th>Team 2 Slots</th>
-                              </tr>
-                          </thead>
-                          <tbody id="game-list">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <h5>Select a Team</h5>
-                    <div class="form-group ">
-                      <div class="radio">
-                        <label><input type="radio" name="team" value="Team 1"> Team 1</label>
-                      </div>
-                      <div class="radio">
-                        <label><input type="radio" name="team" value="Team 2"> Team 2</label>
-                      </div>
-                    </div>
-                    <div class="form-group ">
-                      <input type="submit" value="Sign up" class = "btn btn-secondary">
-                    </div>
-                  </form>
-                  <hr>
-                  <p>If you sign up you MUST ATTEND.</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="card rounded p-3">
-          <h1 class = "mb-0" id="my-schedule">Schedule</h1>
-          <hr>
-          <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-        </div>
+
+
+
+
+
       </div>
     </div>
 </div>
