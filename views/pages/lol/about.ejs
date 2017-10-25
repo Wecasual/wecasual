@@ -1,0 +1,108 @@
+<% include ../../partials/lol/header.ejs %>
+  <div class="container top-spacer">
+    <div class="card">
+      <div class="card-header display-4 text-center">
+        About Wecasual
+      </div>
+      <div class="card-body about-text">
+        <h3 class="card-title">The spirit of real life recreational sports leagues brought to eSports</h3>
+        <ul class="card-text">
+          <li>Wecasual is an esports community that <b>hosts games all week every week</b> for players looking to have a fun and positive esports experience.</li>
+          <li>Wecasual is building a recreational sports league feel in esports. Wecasual is the place to come hangout and have fun a couple of nights a week.</li>
+          <li>Wecasual is a <b>toxic-player free environment</b> where players are guaranteed nice teammates!</li>
+
+        </ul>
+
+        <h3 class="card-title">It's more than just playing the game </h3>
+        <ul class="card-text">
+          <li>At Wecasual it is not just about playing an esport. Wecasual is the place to <b>unwind and chill out</b> for people who love esports.</li>
+          <li>Before and after every game we offer activities to encourage players to <b>hangout in our Discord</b> with other members</li>
+        </ul>
+
+        <h3 class="card-title">How does Wecasual work?</h3>
+        <ul class="card-text">
+          <li>When you sign up for Wecasual you will get a link to join our Discord community.</li>
+          <li>You will then be able to see upcoming games that you can sign up for!</li>
+          <li>You can play in as many games as you want per week.</li>
+          <li>There are no set teams, so you will play with new and interesting people everygame.</li>
+        </ul>
+        <h3 class="card-title">Discord Link</h3>
+        <ul class="card-text">
+          <% if(!user){ %>
+            <li><i>You must sign up to see the Discord link.</i></li>
+          <%}else{ %>
+            <li><a href="https://discord.gg/QdGA439" target="_blank"><b>https://discord.gg/QdGA439</b></a></li>
+          <%}%>
+        </ul>
+
+        <!--<h3 class="card-title">Future expansion</h3>
+        <p class="card-text">Currently Wecasual only has a community and leagues for Dota 2, but Wecasual plans on expanding to other major eSports in the near future!</p>-->
+      </div>
+    </div>
+
+    <div class="mt-4 card text-center">
+      <div class="card-header display-4">
+        Our Values
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="card-title">Play for fun</h3>
+            <p>Try out new things, and don’t get stressed out over your performance in game.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="card-title">Positivity creates results</h3>
+            <p>Thinking positively will help your team and your enjoyment in the long term.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="card-title">Embrace difference</h3>
+            <p>Everyone should be able to play with anyone no matter their differences whether it is skill, interests or anything.</p>
+          </div>
+          <hr>
+          <div class="col-md-4">
+            <h3 class="card-title">Create a community</h3>
+            <p>Meet community members. Do not exclude others because you do not know them.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="card-title">Community before competition</h3>
+            <p>Playing for fun and with inclusion is more important than winning.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="card-title">Transparency</h3>
+            <p>Be honest and truthful and Wecasual will do the same.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="mt-4 card text-center">
+      <div class="card-header display-4">
+        The Team
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h3 class="card-title">Robert</h3>
+            <p class="card-text font-italic font-weight-bold">The organizer</p>
+            <p>The man that keeps this whole thing together. Have any questions about anything? Ask Robert.</p>
+            <p><a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></p>
+          </div>
+          <div class="col">
+            <h3 class="card-title">James</h3>
+            <p class="card-text font-italic font-weight-bold">The coder</p>
+            <p>James keeps this operation on the web and makes sure things don't crash.</p>
+            <p><a href="mailto:james@wecasual.gg">james@wecasual.gg</a></p>
+          </div>
+          <div class="col">
+            <h3 class="card-title">Stewart</h3>
+            <p class="card-text font-italic font-weight-bold">The money man</p>
+            <p>Stewart makes sure we don't spend all of our money on hats.</p>
+            <p><a href="mailto:stewart@wecasual.gg">stewart@wecasual.gg</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% include ../../partials/footer.ejs %>

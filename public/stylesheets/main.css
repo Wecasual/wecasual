@@ -2,6 +2,9 @@
 .container{
   color: #555;
 }
+.body{
+
+}
 
 /*End general*/
 
@@ -44,12 +47,33 @@
 }
 
 
-.jumbotron{
+.jumbotron-dota{
   margin-top:65px;
   height: 750px;
   background: url("/images/treant-tiny.png")  no-repeat center center;
   background-size: cover;
 }
+
+.jumbotron-lol{
+  margin-top:65px;
+  height: 750px;
+  background: url("/images/lol-teamwork-image-greyedout.png")  no-repeat center center;
+  background-size: cover;
+}
+
+.jumbotron-main{
+  margin-top:45px;
+  height: 750px;
+  background: url("/images/pattern.png") repeat center center;
+  /*background-size: cover;*/
+  color: #fff;
+}
+
+.jumbotron-words{
+  background-color: rgba(55, 55, 55, 0.8);
+  margin:0px;
+}
+
 
 
 #join-league {
@@ -69,6 +93,19 @@
 }
 /*End index page*/
 
+
+
+
+/*Landing page*/
+
+.explain-words{
+  background-color: #555555;
+  color: #fff;
+  height: 350px;
+}
+
+
+/*End landing page*/
 
 /*Blog css*/
 .blog-link{
@@ -135,6 +172,12 @@
 /*Bootstrap edits*/
 .pre-scrollable{
   max-height: 650px;
+  border: 0px;
+  padding: 20px;
+}
+
+.pre-scrollable-mini{
+  max-height: 350px;
 }
 
 .collapse-text{
@@ -148,6 +191,10 @@
 .card{
   border-radius: 0rem;
 }
+.card-header{
+  background-color: #e6e6e6;
+}
+
 /*Bootstrap edits end*/
 
 
@@ -167,6 +214,7 @@ ul,li{
 footer{
   bottom: 0;
   text-align: center;
+  background-color: #d1d1d1 !important;
 }
 
 /* The alert message box */

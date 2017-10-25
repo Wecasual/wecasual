@@ -1,0 +1,114 @@
+<% include ../../partials/lol/header-not-paid.ejs %>
+
+	<div class="container top-spacer">
+		<!-- Intro section -->
+		<h1 class = "my-2 text-center">Sign up</h1>
+		<h2 class="text-center"><span class="mt-2 mr-2"><%= user['Email'] %></span>
+			<img height="40" width="40" class="rounded-circle" src= <%= user['Avatar'] %> >
+		</h2>
+
+
+		<!--Rorbert, Look up "bootstrapvalidator feedback icons" if you want to have the feedback icons. The jQuery code is setup for it, it just needs CSS -->
+		<!-- Email section -->
+
+
+		<div class="row justify-content-center">
+			<div class="col col-9">
+				<!-- Player info -->
+				<h4>Important info</h4>
+				<ul>
+					<li>You must have a <b>mic</b> and communicate with your teammates when playing in Wecasual.</li>
+					<li>Wecasual is for players who are <b>less than Platinum IV </b> (Case by case exceptions can be made).</li>
+					<li>Wecasual plays on the <b>North America game server</b>, and communication is done in <b>english</b>.</li>
+					<!-- <li>Wecasual is in <b>free beta</b> right now!	<i>(Wecasual's full release will be $5/month)</i></li> -->
+					<!-- <li>Being a part of Wecasual <b>requires</b> you to play on a team in the league.</li> -->
+					<!-- <li>Wecasual league games are <b>Monday through Thursday at 9:00 PM EST.</b> The gamemode is captain's mode.</li> -->
+						<!-- <li>You sign up for weekly games with our <a href="/schedule" target="_blank"> schedule.</a></li> -->
+					<li>Games are usually in the evenings (All times are in <b>EST</b>).</li>
+					<!-- <li>You will play 2 games a week with your team.</li> -->
+					<!-- <li>Sign-up by <b>Tuesday, October 6th </b>to make it for the first round of games.</li> -->
+					<li>Player roles (eg. ADC, support, etc...) requests are not accepted.</li>
+					<li>You must join and use the Wecasual <b>discord</b> for Wecasual games. (Link will be provided after sign up).</li>
+					<li>If you have a <b>team of 5</b> you wish to play with, then send us a message (in Discord or to robert@wecasual.gg), and we can guarantee you will play together.</li>
+				</ul>
+
+				<hr>
+				<form id="signup-form" method="post" action="/lol/signup/submit">
+					<!-- Email input field -->
+					<div class="my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Please enter your summoner name</h4>
+					</div>
+					<div class="form-group ">
+							<input type="text" name="name" class="form-control" placeholder='Summoner Name'>
+					</div>
+					<hr>
+
+					<div class="my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Please enter your skill level</h4>
+						<!-- <div class="py-1 col col-12">
+							<ul>
+								<li><b>Beginner:</b> New to Dota 2.</li>
+								<li><b>Novice:</b> Understands the basics of the game, like hero abilities and positions, but is still working on fundamental skills like last hitting, pulling, and warding.</li>
+								<li><b>Intermediate:</b> Can perform fundamentals like last hitting, pulling, and warding with ease, but does not always execute in teamfights or follow the flow of the game.</li>
+								<li><b>Advanced:</b> Can consistently execute in team fights and ganks. Strong understanding for flow of the game.</li>
+							</ul>
+						</div> -->
+							<select class="form-control" name="skill-level">
+								<option>Bronze</option>
+							  <option>Silver</option>
+								<option>Gold</option>
+								<option>Platinum</option>
+							</select>
+					</div>
+					<hr>
+					<!-- Teammate request -->
+					<!-- <div class="my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Please enter your teammate requests</h4>
+						<div class = "py-1 col col-12">
+							<ul>
+								<li>You can request up to <b>4</b> teammates to play with.</li>
+								<li>Enter the <b>Steam display names</b> of any players you would like to be on a team with. Blank entries will be ignored.</li>
+								<li>We cannot guarantee you will be on the same team, but we will try our best.<i> If you enter 4 names you will most likely be on the same team.</i></li>
+							</ul>
+						</div>
+					</div> -->
+					<!-- <div class="text-center ">
+						<button type="button" class="btn btn-secondary" id="add-player">Add player</button>
+					</div>
+					<div class="form-group" id="player-requests">
+						<input type="text" name="player-request" class="my-3 form-control" placeholder='Enter Steam display name'>
+					</div>
+					<hr> -->
+					<div class="form-group my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Please read the rules</h4>
+						<div class = "py-1 col col-12">
+							<div class="mb-3">
+								<a href="/lol/rules" target="_blank">Read them here</a>
+							</div>
+							<label class="form-check-label">
+								<input type="checkbox" name="rules" class="form-check-input">
+								By checking this box I understand and agree to the rules of Wecasual.
+							</label>
+						</div>
+					</div>
+					<div class="form-group my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Code of Conduct</h4>
+						<div class = "py-1 col col-12">
+							<div class="mb-3">
+								<p>Wecasual is about fun and community above all else. We are not a competitive community.</p>
+							</div>
+							<label class="form-check-label">
+								<input type="checkbox" name="conduct" class="form-check-input">
+								By checking this box I understand the above statement.
+							</label>
+						</div>
+					</div>
+					<div class="form-group text-center">
+						<input type="submit" value="Sign up" class = "btn btn-secondary btn-lg btn-block">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="scripts/lol/signup-form.js"></script>
+<% include ../../partials/footer.ejs %>
