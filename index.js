@@ -10,7 +10,7 @@ var passportSteam = require('passport-steam');
 var Auth0Strategy = require('passport-auth0');
 var url = require('url');
 var Airtable = require('airtable');
-var sitemap = require('express-sitemap')();
+var sitemap = require('express-sitemap')({url: 'wecasual.gg'});
 
 
 
