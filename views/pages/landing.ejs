@@ -56,7 +56,13 @@
       </a>
     </nav>
       <div class="jumbotron-main">
-          <h1 class ="display-2 mt-3 p-4 align-middle jumbotron-words" style = "position: relative; top: 35%; font-family: 'Montserrat', sans-serif;">Hang out, play <span id="game-scroll"></span></h1>
+          <h1 class ="display-2 mt-3 p-4 align-middle jumbotron-words" style = "position: relative; top: 35%; font-family: 'Montserrat', sans-serif;">Hang out, play
+              <div class="scroll-words-container">
+                <span class="scroll-words" id="dota-scroll">Dota 2</span>
+                <span class="scroll-words" id="lol-scroll">LoL</span>
+                <span class="scroll-words" id="esports-scroll">esports</span>
+              </div>
+          </h1>
       </div>
       <div class="explain-words">
         <h1 class ="p-4 align-middle" style = "position: relative; top: 35%; font-family: 'Montserrat', sans-serif;">Never play a toxic game again.</h1>
@@ -96,18 +102,7 @@
 
     </div>
 
-    <script type="text/javascript">
-    var words = new Array('Dota 2', 'LoL', 'esports');
-    var i = 0;
-  setInterval( function(){
-    $( '#game-scroll' ).empty().append( words[ i ] );
-    if( i < words.length-1 ) {
-        i++;
-    } else {
-        i = 0;
-    }
-  }, 1000 );
-    </script>
+    <script src="../../scripts/text-scroll.js"></script>
     <footer class="p-1">
       <div class="container">
           <p class = "mt-4 mb-1">Contact us at <a href="mailto:info@wecasual.gg">info@wecasual.gg</a> for any inquiries</p>

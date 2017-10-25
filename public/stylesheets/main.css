@@ -104,6 +104,16 @@
   height: 350px;
 }
 
+.scroll-words{
+  position: absolute;
+  float: right;
+  display: none;
+}
+
+.scroll-words-container{
+  display: inline;
+}
+
 
 /*End landing page*/
 
