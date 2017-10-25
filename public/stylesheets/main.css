@@ -47,12 +47,33 @@
 }
 
 
-.jumbotron{
+.jumbotron-dota{
   margin-top:65px;
   height: 750px;
   background: url("/images/treant-tiny.png")  no-repeat center center;
   background-size: cover;
 }
+
+.jumbotron-lol{
+  margin-top:65px;
+  height: 750px;
+  background: url("/images/lol-teamwork-image-greyedout.png")  no-repeat center center;
+  background-size: cover;
+}
+
+.jumbotron-main{
+  margin-top:45px;
+  height: 750px;
+  background: url("/images/pattern.png") repeat center center;
+  /*background-size: cover;*/
+  color: #fff;
+}
+
+.jumbotron-words{
+  background-color: rgba(55, 55, 55, 0.8);
+  margin:0px;
+}
+
 
 
 #join-league {
@@ -72,6 +93,19 @@
 }
 /*End index page*/
 
+
+
+
+/*Landing page*/
+
+.explain-words{
+  background-color: #555555;
+  color: #fff;
+  height: 350px;
+}
+
+
+/*End landing page*/
 
 /*Blog css*/
 .blog-link{
