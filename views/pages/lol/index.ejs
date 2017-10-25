@@ -1,6 +1,44 @@
 <% include ../../partials/lol/header.ejs %>
-<!-- Main jumbotron for a primary marketing message or call to action -->
 
+<div class="modal fade" id="message-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!-- LAN EVENT -->
+          <a class = "blog-link" href="https://wecasual.eventbrite.com" target="_blank">
+
+            <div class="row ">
+              <div class="col col-lg-4 d-md-block d-none">
+                <img class = "rounded float-left img-thumbnail" src="/images/Mini-lan-image.png" alt="Wecasual Mini LAN logo">
+              </div>
+              <div class="col col-lg-8">
+                <h1 class = "m-2">Do you enjoy...</h1>
+                <div class="card-body">
+                  <!-- <h3><b>Do you enjoy...</b></h3> -->
+                  <h1 class ="my-2">Pizza?</h1>
+                  <h1 class ="">IRL games of League of Legends?</h1>
+                  <h3 class = "mt-4">Click to sign up for the Wecasual mini LAN!</h3>
+
+                </div>
+              </div>
+            </div>
+          </a>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('#message-modal').modal("show");
+    });
+  </script>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron-lol">
     <div class="container">
       <div class = "pb-5" style ="color: #fff; text-shadow: #000 0 5px 5px;">
