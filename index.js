@@ -210,10 +210,10 @@ app.get('/dota/schedule', function(req, res){
 app.get('/dota/FAQ', function(req, res){
   res.render('pages/dota/FAQ', { user: req.user});
 });
-//
-// app.get('/dota/playing-guide', function(req, res){
-//   res.render('pages/playing-guide', { user: req.user});
-// });
+
+app.get('/dota/thank-you-signup', ensureAuthenticated, function(req, res){
+  res.render('pages/dota/thank-you-signup', { user: req.user});
+});
 
 //butter
 app.get('/dota/blog', renderHome)
@@ -266,6 +266,10 @@ app.get('/lol/schedule', function(req, res){
 
 app.get('/lol/FAQ', function(req, res){
   res.render('pages/lol/FAQ', { user: req.user});
+});
+
+app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
+  res.render('pages/lol/thank-you-signup', { user: req.user});
 });
 
 // //butter
