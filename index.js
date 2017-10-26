@@ -50,18 +50,22 @@ var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/r
 //Dota routes
 var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
 var scheduleRepoDota = require('./repos/dota/schedule-repo')(baseDota);
+var contactRepoDota = require('./repos/contact-repo')(baseDota);
 
 var loginRouteDota = require('./lib/routes/dota/login-route')();
 var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
 var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
+var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
 
 //LoL routes
 var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
 var scheduleRepoLol = require('./repos/lol/schedule-repo')(baseLol);
+var contactRepoLol = require('./repos/contact-repo')(baseLol);
 
 var loginRouteLol = require('./lib/routes/lol/login-route')();
 var signupRouteLol = require('./lib/routes/lol/signup-route')(profilesRepoLol);
 var scheduleRouteLol = require('./lib/routes/lol/schedule-route')(scheduleRepoLol);
+var contactRouteLol = require('./lib/routes/lol/contact-route')(contactRepoLol);
 
 //==========Middleware==========
 var app = express();
@@ -179,7 +183,7 @@ app.get('/', function(req, res){
 app.get('/dota', function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Steam Id'])){
     // console.log(req.user['Status']);
-    res.redirect('/logout');
+    res.redirect('/dota/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -206,10 +210,10 @@ app.get('/dota/schedule', function(req, res){
 app.get('/dota/FAQ', function(req, res){
   res.render('pages/dota/FAQ', { user: req.user});
 });
-//
-// app.get('/dota/playing-guide', function(req, res){
-//   res.render('pages/playing-guide', { user: req.user});
-// });
+
+app.get('/dota/thank-you-signup', ensureAuthenticated, function(req, res){
+  res.render('pages/dota/thank-you-signup', { user: req.user});
+});
 
 //butter
 app.get('/dota/blog', renderHome)
@@ -229,13 +233,14 @@ app.post(signupRouteDota.submit.route, ensureAuthenticated, signupRouteDota.subm
 app.post(scheduleRouteDota.getAllSchedule.route, ensureAuthenticated, scheduleRouteDota.getAllSchedule.handler);
 app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteDota.gameSignup.handler);
 
-
+app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
+app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Summoner Name'])){
     // console.log(req.user['Status']);
-    res.redirect('/logout');
+    res.redirect('/lol/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -263,12 +268,17 @@ app.get('/lol/FAQ', function(req, res){
   res.render('pages/lol/FAQ', { user: req.user});
 });
 
+app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
+  res.render('pages/lol/thank-you-signup', { user: req.user});
+});
+
 // //butter
 // app.get('/lol/blog', renderHome)
 // app.get('/lol/blog/p/:page', renderHome)
 // app.get('/lol/blog/:slug', renderPost)
 
 //Auth0 login route
+app.get(loginRouteLol.logout.route, loginRouteLol.logout.handler);
 app.get(loginRouteLol.authReturn.route, passport.authenticate('auth0', { failureRedirect: '/lol' }), loginRouteLol.authReturn.handler);
 app.get(loginRouteLol.login.route, passport.authenticate('auth0', {
     clientID: process.env.AUTH0_CLIENT_ID,
@@ -286,6 +296,9 @@ app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit
 //schedule route
 app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
 app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
+
+app.get(contactRouteLol.contact.route, contactRouteLol.contact.handler);
+app.post(contactRouteLol.submit.route, contactRouteLol.submit.handler);
 
 app.get('/sitemap.xml', function(req, res){
   sitemap.generate(app);

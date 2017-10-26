@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google optimize -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-T8J6LJL':true});</script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-107381890-1', 'auto');
+    ga('require', 'GTM-T8J6LJL');
+    ga('send', 'pageview');
+    </script>
+
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107381890-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+      gtag('config', 'UA-107381890-1');
+    </script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Casual Dota 2 Leagues">
+    <meta name="description" content="Esports for casual players">
     <link rel="icon" href="/images/justRobo_BG.png">
     <link rel="alternate" href="http://wecasual.gg" hreflang="en-ca" />
     <link rel="alternate" href="http://www.wecasual.gg" hreflang="en-ca" />
@@ -31,20 +59,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-
-
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107381890-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments)};
-      gtag('js', new Date());
-
-      gtag('config', 'UA-107381890-1');
-    </script>
-
-
-
   </head>
   <body style = "font-family: 'Questrial', sans-serif; background-color: #fafafa ">
 
@@ -104,26 +118,25 @@
 
 
           <!-- Info dropdown -->
-          <!-- <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
             <a class="rounded nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Info
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="nav-link rounded" href="/about">About</a>
-              <a class="nav-link rounded" href="/FAQ">FAQ</a>
-              <a class="nav-link rounded" href="/rules">Rules</a>
+              <a class="nav-link rounded" href="/dota/about">About</a>
+              <a class="nav-link rounded" href="/dota/FAQ">FAQ</a>
+              <a class="nav-link rounded" href="/dota/rules">Rules</a>
 
               <!-- Only shows when players are logged in -->
               <!-- <% if(user){ %>
                 <hr>
                 <a class="nav-link rounded" href="/playing-guide">Playing Guide</a>
               <% } %> -->
-<!--
             </div>
-          </li> -->
+          </li>
 
 
-          <li class="nav-item px-1">
+          <!-- <li class="nav-item px-1">
             <a class="nav-link rounded" href="/dota/about">About</a>
           </li>
           <li class="nav-item px-1">
@@ -131,12 +144,15 @@
           </li>
           <li class="nav-item px-1">
             <a class="nav-link rounded" href="/dota/rules">Rules</a>
-          </li>
+          </li> -->
           <li class="nav-item px-1">
             <a class="nav-link rounded" href="/dota/schedule">Schedule</a>
           </li>
           <li class="nav-item px-1">
             <a class="nav-link rounded" href="/dota/blog">Blog</a>
+          </li>
+          <li class="nav-item px-1">
+            <a class="nav-link rounded" href="/dota/contact">Contact</a>
           </li>
         </ul>
 
@@ -157,7 +173,7 @@
               </a>
             </li>
             <li class="nav-item align-middle">
-              <a class="nav-link rounded px-1" href="/logout">
+              <a class="nav-link rounded px-1" href="/dota/logout">
                 <span>Logout</span>
               </a>
             </li>
