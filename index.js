@@ -50,18 +50,22 @@ var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/r
 //Dota routes
 var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
 var scheduleRepoDota = require('./repos/dota/schedule-repo')(baseDota);
+var contactRepoDota = require('./repos/contact-repo')(baseDota);
 
 var loginRouteDota = require('./lib/routes/dota/login-route')();
 var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
 var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
+var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
 
 //LoL routes
 var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
 var scheduleRepoLol = require('./repos/lol/schedule-repo')(baseLol);
+var contactRepoLol = require('./repos/contact-repo')(baseLol);
 
 var loginRouteLol = require('./lib/routes/lol/login-route')();
 var signupRouteLol = require('./lib/routes/lol/signup-route')(profilesRepoLol);
 var scheduleRouteLol = require('./lib/routes/lol/schedule-route')(scheduleRepoLol);
+var contactRouteLol = require('./lib/routes/lol/contact-route')(contactRepoLol);
 
 //==========Middleware==========
 var app = express();
@@ -229,7 +233,8 @@ app.post(signupRouteDota.submit.route, ensureAuthenticated, signupRouteDota.subm
 app.post(scheduleRouteDota.getAllSchedule.route, ensureAuthenticated, scheduleRouteDota.getAllSchedule.handler);
 app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteDota.gameSignup.handler);
 
-
+app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
+app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
@@ -287,6 +292,9 @@ app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit
 //schedule route
 app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
 app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
+
+app.get(contactRouteLol.contact.route, contactRouteLol.contact.handler);
+app.post(contactRouteLol.submit.route, contactRouteLol.submit.handler);
 
 app.get('/sitemap.xml', function(req, res){
   sitemap.generate(app);
