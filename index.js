@@ -50,10 +50,12 @@ var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/r
 //Dota routes
 var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
 var scheduleRepoDota = require('./repos/dota/schedule-repo')(baseDota);
+var contactRepoDota = require('./repos/dota/contact-repo')(baseDota);
 
 var loginRouteDota = require('./lib/routes/dota/login-route')();
 var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
 var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
+var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
 
 //LoL routes
 var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
@@ -229,7 +231,8 @@ app.post(signupRouteDota.submit.route, ensureAuthenticated, signupRouteDota.subm
 app.post(scheduleRouteDota.getAllSchedule.route, ensureAuthenticated, scheduleRouteDota.getAllSchedule.handler);
 app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteDota.gameSignup.handler);
 
-
+app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
+app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
