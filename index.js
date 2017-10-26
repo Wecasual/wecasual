@@ -179,7 +179,7 @@ app.get('/', function(req, res){
 app.get('/dota', function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Steam Id'])){
     // console.log(req.user['Status']);
-    res.redirect('/logout');
+    res.redirect('/dota/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -235,7 +235,7 @@ app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteD
 app.get('/lol', function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Summoner Name'])){
     // console.log(req.user['Status']);
-    res.redirect('/logout');
+    res.redirect('/lol/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -269,6 +269,7 @@ app.get('/lol/FAQ', function(req, res){
 // app.get('/lol/blog/:slug', renderPost)
 
 //Auth0 login route
+app.get(loginRouteLol.logout.route, loginRouteLol.logout.handler);
 app.get(loginRouteLol.authReturn.route, passport.authenticate('auth0', { failureRedirect: '/lol' }), loginRouteLol.authReturn.handler);
 app.get(loginRouteLol.login.route, passport.authenticate('auth0', {
     clientID: process.env.AUTH0_CLIENT_ID,
