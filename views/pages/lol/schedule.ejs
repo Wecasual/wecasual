@@ -1,8 +1,10 @@
+<% include ../../partials/header.ejs %>
+
 <%if(user && user['Status'] == 'Not Registered'){%>
-  <% include ../../partials/lol/header-not-paid.ejs %>
+  <% include ../../partials/lol/navbar-not-paid.ejs %>
 <%}
 else{%>
-  <% include ../../partials/lol/header.ejs %>
+  <% include ../../partials/lol/navbar.ejs %>
 <%}%>
 
 

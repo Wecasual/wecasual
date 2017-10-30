@@ -1,8 +1,10 @@
+<% include ../../partials/header.ejs %>
+
 <%if(user && user['Status'] == 'Not Registered'){%>
-  <% include ../../partials/dota/header-not-paid.ejs %>
+  <% include ../../partials/dota/navbar-not-paid.ejs %>
 <%}
 else{%>
-  <% include ../../partials/dota/header.ejs %>
+  <% include ../../partials/dota/navbar.ejs %>
 <%}%>
 
 
