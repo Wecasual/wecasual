@@ -1,5 +1,5 @@
-<% include ../../partials/lol/header.ejs %>
-
+<% include ../../partials/header.ejs %>
+<% include ../../partials/lol/navbar.ejs %>
 <%if(message){%>
   <div class="modal fade" id="message-modal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -26,14 +26,20 @@
     <div class="row my-4">
       <div class="col-md-6 col">
         <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
-        <span class="mr-3 align-middle p-5" style="font-size: 1.5em"><%= user['Summoner Name'] %></span>
+        <span class="mr-3 align-middle p-5 text-1.5em"><%= user['Summoner Name'] %></span>
       </div>
       <div class="col-md-6 col">
-          <img class="rounded mt-3" src="/images/discord-image.png" alt="Community image" width="46" height="46">
-          <a class="align-middle" style = "color:#555; text-decoration:none;" href="https://discord.gg/QdGA439" target="_blank">
+
+          <span>
+            <img class="rounded mt-3" alt="discord-image" width="46" height="46" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXCAMAAAC+ozSHAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAconae5DchJjfjZ/hlafjnq7mp7XosL3quMTswcvvytPx09rz3OH25On47fD69vj9////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAffUBjwAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAjCSURBVHhe7Z3tgqMoFER3NMaYxMS8/8PO+lGaUuFegtqBHs6f7TakrSMIKLrz39/fSfKKi+QVF/+0V/4nLE7IJaB7hSY1oKlpXmFadchmihf+RpggoxHR64Q/ECoFchqQvDJ8PVzsbVHwCl9LELN7hd4IBxB2hd0LXwwdpF1i9cLXgidD3gU2rzhaYQcCL7B54UsxgMRzLF4FvhMDiDzH4oWvREGOzDN+gZexwv4tr3Bn8SYQeobZC1+IBNNk6jd4mSoseQUMUjPJK2CQmkleAYPUTPIKGKRmklfAIDWTvAIGqZnkFTBIzSSvgEFqJnkFDFIzyStgkJpJXgGD1EzyChikZpJXwCA1k7w+5FRUVaU8ApJX1aXYYSUbqZkjvPLy9nh1PM7YYmEo9Xpcy20LU0jN7O51uj6HtPdSfWAnK+9D2c5tQ70hNbOvVz5KPS6OTyFlJSrt9XpefGsNqZk9vYp6CNjcVsc+K4iF8unWDN97vW5+zyEgNbOfV4mqenJVFW3vUUOXqeu2x5jKZeN32w98zJCa2curQHN6ltiQFdV9Smvhea9GjXKS9zBDamYfrxypRqvzdTprVOrL0GrHI9O2RsdzcwKpmV28quEEaXor6uRceV77AWFqjc2l+9UdpGZ28DrhQF/bw+whNdB0/XyGA9RW4kddI1Iz270uQ5ZHm6t492wePNoBb2zQr0YZ0mcgNbPZqxhyVNyp+dLc8vEwvV4f1BhSM5u9+gP8POVTE9rGrcjRrG/YgQNIzWz16qurPt36KLtQF/hj7hWG1MxWr666HjtaddyGk8y9wpCa2eh16hMchHOFITWz0WvnmppTYScqSM1s88qR4Bga13kH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">
+          </span>
+
+          <a class="align-middle discord-link-hp" href="https://discord.gg/QdGA439" target="_blank">
             <span class="mr-3 align-bottom" >Join the Discord</span>
           </a>
       </div>
+
+
   </h1>
   <hr>
 
@@ -62,7 +68,7 @@
   <div class="card rounded mt-3">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <a style="border: 1px solid #555;"  class="btn btn-primary mb-2" id="join-league" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+        <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
           <h1 class = "mb-0">Please Read</h1>
         </a>
 
