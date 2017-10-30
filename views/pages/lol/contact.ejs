@@ -1,0 +1,46 @@
+<% include ../../partials/header.ejs %>
+<% include ../../partials/lol/navbar.ejs %>
+<div class="container top-spacer">
+  <div class="card">
+    <div class="card-header display-4 text-center">
+      Contact Us
+    </div>
+    <div class="card-body">
+      <form id="contact-form" type="POST" action="/lol/contact/submit/">
+        <% if(!user) { %>
+          <div class="my-3 row justify-content-center">
+            <h4 class = "py-1 col col-12">Email</h4>
+          </div>
+          <div class="form-group ">
+              <input id="email" type="text" name="email" class="form-control" placeholder='Enter your email'>
+          </div>
+        <%}%>
+
+
+        <div class="my-3 row justify-content-center">
+          <h4 class = "py-1 col col-12">Subject</h4>
+        </div>
+        <div class="form-group ">
+          <select class="form-control" name="subject">
+            <option>Question</option>
+            <option>Website Issue</option>
+            <option>Discord Issue</option>
+            <option>Suggestion</option>
+          </select>
+        </div>
+        <div class="my-3 row justify-content-center">
+          <h4 class = "py-1 col col-12">Message</h4>
+        </div>
+        <div class="form-group ">
+            <textarea class = "contact-message" id="message" name="message" placeholder="Write something.." ></textarea>
+        </div>
+        <div class="form-group text-center">
+          <input id="submit" type="submit" class = "btn btn-secondary btn-lg btn-block" value="Submit">
+        </div>
+      </form>
+    </div>
+
+	</div>
+</div>
+<script src="../../scripts/contact-form.js"></script>
+<% include ../../partials/footer.ejs %>
