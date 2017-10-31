@@ -169,6 +169,36 @@ function getUser(base, id, callback){
   });
 }
 
+function getUserByRowId(base, id, callback){
+  base('Users').find(id, function(err, record) {
+    if (err) { callback && callback(err, null)}
+    else{
+      callback && callback(null, record.fields);
+    }
+  });
+}
+
+function getAllUsers(base, callback){
+  var users = new Array();
+  base('Users').select({
+      // Selecting the first 3 records in Value by Stage:
+      view: "Grid View"
+  }).eachPage(function page(records, fetchNextPage) {
+      // This function (`page`) will get called for each page of records.
+      records.forEach(function(ele){
+        users.push(ele.fields);
+      });
+      // To fetch the next page of records, call `fetchNextPage`.
+      // If there are more records, `page` will get called again.
+      // If there are no more records, `done` will get called.
+      fetchNextPage();
+
+  }, function done(err) {
+    if (err) { callback && callback(err, null) }
+    else{ callback && callback(null, users) }
+  });
+}
+
 function createUser(base, profile, callback){
   // console.log(profile);
   base('Users').create({
@@ -179,14 +209,18 @@ function createUser(base, profile, callback){
   "Original Steam Name": profile.displayName
   }, function(err, record) {
     if (err) { callback && callback(err, null)}
-    callback && callback(null, record);
+    else{
+      callback && callback(null, record);
+    }
   });
 }
 
 function updateUser(base, info, id, callback){
   base('Users').update(id, info, function(err, record) {
     if (err) { callback && callback(err, null)}
-    callback && callback(null, record.fields);
+    else{
+      callback && callback(null, record.fields);
+    }
   });
 }
 
@@ -195,7 +229,10 @@ function updateUser(base, info, id, callback){
 module.exports = base => {
   return {
     userLogin: userLogin.bind(null, base),
-    updateUser: updateUser.bind(null, base)
+    updateUser: updateUser.bind(null, base),
+    getUser: getUser.bind(null, base),
+    getUserByRowId: getUserByRowId.bind(null, base),
+    getAllUsers: getAllUsers.bind(null, base)
     // getUser: getUser.bind(null, base)
     // getAllUsers: getAllUsers.bind(null, pool)
   }
