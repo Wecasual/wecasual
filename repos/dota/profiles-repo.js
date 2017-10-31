@@ -195,7 +195,8 @@ function updateUser(base, info, id, callback){
 module.exports = base => {
   return {
     userLogin: userLogin.bind(null, base),
-    updateUser: updateUser.bind(null, base)
+    updateUser: updateUser.bind(null, base),
+    getUser: getUser.bind(null, base)
     // getUser: getUser.bind(null, base)
     // getAllUsers: getAllUsers.bind(null, pool)
   }

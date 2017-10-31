@@ -56,6 +56,7 @@ var loginRouteDota = require('./lib/routes/dota/login-route')();
 var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
 var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
 var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
+var profileRouteDota = require('./lib/routes/dota/profile-route')(profilesRepoDota);
 
 //LoL routes
 var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
@@ -233,8 +234,12 @@ app.post(signupRouteDota.submit.route, ensureAuthenticated, signupRouteDota.subm
 app.post(scheduleRouteDota.getAllSchedule.route, ensureAuthenticated, scheduleRouteDota.getAllSchedule.handler);
 app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteDota.gameSignup.handler);
 
+//contact route
 app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
 app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
+
+//profile route
+app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
@@ -297,6 +302,7 @@ app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit
 app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
 app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
 
+//contact route
 app.get(contactRouteLol.contact.route, contactRouteLol.contact.handler);
 app.post(contactRouteLol.submit.route, contactRouteLol.submit.handler);
 

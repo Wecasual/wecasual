@@ -19,7 +19,7 @@
     });
   </script>
 <%}%>
-
+<div style="display:none" id="userid"><%= user['Id'] %></div>
 
 <div class="container top-spacer homepage-bg">
   <div class = "my-3">
@@ -50,6 +50,7 @@
 
         </h1>
         <hr>
+
         <!-- PLAYING GUIDE -->
         <div class="card rounded mt-3">
           <ul class="list-group list-group-flush">
@@ -232,5 +233,6 @@
       </div>
     </div>
 </div>
+<script src="../../scripts/dota/friends.js"></script>
 <script src="../../scripts/dota/gameSignup.js"></script>
 <% include ../../partials/footer.ejs %>
