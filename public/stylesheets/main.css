@@ -294,7 +294,7 @@ a.active{
 }
 
 .pink-btn{
-  border: 1px solid #555;
+  border: 0px solid #555;
 }
 
 #user-search {
@@ -332,6 +332,11 @@ a.active{
 }
 
 .sidebar{
+
+}
+
+.friend-search{
+  min-height: 250px;
 }
 
 /*Home page end*/
