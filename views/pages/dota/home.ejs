@@ -19,7 +19,7 @@
     });
   </script>
 <%}%>
-<div style="display:none" id="userid"><%= user['Id'] %></div>
+<div style="display:none" id="userid"><%=user['Id']%></div>
 
 <div class="container top-spacer homepage-bg">
   <div class = "my-3">
@@ -50,6 +50,56 @@
 
         </h1>
         <hr>
+        <!-- FRIEND LIST -->
+        <div class="row">
+          <div class="col-md-6 col">
+            <div class="card rounded mt-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h1>Friends</h1>
+                  <div class="card-body pre-scrollable">
+                    <table class="table table-striped">
+                      <thead>
+                          <tr>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                      </thead>
+                      <tbody id="friends-list">
+                      </tbody>
+                    </table>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- FRIEND REQUESTS -->
+          <div class="col-md-6 col">
+            <div class="card rounded mt-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h1>Friend Requests</h1>
+                  <div class="card-body pre-scrollable">
+                    <table class="table table-striped">
+                      <thead>
+                          <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                      </thead>
+                      <tbody id="friend-requests">
+                      </tbody>
+                    </table>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
 
         <!-- PLAYING GUIDE -->
         <div class="card rounded mt-3">
