@@ -242,6 +242,8 @@ app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
 app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
 app.post(profileRouteDota.acceptFriend.route, profileRouteDota.acceptFriend.handler);
 app.post(profileRouteDota.declineFriend.route, profileRouteDota.declineFriend.handler);
+app.post(profileRouteDota.sendFriendRequest.route, profileRouteDota.sendFriendRequest.handler);
+
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {

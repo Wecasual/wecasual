@@ -6,6 +6,7 @@ $(document).ready(function() {
   var friendRequestIds = new Array();
   var userId = $("#userid").html();
   var users;
+  var userIds = new Array();
   $.ajax({
     type: 'POST',
     url: '/dota/profile/getFriends',
@@ -22,13 +23,15 @@ $(document).ready(function() {
           $("#friends-list").append('<tr><th scope="row"><img class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Steam Name'] + '</td></tr>')
           friendIds.push(ele['Id']);
         });
-        var i = 0;
         friendRequests.forEach(function(ele){
           $("#friend-requests").append('<tr id="' + ele['Id'] + '"><th scope="row"><img class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Steam Name'] +
           '</td><td><button type="button" class="btn btn-success">&#10004;</button></td>\
           <td><button type="button" class="btn btn-danger">&#10008;</button></td></tr>');
           friendRequestIds.push(ele['Id']);
-          i++;
+        });
+        users.forEach(function(ele){
+          $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '" class="friend-request-send">' + ele['Steam Name'] + '</a></li>')
+          userIds.push(ele['Id']);
         });
       }
     }
@@ -44,6 +47,7 @@ $(document).ready(function() {
       data: JSON.stringify({id: userId,
       friendIds: friendIds,
       friendRequestIds: friendRequestIds,
+      friendRequests: friendRequests,
       index: index}),
       success: function(res){
         if(!res.success){
@@ -93,6 +97,44 @@ $(document).ready(function() {
       }
     });
   });
+  $(document).on('click', '.friend-request-send', function(){
+    var requestId = this.id;
+    var currentRequests = users[userIds.indexOf(requestId)]['Friend Requests'];
+    $.ajax({
+      type: 'POST',
+      url: '/dota/profile/sendFriendRequest',
+      contentType: 'application/json',
+      data: JSON.stringify({id: requestId,
+      requesterId: userId,
+      currentRequests: currentRequests}),
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          alert(res.message);
+        }
+      }
+    });
+  });
   //Send friend request
-
 });
+
+function search() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('user-search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("user-list");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
