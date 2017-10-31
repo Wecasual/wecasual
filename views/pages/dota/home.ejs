@@ -126,7 +126,7 @@
                     <label><input type="radio" name="team" value="Team 1"> Team 1</label>
                   </div>
                   <div class="radio">
-                    <label><input type="radio" name="team" value="Team 2"> Team 2</label>
+                    <label><input id="team2" type="radio" name="team" value="Team 2"> Team 2</label>
                   </div>
                 </div>
                 <div class="form-group ">
@@ -142,8 +142,19 @@
           </ul>
         </div>
 
-
-
+        <!-- SCHEDULE A GAME -->
+        <div class="card rounded mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <h1 class = "mb-0">Schedule a Game</h1>
+              </a>
+              <div class="collapse card-body" id="scheduleAGame">
+                <iframe class="airtable-embed" src="https://airtable.com/embed/shroAUq2kjkzYJ2En?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+              </div>
+            </li>
+          </ul>
+        </div>
         <!-- YOUR GAMES -->
         <div class="card rounded mt-3">
           <ul class="list-group list-group-flush">
