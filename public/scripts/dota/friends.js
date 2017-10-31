@@ -5,6 +5,7 @@ $(document).ready(function() {
   var friendIds = new Array();
   var friendRequestIds = new Array();
   var userId = $("#userid").html();
+  var users;
   $.ajax({
     type: 'POST',
     url: '/dota/profile/getFriends',
@@ -16,6 +17,7 @@ $(document).ready(function() {
       else if(res.success){
         friendsList = res.data.friendsList;
         friendRequests = res.data.friendRequests;
+        users = res.data.users;
         friendsList.forEach(function(ele){
           $("#friends-list").append('<tr><th scope="row"><img class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Steam Name'] + '</td></tr>')
           friendIds.push(ele['Id']);
