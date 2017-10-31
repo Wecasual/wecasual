@@ -6,8 +6,8 @@ body{
   background-color: #fafafa !important;
   font-family: 'Questrial', sans-serif !important;
 }
-.text-1.5em{
-  font-size: 1.5em;
+.text-1.3em{
+  font-size: 1.3em;
 }
 /*End general*/
 
@@ -103,11 +103,9 @@ body{
   background-color: #ff9da2 ;
   border: 2px solid white;
   overflow: hidden;
+  box-shadow: 5px 5px 2px #555;
 }
 
-.homepage-bg{
-   /*background-color: #d1d1d1;*/
-}
 /*End index page*/
 
 
@@ -272,14 +270,26 @@ input[type=text], select, textarea {
   background-color: #e6e6e6;
 }
 
+a.active{
+  background-color: #ff9da2 !important;
+  border: 0px;
+}
+
 /*Bootstrap edits end*/
 
 /*Home page*/
 .discord-link-hp{
   color:#555;
   text-decoration:none;
+  padding-bottom: 0px;
+  box-shadow: 0 8px 3px -8px black;
 }
 .discord-link-hp:hover{
+  color:#d1d1d1;
+  text-decoration:none;
+}
+
+.steam-name{
   color:#555;
 }
 
@@ -321,6 +331,8 @@ input[type=text], select, textarea {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
 
+.sidebar{
+}
 
 /*Home page end*/
 
