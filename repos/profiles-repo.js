@@ -14,7 +14,7 @@ function userLogin(base, profile, callback){
       }
       else{
         // console.log(record);
-        updateUser(base, {"Username": profile.username, "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png", "Id": record.id, "Discord Id": profile.id}, record.id, function(err, new_record_fields){
+        updateUser(base, {"Username": profile.username, "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png", "Id": record.id}, record.id, function(err, new_record_fields){
           if (err) { callback && callback(err, null)}
           else{
             callback && callback(null, new_record_fields);
