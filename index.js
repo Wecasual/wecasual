@@ -280,14 +280,7 @@ app.get('/dota/blog/:slug', renderPost)
 // app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
 // app.get(loginRouteDota.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamReturn.handler);
 // app.get(loginRouteDota.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamAuth.handler);
-//
-// //signup route
 
-//
-
-//
-
-//
 // //profile route
 // app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
 // app.post(profileRouteDota.acceptFriend.route, profileRouteDota.acceptFriend.handler);
@@ -314,23 +307,23 @@ app.get('/lol', function(req, res) {
     res.render('pages/lol/index', {user: req.user});
   }
 });
-//
-// app.get('/lol/about', function(req, res){
-//   res.render('pages/lol/about', { user: req.user});
-// });
-//
-// app.get('/lol/rules', function(req, res){
-//   res.render('pages/lol/rules', { user: req.user});
-// });
-//
-// app.get('/lol/schedule', function(req, res){
-//   res.render('pages/lol/schedule', { user: req.user});
-// });
-//
-// app.get('/lol/FAQ', function(req, res){
-//   res.render('pages/lol/FAQ', { user: req.user});
-// });
-//
+
+app.get('/lol/about', function(req, res){
+  res.render('pages/lol/about', { user: req.user});
+});
+
+app.get('/lol/rules', function(req, res){
+  res.render('pages/lol/rules', { user: req.user});
+});
+
+app.get('/lol/schedule', function(req, res){
+  res.render('pages/lol/schedule', { user: req.user});
+});
+
+app.get('/lol/FAQ', function(req, res){
+  res.render('pages/lol/FAQ', { user: req.user});
+});
+
 app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
   res.render('pages/lol/thank-you-signup', { user: req.user});
 });
