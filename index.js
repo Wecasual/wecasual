@@ -221,6 +221,7 @@ app.get(loginRoute.logout.route, loginRoute.logout.handler);
 //signup route
 app.get(signupRoute.signup.route, signupRoute.signup.handler);
 app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handler);
+app.post(signupRoute.submitSkillLevel.route, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
 //schedule route
 app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
@@ -232,18 +233,20 @@ app.post(contactRoute.submit.route, contactRoute.submit.handler);
 
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
+  req.session.realm = "dota";
   if(req.user && (req.user['Status'] == 'Not Registered')){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
+  else if(req.user && req.user['Status'] != 'Not Registered' && !req.user['dota']) {
+    res.redirect('/signup');
+  }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
     req.session.message = null;
-    req.session.realm = "dota";
     res.render('pages/dota/home', { user: req.user, message: message});
   }
   else{
-    req.session.realm = "dota";
     res.render('pages/dota/index', {user: req.user});
   }
 });
@@ -294,18 +297,20 @@ app.get('/dota/blog/:slug', renderPost)
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
+  req.session.realm = "lol";
   if(req.user && (req.user['Status'] == 'Not Registered')){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
+  else if(req.user && req.user['Status'] != 'Not Registered' && !req.user['lol']) {
+    res.redirect('/signup');
+  }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
     req.session.message = null;
-    req.session.realm = "lol";
     res.render('pages/lol/home', { user: req.user, message: message});
   }
   else{
-    req.session.realm = "lol";
     res.render('pages/lol/index', {user: req.user});
   }
 });
