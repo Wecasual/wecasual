@@ -32,10 +32,10 @@ var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ct
 // var stripe = require('stripe')(keySecret);
 
 //Steam API Info
-var returnURLDota = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
-var realmDota = process.env.SITE_URL || 'http://localhost:5000/';
-
-var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/return";
+// var returnURLDota = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/steam/return";
+// var realmDota = process.env.SITE_URL || 'http://localhost:5000/';
+//
+// var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/return";
 
 var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/discord/callback";
 // const pgParams = url.parse(process.env.DATABASE_URL);
