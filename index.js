@@ -21,7 +21,7 @@ var sitemap = require('express-sitemap')({url: 'wecasual.gg'});
 var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
 
 //Airtable
-var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appQNrirLcYjjQZkZ');
+var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
 
 // var baseDota = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
 // var baseLol = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appCUfOoXm19TJWfl');
@@ -210,8 +210,11 @@ app.use(passport.session());
 
 //==========End Middleware==========
 
-
 app.get('/', function(req, res){
+  if(req.user && (req.user['Discord Id'] == null)){
+    // console.log(req.user['Status']);
+    res.redirect('/logout');
+  }
   res.render('pages/landing');
 });
 
@@ -242,7 +245,7 @@ app.post(profileRoute.sendFriendRequest.route, profileRoute.sendFriendRequest.ha
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
   req.session.realm = "dota";
-  if(req.user && (req.user['Status'] == 'Not Registered')){
+  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
@@ -295,7 +298,7 @@ app.get('/dota/blog/:slug', renderPost)
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
   req.session.realm = "lol";
-  if(req.user && (req.user['Status'] == 'Not Registered')){
+  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
