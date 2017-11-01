@@ -9,7 +9,7 @@ $(document).ready(function() {
   var userIds = new Array();
   $.ajax({
     type: 'POST',
-    url: '/dota/profile/getFriends',
+    url: '/profile/getFriends',
     data: {id: userId},
     success: function(res){
       if(!res.success){
@@ -20,17 +20,17 @@ $(document).ready(function() {
         friendRequests = res.data.friendRequests;
         users = res.data.users;
         friendsList.forEach(function(ele){
-          $("#friends-list").append('<tr><th scope="row"><img class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Steam Name'] + '</td></tr>')
+          $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Username'] + '</td></tr>')
           friendIds.push(ele['Id']);
         });
         friendRequests.forEach(function(ele){
-          $("#friend-requests").append('<tr id="' + ele['Id'] + '"><th scope="row"><img class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Steam Name'] +
+          $("#friend-requests").append('<tr id="' + ele['Id'] + '"><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Username'] +
           '</td><td><button type="button" class="btn btn-success">&#10004;</button></td>\
           <td><button type="button" class="btn btn-danger">&#10008;</button></td></tr>');
           friendRequestIds.push(ele['Id']);
         });
         users.forEach(function(ele){
-          $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '" class="friend-request-send">' + ele['Steam Name'] + '</a></li>')
+          $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '" class="friend-request-send">' + ele['Username'] + '</a></li>')
           userIds.push(ele['Id']);
         });
       }
@@ -42,7 +42,7 @@ $(document).ready(function() {
     var newFriend = friendRequests[index];
     $.ajax({
       type: 'POST',
-      url: '/dota/profile/acceptFriend',
+      url: '/profile/acceptFriend',
       contentType: 'application/json',
       data: JSON.stringify({id: userId,
       friendIds: friendIds,
@@ -55,7 +55,7 @@ $(document).ready(function() {
         }
         else if(res.success){
           $('#' + friendRequestIds[index]).remove();
-          $("#friends-list").append('<tr><th scope="row"><img class="rounded-circle" src=' + newFriend['Avatar'] + '></th><td>' + newFriend['Steam Name'] + '</td></tr>')
+          $("#friends-list").append('<tr><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + newFriend['Avatar'] + '></th><td>' + newFriend['Username'] + '</td></tr>')
           friendIds.push(friendRequestIds[index]);
           if(friendRequestIds.length == 1){
             friendRequests = [];
@@ -74,7 +74,7 @@ $(document).ready(function() {
     var index = friendRequestIds.indexOf($(this).closest('tr').attr('id'));
     $.ajax({
       type: 'POST',
-      url: '/dota/profile/declineFriend',
+      url: '/profile/declineFriend',
       contentType: 'application/json',
       data: JSON.stringify({id: userId,
       friendRequestIds: friendRequestIds,
@@ -98,24 +98,26 @@ $(document).ready(function() {
     });
   });
   $(document).on('click', '.friend-request-send', function(){
-    var requestId = this.id;
-    var currentRequests = users[userIds.indexOf(requestId)]['Friend Requests'];
-    $.ajax({
-      type: 'POST',
-      url: '/dota/profile/sendFriendRequest',
-      contentType: 'application/json',
-      data: JSON.stringify({id: requestId,
-      requesterId: userId,
-      currentRequests: currentRequests}),
-      success: function(res){
-        if(!res.success){
-          alert(res.error);
+    if(confirm("Send friend request?")){
+      var requestId = this.id;
+      var currentRequests = users[userIds.indexOf(requestId)]['Friend Requests'];
+      $.ajax({
+        type: 'POST',
+        url: '/profile/sendFriendRequest',
+        contentType: 'application/json',
+        data: JSON.stringify({id: requestId,
+        requesterId: userId,
+        currentRequests: currentRequests}),
+        success: function(res){
+          if(!res.success){
+            alert(res.error);
+          }
+          else if(res.success){
+            alert(res.message);
+          }
         }
-        else if(res.success){
-          alert(res.message);
-        }
-      }
-    });
+      });
+    }
   });
   //Send friend request
 });

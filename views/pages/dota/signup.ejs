@@ -4,8 +4,8 @@
 	<div class="container top-spacer">
 		<!-- Intro section -->
 		<h1 class = "my-2 text-center">Sign up</h1>
-		<h2 class="text-center"><span class="mt-2 mr-2"><%= user['Steam Name'] %></span>
-			<img class="rounded-circle" src= <%= user['Avatar'] %> >
+		<h2 class="text-center"><span class="mt-2 mr-2"><%= user['Username'] %></span>
+			<img height="40" width="40" class="rounded-circle" src= <%= user['Avatar'] %> >
 		</h2>
 
 
@@ -34,7 +34,7 @@
 				</ul>
 
 				<hr>
-				<form id="signup-form" method="post" action="/dota/signup/submit">
+				<form id="signup-form" method="post" action="/signup/submit">
 					<!-- Email input field -->
 					<div class="my-3 row justify-content-center">
 						<h4 class = "py-1 col col-12">Please enter your email address</h4>
@@ -111,5 +111,5 @@
 			</div>
 		</div>
 	</div>
-<script src="../scripts/dota/signup-form.js"></script>
+<script src="../scripts/signup-form.js"></script>
 <% include ../../partials/footer.ejs %>

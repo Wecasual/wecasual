@@ -86,7 +86,7 @@
         <a class="nav-link rounded" href="/lol/schedule">Schedule</a>
       </li>
       <li class="nav-item px-1">
-        <a class="nav-link rounded" href="/lol/contact">Contact Us</a>
+        <a class="nav-link rounded" href="/contact">Contact Us</a>
       </li>
       <!-- <li class="nav-item px-1">
         <a class="nav-link rounded" href="/dota/blog">Blog</a>
@@ -97,19 +97,19 @@
       <!-- Steam login -->
       <% if(!user){ %>
         <li class="nav-item">
-          <a class="nav-link rounded px-1" href="/login">
+          <a class="nav-link rounded px-1" href="/auth/discord">
             <span>Sign in</span>
           </a>
         </li>
       <% } else{ %>
         <li class="nav-item">
           <a class="nav-link rounded px-1" href="/lol">
-            <span class="mr-3"><%= user['Summoner Name'] %></span>
-              <img height="40" width="40" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+            <span class="mr-3"><%= user['Username'] %></span>
+            <img height="40" width="40" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
           </a>
         </li>
         <li class="nav-item align-middle">
-          <a class="nav-link rounded px-1" href="/lol/logout">
+          <a class="nav-link rounded px-1" href="/logout">
             <span>Logout</span>
           </a>
         </li>
