@@ -6,8 +6,8 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var cookieSession = require('cookie-session')
 var passport = require('passport');
-var passportSteam = require('passport-steam');
-var Auth0Strategy = require('passport-auth0');
+// var passportSteam = require('passport-steam');
+// var Auth0Strategy = require('passport-auth0');
 var passportDiscord = require('passport-discord');
 var url = require('url');
 var Airtable = require('airtable');
@@ -75,11 +75,14 @@ var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "aut
 
 var profilesRepo = require('./repos/profiles-repo')(base);
 var scheduleRepo = require('./repos/schedule-repo')(base);
+var contactRepo = require('./repos/contact-repo')(base);
 
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo);
+var contactRoute = require('./lib/routes/contact-route')(contactRepo);
+
 
 //==========Middleware==========
 var app = express();
@@ -223,6 +226,10 @@ app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handl
 app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.gameSignup.route, ensureAuthenticated, scheduleRoute.gameSignup.handler);
 
+//contact route
+app.get(contactRoute.contact.route, contactRoute.contact.handler);
+app.post(contactRoute.submit.route, contactRoute.submit.handler);
+
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered')){
@@ -232,6 +239,7 @@ app.get('/dota', function(req, res) {
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
     req.session.message = null;
+    req.session.realm = "dota";
     res.render('pages/dota/home', { user: req.user, message: message});
   }
   else{
@@ -275,9 +283,7 @@ app.get('/dota/blog/:slug', renderPost)
 //
 
 //
-// //contact route
-// app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
-// app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
+
 //
 // //profile route
 // app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
@@ -295,6 +301,7 @@ app.get('/lol', function(req, res) {
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
     req.session.message = null;
+    req.session.realm = "lol";
     res.render('pages/lol/home', { user: req.user, message: message});
   }
   else{

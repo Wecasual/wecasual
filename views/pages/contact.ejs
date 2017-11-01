@@ -1,12 +1,17 @@
-<% include ../../partials/header.ejs %>
-<% include ../../partials/lol/navbar.ejs %>
+<% include ../partials/header.ejs %>
+<%if(realm == "dota"){%>
+  <% include ../partials/dota/navbar.ejs %>
+<% } else if(realm == "lol") { %>
+  <% include ../partials/lol/navbar.ejs %>
+<% } %>
+
 <div class="container top-spacer">
   <div class="card">
     <div class="card-header display-4 text-center">
       Contact Us
     </div>
     <div class="card-body">
-      <form id="contact-form" type="POST" action="/lol/contact/submit/">
+      <form id="contact-form" type="POST" action="/contact/submit/">
         <% if(!user) { %>
           <div class="my-3 row justify-content-center">
             <h4 class = "py-1 col col-12">Email</h4>
@@ -42,5 +47,5 @@
 
 	</div>
 </div>
-<script src="../../scripts/contact-form.js"></script>
-<% include ../../partials/footer.ejs %>
+<script src="../scripts/contact-form.js"></script>
+<% include ../partials/footer.ejs %>
