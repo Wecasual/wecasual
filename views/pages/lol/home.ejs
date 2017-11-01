@@ -19,32 +19,36 @@
     });
   </script>
 <%}%>
+<div style="display:none" id="userid"><%=user['Id']%></div>
 
 
-<div class="container top-spacer homepage-bg">
-  <h1 class = "text-center">
-    <div class="row my-4">
-      <div class="col-md-6 col">
-        <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
-        <span class="mr-3 align-middle p-5 text-1.5em"><%= user['Summoner Name'] %></span>
+
+
+<div class="container-fluid top-spacer">
+  <h2 class = "text-center">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <span>
+          <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+        </span>
+        <span class="steam-name pl-2 align-bottom text-1.3em"><%= user['Username'] %></span>
+
+
       </div>
-      <div class="col-md-6 col">
-
+      <div class="col-md-6">
           <span>
-            <img class="rounded mt-3" alt="discord-image" width="46" height="46" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXCAMAAAC+ozSHAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAconae5DchJjfjZ/hlafjnq7mp7XosL3quMTswcvvytPx09rz3OH25On47fD69vj9////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAffUBjwAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAjCSURBVHhe7Z3tgqMoFER3NMaYxMS8/8PO+lGaUuFegtqBHs6f7TakrSMIKLrz39/fSfKKi+QVF/+0V/4nLE7IJaB7hSY1oKlpXmFadchmihf+RpggoxHR64Q/ECoFchqQvDJ8PVzsbVHwCl9LELN7hd4IBxB2hd0LXwwdpF1i9cLXgidD3gU2rzhaYQcCL7B54UsxgMRzLF4FvhMDiDzH4oWvREGOzDN+gZexwv4tr3Bn8SYQeobZC1+IBNNk6jd4mSoseQUMUjPJK2CQmkleAYPUTPIKGKRmklfAIDWTvAIGqZnkFTBIzSSvgEFqJnkFDFIzyStgkJpJXgGD1EzyChikZpJXwCA1k7w+5FRUVaU8ApJX1aXYYSUbqZkjvPLy9nh1PM7YYmEo9Xpcy20LU0jN7O51uj6HtPdSfWAnK+9D2c5tQ70hNbOvVz5KPS6OTyFlJSrt9XpefGsNqZk9vYp6CNjcVsc+K4iF8unWDN97vW5+zyEgNbOfV4mqenJVFW3vUUOXqeu2x5jKZeN32w98zJCa2curQHN6ltiQFdV9Smvhea9GjXKS9zBDamYfrxypRqvzdTprVOrL0GrHI9O2RsdzcwKpmV28quEEaXor6uRceV77AWFqjc2l+9UdpGZ28DrhQF/bw+whNdB0/XyGA9RW4kddI1Iz270uQ5ZHm6t492wePNoBb2zQr0YZ0mcgNbPZqxhyVNyp+dLc8vEwvV4f1BhSM5u9+gP8POVTE9rGrcjRrG/YgQNIzWz16qurPt36KLtQF/hj7hWG1MxWr666HjtaddyGk8y9wpCa2eh16hMchHOFITWz0WvnmppTYScqSM1s88qR4Bga13kH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">
+            <img class="rounded" alt="discord-image" width="46" height="46" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXCAMAAAC+ozSHAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAconae5DchJjfjZ/hlafjnq7mp7XosL3quMTswcvvytPx09rz3OH25On47fD69vj9////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAffUBjwAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAjCSURBVHhe7Z3tgqMoFER3NMaYxMS8/8PO+lGaUuFegtqBHs6f7TakrSMIKLrz39/fSfKKi+QVF/+0V/4nLE7IJaB7hSY1oKlpXmFadchmihf+RpggoxHR64Q/ECoFchqQvDJ8PVzsbVHwCl9LELN7hd4IBxB2hd0LXwwdpF1i9cLXgidD3gU2rzhaYQcCL7B54UsxgMRzLF4FvhMDiDzH4oWvREGOzDN+gZexwv4tr3Bn8SYQeobZC1+IBNNk6jd4mSoseQUMUjPJK2CQmkleAYPUTPIKGKRmklfAIDWTvAIGqZnkFTBIzSSvgEFqJnkFDFIzyStgkJpJXgGD1EzyChikZpJXwCA1k7w+5FRUVaU8ApJX1aXYYSUbqZkjvPLy9nh1PM7YYmEo9Xpcy20LU0jN7O51uj6HtPdSfWAnK+9D2c5tQ70hNbOvVz5KPS6OTyFlJSrt9XpefGsNqZk9vYp6CNjcVsc+K4iF8unWDN97vW5+zyEgNbOfV4mqenJVFW3vUUOXqeu2x5jKZeN32w98zJCa2curQHN6ltiQFdV9Smvhea9GjXKS9zBDamYfrxypRqvzdTprVOrL0GrHI9O2RsdzcwKpmV28quEEaXor6uRceV77AWFqjc2l+9UdpGZ28DrhQF/bw+whNdB0/XyGA9RW4kddI1Iz270uQ5ZHm6t492wePNoBb2zQr0YZ0mcgNbPZqxhyVNyp+dLc8vEwvV4f1BhSM5u9+gP8POVTE9rGrcjRrG/YgQNIzWz16qurPt36KLtQF/hj7hWG1MxWr666HjtaddyGk8y9wpCa2eh16hMchHOFITWz0WvnmppTYScqSM1s88qR4Bga13kH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">
           </span>
-
           <a class="align-middle discord-link-hp" href="https://discord.gg/QdGA439" target="_blank">
-            <span class="mr-3 align-bottom" >Join the Discord</span>
+            <span class="mr-3 align-bottom text-1.3em" >Join the Discord</span>
           </a>
       </div>
-
-
-  </h1>
+    </div>
+  </h2>
   <hr>
 
   <!-- LAN EVENT -->
-  <a class = "blog-link" href="https://wecasual.eventbrite.com" target="_blank">
+  <!-- <a class = "blog-link" href="https://wecasual.eventbrite.com" target="_blank">
   <div class="hvr-float card rounded mb-4">
     <div class="row ">
       <div class="col col-lg-4 d-md-block d-none">
@@ -53,7 +57,6 @@
       <div class="col col-lg-8">
         <h1 class = "m-2">Do you enjoy...</h1>
         <div class="card-body">
-          <!-- <h3><b>Do you enjoy...</b></h3> -->
           <h1 class ="my-2">Pizza?</h1>
           <h1 class ="">IRL games of League of Legends?</h1>
           <h3 class = "mt-4">Click to sign up for the Wecasual mini LAN!</h3>
@@ -62,179 +65,250 @@
       </div>
     </div>
   </div>
-  </a>
-
-  <!-- PLAYING GUIDE -->
-  <div class="card rounded mt-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-          <h1 class = "mb-0">Please Read</h1>
-        </a>
-
-        <div class="collapse card-body pre-scrollable pre-scrollable-mini" id="readBeforePlaying">
-          <hr>
-            <h3 class="card-title">Before the Game</h3>
-            <ul class="card-text">
-              <li>Show up 15 minutes early and join the <b>Hangout</b> voice channel in your assigned Discord Room (ex. Noxus).</li>
-
-            </ul>
-            <h3 class="card-title">How to join a game</h3>
-            <ul class="card-text">
-              <li>5 minutes before game start join the <b>Team 1</b> or <b>Team 2</b> voice channel in your assigned Discord Room (depending on what team you signed up for).</li>
-              <li>In the LoL client search the custom lobbies for Wecasual.</li>
-              <li>You should be able to find a lobby called <b>"Wecasual [Your Discord Room Name]"</b> (ex. Wecasual Noxus).</li>
-              <li>Join the lobby with the password <b>wecasual2017</b></li>
-              <!-- <li>Have your team join either Dire or Radiant (it does not matter, as it will automatically switch you after the coin toss).</li>
-              <li>First Pick/Side pick will be determined by an automatic coin toss (it is a system built into Dota).</li>
-              <li>Make sure you have a <b>team name set</b> because the automatic coin toss will not work without one.</li>
-              <li>Wait for the lobby host to start the coin toss, and follow the instructions.</li> -->
-            </ul>
-            <h3 class="card-title">During the game</h3>
-            <ul class="card-text">
-              <li>No team has a designated captain or drafter, so have fun with it and switch it up every game.</li>
-              <li>There is <b>no limit to pausing</b> in game, but be reasonable. Only pause for technical issues or bathroom breaks.</li>
-              <li><b>DO NOT</b> call false/early gg's. Make sure your team agrees with any gg call.</li>
-              <li>All chat is permitted provided that it is <b>ALWAYS POSITIVE</b> no matter the circumstance.</li>
-              <li>Please submit a player report for any false gg calls or excessive pauses. Email <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or send Robert a message on Discord</li>
-            </ul>
-            <h3 class="card-title">After the game</h3>
-            <ul class="card-text">
-              <li>Head back to your <b>Hangout</b> voice channel, and chill!</li>
-              <li>We encourage you to stick around, discuss the game, and have fun!</li>
-            </ul>
-            <hr>
-            <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/lol/rules" target="_blank">rules</a></i></h5>
-        </div>
-      </li>
-    </ul>
-  </div>
+  </a> -->
 
 
-  <!-- GAME SIGNUP -->
-  <div class="card rounded mt-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <h1>Game Signup</h1>
-        <p>Sign up for a game, all members welcome!</p>
-        <form id="game-signup" method="post" action="/lol/schedule/gameSignup">
-          <div class="form-group ">
-            <div class="card-body pre-scrollable pre-scrollable-mini">
-              <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <th></th>
-                      <th>Game</th>
-                      <th>Time</th>
-                      <th>Team 1 Slots</th>
-                      <th>Team 2 Slots</th>
-                    </tr>
-                </thead>
-                <tbody id="game-list">
-                </tbody>
-              </table>
+  <div class="row">
+    <div class="col-lg-3">
+      <h5 class="text-center my-1">
+        <b>Pages</b>
+      </h5>
+      <hr class = "my-1">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active text-center" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Play</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+      </div>
+
+      <!-- PLAYING GUIDE -->
+      <div class="card rounded my-3">
+        <ul class="list-group list-group-flush mt-0">
+          <li class="list-group-item p-0  text-center mt-0">
+            <a class="m-3 pink-btn btn btn-primary mb-2 join-league-btn" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+              <h5 class = "mb-0">IMPORTANT</h5>
+            </a>
+
+            <div class="text-left collapse card-body pre-scrollable p-1" id="readBeforePlaying">
+              <hr>
+                <h3 class="card-title">Before the Game</h3>
+                <ul class="card-text">
+                  <li>Show up 15 minutes early and join the <b>Hangout</b> voice channel in your assigned Discord Room (ex. Noxus).</li>
+
+                </ul>
+                <h3 class="card-title">How to join a game</h3>
+                <ul class="card-text">
+                  <li>5 minutes before game start join the <b>Team 1</b> or <b>Team 2</b> voice channel in your assigned Discord Room (depending on what team you signed up for).</li>
+                  <li>In the LoL client search the custom lobbies for Wecasual.</li>
+                  <li>You should be able to find a lobby called <b>"Wecasual [Your Discord Room Name]"</b> (ex. Wecasual Noxus).</li>
+                  <li>Join the lobby with the password <b>wecasual2017</b></li>
+                  <!-- <li>Have your team join either Dire or Radiant (it does not matter, as it will automatically switch you after the coin toss).</li>
+                  <li>First Pick/Side pick will be determined by an automatic coin toss (it is a system built into Dota).</li>
+                  <li>Make sure you have a <b>team name set</b> because the automatic coin toss will not work without one.</li>
+                  <li>Wait for the lobby host to start the coin toss, and follow the instructions.</li> -->
+                </ul>
+                <h3 class="card-title">During the game</h3>
+                <ul class="card-text">
+                  <li>No team has a designated captain or drafter, so have fun with it and switch it up every game.</li>
+                  <li>There is <b>no limit to pausing</b> in game, but be reasonable. Only pause for technical issues or bathroom breaks.</li>
+                  <li><b>DO NOT</b> call false/early gg's. Make sure your team agrees with any gg call.</li>
+                  <li>All chat is permitted provided that it is <b>ALWAYS POSITIVE</b> no matter the circumstance.</li>
+                  <li>Please submit a player report for any false gg calls or excessive pauses. Email <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or send Robert a message on Discord</li>
+                </ul>
+                <h3 class="card-title">After the game</h3>
+                <ul class="card-text">
+                  <li>Head back to your <b>Hangout</b> voice channel, and chill!</li>
+                  <li>We encourage you to stick around, discuss the game, and have fun!</li>
+                </ul>
+                <hr>
+                <h5 class = "card-text  mb-4"><i>For more details, please see the <a href="/lol/rules" target="_blank">rules</a></i></h5>
             </div>
-          </div>
-          <h5>Select a Team</h5>
-          <div class="form-group ">
-            <div class="radio">
-              <label><input type="radio" name="team" value="Team 1"> Team 1</label>
-            </div>
-            <div class="radio">
-              <label><input type="radio" name="team" value="Team 2"> Team 2</label>
-            </div>
-          </div>
-          <div class="form-group ">
-            <input type="submit" value="Sign up" class = "btn btn-secondary">
-          </div>
-        </form>
-        <hr>
-        <ul>
-          <li>If you sign up you MUST ATTEND.</li>
-          <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
+          </li>
         </ul>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="tab-content" id="nav-tabContent">
+        <!-- HOME -->
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          <!-- GAME SIGNUP -->
+          <div class="card rounded">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                  <h4 class = "mb-0">Game Signup</h4>
+                </a>
+                <p class ="mb-0">Sign up for an existing game, all members welcome!</p>
+                <div class="collapse card-body" id="gameSignup">
 
+                  <form id="game-signup" method="post" action="/schedule/gameSignup">
+                    <div class="form-group ">
+                      <div class="card-body pre-scrollable pre-scrollable-mini">
+                        <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                <th></th>
+                                <th>Game</th>
+                                <th>Time</th>
+                                <th>Team 1 Slots</th>
+                                <th>Team 2 Slots</th>
+                              </tr>
+                          </thead>
+                          <tbody id="game-list">
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <h5>Select a Team</h5>
+                    <div class="form-group ">
+                      <div class="radio">
+                        <label><input type="radio" name="team" value="Team 1"> Team 1</label>
+                      </div>
+                      <div class="radio">
+                        <label><input id="team2" type="radio" name="team" value="Team 2"> Team 2</label>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <input type="submit" value="Sign up" class = "btn btn-secondary">
+                    </div>
+                  </form>
+                  <hr>
+                  <ul>
+                    <li>If you sign up you MUST ATTEND.</li>
+                    <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
+                  </ul>
+                </div>
 
-  <!-- YOUR GAMES -->
-  <div class="card rounded mt-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <h1 class = "mb-0">Your Games</h1>
-        <div class="card-body">
-          <div class=" pre-scrollable">
-            <table class="table table-striped">
-              <thead>
-                  <tr>
-                    <th>Game</th>
-                    <th>Time</th>
-                    <th>Team 1 Slots</th>
-                    <th>Team 2 Slots</th>
-                    <th>Your Team</th>
-                    <th>Discord Room</th>
-                  </tr>
-              </thead>
-              <tbody id="my-game-list">
-              </tbody>
-            </table>
+              </li>
+            </ul>
           </div>
-          <!-- <h5 class = "ml-1 mt-1"><i>Games with insufficient players 24 hours before game time will be cancelled (You will be notified)</i></h5> -->
-          <ul>
-            <li>Games with insufficient players 24 hours before game time will be cancelled (You will be notified).</li>
-            <li>If you want to cancel a sign up you must email us at robert@wecasual.gg or message us on Discord 24 hours before the game.</li>
-          </ul>
+
+          <!-- SCHEDULE A GAME -->
+          <div class="card rounded mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                  <h4 class = "mb-0">Create a Game</h4>
+                </a>
+                <p class ="mb-0">Schedule your own game time</p>
+                <div class="collapse card-body" id="scheduleAGame">
+                  <iframe class="airtable-embed" src="https://airtable.com/embed/shrOyP1pKwAP0djqU?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- SCHEUDLE -->
+          <div class="card rounded p-4 mt-3">
+            <h3 class = "mb-0" id="my-schedule">Schedule</h3>
+            <hr>
+            <iframe class="airtable-embed" src="https://airtable.com/embed/shrPfOxeeMi73OZdR?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+          </div>
         </div>
-      </li>
-    </ul>
-  </div>
-  <!-- OLD EMAIL -->
-  <!-- <div class="card rounded">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <h4><b>Email: </b>
-        <% if(user['Email']){ %>
+        <!-- END HOME -->
+        <!-- PROFILE -->
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+          <!-- YOUR GAMES -->
+          <div class="card rounded mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3 class = "mb-0">Your Games</h3>
+                <div class="card-body pt-0">
+                  <div class=" pre-scrollable">
+                    <table class="table table-striped">
+                      <thead>
+                          <tr>
+                            <th>Game</th>
+                            <th>Time</th>
+                            <th>Team 1 Slots</th>
+                            <th>Team 2 Slots</th>
+                            <th>Your Team</th>
+                            <th>Discord Room</th>
+                          </tr>
+                      </thead>
+                      <tbody id="my-game-list">
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- <h5 class = "ml-1 mt-1"><i>Games with insufficient players 24 hours before game time will be cancelled (You will be notified)</i></h5> -->
+                  <ul>
+                    <li>Games with insufficient players 24 hours before game time will be cancelled (You will be notified).</li>
+                    <li>If you want to cancel a sign up you must email us at robert@wecasual.gg or message us on Discord 24 hours before the game.</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- FRIEND LIST -->
+          <div class="row">
+            <div class="col-md-6 col">
+              <div class="card rounded mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h3>Friends</h3>
+                    <div class="card-body pre-scrollable">
+                      <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="friends-list">
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-        <%= user['Email'] %>
+            <!-- FRIEND REQUESTS -->
+            <div class="col-md-6 col">
+              <div class="card rounded mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h3>Friend Requests</h3>
+                    <p class = "mb-0">People who want to add you as a friend</p>
+                    <div class="card-body pre-scrollable">
+                      <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="friend-requests">
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ADD FRIENDS -->
+          <div class="card rounded mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>Add a friend</h3>
+                <p class ="mb-0">Click to send a friend request</p>
+                <div class="card-body pre-scrollable friend-search">
 
-        <%}else{ %>
-          <i>No email</i>
-        <%}%>
-      </h4>
-      </li>
-    </ul>
-  </div> -->
+                  <input type="text" id="user-search" onkeyup="search()" placeholder="Search for names..">
 
-  <!-- OLD DISCORD -->
-  <!-- <div class="card rounded mt-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item text-center">
-        <h4>
-          <img class="rounded mb-2" src="/images/discord-image.png" alt="Community image" width="64" height="64">
-            <span>Join the Discord</span>
-
-          <a href="https://discord.gg/QdGA439" target="_blank">https://discord.gg/QdGA439</a>
-        </h4>
-      </li>
-    </ul>
-  </div> -->
-
-  <!-- <div class="card rounded mt-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item text-center">
-        <iframe src="https://discord.gg/3Q2n2Dt" width="100%" height="800px"></iframe>
-      </li>
-    </ul>
-  </div> -->
-
-
-  <!-- SCHEDULE -->
-  <div class="card rounded p-3 mt-3">
-    <h1 class = "mb-0" id="my-schedule">Schedule</h1>
-    <hr>
-    <iframe class="airtable-embed" src="https://airtable.com/embed/shrSkV5i5Qj7cUj7n?backgroundColor=yellow" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-  </div>
-</div>
-<script src="../../scripts/lol/gameSignup.js"></script>
+                  <ul id="user-list">
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- END PROFILE -->
+        </div>
+      </div>
+    </div> <!-- BIG COL -->
+  </div> <!--ROW-->
+</div> <!-- CONTAINER -->
+<script src="../../scripts/friends.js"></script>
+<script src="../../scripts/gameSignup.js"></script>
 <% include ../../partials/footer.ejs %>

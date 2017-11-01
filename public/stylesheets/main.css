@@ -6,8 +6,8 @@ body{
   background-color: #fafafa !important;
   font-family: 'Questrial', sans-serif !important;
 }
-.text-1.5em{
-  font-size: 1.5em;
+.text-1.3em{
+  font-size: 1.3em;
 }
 /*End general*/
 
@@ -103,11 +103,9 @@ body{
   background-color: #ff9da2 ;
   border: 2px solid white;
   overflow: hidden;
+  box-shadow: 5px 5px 2px #555;
 }
 
-.homepage-bg{
-   /*background-color: #d1d1d1;*/
-}
 /*End index page*/
 
 
@@ -272,21 +270,74 @@ input[type=text], select, textarea {
   background-color: #e6e6e6;
 }
 
+a.active{
+  background-color: #ff9da2 !important;
+  border: 0px;
+}
+
 /*Bootstrap edits end*/
 
 /*Home page*/
 .discord-link-hp{
   color:#555;
   text-decoration:none;
+  padding-bottom: 0px;
+  box-shadow: 0 8px 3px -8px black;
 }
 .discord-link-hp:hover{
+  color:#d1d1d1;
+  text-decoration:none;
+}
+
+.steam-name{
   color:#555;
 }
 
 .pink-btn{
-  border: 1px solid #555;
+  border: 0px solid #555;
 }
 
+#user-search {
+    background-image: url('/images/search-icon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    background-size: 1.3em;
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#user-list {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#user-list li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: #555; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#user-list li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+.sidebar{
+
+}
+
+.friend-search{
+  min-height: 250px;
+}
 
 /*Home page end*/
 

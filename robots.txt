@@ -1,0 +1,3 @@
+User-agent:*
+Disallow:/dota/sign-up
+Disallow:/lol/sign-up

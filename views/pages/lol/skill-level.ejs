@@ -1,0 +1,29 @@
+<% include ../../partials/header.ejs %>
+<% include ../../partials/lol/navbar-not-paid.ejs %>
+
+	<div class="container top-spacer">
+		<!-- Intro section -->
+		<h2 class="text-center"><span class="mt-2 mr-2"><%= user['Username'] %></span>
+			<img height="40" width="40" class="rounded-circle" src= <%= user['Avatar'] %> >
+		</h2>
+		<div class="row justify-content-center">
+			<div class="col col-9">
+				<form id="signup-form" method="post" action="/signup/submitSkillLevel">
+					<div class="my-3 row justify-content-center">
+						<h4 class = "py-1 col col-12">Please enter your skill level before participating in any Wecasual League of Legends games</h4>
+							<select class="form-control" name="skill-level">
+								<option>Bronze</option>
+							  <option>Silver</option>
+								<option>Gold</option>
+								<option>Platinum</option>
+							</select>
+					</div>
+					<hr>
+					<div class="form-group text-center">
+						<input type="submit" value="Submit" class = "btn btn-secondary btn-lg btn-block">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<% include ../../partials/footer.ejs %>
