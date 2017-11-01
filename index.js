@@ -82,6 +82,8 @@ var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+
 
 
 //==========Middleware==========
@@ -231,6 +233,12 @@ app.post(scheduleRoute.gameSignup.route, ensureAuthenticated, scheduleRoute.game
 app.get(contactRoute.contact.route, contactRoute.contact.handler);
 app.post(contactRoute.submit.route, contactRoute.submit.handler);
 
+//profile route
+app.post(profileRoute.getFriends.route, profileRoute.getFriends.handler);
+app.post(profileRoute.acceptFriend.route, profileRoute.acceptFriend.handler);
+app.post(profileRoute.declineFriend.route, profileRoute.declineFriend.handler);
+app.post(profileRoute.sendFriendRequest.route, profileRoute.sendFriendRequest.handler);
+
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
   req.session.realm = "dota";
@@ -281,11 +289,7 @@ app.get('/dota/blog/:slug', renderPost)
 // app.get(loginRouteDota.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamReturn.handler);
 // app.get(loginRouteDota.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamAuth.handler);
 
-// //profile route
-// app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
-// app.post(profileRouteDota.acceptFriend.route, profileRouteDota.acceptFriend.handler);
-// app.post(profileRouteDota.declineFriend.route, profileRouteDota.declineFriend.handler);
-// app.post(profileRouteDota.sendFriendRequest.route, profileRouteDota.sendFriendRequest.handler);
+
 
 
 //==========LoL Routes==========
