@@ -8,6 +8,7 @@ var cookieSession = require('cookie-session')
 var passport = require('passport');
 var passportSteam = require('passport-steam');
 var Auth0Strategy = require('passport-auth0');
+var passportDiscord = require('passport-discord');
 var url = require('url');
 var Airtable = require('airtable');
 var sitemap = require('express-sitemap')({url: 'wecasual.gg'});
@@ -20,8 +21,10 @@ var sitemap = require('express-sitemap')({url: 'wecasual.gg'});
 var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
 
 //Airtable
-var baseDota = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
-var baseLol = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appCUfOoXm19TJWfl');
+var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appQNrirLcYjjQZkZ');
+
+// var baseDota = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
+// var baseLol = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appCUfOoXm19TJWfl');
 
 //Stripe
 // const keyPublishable = process.env.PUBLISHABLE_KEY;
@@ -33,6 +36,8 @@ var returnURLDota = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/s
 var realmDota = process.env.SITE_URL || 'http://localhost:5000/';
 
 var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/return";
+
+var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/discord/callback";
 // const pgParams = url.parse(process.env.DATABASE_URL);
 // const pgAuth = pgParams.auth.split(':');
 // const config = {
@@ -48,25 +53,33 @@ var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/r
 // var pool = new pg.Pool(config);
 
 //Dota routes
-var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
-var scheduleRepoDota = require('./repos/dota/schedule-repo')(baseDota);
-var contactRepoDota = require('./repos/contact-repo')(baseDota);
+// var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
+// var scheduleRepoDota = require('./repos/dota/schedule-repo')(baseDota);
+// var contactRepoDota = require('./repos/contact-repo')(baseDota);
+//
+// var loginRouteDota = require('./lib/routes/dota/login-route')();
+// var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
+// var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
+// var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
+// var profileRouteDota = require('./lib/routes/dota/profile-route')(profilesRepoDota);
+//
+// //LoL routes
+// var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
+// var scheduleRepoLol = require('./repos/lol/schedule-repo')(baseLol);
+// var contactRepoLol = require('./repos/contact-repo')(baseLol);
+//
+// var loginRouteLol = require('./lib/routes/lol/login-route')();
+// var signupRouteLol = require('./lib/routes/lol/signup-route')(profilesRepoLol);
+// var scheduleRouteLol = require('./lib/routes/lol/schedule-route')(scheduleRepoLol);
+// var contactRouteLol = require('./lib/routes/lol/contact-route')(contactRepoLol);
 
-var loginRouteDota = require('./lib/routes/dota/login-route')();
-var signupRouteDota = require('./lib/routes/dota/signup-route')(profilesRepoDota);
-var scheduleRouteDota = require('./lib/routes/dota/schedule-route')(scheduleRepoDota);
-var contactRouteDota = require('./lib/routes/dota/contact-route')(contactRepoDota);
-var profileRouteDota = require('./lib/routes/dota/profile-route')(profilesRepoDota);
+var profilesRepo = require('./repos/profiles-repo')(base);
+var scheduleRepo = require('./repos/schedule-repo')(base);
 
-//LoL routes
-var profilesRepoLol = require('./repos/lol/profiles-repo')(baseLol);
-var scheduleRepoLol = require('./repos/lol/schedule-repo')(baseLol);
-var contactRepoLol = require('./repos/contact-repo')(baseLol);
-
-var loginRouteLol = require('./lib/routes/lol/login-route')();
-var signupRouteLol = require('./lib/routes/lol/signup-route')(profilesRepoLol);
-var scheduleRouteLol = require('./lib/routes/lol/schedule-route')(scheduleRepoLol);
-var contactRouteLol = require('./lib/routes/lol/contact-route')(contactRepoLol);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var loginRoute = require('./lib/routes/login-route')();
+var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
+var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo);
 
 //==========Middleware==========
 var app = express();
@@ -123,41 +136,58 @@ app.use(expressValidator({
 }));
 
 //passport-steam Middleware https://github.com/liamcurry/passport-steam
-passport.use(new passportSteam.Strategy({
-    returnURL: returnURLDota,
-    realm: realmDota,
-    apiKey: process.env.STEAM_API_KEY
-  },
-  function(identifier, profile, done) {
-    profilesRepoDota.userLogin(identifier, profile, function(err, user){
-      if(err) {
-        console.log(err);
-        return done(null, null);
-      }
-      // console.log(user);
-      return done(null, user);
-    });
-  }
-));
+// passport.use(new passportSteam.Strategy({
+//     returnURL: returnURLDota,
+//     realm: realmDota,
+//     apiKey: process.env.STEAM_API_KEY
+//   },
+//   function(identifier, profile, done) {
+//     profilesRepoDota.userLogin(identifier, profile, function(err, user){
+//       if(err) {
+//         console.log(err);
+//         return done(null, null);
+//       }
+//       // console.log(user);
+//       return done(null, user);
+//     });
+//   }
+// ));
+//
+// passport.use(new Auth0Strategy(
+//   {
+//     domain: process.env.AUTH0_DOMAIN,
+//     clientID: process.env.AUTH0_CLIENT_ID,
+//     clientSecret: process.env.AUTH0_SECRET,
+//     callbackURL: returnURLLol,
+//   },
+//   function(accessToken, refreshToken, extraParams, profile, done) {
+//     profilesRepoLol.userLogin(profile, function(err, user){
+//       if(err) {
+//         console.log(err);
+//         return done(null, null);
+//       }
+//       // console.log(user);
+//       return done(null, user);
+//     });
+//   }
+// ));
 
-passport.use(new Auth0Strategy(
-  {
-    domain: process.env.AUTH0_DOMAIN,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_SECRET,
-    callbackURL: returnURLLol,
+passport.use(new passportDiscord.Strategy({
+    clientID: process.env.DISCORD_ID,
+    clientSecret: process.env.DISCORD_SECRET,
+    callbackURL: returnURLDiscord,
+    scope: ['identify'],
+    response_type: ['code']
   },
-  function(accessToken, refreshToken, extraParams, profile, done) {
-    profilesRepoLol.userLogin(profile, function(err, user){
+  function(accessToken, refreshToken, profile, done) {
+    profilesRepo.userLogin(profile, function(err, user){
       if(err) {
         console.log(err);
         return done(null, null);
       }
-      // console.log(user);
       return done(null, user);
     });
-  }
-));
+  }));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -180,11 +210,24 @@ app.get('/', function(req, res){
   res.render('pages/landing');
 });
 
+//login route
+app.get(loginRoute.authDiscord.route, passport.authenticate('discord'));
+app.get(loginRoute.authDiscordCallback.route, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
+app.get(loginRoute.logout.route, loginRoute.logout.handler);
+
+//signup route
+app.get(signupRoute.signup.route, signupRoute.signup.handler);
+app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handler);
+
+//schedule route
+app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
+app.post(scheduleRoute.gameSignup.route, ensureAuthenticated, scheduleRoute.gameSignup.handler);
+
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
-  if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Steam Id'])){
+  if(req.user && (req.user['Status'] == 'Not Registered')){
     // console.log(req.user['Status']);
-    res.redirect('/dota/logout');
+    res.redirect('/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -192,6 +235,7 @@ app.get('/dota', function(req, res) {
     res.render('pages/dota/home', { user: req.user, message: message});
   }
   else{
+    req.session.realm = "dota";
     res.render('pages/dota/index', {user: req.user});
   }
 });
@@ -216,40 +260,37 @@ app.get('/dota/thank-you-signup', ensureAuthenticated, function(req, res){
   res.render('pages/dota/thank-you-signup', { user: req.user});
 });
 
-//butter
+// //butter
 app.get('/dota/blog', renderHome)
 app.get('/dota/blog/p/:page', renderHome)
 app.get('/dota/blog/:slug', renderPost)
 
 //Steam login route
-app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
-app.get(loginRouteDota.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamReturn.handler);
-app.get(loginRouteDota.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamAuth.handler);
+// app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
+// app.get(loginRouteDota.steamReturn.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamReturn.handler);
+// app.get(loginRouteDota.steamAuth.route, passport.authenticate('steam', { failureRedirect: '/dota' }), loginRouteDota.steamAuth.handler);
+//
+// //signup route
 
-//signup route
-app.get(signupRouteDota.signup.route, signupRouteDota.signup.handler);
-app.post(signupRouteDota.submit.route, ensureAuthenticated, signupRouteDota.submit.handler);
+//
 
-//schedule route
-app.post(scheduleRouteDota.getAllSchedule.route, ensureAuthenticated, scheduleRouteDota.getAllSchedule.handler);
-app.post(scheduleRouteDota.gameSignup.route, ensureAuthenticated, scheduleRouteDota.gameSignup.handler);
-
-//contact route
-app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
-app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
-
-//profile route
-app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
-app.post(profileRouteDota.acceptFriend.route, profileRouteDota.acceptFriend.handler);
-app.post(profileRouteDota.declineFriend.route, profileRouteDota.declineFriend.handler);
-app.post(profileRouteDota.sendFriendRequest.route, profileRouteDota.sendFriendRequest.handler);
+//
+// //contact route
+// app.get(contactRouteDota.contact.route, contactRouteDota.contact.handler);
+// app.post(contactRouteDota.submit.route, contactRouteDota.submit.handler);
+//
+// //profile route
+// app.post(profileRouteDota.getFriends.route, profileRouteDota.getFriends.handler);
+// app.post(profileRouteDota.acceptFriend.route, profileRouteDota.acceptFriend.handler);
+// app.post(profileRouteDota.declineFriend.route, profileRouteDota.declineFriend.handler);
+// app.post(profileRouteDota.sendFriendRequest.route, profileRouteDota.sendFriendRequest.handler);
 
 
 //==========LoL Routes==========
 app.get('/lol', function(req, res) {
-  if(req.user && (req.user['Status'] == 'Not Registered' || !req.user['Summoner Name'])){
+  if(req.user && (req.user['Status'] == 'Not Registered')){
     // console.log(req.user['Status']);
-    res.redirect('/lol/logout');
+    res.redirect('/logout');
   }
   else if(req.user && req.user['Status'] != 'Not Registered'){
     var message = req.session.message;
@@ -257,26 +298,27 @@ app.get('/lol', function(req, res) {
     res.render('pages/lol/home', { user: req.user, message: message});
   }
   else{
+    req.session.realm = "lol";
     res.render('pages/lol/index', {user: req.user});
   }
 });
-
-app.get('/lol/about', function(req, res){
-  res.render('pages/lol/about', { user: req.user});
-});
-
-app.get('/lol/rules', function(req, res){
-  res.render('pages/lol/rules', { user: req.user});
-});
-
-app.get('/lol/schedule', function(req, res){
-  res.render('pages/lol/schedule', { user: req.user});
-});
-
-app.get('/lol/FAQ', function(req, res){
-  res.render('pages/lol/FAQ', { user: req.user});
-});
-
+//
+// app.get('/lol/about', function(req, res){
+//   res.render('pages/lol/about', { user: req.user});
+// });
+//
+// app.get('/lol/rules', function(req, res){
+//   res.render('pages/lol/rules', { user: req.user});
+// });
+//
+// app.get('/lol/schedule', function(req, res){
+//   res.render('pages/lol/schedule', { user: req.user});
+// });
+//
+// app.get('/lol/FAQ', function(req, res){
+//   res.render('pages/lol/FAQ', { user: req.user});
+// });
+//
 app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
   res.render('pages/lol/thank-you-signup', { user: req.user});
 });
@@ -287,28 +329,28 @@ app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
 // app.get('/lol/blog/:slug', renderPost)
 
 //Auth0 login route
-app.get(loginRouteLol.logout.route, loginRouteLol.logout.handler);
-app.get(loginRouteLol.authReturn.route, passport.authenticate('auth0', { failureRedirect: '/lol' }), loginRouteLol.authReturn.handler);
-app.get(loginRouteLol.login.route, passport.authenticate('auth0', {
-    clientID: process.env.AUTH0_CLIENT_ID,
-    domain: process.env.AUTH0_DOMAIN,
-    redirectUri: returnURLLol,
-    audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
-    responseType: 'code',
-    scope: 'openid profile'}),
-    loginRouteLol.login.handler);
-
-//signup route
-app.get(signupRouteLol.signup.route, signupRouteLol.signup.handler);
-app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit.handler);
-
-//schedule route
-app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
-app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
-
-//contact route
-app.get(contactRouteLol.contact.route, contactRouteLol.contact.handler);
-app.post(contactRouteLol.submit.route, contactRouteLol.submit.handler);
+// app.get(loginRouteLol.logout.route, loginRouteLol.logout.handler);
+// app.get(loginRouteLol.authReturn.route, passport.authenticate('auth0', { failureRedirect: '/lol' }), loginRouteLol.authReturn.handler);
+// app.get(loginRouteLol.login.route, passport.authenticate('auth0', {
+//     clientID: process.env.AUTH0_CLIENT_ID,
+//     domain: process.env.AUTH0_DOMAIN,
+//     redirectUri: returnURLLol,
+//     audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
+//     responseType: 'code',
+//     scope: 'openid profile'}),
+//     loginRouteLol.login.handler);
+//
+// //signup route
+// app.get(signupRoute.signup.route, signupRoute.signup.handler);
+// app.post(signupRouteLol.submit.route, ensureAuthenticated, signupRouteLol.submit.handler);
+//
+// //schedule route
+// app.post(scheduleRouteLol.getAllSchedule.route, ensureAuthenticated, scheduleRouteLol.getAllSchedule.handler);
+// app.post(scheduleRouteLol.gameSignup.route, ensureAuthenticated, scheduleRouteLol.gameSignup.handler);
+//
+// //contact route
+// app.get(contactRouteLol.contact.route, contactRouteLol.contact.handler);
+// app.post(contactRouteLol.submit.route, contactRouteLol.submit.handler);
 
 app.get('/sitemap.xml', function(req, res){
   sitemap.generate(app);
