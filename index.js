@@ -219,28 +219,28 @@ app.get('/', function(req, res){
 });
 
 //login route
-app.get(loginRoute.authDiscord.route, passport.authenticate('discord'));
-app.get(loginRoute.authDiscordCallback.route, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
+app.get(loginRoute.authDiscord.route, ensureRealm, passport.authenticate('discord'));
+app.get(loginRoute.authDiscordCallback.route, ensureRealm, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
 app.get(loginRoute.logout.route, loginRoute.logout.handler);
 
 //signup route
-app.get(signupRoute.signup.route, signupRoute.signup.handler);
-app.post(signupRoute.submit.route, ensureAuthenticated, signupRoute.submit.handler);
-app.post(signupRoute.submitSkillLevel.route, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
+app.get(signupRoute.signup.route, ensureRealm, signupRoute.signup.handler);
+app.post(signupRoute.submit.route, ensureRealm, ensureAuthenticated, signupRoute.submit.handler);
+app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
 //schedule route
-app.post(scheduleRoute.getAllSchedule.route, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
-app.post(scheduleRoute.gameSignup.route, ensureAuthenticated, scheduleRoute.gameSignup.handler);
+app.post(scheduleRoute.getAllSchedule.route, ensureRealm, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
+app.post(scheduleRoute.gameSignup.route, ensureRealm, ensureAuthenticated, scheduleRoute.gameSignup.handler);
 
 //contact route
-app.get(contactRoute.contact.route, contactRoute.contact.handler);
-app.post(contactRoute.submit.route, contactRoute.submit.handler);
+app.get(contactRoute.contact.route, ensureRealm,  contactRoute.contact.handler);
+app.post(contactRoute.submit.route, ensureRealm, contactRoute.submit.handler);
 
 //profile route
-app.post(profileRoute.getFriends.route, profileRoute.getFriends.handler);
-app.post(profileRoute.acceptFriend.route, profileRoute.acceptFriend.handler);
-app.post(profileRoute.declineFriend.route, profileRoute.declineFriend.handler);
-app.post(profileRoute.sendFriendRequest.route, profileRoute.sendFriendRequest.handler);
+app.post(profileRoute.getFriends.route, ensureRealm, profileRoute.getFriends.handler);
+app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend.handler);
+app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
+app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
 
 //==========Dota Routes==========
 app.get('/dota', function(req, res) {
@@ -262,30 +262,30 @@ app.get('/dota', function(req, res) {
   }
 });
 
-app.get('/dota/about', function(req, res){
+app.get('/dota/about', ensureRealm, function(req, res){
   res.render('pages/dota/about', { user: req.user});
 });
 
-app.get('/dota/rules', function(req, res){
+app.get('/dota/rules', ensureRealm, function(req, res){
   res.render('pages/dota/rules', { user: req.user});
 });
 
-app.get('/dota/schedule', function(req, res){
+app.get('/dota/schedule', ensureRealm, function(req, res){
   res.render('pages/dota/schedule', { user: req.user});
 });
 
-app.get('/dota/FAQ', function(req, res){
+app.get('/dota/FAQ', ensureRealm, function(req, res){
   res.render('pages/dota/FAQ', { user: req.user});
 });
 
-app.get('/dota/thank-you-signup', ensureAuthenticated, function(req, res){
+app.get('/dota/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
   res.render('pages/dota/thank-you-signup', { user: req.user});
 });
 
 // //butter
-app.get('/dota/blog', renderHome)
-app.get('/dota/blog/p/:page', renderHome)
-app.get('/dota/blog/:slug', renderPost)
+app.get('/dota/blog', ensureRealm, renderHome)
+app.get('/dota/blog/p/:page', ensureRealm, renderHome)
+app.get('/dota/blog/:slug', ensureRealm, renderPost)
 
 //Steam login route
 // app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
@@ -315,23 +315,23 @@ app.get('/lol', function(req, res) {
   }
 });
 
-app.get('/lol/about', function(req, res){
+app.get('/lol/about', ensureRealm, function(req, res){
   res.render('pages/lol/about', { user: req.user});
 });
 
-app.get('/lol/rules', function(req, res){
+app.get('/lol/rules', ensureRealm, function(req, res){
   res.render('pages/lol/rules', { user: req.user});
 });
 
-app.get('/lol/schedule', function(req, res){
+app.get('/lol/schedule', ensureRealm, function(req, res){
   res.render('pages/lol/schedule', { user: req.user});
 });
 
-app.get('/lol/FAQ', function(req, res){
+app.get('/lol/FAQ', ensureRealm, function(req, res){
   res.render('pages/lol/FAQ', { user: req.user});
 });
 
-app.get('/lol/thank-you-signup', ensureAuthenticated, function(req, res){
+app.get('/lol/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
   res.render('pages/lol/thank-you-signup', { user: req.user});
 });
 
@@ -378,6 +378,19 @@ app.listen(app.get('port'), function() {
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
+}
+
+function ensureRealm(req, res, next) {
+  if(req.session.realm){ return next(); }
+  else if(req.originalUrl.includes("dota")){
+    res.redirect('/dota');
+  }
+  else if(req.originalUrl.includes("lol")){
+    res.redirect('/lol');
+  }
+  else{
+    res.redirect('/');
+  }
 }
 
 
