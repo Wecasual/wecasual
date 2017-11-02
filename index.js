@@ -383,13 +383,16 @@ function ensureAuthenticated(req, res, next) {
 function ensureRealm(req, res, next) {
   if(req.session.realm){ return next(); }
   else if(req.originalUrl.includes("dota")){
-    res.redirect('/dota');
+    req.session.realm = "dota";
+    return next();
   }
   else if(req.originalUrl.includes("lol")){
-    res.redirect('/lol');
+    req.session.realm = "lol";
+    return next();
   }
   else{
-    res.redirect('/');
+    req.session.realm = "dota";
+    return next();
   }
 }
 

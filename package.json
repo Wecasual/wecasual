@@ -1,6 +1,6 @@
 {
   "name": "Wecasual",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Wecasual site",
   "engines": {
     "node": "6.11.3"
