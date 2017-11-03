@@ -211,11 +211,12 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res){
-  if(req.user && (req.user['Discord Id'] == null)){
+  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
+  }else{
+    res.render('pages/landing', {user: req.user});
   }
-  res.render('pages/landing', {user: req.user});
 });
 
 //login route
@@ -225,6 +226,8 @@ app.get(loginRoute.logout.route, loginRoute.logout.handler);
 
 //signup route
 app.get(signupRoute.signup.route, ensureRealm, signupRoute.signup.handler);
+app.get(signupRoute.dotaSignup.route, ensureRealm, signupRoute.dotaSignup.handler);
+app.get(signupRoute.lolSignup.route, ensureRealm, signupRoute.lolSignup.handler);
 app.post(signupRoute.submit.route, ensureRealm, ensureAuthenticated, signupRoute.submit.handler);
 app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
@@ -243,22 +246,18 @@ app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFrie
 app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
 
 //==========Dota Routes==========
-app.get('/dota', function(req, res) {
-  req.session.realm = "dota";
+app.get('/dota', ensureRealm, function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
-  else if(req.user && req.user['Status'] != 'Not Registered' && !req.user['dota']) {
-    res.redirect('/signup');
+  else if((req.user && req.user['Status'] != 'Not Registered' && !req.user['dota']) || !req.user) {
+    res.redirect('/dota/signup');
   }
-  else if(req.user && req.user['Status'] != 'Not Registered'){
+  else{
     var message = req.session.message;
     req.session.message = null;
     res.render('pages/dota/home', { user: req.user, message: message});
-  }
-  else{
-    res.render('pages/dota/index', {user: req.user});
   }
 });
 
@@ -296,22 +295,18 @@ app.get('/dota/blog/:slug', ensureRealm, renderPost)
 
 
 //==========LoL Routes==========
-app.get('/lol', function(req, res) {
-  req.session.realm = "lol";
+app.get('/lol', ensureRealm, function(req, res) {
   if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
-  else if(req.user && req.user['Status'] != 'Not Registered' && !req.user['lol']) {
-    res.redirect('/signup');
+  else if((req.user && req.user['Status'] != 'Not Registered' && !req.user['lol']) || !req.user) {
+    res.redirect('/lol/signup');
   }
-  else if(req.user && req.user['Status'] != 'Not Registered'){
+  else{
     var message = req.session.message;
     req.session.message = null;
     res.render('pages/lol/home', { user: req.user, message: message});
-  }
-  else{
-    res.render('pages/lol/index', {user: req.user});
   }
 });
 
@@ -381,17 +376,19 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function ensureRealm(req, res, next) {
-  if(req.session.realm){ return next(); }
-  else if(req.originalUrl.includes("dota")){
+  // console.log(req.originalUrl);
+  if(req.originalUrl.includes("dota")){
     req.session.realm = "dota";
+    // console.log(req.session.realm);
     return next();
   }
   else if(req.originalUrl.includes("lol")){
     req.session.realm = "lol";
+    // console.log(req.session.realm);
     return next();
   }
   else{
-    req.session.realm = "dota";
+    // console.log("unknown");
     return next();
   }
 }
@@ -423,3 +420,15 @@ function renderPost(req, res) {
     })
   })
 }
+
+
+//Error handling
+//Handle 404
+app.use(function(req, res) {
+   res.send('404: Page not Found', 404);
+});
+
+// Handle 500
+app.use(function(error, req, res, next) {
+   res.send('500: Internal Server Error', 500);
+});
