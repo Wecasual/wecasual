@@ -215,7 +215,7 @@ app.get('/', function(req, res){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
-  res.render('pages/landing');
+  res.render('pages/landing', {user: req.user});
 });
 
 //login route
