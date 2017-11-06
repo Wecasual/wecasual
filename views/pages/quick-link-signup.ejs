@@ -1,0 +1,66 @@
+<% include ../partials/header.ejs %>
+<div class="container-fluid top-spacer">
+
+
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <span>
+        <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+      </span>
+      <span class="steam-name pl-2 align-bottom text-1.3em"><%= user['Username'] %></span>
+
+
+    </div>
+    <div class="col-lg-9">
+      <div class="tab-content" id="nav-tabContent">
+        <!-- HOME -->
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          <!-- GAME SIGNUP -->
+          <div class="card rounded">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <form id="game-signup" method="post" action="/schedule/gameSignup">
+                  <div class="form-group ">
+                    <div class="card-body pre-scrollable pre-scrollable-mini">
+                      <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th></th>
+                              <th>Game</th>
+                              <th>Time</th>
+                              <th>Team 1 Slots</th>
+                              <th>Team 2 Slots</th>
+                            </tr>
+                        </thead>
+                        <tbody id="game-list">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <h5>Select a Team</h5>
+                  <div class="form-group ">
+                    <div class="radio">
+                      <label><input type="radio" name="team" value="Team 1"> Team 1</label>
+                    </div>
+                    <div class="radio">
+                      <label><input id="team2" type="radio" name="team" value="Team 2"> Team 2</label>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <input type="submit" value="Sign up" class = "btn btn-secondary">
+                  </div>
+                </form>
+                <hr>
+                <ul>
+                  <li>If you sign up you MUST ATTEND.</li>
+                  <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> <!-- BIG COL -->
+  </div> <!--ROW-->
+</div> <!-- CONTAINER -->
+<script src="../../scripts/quickLink.js"></script>

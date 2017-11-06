@@ -43,9 +43,17 @@ function getAllSchedule(base, table, callback){
   });
 }
 
+function getSingleGame(base, table, id, callback){
+  base(table).find(id, function(err, record){
+    if (err) { callback && callback(err, null)}
+    else { callback && callback(null, record) }
+  });
+}
+
 module.exports = base => {
   return{
     gameSignup: gameSignup.bind(null, base),
-    getAllSchedule: getAllSchedule.bind(null, base)
+    getAllSchedule: getAllSchedule.bind(null, base),
+    getSingleGame: getSingleGame.bind(null, base)
   }
 }
