@@ -232,8 +232,11 @@ app.post(signupRoute.submit.route, ensureRealm, ensureAuthenticated, signupRoute
 app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
 //schedule route
+app.get(scheduleRoute.dotaQuickLink.route, ensureRealm, ensureAuthenticated, scheduleRoute.dotaQuickLink.handler);
+app.post(scheduleRoute.getSingleGame.route, ensureRealm, ensureAuthenticated, scheduleRoute.getSingleGame.handler);
 app.post(scheduleRoute.getAllSchedule.route, ensureRealm, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.gameSignup.route, ensureRealm, ensureAuthenticated, scheduleRoute.gameSignup.handler);
+
 
 //contact route
 app.get(contactRoute.contact.route, ensureRealm,  contactRoute.contact.handler);
@@ -372,12 +375,19 @@ app.listen(app.get('port'), function() {
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
+  res.redirect('/auth/discord');
 }
 
 function ensureRealm(req, res, next) {
   // console.log(req.originalUrl);
-  if(req.originalUrl.includes("dota")){
+  if(req.originalUrl.includes("dota/quickLink")){
+     var query = url.parse(req.url,true).query;
+     req.session.quickLinkId = query.id;
+     req.session.realm = "dota/quickLink";
+     // console.log(req.session.realm);
+     return next();
+  }
+  else if(req.originalUrl.includes("dota")){
     req.session.realm = "dota";
     // console.log(req.session.realm);
     return next();
@@ -424,11 +434,11 @@ function renderPost(req, res) {
 
 //Error handling
 //Handle 404
-app.use(function(req, res) {
-   res.send('404: Page not Found', 404);
-});
-
-// Handle 500
-app.use(function(error, req, res, next) {
-   res.send('500: Internal Server Error', 500);
-});
+// app.use(function(req, res) {
+//    res.send('404: Page not Found', 404);
+// });
+//
+// // Handle 500
+// app.use(function(error, req, res, next) {
+//    res.send('500: Internal Server Error', 500);
+// });
