@@ -129,8 +129,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
     if (message === "ping") {
         bot.sendMessage({
             to: channelID,
-            message: "Click here to signup for the game tonight!\
-            http://wecasual.gg/schedule/dota/quickLink?id=recbRMUSATNU2gnkg"
+            message: "@everyone Click here to signup for the game tonight! http://wecasual.gg/schedule/dota/quickLink?id=recbRMUSATNU2gnkg"
         });
     }
 });
