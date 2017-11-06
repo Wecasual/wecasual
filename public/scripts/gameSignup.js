@@ -21,14 +21,14 @@ $(document).ready(function(){
         res.data.other_games.forEach(function(ele){
           if(ele.fields['Pub Session']){
             $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + ele.id + '|' +
-            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '"></label></td><td>' +
+            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '|' + ele.fields['Quick Link Signups'] + '"></label></td><td>' +
             ele.fields.Game + '</td><td>' +
             ele.fields['Game Time'] + '</td><td>' +
             ele.fields['Team 1 Slots'] + '</td><td>' + ele.fields['Team 2 Slots'] + '</td></tr>');
           }
           else{
             $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '|' +
-            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '"></label></td><td>' +
+            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '|' + ele.fields['Quick Link Signups'] + '"></label></td><td>' +
             ele.fields.Game + '</td><td>' +
             ele.fields['Game Time'] + '</td><td>' +
             ele.fields['Team 1 Slots'] + '</td><td>' + ele.fields['Team 2 Slots'] + '</td></tr>');

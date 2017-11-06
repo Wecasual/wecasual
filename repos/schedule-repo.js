@@ -1,24 +1,8 @@
-function gameSignup(base, team, game_id, user_id, team1, team2, table, callback){
-  if(team == "Team 1"){
-    team1.unshift(user_id);
-    base(table).update(game_id, {
-      "Team 1": team1
-    }, function(err) {
-      if (err) { callback && callback(err, null)}
-      callback && callback(null, null);
-    });
-  }
-  else if(team == "Team 2"){
-    team2.unshift(user_id);
-    // console.log(team2);
-    base(table).update(game_id, {
-      "Team 2": team2
-    }, function(err) {
-      if (err) { callback && callback(err, null)}
-      callback && callback(null, null);
-    });
-  }
-
+function gameSignup(base, game_id, info, table, callback){
+  base(table).update(game_id, info, function(err) {
+    if (err) { callback && callback(err)}
+    else { callback && callback(null); }
+  });
 }
 
 function getAllSchedule(base, table, callback){
@@ -37,15 +21,21 @@ function getAllSchedule(base, table, callback){
 
   }, function done(err) {
     if (err) { callback && callback(err, null) }
-    else{
-      callback && callback(null, schedule);
-    }
+    else{ callback && callback(null, schedule); }
+  });
+}
+
+function getSingleGame(base, table, id, callback){
+  base(table).find(id, function(err, record){
+    if (err) { callback && callback(err, null)}
+    else { callback && callback(null, record) }
   });
 }
 
 module.exports = base => {
   return{
     gameSignup: gameSignup.bind(null, base),
-    getAllSchedule: getAllSchedule.bind(null, base)
+    getAllSchedule: getAllSchedule.bind(null, base),
+    getSingleGame: getSingleGame.bind(null, base)
   }
 }
