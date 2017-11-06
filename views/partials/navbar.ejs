@@ -1,22 +1,45 @@
 <!-- Header nav-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mr-0">
+
+  <% if(!realm){ %>
+    <a class="navbar-brand nav-link rounded mr-0 mt-1 px-1" href="/">
+      <span>
+        <img alt="Wecasual logo small" width="44" height="44" src="/images/Wecasual-Logo-regular-64x64.png">
+      </span>
+      <span class = "align-middle">Wecasual</span>
+    </a>
+  <%} else if(realm == 'dota'){ %>
+    <a class="navbar-brand nav-link rounded mr-0 mt-1 px-1" href="/">
+      <span>
+        <img alt="Wecasual logo dota small" width="44" height="44" src="/images/Wecasual-logo-dota-128x128.png">
+      </span>
+      <span class = "align-middle">Wecasual</span>
+    </a>
+
+<%  } else if(realm == 'lol') { %>
   <a class="navbar-brand nav-link rounded mr-0 mt-1 px-1" href="/">
     <span>
-      <img alt="Wecasual logo small" width="44" height="44" src="/images/Wecasual-Logo-regular-64x64.png">
+      <img alt="Wecasual logo lol small" width="44" height="44" src="/images/Wecasual-logo-lol-128x128.png">
     </span>
     <span class = "align-middle">Wecasual</span>
   </a>
+
+<%}%>
+
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+  <div class="ml-3 collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto mt-0">
 
 
       <li class="nav-item px-1">
         <a class="nav-link rounded" href="/about">About</a>
+      </li>
+      <li class="nav-item px-1">
+        <a class="nav-link rounded" href="/FAQ">FAQ</a>
       </li>
       <li class="nav-item px-1">
         <a class="nav-link rounded" href="/contact">Contact Us</a>
@@ -39,7 +62,7 @@
         </li>
       <% } else{ %>
         <li class="nav-item mt-0">
-          <a class="nav-link rounded" href="/dota" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link rounded" href="/dota">
             <img src="/images/Dota_2_Logo_only.png" alt= "Dota logo just icon" width="44" height="44" >
           </a>
         </li>
