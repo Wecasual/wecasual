@@ -9,6 +9,9 @@ body{
 .text-1.3em{
   font-size: 1.3em;
 }
+.text-2.5em{
+    font-size: 2.5em;
+}
 /*End general*/
 
 
@@ -420,6 +423,32 @@ a.active{
 
 /*Home page end*/
 
+
+/*Quick link signup*/
+
+.quick-link-bg{
+
+  background-image: url('/images/the-radiant.jpg');
+  margin-top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.quick-link-box{
+  border: 3px solid #ddd; /* Add a grey border */
+}
+
+.quick-link-title{
+  color: #fff;
+}
+
+.quick-link-container{
+  padding: 50px;
+  background-color: rgba(50, 50, 50, 0.5);
+}
+
+/*Quick link signup end*/
 
 
 /*Random*/
