@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var cookieSession = require('cookie-session')
 var passport = require('passport');
+var discordBot = require('discord.io');
 // var passportSteam = require('passport-steam');
 // var Auth0Strategy = require('passport-auth0');
 var passportDiscord = require('passport-discord');
@@ -114,8 +115,25 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 * 365// 1 day
 }))
 
-//Sitemap middleware
+//discord.io middleware
+var bot = new discordBot.Client({
+    token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
+    autorun: true
+});
 
+bot.on('ready', function() {
+    console.log('Logged in as %s - %s\n', bot.username, bot.id);
+});
+
+bot.on('message', function(user, userID, channelID, message, event) {
+    if (message === "ping") {
+        bot.sendMessage({
+            to: channelID,
+            message: "Click here to signup for the game tonight!\
+            http://wecasual.gg/schedule/dota/quickLink?id=recbRMUSATNU2gnkg"
+        });
+    }
+});
 
 
 //Body Parser Middleware
