@@ -3,8 +3,6 @@ $(document).ready(function(){
   var url = window.location.href;
   var id = url.split('=')[1];
   var domain = url.split('schedule')[0];
-  console.log(id);
-  console.log(domain);
   var table;
   var realm;
   if(pathname == "/schedule/dota/quickLink"){
@@ -26,14 +24,14 @@ $(document).ready(function(){
         game = res.data;
         if(game.fields['Pub Session']){
           $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '"></label></td><td>' +
+          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + (parseInt(game.fields['Quick Link Signups'])+1) + '"></label></td><td>' +
           game.fields.Game + '</td><td>' +
           game.fields['Game Time'] + '</td><td>' +
           game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
         }
         else{
           $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '"></label></td><td>' +
+          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + (parseInt(game.fields['Quick Link Signups'])+1) + '"></label></td><td>' +
           game.fields.Game + '</td><td>' +
           game.fields['Game Time'] + '</td><td>' +
           game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
