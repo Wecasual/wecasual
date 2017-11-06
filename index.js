@@ -215,7 +215,7 @@ app.get('/', function(req, res){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }else{
-    res.render('pages/landing', {user: req.user});
+    res.render('pages/landing', {user: req.user, realm: null});
   }
 });
 
@@ -260,12 +260,16 @@ app.get('/dota', ensureRealm, function(req, res) {
   else{
     var message = req.session.message;
     req.session.message = null;
-    res.render('pages/dota/home', { user: req.user, message: message});
+    res.render('pages/dota/home', { user: req.user, message: message, realm: req.session.realm});
   }
 });
 
-app.get('/dota/about', ensureRealm, function(req, res){
-  res.render('pages/dota/about', { user: req.user});
+app.get('/about', ensureRealm, function(req, res){
+  res.render('pages/about', { user: req.user, realm: req.session.realm});
+});
+
+app.get('/FAQ', ensureRealm, function(req, res){
+  res.render('pages/FAQ', { user: req.user, realm: req.session.realm});
 });
 
 app.get('/dota/rules', ensureRealm, function(req, res){
@@ -276,18 +280,18 @@ app.get('/dota/schedule', ensureRealm, function(req, res){
   res.render('pages/dota/schedule', { user: req.user});
 });
 
-app.get('/dota/FAQ', ensureRealm, function(req, res){
-  res.render('pages/dota/FAQ', { user: req.user});
-});
+// app.get('/dota/FAQ', ensureRealm, function(req, res){
+//   res.render('pages/dota/FAQ', { user: req.user});
+// });
 
 app.get('/dota/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
-  res.render('pages/dota/thank-you-signup', { user: req.user});
+  res.render('pages/dota/thank-you-signup', { user: req.user, realm: req.session.realm});
 });
 
 // //butter
-app.get('/dota/blog', ensureRealm, renderHome)
-app.get('/dota/blog/p/:page', ensureRealm, renderHome)
-app.get('/dota/blog/:slug', ensureRealm, renderPost)
+app.get('/blog', ensureRealm, renderHome)
+app.get('/blog/p/:page', ensureRealm, renderHome)
+app.get('/blog/:slug', ensureRealm, renderPost)
 
 //Steam login route
 // app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
@@ -309,13 +313,13 @@ app.get('/lol', ensureRealm, function(req, res) {
   else{
     var message = req.session.message;
     req.session.message = null;
-    res.render('pages/lol/home', { user: req.user, message: message});
+    res.render('pages/lol/home', { user: req.user, message: message, realm: req.session.realm});
   }
 });
 
-app.get('/lol/about', ensureRealm, function(req, res){
-  res.render('pages/lol/about', { user: req.user});
-});
+// app.get('/lol/about', ensureRealm, function(req, res){
+//   res.render('pages/lol/about', { user: req.user});
+// });
 
 app.get('/lol/rules', ensureRealm, function(req, res){
   res.render('pages/lol/rules', { user: req.user});
@@ -330,7 +334,7 @@ app.get('/lol/FAQ', ensureRealm, function(req, res){
 });
 
 app.get('/lol/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
-  res.render('pages/lol/thank-you-signup', { user: req.user});
+  res.render('pages/lol/thank-you-signup', { user: req.user, realm: req.session.realm});
 });
 
 // //butter
@@ -409,11 +413,12 @@ function renderHome(req, res) {
   var page = req.params.page || 1;
 
   butter.post.list({page_size: 10, page: page}).then(function(resp) {
-    res.render('pages/dota/blog', {
+    res.render('pages/blog', {
       user: req.user,
       posts: resp.data.data,
       next_page: resp.data.meta.next_page,
       previous_page: resp.data.meta.previous_page,
+      realm: req.session.realm
     })
   })
 }
@@ -422,11 +427,12 @@ function renderPost(req, res) {
   var slug = req.params.slug;
 
   butter.post.retrieve(slug).then(function(resp) {
-    res.render('pages/dota/post', {
+    res.render('pages/post', {
       user: req.user,
       title: resp.data.data.title,
       post: resp.data.data,
-      published: new Date(resp.data.data.published)
+      published: new Date(resp.data.data.published),
+      realm: req.session.realm
     })
   })
 }

@@ -1,6 +1,6 @@
 /*General*/
 .container{
-  color: #555;
+  /*color: #555;*/
 }
 body{
   background-color: #fafafa !important;
@@ -23,8 +23,8 @@ body{
 }
 
 .navbar{
-  background: rgba(85, 85, 85, 0);
 
+  background: rgba(85, 85, 85, 1);
   -webkit-transition: all 0.6s ease-out;
   -moz-transition: all 0.6s ease-out;
   -o-transition: all 0.6s ease-out;
@@ -38,7 +38,7 @@ body{
 
 
 .navbar.scrolled {
-      background: rgba(85, 85, 85, 1);
+      background: rgba(85, 85, 85, 0);
 }
 
 
@@ -156,29 +156,44 @@ body{
 
 /*Landing page*/
 
-.explain-words-container{
-  padding-top: 60px;
+.grey-container{
   background-color: #555555;
+  padding-top: 60px;
+  color: #fff;
+  padding-right: 0px;
+  padding-bottom: 60px;
+}
+.pink-container{
+  background-color: #ff9da2 ;
+  padding-top: 60px;
   color: #fff;
   padding-right: 0px;
   padding-bottom: 60px;
 }
 
 .explain-words{
-  background-color: #555555;
   color: #fff;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.explain-words-left{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.2em;
-  position: relative;
-  top: 15%;
+.explain-words-last{
+  color: #555;
 }
 
-.explain-words-right{
-  /*font-family: 'Raleway';*/
+
+
+.explain-words-text{
+  /*font-family: 'Montserrat', sans-serif;*/
   font-size: 1.7em;
+  position: relative;
+  top: 20%;
+}
+
+.explain-words-header{
+  /*font-family: 'Montserrat', sans-serif;*/
+  font-size: 1.5em;
 }
 
 .logo-pick-container{
@@ -193,6 +208,12 @@ body{
 
 .white-hr{
   border: 1px solid #fff;
+}
+
+.small-hr{
+  width:20%;
+  margin-right: auto;
+  margin-left: 0;
 }
 
 .scroll-words{
@@ -213,6 +234,10 @@ body{
   background-color: #fff
   background-size: cover;
   background: url(https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-512.png) no-repeat center;
+}
+
+.discord-widget{
+
 }
 
 
