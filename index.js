@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var cookieSession = require('cookie-session')
 var passport = require('passport');
-var discordBot = require('discord.io');
+var discordIo = require('discord.io');
 // var passportSteam = require('passport-steam');
 // var Auth0Strategy = require('passport-auth0');
 var passportDiscord = require('passport-discord');
@@ -112,32 +112,22 @@ app.use(cookieSession({
   name: 'session',
   keys: ['Aqua secret'],
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 * 365// 1 day
+  maxAge: 24 * 60 * 60 * 1000 * 365// 1 year
 }))
 
 //discord.io middleware
 var admins = ["148219528470462464", "148285628478390272"];
 
-var bot = new discordBot.Client({
+var bot = new discordIo.Client({
     token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
     autorun: true
 });
 
-bot.on('ready', function() {
-    console.log('Logged in as %s - %s\n', bot.username, bot.id);
-});
+var discordBot = require('./bots/discord-bot')(bot);
+discordBot.init(admins);
 
-bot.on('message', function(user, userID, channelID, message, event) {
-  if(admins.includes(userID)){
-    if (message.includes("~weeka")) {
-      var info = message.split(";")
-      bot.sendMessage({
-          to: channelID,
-          message: "@everyone Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! http://wecasual.gg/schedule/dota/quickLink?id=" + info[4]
-      });
-    }
-  }
-});
+
+
 
 
 //Body Parser Middleware
