@@ -74,6 +74,16 @@ var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "aut
 // var scheduleRouteLol = require('./lib/routes/lol/schedule-route')(scheduleRepoLol);
 // var contactRouteLol = require('./lib/routes/lol/contact-route')(contactRepoLol);
 
+var admins = ["148219528470462464", "148285628478390272"];
+
+var bot = new discordIo.Client({
+    token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
+    autorun: true
+});
+
+var discordBot = require('./bots/discord-bot')(bot);
+discordBot.init(admins);
+
 var profilesRepo = require('./repos/profiles-repo')(base);
 var scheduleRepo = require('./repos/schedule-repo')(base);
 var contactRepo = require('./repos/contact-repo')(base);
@@ -81,7 +91,7 @@ var contactRepo = require('./repos/contact-repo')(base);
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
-var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo);
+var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
 
@@ -114,21 +124,6 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 * 365// 1 year
 }))
-
-//discord.io middleware
-var admins = ["148219528470462464", "148285628478390272"];
-
-var bot = new discordIo.Client({
-    token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
-    autorun: true
-});
-
-var discordBot = require('./bots/discord-bot')(bot);
-discordBot.init(admins);
-
-
-
-
 
 //Body Parser Middleware
 app.use(bodyParser.json());
@@ -248,6 +243,7 @@ app.get(scheduleRoute.dotaQuickLink.route, ensureRealm, ensureAuthenticated, sch
 app.post(scheduleRoute.getSingleGame.route, ensureRealm, ensureAuthenticated, scheduleRoute.getSingleGame.handler);
 app.post(scheduleRoute.getAllSchedule.route, ensureRealm, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.gameSignup.route, ensureRealm, ensureAuthenticated, scheduleRoute.gameSignup.handler);
+app.post(scheduleRoute.scheduleGame.route, ensureRealm, ensureAuthenticated, scheduleRoute.scheduleGame.handler);
 
 
 //contact route
