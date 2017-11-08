@@ -187,7 +187,43 @@
                 </a>
                 <p class ="mb-0">Schedule your own game time</p>
                 <div class="collapse card-body" id="scheduleAGame">
-                  <iframe class="airtable-embed" src="https://airtable.com/embed/shroAUq2kjkzYJ2En?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+                  <form id="schedule-game" method="post" action="/schedule/scheduleGame">
+                    <h5>Game Type</h5>
+                    <label>Ex. Captains Mode, Pub Session, ARDM</label>
+                    <div class="form-group ">
+                      <input type="text" name="gameType" placeholder="Game type" id="gameType">
+                    </div>
+                    <br>
+                    <h5>Pub Session</h5>
+                    <div class="form-group ">
+                        <label><input type="checkbox" name="pubSession" id="pubSession"> Check if this is a pub session and you are only looking for a 5 stack</label>
+                    </div>
+                    <br>
+                    <h5>Date and Time</h5>
+                    <label>Please schedule times in EST to keep things consistent</label>
+                    <div class="form-group ">
+                      <input type="date" name="date" value="" id="date">
+                      <input type="time" name="time" value="21:00" id="time">
+                    </div>
+                    <br>
+                    <h5>Discord Room</h5>
+                    <label>Please select a room that isn't in use at the time you are scheduling the game for</label>
+                    <div class="form-group">
+                      <select name="discordRoom" id="discordRoom">
+                        <option value = "1" selected="selected">The Hoven</option>
+                        <option value = "2" >Icewrack</option>
+                        <option value = "3" >Knollen</option>
+                      </select>
+                    </div>
+                    <br>
+                    <h5>Announce on Discord</h5>
+                    <div class="form-group ">
+                        <label><input type="checkbox" name="announce" checked id="announce"> Uncheck if you don't want a signup link posted to the Discord</label>
+                    </div>
+                    <div class="form-group ">
+                      <input type="submit" value="Schedule Game" class = "btn btn-secondary">
+                    </div>
+                  </form>
                 </div>
               </li>
             </ul>
@@ -412,4 +448,5 @@
 </div> <!-- CONTAINER -->
 <script src="../../scripts/friends.js"></script>
 <script src="../../scripts/gameSignup.js"></script>
+<script src="../../scripts/scheduleGame.js"></script>
 <% include ../../partials/footer.ejs %>

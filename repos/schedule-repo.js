@@ -6,7 +6,12 @@ function gameSignup(base, game_id, info, table, callback){
 }
 
 function scheduleGame(base, info, table, callback){
-  
+  base(table).create(info, function(err, record) {
+    if (err) { callback && callback(err, null)}
+    else{
+      callback && callback(null, record);
+    }
+  });
 }
 
 function getAllSchedule(base, table, callback){
