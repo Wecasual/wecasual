@@ -5,6 +5,10 @@ function gameSignup(base, game_id, info, table, callback){
   });
 }
 
+function scheduleGame(base, info, table, callback){
+  
+}
+
 function getAllSchedule(base, table, callback){
   var schedule = new Array();
   base(table).select({
@@ -35,6 +39,7 @@ function getSingleGame(base, table, id, callback){
 module.exports = base => {
   return{
     gameSignup: gameSignup.bind(null, base),
+    scheduleGame: scheduleGame.bind(null, base),
     getAllSchedule: getAllSchedule.bind(null, base),
     getSingleGame: getSingleGame.bind(null, base)
   }
