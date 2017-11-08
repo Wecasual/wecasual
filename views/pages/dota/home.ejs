@@ -64,8 +64,8 @@
       <div class="card rounded my-3">
         <ul class="list-group list-group-flush mt-0">
           <li class="list-group-item p-0  text-center mt-0">
-            <a class="m-3 pink-btn btn btn-primary mb-2 join-league-btn" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-              <h5 class = "mb-0">How to Wecasual</h5>
+            <a class="m-3 pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+              <h5 class = "mb-0">How to Wecasual<span class="down-caret"></span></h5>
             </a>
 
             <div class="text-left collapse card-body pre-scrollable p-1" id="readBeforePlaying">
@@ -130,8 +130,8 @@
           <div class="card rounded">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                  <h4 class = "mb-0">Game Signup</h4>
+                <a class="pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                  <h4 class = "mb-0">Game Signup<span class="down-caret"></span></h4>
                 </a>
                 <p class ="mb-0">Sign up for an existing game, all members welcome!</p>
                 <div class="collapse card-body" id="gameSignup">
@@ -182,12 +182,48 @@
           <div class="card rounded mt-3">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 join-league-btn" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                  <h4 class = "mb-0">Schedule a Game</h4>
+                <a class="pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                  <h4 class = "mb-0">Schedule a Game<span class="down-caret"></span></h4>
                 </a>
                 <p class ="mb-0">Schedule your own game time</p>
                 <div class="collapse card-body" id="scheduleAGame">
-                  <iframe class="airtable-embed" src="https://airtable.com/embed/shroAUq2kjkzYJ2En?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+                  <form id="schedule-game" method="post" action="/schedule/scheduleGame">
+                    <h5>Game Type</h5>
+                    <label>Ex. Captains Mode, Pub Session, ARDM</label>
+                    <div class="form-group ">
+                      <input type="text" name="gameType" placeholder="Game type" id="gameType">
+                    </div>
+                    <br>
+                    <h5>Pub Session</h5>
+                    <div class="form-group ">
+                        <label><input type="checkbox" name="pubSession" id="pubSession"> Check if this is a pub session and you are only looking for a 5 stack</label>
+                    </div>
+                    <br>
+                    <h5>Date and Time</h5>
+                    <label>Please schedule times in EST to keep things consistent</label>
+                    <div class="form-group ">
+                      <input type="date" name="date" value="" id="date">
+                      <input type="time" name="time" value="21:00" id="time">
+                    </div>
+                    <br>
+                    <h5>Discord Room</h5>
+                    <label>Please select a room that isn't in use at the time you are scheduling the game for</label>
+                    <div class="form-group">
+                      <select name="discordRoom" id="discordRoom">
+                        <option value = "1" selected="selected">The Hoven</option>
+                        <option value = "2" >Icewrack</option>
+                        <option value = "3" >Knollen</option>
+                      </select>
+                    </div>
+                    <br>
+                    <h5>Announce on Discord</h5>
+                    <div class="form-group ">
+                        <label><input type="checkbox" name="announce" checked id="announce"> Uncheck if you don't want a signup link posted to the Discord</label>
+                    </div>
+                    <div class="form-group ">
+                      <input type="submit" value="Schedule Game" class = "btn btn-secondary">
+                    </div>
+                  </form>
                 </div>
               </li>
             </ul>
@@ -412,4 +448,6 @@
 </div> <!-- CONTAINER -->
 <script src="../../scripts/friends.js"></script>
 <script src="../../scripts/gameSignup.js"></script>
+<script src="../../scripts/scheduleGame.js"></script>
+<script src="../../scripts/dropDown.js"></script>
 <% include ../../partials/footer.ejs %>
