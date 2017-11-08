@@ -116,6 +116,8 @@ app.use(cookieSession({
 }))
 
 //discord.io middleware
+var admins = ["148219528470462464", "148285628478390272"];
+
 var bot = new discordBot.Client({
     token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
     autorun: true
@@ -126,12 +128,15 @@ bot.on('ready', function() {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-    if (message === "ping") {
-        bot.sendMessage({
-            to: channelID,
-            message: "@everyone Click here to signup for the game tonight! http://wecasual.gg/schedule/dota/quickLink?id=recbRMUSATNU2gnkg"
-        });
+  if(admins.includes(userID)){
+    if (message.includes("~weeka")) {
+      var info = message.split(";")
+      bot.sendMessage({
+          to: channelID,
+          message: "@everyone Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! http://wecasual.gg/schedule/dota/quickLink?id=" + info[4]
+      });
     }
+  }
 });
 
 
@@ -458,10 +463,10 @@ function renderPost(req, res) {
 //Error handling
 //Handle 404
 app.use(function(req, res) {
-   res.send('404: Page not Found', 404);
+  res.status(404).send('404: Page not Found');
 });
 
 // Handle 500
 app.use(function(error, req, res, next) {
-   res.send('500: Internal Server Error', 500);
+  res.status(500).send('500: Internal Server Error');
 });
