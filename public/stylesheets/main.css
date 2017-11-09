@@ -89,7 +89,7 @@ body{
   /*background-color: rgba(55, 55, 55, 0.5);*/
   margin:0px;
   position: relative;
-  top: 20%;
+  top: 15%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -101,7 +101,7 @@ body{
 .jumbotron-words-sub{
   margin:0px;
   position: relative;
-  top: 28%;
+  top: 25%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   text-shadow: #000 0 2px 2px;
@@ -111,7 +111,7 @@ body{
 .jumbotron-button{
   margin:0px;
   position: relative;
-  top: 25%;
+  top: 20%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: .8em;
