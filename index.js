@@ -77,7 +77,7 @@ var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "aut
 var admins = ["148219528470462464", "148285628478390272"];
 
 var bot = new discordIo.Client({
-    token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
+    token: process.env.BOT_TOKEN,
     autorun: true
 });
 

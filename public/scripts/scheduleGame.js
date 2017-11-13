@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var pathname = window.location.pathname;
   var table;
+  var username = $("#username").html();
   if(pathname == "/dota"){
     table = "Schedule-Dota";
   }
@@ -48,7 +49,8 @@ $(document).ready(function(){
         time: $('#time').val(),
         discordRoom: $('#discordRoom').find(":selected").text(),
         announce: $('#announce').is(":checked"),
-        table: table},
+        table: table,
+        username: username},
       success: function(res){
         if(!res.success){
           alert(res.error);
