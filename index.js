@@ -255,6 +255,11 @@ app.post(profileRoute.getFriends.route, ensureRealm, profileRoute.getFriends.han
 app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend.handler);
 app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
 app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
+app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
+
+app.get('/dota/players', ensureRealm, function(req, res){
+  res.render('pages/dota/players',  { user: req.user, realm: req.session.realm});
+});
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {
@@ -453,6 +458,6 @@ app.use(function(req, res) {
 });
 
 // Handle 500
-app.use(function(error, req, res, next) {
-  res.status(500).send('500: Internal Server Error');
-});
+// app.use(function(error, req, res, next) {
+//   res.status(500).send('500: Internal Server Error');
+// });

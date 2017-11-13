@@ -442,6 +442,17 @@ a.active{
 
 /*Home page end*/
 
+/*Players page*/
+.loading-ring {
+    display:    none;
+    position:   absolute;
+    height:     100%;
+    width:      100%;
+    background: url('http://i.stack.imgur.com/FhHRx.gif') no-repeat;
+}
+/*Player page end*/
+
+
 
 /*Quick link signup*/
 
