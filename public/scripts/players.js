@@ -1,5 +1,7 @@
 $(document).ready(function() {
   //Get all users
+  var users;
+  var userIds;
   var $loading = $('.loading-ring').hide();
   $(document)
     .ajaxStart(function () {
@@ -18,16 +20,20 @@ $(document).ready(function() {
         alert(res.error);
       }
       else if(res.success){
-        friendsList = res.data.friendsList;
-        friendRequests = res.data.friendRequests;
         users = res.data;
         users.forEach(function(ele){
-          $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '"">' + ele['Username'] + '</a></li>')
+          $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '" class="profile-btn">' + ele['Username'] + '</a></li>')
           userIds.push(ele['Id']);
         });
       }
     }
   });
+  $(document).on('click', '.profile-btn', function(){
+    var userInfo = users[userIds.indexOf(this.id)];
+    $('#user-info-div').empty(); //Remove any current info. Do for all divs
+    $('#user-info-div').append()//Append  user info to each div
+  });
+
 });
 
 function search() {

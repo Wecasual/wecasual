@@ -257,9 +257,7 @@ app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFrie
 app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
 app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
 
-app.get('/dota/players', ensureRealm, function(req, res){
-  res.render('pages/dota/players',  { user: req.user, realm: req.session.realm});
-});
+
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {
@@ -291,6 +289,14 @@ app.get('/dota/rules', ensureRealm, function(req, res){
 
 app.get('/dota/schedule', ensureRealm, function(req, res){
   res.render('pages/dota/schedule', { user: req.user});
+});
+
+app.get('/dota/players', ensureRealm, function(req, res){
+  res.render('pages/dota/players',  { user: req.user, realm: req.session.realm});
+});
+
+app.get('/dota/teams', ensureRealm, function(req, res){
+  res.render('pages/dota/teams',  { user: req.user, realm: req.session.realm});
 });
 
 // app.get('/dota/FAQ', ensureRealm, function(req, res){
