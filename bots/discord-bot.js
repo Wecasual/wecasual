@@ -9,7 +9,7 @@ function init(bot, admins){
         var info = message.split(";")
         bot.sendMessage({
             to: channelID,
-            message: "@everyone Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! <http://wecasual.gg/schedule/dota/quickLink?id=" + info[4] + ">"
+            message: "@here Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! <http://wecasual.gg/schedule/dota/quickLink?id=" + info[4] + ">"
         });
       }
     }
@@ -31,7 +31,7 @@ function init(bot, admins){
 function postQuickLink(bot, info){
   bot.sendMessage({
     to: process.env.SIGNUP_CHANNEL_ID,
-    message: "@everyone Click here to signup for " + info[0] + " on " + info[1] + ": <http://wecasual.gg/schedule/dota/quickLink?id=" + info[2] + ">"
+    message: "@here Click here to signup for " + info[0] + " on " + info[1] + ": <http://wecasual.gg/schedule/dota/quickLink?id=" + info[2] + ">"
   }, function(err){
     if(err){
       console.log(err);
