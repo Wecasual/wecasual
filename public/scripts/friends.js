@@ -7,6 +7,14 @@ $(document).ready(function() {
   var userId = $("#userid").html();
   var users;
   var userIds = new Array();
+  var $loading = $('.loading-ring').hide();
+  $(document)
+    .ajaxStart(function () {
+      $loading.show();
+    })
+    .ajaxStop(function () {
+      $loading.hide();
+    });
   $.ajax({
     type: 'POST',
     url: '/profile/getFriends',

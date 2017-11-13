@@ -31,7 +31,7 @@ function init(bot, admins){
 function postQuickLink(bot, info){
   bot.sendMessage({
     to: process.env.SIGNUP_CHANNEL_ID,
-    message: "@here Click here to signup for " + info[0] + " on " + info[1] + ": <http://wecasual.gg/schedule/dota/quickLink?id=" + info[2] + ">"
+    message: "@here Click here to signup for " + info[3] + "'s game: " + info[0] + " on " + info[1] + ": <http://wecasual.gg/schedule/dota/quickLink?id=" + info[2] + ">"
   }, function(err){
     if(err){
       console.log(err);

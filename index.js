@@ -77,7 +77,7 @@ var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "aut
 var admins = ["148219528470462464", "148285628478390272"];
 
 var bot = new discordIo.Client({
-    token: "Mzc1MDQyMTIyOTQxNzI2NzIx.DOJazQ.cpt92XOP9I-Nm0uL117vBHVkLds",
+    token: process.env.BOT_TOKEN,
     autorun: true
 });
 
@@ -221,7 +221,11 @@ app.get('/', function(req, res){
   if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
-  }else{
+  }
+  else if(req.user){
+    res.redirect('/dota');
+  }
+  else{
     res.render('pages/landing', {user: req.user, realm: null});
   }
 });
@@ -255,6 +259,9 @@ app.post(profileRoute.getFriends.route, ensureRealm, profileRoute.getFriends.han
 app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend.handler);
 app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
 app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
+app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
+
+
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {
@@ -286,6 +293,14 @@ app.get('/dota/rules', ensureRealm, function(req, res){
 
 app.get('/dota/schedule', ensureRealm, function(req, res){
   res.render('pages/dota/schedule', { user: req.user});
+});
+
+app.get('/dota/players', ensureRealm, function(req, res){
+  res.render('pages/dota/players',  { user: req.user, realm: req.session.realm});
+});
+
+app.get('/dota/teams', ensureRealm, function(req, res){
+  res.render('pages/dota/teams',  { user: req.user, realm: req.session.realm});
 });
 
 // app.get('/dota/FAQ', ensureRealm, function(req, res){
@@ -453,6 +468,6 @@ app.use(function(req, res) {
 });
 
 // Handle 500
-app.use(function(error, req, res, next) {
-  res.status(500).send('500: Internal Server Error');
-});
+// app.use(function(error, req, res, next) {
+//   res.status(500).send('500: Internal Server Error');
+// });

@@ -7,7 +7,11 @@
         Make gaming fun again
       </h1>
     </div>
-    <div class = "pt-4 pb-4 text-center jumbotron-button"><a class="btn btn-lg btn-primary join-league-btn" href="/signup" role="button">Sign Up For Free</a></div>
+    <% if (user) { %>
+      <div class = "pt-4 pb-4 text-center jumbotron-button"><a class="btn btn-lg btn-primary join-league-btn" href="/dota" role="button">Go to the home page</a></div>
+    <% } else { %>
+        <div class = "pt-4 pb-4 text-center jumbotron-button"><a class="btn btn-lg btn-primary join-league-btn" href="/signup" role="button">Sign Up For Free</a></div>
+    <% } %>
     <div class="row justify-content-md-center jumbotron-words-sub ">
         <h2 class ="col-md-6">A community for the casual esport player to play in organized and fun matches</h2>
     </div>
@@ -128,7 +132,12 @@
       </span>
       <h1 class="mt-3 display-5 text-center">eSports for Casual Players </h1>
     </div>
-    <div class = "pt-3 pb-4 text-center"><a  class="btn btn-lg btn-primary join-league-btn" href="/signup" role="button">Sign Up For Free</a></div>
+
+    <% if (user) { %>
+      <div class = "pt-3 pb-4 text-center"><a  class="btn btn-lg btn-primary join-league-btn" href="/dota" role="button">Go to the home page</a></div>
+    <% } else { %>
+      <div class = "pt-3 pb-4 text-center"><a  class="btn btn-lg btn-primary join-league-btn" href="/signup" role="button">Sign Up For Free</a></div>
+    <% } %>
 
 
     <h3 class = "text-center mt-4 mb-5">Want to know more? Check out our <a href="/FAQ" target="_blank"> FAQ</a></h1>

@@ -1,0 +1,46 @@
+<% include ../../partials/header.ejs %>
+<% include ../../partials/navbar.ejs %>
+
+<div class="container-fluid top-spacer">
+  <div class="card-header display-4 text-center">
+    Players (Under Construction)
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-4">
+      <h5 class="text-center my-1">
+        <b>Search for a player</b>
+      </h5>
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class ="mb-0">Click a player for more information</p>
+            <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
+            <div class="card-body pre-scrollable friend-search">
+              <div class="loading-ring"></div>
+              <ul id="user-list">
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body about-text" id="user-info">
+          <!-- Format divs for user info -->
+
+          <div id="username">
+
+          </div>
+          <div id="avatar">
+
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- BIG COL -->
+  </div> <!--ROW-->
+</div> <!-- CONTAINER -->
+<script src="../../scripts/players.js"></script>
+<% include ../../partials/footer.ejs %>
