@@ -221,7 +221,11 @@ app.get('/', function(req, res){
   if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
-  }else{
+  }
+  else if(req.user){
+    res.redirect('/dota');
+  }
+  else{
     res.render('pages/landing', {user: req.user, realm: null});
   }
 });
