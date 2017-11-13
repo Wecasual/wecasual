@@ -68,7 +68,9 @@ function getAllUsers(base, callback){
   }).eachPage(function page(records, fetchNextPage) {
       // This function (`page`) will get called for each page of records.
       records.forEach(function(ele){
-        users.push(ele.fields);
+        if(ele.fields['Status'] != "Not Registered"){
+          users.push(ele.fields);
+        }
       });
       // To fetch the next page of records, call `fetchNextPage`.
       // If there are more records, `page` will get called again.
