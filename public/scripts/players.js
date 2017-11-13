@@ -30,8 +30,10 @@ $(document).ready(function() {
   });
   $(document).on('click', '.profile-btn', function(){
     var userInfo = users[userIds.indexOf(this.id)];
-    $('#user-info-div').empty(); //Remove any current info. Do for all divs
-    $('#user-info-div').append()//Append  user info to each div
+    $('#username').empty(); //Remove any current info. Do for all divs
+    $('#avatar').empty();
+    $('#username').append(userInfo['Username'])
+    $('#avatar').append(userInfo['Avatar'])//Append  user info to each div
   });
 
 });
