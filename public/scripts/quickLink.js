@@ -24,14 +24,14 @@ $(document).ready(function(){
         game = res.data;
         if(game.fields['Pub Session']){
           $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + (parseInt(game.fields['Quick Link Signups'])+1) + '"></label></td><td>' +
+          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + "true" + '"></label></td><td>' +
           game.fields.Game + '</td><td>' +
           game.fields['Game Time'] + '</td><td>' +
           game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
         }
         else{
           $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + (parseInt(game.fields['Quick Link Signups'])+1) + '"></label></td><td>' +
+          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + "true" + '"></label></td><td>' +
           game.fields.Game + '</td><td>' +
           game.fields['Game Time'] + '</td><td>' +
           game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
