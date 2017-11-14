@@ -33,6 +33,7 @@ $(document).ready(function() {
     //Remove any current info. Do for all divs
     $('#avatar').empty();
     $('#username').empty();
+    $('#reg-date').empty();
     $('#premium').empty();
     $('#points').empty();
     $('#team').empty();
@@ -47,6 +48,8 @@ $(document).ready(function() {
       $('#avatar').append('<img height="128" width="128" class = "rounded-circle" src=' + userInfo['Avatar'] + ' alt="Avatar Image" />');
     }
     $('#username').append(userInfo['Username']);
+    var date = new Date(userInfo['Registration Date'])
+    $('#reg-date').append('Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
     if(userInfo['Premium']){
       $('#premium').append('<img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">\
       <h5><p><b>Active</b></p></h5>');
