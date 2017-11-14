@@ -260,6 +260,7 @@ app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend
 app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
 app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
 app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
+// app.post(profileRoute.updateUser.route, ensureAuthenticated, profileRoute.updateUser.handler);
 
 
 
@@ -278,7 +279,15 @@ app.get('/dota', ensureRealm, function(req, res) {
   else{
     var message = req.session.message;
     req.session.message = null;
-    res.render('pages/dota/home', { user: req.user, message: message, realm: req.session.realm});
+    profileRoute.updateUser(req, res, function(err){
+      if(err){
+        console.log(err);
+        res.redirect('500');
+      }
+      else{
+        res.render('pages/dota/home', { user: req.user, message: message, realm: req.session.realm});
+      }
+    });
   }
 });
 
