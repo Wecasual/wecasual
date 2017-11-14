@@ -1,7 +1,7 @@
 <!-- Header nav-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mr-0">
 
-  <% if(!realm){ %>
+  <!-- <% if(!realm){ %>
     <a class="navbar-brand nav-link rounded mr-0 mt-1 px-1" href="/">
       <span>
         <img alt="Wecasual logo small" width="44" height="44" src="/images/Wecasual-logo-regular-128x128.png">
@@ -24,8 +24,18 @@
     <span class = "align-middle">Wecasual</span>
   </a>
 
-<%}%>
+<%}%> -->
+  <a class="navbar-brand nav-link rounded mr-0 mt-1 px-1" href="/dota">
+    <% if(!user){ %>
+    <span>
+      <img alt="Wecasual logo small" width="44" height="44" src="/images/Wecasual-logo-regular-128x128.png">
+    </span>
 
+    <% } else{ %>
+      <span><img height="44" width="44" class = "rounded-circle mr-1" src='<%= user['Avatar'] %>' alt='Your Avatar Image' /></span>
+    <%} %>
+    <span class = "align-middle">Wecasual</span>
+  </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -34,7 +44,24 @@
   <div class="ml-3 collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto mt-0">
 
+      <!-- <li class="nav-item dropdown mt-0">
 
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="nav-link rounded" href="/dota">Home</a>
+            <a class="nav-link rounded" href="/dota/players">Players</a>
+            <a class="nav-link rounded" href="/dota/teams">Teams</a>
+            <a class="nav-link rounded" href="/dota/rules">Rules</a>
+        </div>
+      </li> -->
+      <li class="nav-item px-1">
+        <a class="nav-link rounded" href="/dota/players">Players</a>
+      </li>
+      <li class="nav-item px-1">
+        <a class="nav-link rounded" href="/dota/teams">Teams</a>
+      </li>
+      <li class="nav-item px-1">
+        <a class="nav-link rounded" href="/dota/rules">Rules</a>
+      </li>
       <li class="nav-item px-1">
         <a class="nav-link rounded" href="/about">About</a>
       </li>
@@ -42,11 +69,12 @@
         <a class="nav-link rounded" href="/FAQ">FAQ</a>
       </li>
       <li class="nav-item px-1">
-        <a class="nav-link rounded" href="/contact">Contact Us</a>
+        <a class="nav-link rounded" href="/contact">Contact</a>
       </li>
       <li class="nav-item px-1">
         <a class="nav-link rounded" href="/blog">Blog</a>
       </li>
+
     </ul>
 
     <ul class="navbar-nav ml-auto mt-0">
@@ -61,21 +89,21 @@
           </a>
         </li>
       <% } else{ %>
-        <li class="nav-item mt-0">
+        <!-- <li class="nav-item mt-0">
           <a class="nav-link rounded" href="/dota">
             <img src="/images/Dota_2_Logo_only.png" alt= "Dota logo just icon" width="44" height="44" >
           </a>
-        </li>
-        <li class="nav-item mt-1 mr-3">
+        </li> -->
+        <!-- <li class="nav-item mt-1 mr-3">
           <a class="nav-link rounded" href="/lol">
             <img src="/images/League-of-Legends-Logo-Transparent-Background.png" alt= "League of Legends logo small" width="96" height="40" >
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item align-middle">
           <a class="nav-link rounded px-1" href="/logout">
-            <span><img height="30" width="30" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' /></span>
-            <span class = "align-middle">Logout</span>
+
+            <span class = "align-middle">Logout 	&#10150;</span>
 
           </a>
         </li>

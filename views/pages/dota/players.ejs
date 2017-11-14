@@ -1,0 +1,101 @@
+<% include ../../partials/header.ejs %>
+<% include ../../partials/navbar.ejs %>
+
+<div class="container-fluid top-spacer">
+  <div class="card-header display-4 text-center">
+    Players
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-4">
+      <h5 class="text-center my-1">
+        <b>Search for a player</b>
+      </h5>
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class ="mb-0">Click a player for more information</p>
+            <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
+            <div class="card-body pre-scrollable friend-search">
+              <div class="loading-ring"></div>
+              <ul id="user-list">
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <div class="card rounded my-3">
+        <ul class="list-group list-group-flush mt-0">
+          <li class="list-group-item p-0  text-left mt-0">
+            <!-- AVATAR AND NAMES -->
+            <div class="m-3 text-center">
+              <!-- AVATAR -->
+              <span id="avatar"></span>
+              <h2>
+              <!-- USERNAME -->
+              <span class="align-bottom text-1.3em" id="username"></span>
+              </h2>
+              <h6>
+              <!-- REG DATE -->
+              <span class="align-bottom" id="reg-date"></span>
+              </h6>
+              <hr>
+            </div>
+            <!-- POINTS AND PREMIUM -->
+            <div class="row m-3 text-center">
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Premium</h5>
+                  <div id="premium">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Points</h5>
+                  <div id="points">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team -->
+            <div class="m-3">
+              <h5>Team:<span id="team"></span></h5>
+            </div>
+            <!-- Total Games -->
+            <div class="m-3">
+              <h5>Games played:<span id="games-played"></span></h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div> <!-- BIG COL -->
+    <div class="col-lg-4">
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Friends</h3>
+            <div class="card-body pre-scrollable">
+              <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                </thead>
+                <tbody id="friends-list">
+                </tbody>
+              </table>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> <!-- BIG COL -->
+  </div> <!--ROW-->
+</div> <!-- CONTAINER -->
+<script src="../../scripts/players.js"></script>
+<% include ../../partials/footer.ejs %>

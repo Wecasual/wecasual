@@ -69,6 +69,7 @@ function getAllUsers(base, callback){
       // This function (`page`) will get called for each page of records.
       records.forEach(function(ele){
         if(ele.fields['Status'] != "Not Registered"){
+          ele.fields['Email'] = null; //Remove email for security reasons
           users.push(ele.fields);
         }
       });

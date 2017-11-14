@@ -20,44 +20,115 @@
   </script>
 <%}%>
 <div style="display:none" id="userid"><%=user['Id']%></div>
+<div style="display:none" id="username"><%=user['Username']%></div>
 
 
 
 
-<div class="container-fluid top-spacer">
+<div class="container-fluid top-spacer-small">
   <h2 class = "text-center">
     <div class="row">
-      <div class="col-md-6 mb-2">
-        <span>
-          <img height="46" width="46" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
-        </span>
-        <span class="steam-name pl-2 align-bottom text-1.3em"><%= user['Username'] %></span>
 
+      <%if(!user['Premium']){%>
+      <a class="patreon-bg col-md-6 hvr-fade" href="https://www.patreon.com/wecasual" target="_blank">
+        <img class="rounded" alt="patreon-logo" width="128" height="64" src="/images/patreon-logo.png">
+        <span class = "explain-words align-middle">Get Wecasual Premium!</span>
+      </a>
+      <%}else{%>
+      <a class="patreon-bg col-md-6 hvr-fade" href="https://www.patreon.com/wecasual" target="_blank">
+        <img class="rounded" alt="patreon-logo" width="128" height="64" src="/images/patreon-logo.png">
+        <span class = "explain-words align-middle">You have Premium! &#10004; </span>
+      </a>
+      <%}%>
 
-      </div>
-      <div class="col-md-6">
-          <span>
-            <img class="rounded" alt="discord-image" width="46" height="46" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXCAMAAAC+ozSHAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAconae5DchJjfjZ/hlafjnq7mp7XosL3quMTswcvvytPx09rz3OH25On47fD69vj9////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAffUBjwAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAjCSURBVHhe7Z3tgqMoFER3NMaYxMS8/8PO+lGaUuFegtqBHs6f7TakrSMIKLrz39/fSfKKi+QVF/+0V/4nLE7IJaB7hSY1oKlpXmFadchmihf+RpggoxHR64Q/ECoFchqQvDJ8PVzsbVHwCl9LELN7hd4IBxB2hd0LXwwdpF1i9cLXgidD3gU2rzhaYQcCL7B54UsxgMRzLF4FvhMDiDzH4oWvREGOzDN+gZexwv4tr3Bn8SYQeobZC1+IBNNk6jd4mSoseQUMUjPJK2CQmkleAYPUTPIKGKRmklfAIDWTvAIGqZnkFTBIzSSvgEFqJnkFDFIzyStgkJpJXgGD1EzyChikZpJXwCA1k7w+5FRUVaU8ApJX1aXYYSUbqZkjvPLy9nh1PM7YYmEo9Xpcy20LU0jN7O51uj6HtPdSfWAnK+9D2c5tQ70hNbOvVz5KPS6OTyFlJSrt9XpefGsNqZk9vYp6CNjcVsc+K4iF8unWDN97vW5+zyEgNbOfV4mqenJVFW3vUUOXqeu2x5jKZeN32w98zJCa2curQHN6ltiQFdV9Smvhea9GjXKS9zBDamYfrxypRqvzdTprVOrL0GrHI9O2RsdzcwKpmV28quEEaXor6uRceV77AWFqjc2l+9UdpGZ28DrhQF/bw+whNdB0/XyGA9RW4kddI1Iz270uQ5ZHm6t492wePNoBb2zQr0YZ0mcgNbPZqxhyVNyp+dLc8vEwvV4f1BhSM5u9+gP8POVTE9rGrcjRrG/YgQNIzWz16qurPt36KLtQF/hj7hWG1MxWr666HjtaddyGk8y9wpCa2eh16hMchHOFITWz0WvnmppTYScqSM1s88qR4Bga13kH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">
-          </span>
-          <a class="align-middle discord-link-hp" href="https://discord.gg/xGKTNzv" target="_blank">
-            <span class="mr-3 align-bottom text-1.3em" >Join the Discord</span>
-          </a>
-      </div>
+      <%if(user['Status'] == 'Not in Discord'){%>
+      <a class="discord-bg col-md-6 hvr-fade hvr-fade-discord" href="https://discord.gg/xGKTNzv" target="_blank">
+        <img class="rounded" alt="patreon-logo" width="64" height="64" src="/images/discord-logo-white.png">
+        <span class = "explain-words align-middle">Join the Discord</span>
+      </a>
+      <%}else{%>
+      <a class="discord-bg col-md-6 hvr-fade hvr-fade-discord" href="https://discord.gg/xGKTNzv" target="_blank">
+        <img class="rounded" alt="patreon-logo" width="64" height="64" src="/images/discord-logo-white.png">
+        <span class = "explain-words align-middle">Joined the Discord &#10004; </span>
+      </a>
+      <%}%>
+
     </div>
   </h2>
-  <hr>
 
 
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-lg-3">
       <h5 class="text-center my-1">
-        <b>Pages</b>
+        <b>Home</b>
       </h5>
       <hr class = "my-1">
       <div class="list-group" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active text-center" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Play</a>
         <a class="list-group-item list-group-item-action text-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-        <a class="list-group-item list-group-item-action text-center" id="list-rules-list" data-toggle="list" href="#list-rules" role="tab" aria-controls="list">Rules</a>
+      </div>
+
+      <!-- PROFILE INFO -->
+      <div class="card rounded my-3">
+        <ul class="list-group list-group-flush mt-0">
+          <li class="list-group-item p-0  text-left mt-0">
+            <!-- AVATAR AND NAMES -->
+            <div class="m-3 text-center">
+              <img height="128" width="128" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+              <h2>
+                <span class="align-bottom text-1.3em"><%= user['Username'] %></span>
+              </h2>
+              <hr>
+            </div>
+
+            <!-- POINTS AND PREMIUM -->
+            <div class="row m-3 text-center">
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Premium </h5>
+                  <%if(!user['Premium']){%>
+                    <img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">
+                    <h5><p><b>Not Active</b></p></h5>
+                  <%}else{%>
+                    <img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">
+                    <h5><p><b>Active</b></p></h5>
+                  <%}%>
+
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Points</h5>
+
+                  <%if(!user['Premium']){%>
+                    <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-small.png">
+                    <h5><b>N/A</b></h5>
+                  <%}else{%>
+                    <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">
+                    <h5><b><%= user['Wecasual Points'] %></b></h5>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team -->
+            <div class="m-3">
+              <h5>Team:
+                <%if(user['Team']){%>
+                <a href="/dota/teams"><b><%= user['Team Name'] %></b></a>
+                <%}else{%>
+                  <b>No team</b>
+                <%}%>
+              </h5>
+            </div>
+            <!-- Total Games -->
+            <div class="m-3">
+              <h5>Games played: <b><%= user['Total Games'] %></b></h5>
+            </div>
+
+          </li>
+        </ul>
       </div>
 
       <!-- PLAYING GUIDE -->
@@ -118,6 +189,7 @@
         </ul>
       </div> -->
       <!-- END TOURNAMENT -->
+
     </div>
 
 
@@ -326,10 +398,9 @@
               <li class="list-group-item">
                 <h3>Add a friend</h3>
                 <p class ="mb-0">Click to send a friend request</p>
+                <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
                 <div class="card-body pre-scrollable friend-search">
-
-                  <input type="text" id="user-search" onkeyup="search()" placeholder="Search for names..">
-
+                  <div class="loading-ring"></div>
                   <ul id="user-list">
                   </ul>
                 </div>
@@ -342,105 +413,7 @@
         </div><!-- END PROFILE -->
         <!-- RULES -->
         <div class="tab-pane fade" id="list-rules" role="tabpanel" aria-labelledby="list-rules-list">
-          <div class="card rounded mt-3">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <h3 class = "mb-0">Rules </h3>
-                <i>Version 07-Nov-2017</i>
 
-                <div class="card-body pt-0">
-                  <div class=" pre-scrollable">
-                    <hr>
-                    <h4 class="card-title text-center">Condensed version</h4>
-                    <ul class="card-text pl-3">
-                      <li>Be nice</li>
-                      <li>Show up to games you sign up for!</li>
-                      <li>Join and use the Discord</li>
-                      <li>Report any violations or bad behaviour to the Wecasual team<</li>
-                      <li>Failing to abide by the rules can result in the removal of Wecasual</li>
-                      <li>If you have questions or concerns email: <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></span><span >&nbsp;or dm Robert on discord</li>
-                    </ul>
-                    <hr>
-                    <h4 class="card-title text-center">Full version</h4>
-                    <p>Wecasual has a mission to ELIMINATE ALL TOXIC BEHAVIOUR
-                      FROM ESPORT GAMES THROUGH ORGANIZED, FRIENDLY, AND WELCOMING PLAY. The following rules are designed to allow Wecasual to maintain a positive, and welcoming community. </p>
-
-                    <h4 class="card-title mt-2">Registration Rules</h4>
-                    <ul class="card-text pl-3">
-                      <li>To participate in Wecasual players must be under 4000 solo MMR</li>
-                      <ul>
-                        <li>Exceptions will be made on a case-by-case basis, contact <a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a></li>
-                        <li>MMR must be publicly visible on your Dota 2 account in-client and on Dotabuff/OpenDota</li>
-                        <li>Party MMR will not be taken into account</li>
-                        <li>If you are not calibrated you can’t be playing in very high skill games (Dotabuff and OpenDota will be referenced)</li>
-                      </ul>
-                      <li>Each player may only register one account with Wecasual</li>
-                      <li>Players are not allowed to share accounts with any other players</li>
-                      <li>There is no registration cut off date</li>
-                    </ul>
-                    <h4 class="card-title mt-2">Player Rules</h4>
-                    <ul class="card-text pl-3">
-                      <li>While in Wecasual players must stay below the MMR cap (Exceptions will be made on a case-by-case basis)</li>
-                      <li>Wecasual reserves the right to remove a player from the community due to skill level disparity</li>
-                      <ul>
-                        <li>This manner of player removal is for play balancing reasons</li>
-                      </ul>
-                    </ul>
-                    <h4 class="card-title mt-2">Conduct</h4>
-                    <ul class="card-text pl-3">
-                      <li>All community members must act in a respectful manner while in the Wecasul community</li>
-                      <ul>
-                        <li>This includes on the Wecasual Discord, Wecasual Website, and any Wecasual games</li>
-                      </ul>
-                      <li>No verbal attacks or rude remarks to any other person</li>
-                      <li>No harassment of any Wecasual community members</li>
-                      <li>No spam</li>
-                      <li>No sharing or posting of offensive or NSFW content anywhere in the Wecasual community space</li>
-                    </ul>
-                    <h4 class="card-title mt-2">League Rules</h4>
-                    <ul class="card-text pl-3">
-                      <li>The league is continuous and there are no playoffs or end to a ‘season’</li>
-                      <li>Games are best of 1 (Unless otherwise specified)</li>
-                      <li>Lobbies will be hosted by Wecasual or official lobby hosters</li>
-                      <li>If you are unable to attend a game you signed up for please contact a Wecasual team member</li>
-                      <li>You must give at least 48 hours notice of your absence, continued late notice will result in disciplinary action</li>
-                      <li>Any game with insufficient sign ups 24 hours before game time will be cancelled</li>
-                    </ul>
-                    <h4 class="card-title mt-2">Lobbies and In-Game Rules</h4>
-                    <ul class="card-text pl-3">
-                      <li>All players should be in lobby 5 minutes prior to the official start time</li>
-                      <li>Pauses are permitted for any reasonable issues</li>
-                      <ul>
-                        <li>This includes: lag and packet loss, a disconnect, urgent bathroom break, someone at the door, etc. Please use your best judgement when it comes to pauses</li>
-                        <li>If there is an issue with pausing in-game contact a Wecasual team member via email or on Discord</li>
-                      </ul>
-                      <li>No all chat of any variations of “gg” outside of forfeiting the match</li>
-                      <ul>
-                        <li>Any accidental all chat of “gg” without the intention of forfeiting should be immediately followed by all chat informing the opposing team that they will not be forfeiting</li>
-                        <li>Any fake “gg” calls with be result in a warning and then a forfeit</li>
-                      </ul>
-                      <li>Positive and friendly all chat is permitted</li>
-                      <li>Any negative (even with playful or good intentions) will not be permitted</li>
-                      <li>All players must use voice chat in the Wecasual Discord to communicate with their team</li>
-                    </ul>
-                    <h4 class="card-title mt-2">Reporting</h4>
-                    <ul class="card-text pl-3">
-                      <li>Players may report any violations of the Wecasual rules</li>
-                      <li>All and any reports can be sent to<a href="mailto:robert@wecasual.gg">robert@wecasual.gg</a> or to Robert on Discord</li>
-                      <li>Please include the match ID, team names, and player names of those involved</li>
-                      <li>It is recommended to include other evidence such as screenshots or recordings as well as having consensus among the players in the match that the rules were broken</li>
-                    </ul>
-                    <h4 class="card-title mt-2">Disciplinary Actions </h4>
-                    <ul class="card-text pl-3">
-                      <li>The first two violations of the rules will result in warnings</li>
-                      <li>The third violation of the rules will result in a removal from Wecasual</li>
-                      <li>Any Wecasual team member reserves the right to remove any player from the league with no prior warnings under extreme circumstances</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
         </div><!-- END RULES -->
       </div>
     </div> <!-- BIG COL -->
@@ -449,5 +422,4 @@
 <script src="../../scripts/friends.js"></script>
 <script src="../../scripts/gameSignup.js"></script>
 <script src="../../scripts/scheduleGame.js"></script>
-<script src="../../scripts/dropDown.js"></script>
 <% include ../../partials/footer.ejs %>
