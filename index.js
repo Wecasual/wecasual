@@ -265,7 +265,10 @@ app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.h
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {
-  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
+  if(!req.user){
+    res.redirect('/');
+  }
+  else if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
@@ -288,7 +291,7 @@ app.get('/FAQ', ensureRealm, function(req, res){
 });
 
 app.get('/dota/rules', ensureRealm, function(req, res){
-  res.render('pages/dota/rules', { user: req.user});
+  res.render('pages/dota/rules', { user: req.user, realm: req.session.realm});
 });
 
 app.get('/dota/schedule', ensureRealm, function(req, res){
