@@ -74,11 +74,11 @@
           <li class="list-group-item p-0  text-left mt-0">
             <!-- AVATAR AND NAMES -->
             <div class="m-3 text-center">
-              <img height="128" width="128" class = "rounded" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
-              <hr>
+              <img height="128" width="128" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
               <h2>
-                <span class="pl-2 align-bottom text-1.3em"><%= user['Username'] %></span>
+                <span class="align-bottom text-1.3em"><%= user['Username'] %></span>
               </h2>
+              <hr>
             </div>
 
             <!-- POINTS AND PREMIUM -->
@@ -98,7 +98,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="">
+                <div class="p-1">
                   <h5>Wecasual Points</h5>
 
                   <%if(!user['Premium']){%>
