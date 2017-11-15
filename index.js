@@ -406,6 +406,13 @@ app.get('/sitemap.xml', function(req, res){
   sitemap.XMLtoWeb(res);
 });
 
+app.get('/error', function(req, res){
+  res.render('pages/error', {errorMessage: "An unexpected error occured!"});
+})
+
+app.get('/maintenance', function(req, res){
+  res.render('pages/maintenance');
+})
 
 
 app.listen(app.get('port'), function() {

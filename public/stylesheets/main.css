@@ -116,12 +116,14 @@ body{
 
 .jumbotron-words-sub{
   margin:0px;
+  padding: 10px;
   position: relative;
   top: 25%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   text-shadow: #000 0 2px 2px;
   font-size: 2.0em;
+  background-color: rgba(85, 85, 85, 0.3)
 }
 
 .jumbotron-button{
@@ -208,7 +210,7 @@ body{
 
 .explain-words-text{
   /*font-family: 'Montserrat', sans-serif;*/
-  font-size: 1.7em;
+  font-size: 1.5em;
   position: relative;
   top: 20%;
 }
