@@ -1,33 +1,52 @@
-function userLogin(base, profile, callback){
-  getUser(base, profile.id, function(err, record){
-    if (err) { callback && callback(err, null)}
-    else{
-      if(!record){
-        createUser(base, profile, function(err, new_record){
-          if (err) { callback && callback(err, null)}
-          else{
-            // console.log(user);
-            new_record.fields['Id'] = new_record.id;
-            callback && callback(null, new_record.fields);
-          }
-        });
-      }
-      else{
-        // console.log(record);
-        updateUser(base, {"Username": profile.username, "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png", "Id": record.id}, record.id, function(err, new_record_fields){
-          if (err) { callback && callback(err, null)}
-          else{
-            callback && callback(null, new_record_fields);
-          }
-        });
-      }
+function userLogin(pool, profile, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
     }
-  })
+    else{
+      var queryString = 'INSERT INTO "Player" ("Username", "DiscordID", "Avatar") VALUES ($1, $2, $3) ON CONFLICT ("DiscordID") DO UPDATE SET ("Username", "Avatar") = ($1, $3) RETURNING *';
+      var values = [profile.username, profile.id, 'https://cdn.discordapp.com/avatars/' + profile.id + '/' + profile.avatar + '.png'];
+      // console.log(queryString);
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          callback && callback(null, result.rows[0]);
+        }
+      });
+    }
+  });
+  // getUser(pool, profile.id, function(err, record){
+  //   if (err) { callback && callback(err, null)}
+  //   else{
+  //     if(!record){
+  //       createUser(pool, profile, function(err, new_record){
+  //         if (err) { callback && callback(err, null)}
+  //         else{
+  //           // console.log(user);
+  //           new_record.fields['Id'] = new_record.id;
+  //           callback && callback(null, new_record.fields);
+  //         }
+  //       });
+  //     }
+  //     else{
+  //       // console.log(record);
+  //       updateUser(pool, {"Username": profile.username, "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png", "Id": record.id}, record.id, function(err, new_record_fields){
+  //         if (err) { callback && callback(err, null)}
+  //         else{
+  //           callback && callback(null, new_record_fields);
+  //         }
+  //       });
+  //     }
+  //   }
+  // })
 }
 
-function getUser(base, id, callback){
+function getUser(pool, id, callback){
   var found = false;
-  base('Users').select({
+  pool('Users').select({
       // Selecting the first 3 records in Value by Stage:
       view: "Grid View"
   }).eachPage(function page(records, fetchNextPage) {
@@ -51,8 +70,8 @@ function getUser(base, id, callback){
   });
 }
 
-function getUserByRowId(base, id, callback){
-  base('Users').find(id, function(err, record) {
+function getUserByRowId(pool, id, callback){
+  pool('Users').find(id, function(err, record) {
     if (err) { callback && callback(err, null)}
     else{
       callback && callback(null, record.fields);
@@ -60,9 +79,9 @@ function getUserByRowId(base, id, callback){
   });
 }
 
-function getAllUsers(base, callback){
+function getAllUsers(pool, callback){
   var users = new Array();
-  base('Users').select({
+  pool('Users').select({
       // Selecting the first 3 records in Value by Stage:
       view: "Grid View"
   }).eachPage(function page(records, fetchNextPage) {
@@ -84,8 +103,8 @@ function getAllUsers(base, callback){
   });
 }
 
-function createUser(base, profile, callback){
-  base('Users').create({
+function createUser(pool, profile, callback){
+  pool('Users').create({
   "Username": profile.username,
   "Discord Id": profile.id,
   "Status": "Not Registered",
@@ -99,8 +118,8 @@ function createUser(base, profile, callback){
   });
 }
 
-function updateUser(base, info, id, callback){
-  base('Users').update(id, info, function(err, record) {
+function updateUser(pool, info, id, callback){
+  pool('Users').update(id, info, function(err, record) {
     if (err) { callback && callback(err, null)}
     else{
       callback && callback(null, record.fields);
@@ -110,14 +129,14 @@ function updateUser(base, info, id, callback){
 
 
 
-module.exports = base => {
+module.exports = pool => {
   return {
-    userLogin: userLogin.bind(null, base),
-    updateUser: updateUser.bind(null, base),
-    getUser: getUser.bind(null, base),
-    getUserByRowId: getUserByRowId.bind(null, base),
-    getAllUsers: getAllUsers.bind(null, base)
-    // getUser: getUser.bind(null, base)
+    userLogin: userLogin.bind(null, pool),
+    updateUser: updateUser.bind(null, pool),
+    getUser: getUser.bind(null, pool),
+    getUserByRowId: getUserByRowId.bind(null, pool),
+    getAllUsers: getAllUsers.bind(null, pool)
+    // getUser: getUser.bind(null, pool)
     // getAllUsers: getAllUsers.bind(null, pool)
   }
 }

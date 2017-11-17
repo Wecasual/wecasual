@@ -13,7 +13,7 @@ var passportDiscord = require('passport-discord');
 var url = require('url');
 var Airtable = require('airtable');
 var sitemap = require('express-sitemap')({url: 'wecasual.gg'});
-
+var pg = require('pg');
 
 
 // var pg = require('pg');
@@ -39,19 +39,19 @@ var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ct
 // var returnURLLol = (process.env.SITE_URL || 'http://localhost:5000/') + "auth0/return";
 
 var returnURLDiscord = (process.env.SITE_URL || 'http://localhost:5000/') + "auth/discord/callback";
-// const pgParams = url.parse(process.env.DATABASE_URL);
-// const pgAuth = pgParams.auth.split(':');
-// const config = {
-//   user: pgAuth[0],
-//   password: pgAuth[1],
-//   host: pgParams.hostname,
-//   port: pgParams.port,
-//   database: pgParams.pathname.split('/')[1],
-//   ssl: true
-// };
 
 //Postgres
-// var pool = new pg.Pool(config);
+const pgParams = url.parse(process.env.DATABASE_URL);
+const pgAuth = pgParams.auth.split(':');
+const config = {
+  user: pgAuth[0],
+  password: pgAuth[1],
+  host: pgParams.hostname,
+  port: pgParams.port,
+  database: pgParams.pathname.split('/')[1],
+  ssl: true
+};
+var pool = new pg.Pool(config);
 
 //Dota routes
 // var profilesRepoDota = require('./repos/dota/profiles-repo')(baseDota);
@@ -84,7 +84,7 @@ var bot = new discordIo.Client({
 var discordBot = require('./bots/discord-bot')(bot);
 discordBot.init(admins);
 
-var profilesRepo = require('./repos/profiles-repo')(base);
+var profilesRepo = require('./repos/profiles-repo')(pool);
 var scheduleRepo = require('./repos/schedule-repo')(base);
 var contactRepo = require('./repos/contact-repo')(base);
 
@@ -218,7 +218,7 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res){
-  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
+  if(req.user && req.user['Status'] == 'Not Registered'){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
@@ -269,7 +269,7 @@ app.get('/dota', ensureRealm, function(req, res) {
   if(!req.user){
     res.redirect('/');
   }
-  else if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
+  else if(req.user && req.user['Status'] == 'Not Registered'){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
@@ -337,40 +337,40 @@ app.get('/blog/:slug', ensureRealm, renderPost)
 
 
 //==========LoL Routes==========
-app.get('/lol', ensureRealm, function(req, res) {
-  if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
-    // console.log(req.user['Status']);
-    res.redirect('/logout');
-  }
-  else if((req.user && req.user['Status'] != 'Not Registered' && !req.user['lol']) || !req.user) {
-    res.redirect('/lol/signup');
-  }
-  else{
-    var message = req.session.message;
-    req.session.message = null;
-    res.render('pages/lol/home', { user: req.user, message: message, realm: req.session.realm});
-  }
-});
-
-// app.get('/lol/about', ensureRealm, function(req, res){
-//   res.render('pages/lol/about', { user: req.user});
+// app.get('/lol', ensureRealm, function(req, res) {
+//   if(req.user && (req.user['Status'] == 'Not Registered' || req.user['Discord Id'] == null)){
+//     // console.log(req.user['Status']);
+//     res.redirect('/logout');
+//   }
+//   else if((req.user && req.user['Status'] != 'Not Registered' && !req.user['lol']) || !req.user) {
+//     res.redirect('/lol/signup');
+//   }
+//   else{
+//     var message = req.session.message;
+//     req.session.message = null;
+//     res.render('pages/lol/home', { user: req.user, message: message, realm: req.session.realm});
+//   }
 // });
-
-app.get('/lol/rules', ensureRealm, function(req, res){
-  res.render('pages/lol/rules', { user: req.user});
-});
-
-app.get('/lol/schedule', ensureRealm, function(req, res){
-  res.render('pages/lol/schedule', { user: req.user});
-});
-
-app.get('/lol/FAQ', ensureRealm, function(req, res){
-  res.render('pages/lol/FAQ', { user: req.user});
-});
-
-app.get('/lol/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
-  res.render('pages/lol/thank-you-signup', { user: req.user, realm: req.session.realm});
-});
+//
+// // app.get('/lol/about', ensureRealm, function(req, res){
+// //   res.render('pages/lol/about', { user: req.user});
+// // });
+//
+// app.get('/lol/rules', ensureRealm, function(req, res){
+//   res.render('pages/lol/rules', { user: req.user});
+// });
+//
+// app.get('/lol/schedule', ensureRealm, function(req, res){
+//   res.render('pages/lol/schedule', { user: req.user});
+// });
+//
+// app.get('/lol/FAQ', ensureRealm, function(req, res){
+//   res.render('pages/lol/FAQ', { user: req.user});
+// });
+//
+// app.get('/lol/thank-you-signup', ensureRealm, ensureAuthenticated, function(req, res){
+//   res.render('pages/lol/thank-you-signup', { user: req.user, realm: req.session.realm});
+// });
 
 // //butter
 // app.get('/lol/blog', renderHome)
