@@ -1,37 +1,36 @@
 $(document).ready(function(){
-  var pathname = window.location.pathname;
-  var table;
-  if(pathname == "/dota"){
-    table = "Schedule-Dota";
-  }
-  else if(pathname == "/lol"){
-    table = "Schedule-LoL";
-  }
+  // var pathname = window.location.pathname;
+  // var table;
+  // if(pathname == "/dota"){
+  //   table = "Schedule-Dota";
+  // }
+  // else if(pathname == "/lol"){
+  //   table = "Schedule-LoL";
+  // }
   $.ajax({
     type: 'POST',
     url: '/schedule/getAllSchedule',
-    data: JSON.stringify({table: table}),
     contentType: 'application/json',
     success: function(res){
       if(!res.success){
         alert(res.error);
       }
       else if(res.success){
-        // console.log(res.data);
-        res.data.other_games.forEach(function(ele){
-          if(ele.fields['Pub Session']){
-            $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + ele.id + '|' +
-            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '|' + "false" + '"></label></td><td>' +
-            ele.fields.Game + '</td><td>' +
-            ele.fields['Game Time'] + '</td><td>' +
-            ele.fields['Team 1 Slots'] + '</td><td>' + ele.fields['Team 2 Slots'] + '</td></tr>');
+        console.log(res.data);
+        res.data.otherGames.forEach(function(game){
+          if(game.pubsession){
+            $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.gameid + '|' +
+            game.team1 + '|' + game.team2 + '|' + "false" + '"></label></td><td>' +
+            game.name + '</td><td>' +
+            game.gametime + '</td><td>' +
+            game.team1Slots + '</td><td>' + game.team2Slots + '</td></tr>');
           }
           else{
-            $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + ele.id + '|' +
-            ele.fields['Team 1'] + '|' + ele.fields['Team 2'] + '|' + table + '|' + "false" + '"></label></td><td>' +
-            ele.fields.Game + '</td><td>' +
-            ele.fields['Game Time'] + '</td><td>' +
-            ele.fields['Team 1 Slots'] + '</td><td>' + ele.fields['Team 2 Slots'] + '</td></tr>');
+            $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.gameid + '|' +
+            game.team1 + '|' + game.team2 + '|' + "false" + '"></label></td><td>' +
+            game.name + '</td><td>' +
+            game.gametime + '</td><td>' +
+            game.team1Slots + '</td><td>N/A</td></tr>');
           }
 
         });
@@ -58,23 +57,23 @@ $(document).ready(function(){
             }
           }
         });
-        res.data.my_games.forEach(function(ele){
+        res.data.myGames.forEach(function(game){
           var team;
-          if(ele.fields['Team 1']){
-            if(ele.fields['Team 1'].includes(res.data.user_id)){
+          if(game.team1){
+            if(game.team1.includes(res.data.playerid)){
               team = 'Team 1';
             }
           }
-          if(ele.fields['Team 2']){
-            if(ele.fields['Team 2'].includes(res.data.user_id)){
+          if(game.team2){
+            if(game.team2.includes(res.data.playerid)){
               team = 'Team 2';
             }
           }
           $('#my-game-list').append('<tr><td>' +
-          ele.fields.Game + '</td><td>' +
-          ele.fields['Game Time'] + '</td><td>' +
-          ele.fields['Team 1 Slots'] + '</td> <td>' + ele.fields['Team 2 Slots'] + '</td><td>' + team + '</td><td>' +
-          ele.fields['Discord Room'] + '</td></tr>');
+          game.name + '</td><td>' +
+          game.gametime + '</td><td>' +
+          game.team1Slots + '</td> <td>' + game.team2Slots + '</td><td>' + team + '</td><td>' +
+          game.discordroom + '</td></tr>');
         });
 
       }

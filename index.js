@@ -85,7 +85,7 @@ var discordBot = require('./bots/discord-bot')(bot);
 discordBot.init(admins);
 
 var profilesRepo = require('./repos/profiles-repo')(pool);
-var scheduleRepo = require('./repos/schedule-repo')(base);
+var scheduleRepo = require('./repos/schedule-repo')(pool);
 var contactRepo = require('./repos/contact-repo')(base);
 
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
