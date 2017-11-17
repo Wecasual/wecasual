@@ -218,7 +218,7 @@ app.use(passport.session());
 //==========End Middleware==========
 
 app.get('/', function(req, res){
-  if(req.user && req.user['Status'] == 'Not Registered'){
+  if(req.user && req.user.status == 'Not Registered'){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
@@ -269,11 +269,11 @@ app.get('/dota', ensureRealm, function(req, res) {
   if(!req.user){
     res.redirect('/');
   }
-  else if(req.user && req.user['Status'] == 'Not Registered'){
+  else if(req.user && req.user.status== 'Not Registered'){
     // console.log(req.user['Status']);
     res.redirect('/logout');
   }
-  else if((req.user && req.user['Status'] != 'Not Registered' && !req.user['dota']) || !req.user) {
+  else if((req.user && req.user.status != 'Not Registered' && !req.user.dota) || !req.user) {
     res.redirect('/dota/signup');
   }
   else{
@@ -482,15 +482,15 @@ function renderPost(req, res) {
 
 //Error handling
 //Handle 404
-app.use(function(req, res) {
-  res.status(404)
-  res.render('pages/error', {errorMessage: "404: Page not Found"});
-  //.send('404: Page not Found');
-});
-
-// Handle 500
-app.use(function(error, req, res, next) {
-  res.status(500)
-  res.render('pages/error', {errorMessage: "500: Internal Server Error"});
-  //.send('500: Internal Server Error');
-});
+// app.use(function(req, res) {
+//   res.status(404)
+//   res.render('pages/error', {errorMessage: "404: Page not Found"});
+//   //.send('404: Page not Found');
+// });
+//
+// // Handle 500
+// app.use(function(error, req, res, next) {
+//   res.status(500)
+//   res.render('pages/error', {errorMessage: "500: Internal Server Error"});
+//   //.send('500: Internal Server Error');
+// });
