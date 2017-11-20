@@ -1,7 +1,8 @@
 $(document).ready(function() {
   //Get all users
-  var users;
-  var userIds;
+  var player;
+  var playerid = new Array();
+  var friend;
   var $loading = $('.loading-ring').hide();
   $(document)
     .ajaxStart(function () {
@@ -10,8 +11,6 @@ $(document).ready(function() {
     .ajaxStop(function () {
       $loading.hide();
     });
-  var users;
-  var userIds = new Array();
   $.ajax({
     type: 'POST',
     url: '/profile/getAllUsers',
@@ -20,16 +19,18 @@ $(document).ready(function() {
         alert(res.error);
       }
       else if(res.success){
-        users = res.data;
-        users.forEach(function(ele){
+        player = res.data;
+        player.forEach(function(ele){
           $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="player-btn">' + ele.username + '</a></li>')
-          userIds.push(ele.playerid);
+          playerid.push(ele.playerid);
         });
+
       }
     }
   });
   $(document).on('click', '.player-btn', function(){
-    var userInfo = users[userIds.indexOf(parseInt(this.id))];
+    var selectedPlayerid = parseInt(this.id)
+    var playerInfo = player[playerid.indexOf(selectedPlayerid)];
     //Remove any current info. Do for all divs
     $('#avatar').empty();
     $('#username').empty();
@@ -39,22 +40,22 @@ $(document).ready(function() {
     $('#team').empty();
     $('#games-played').empty();
     $('#friends-list').empty();
-    //Append  user info to each div
 
-    if(userInfo.avatar.includes('null')){
+    //Append  user info to each div
+    if(playerInfo.avatar.includes('null')){
       $('#avatar').append('<img height="128" width="128" class = "rounded-circle" src=/images/avatar-default.png alt="Avatar Image" />');
     }
     else{
-      $('#avatar').append('<img height="128" width="128" class = "rounded-circle" src=' + userInfo.avatar + ' alt="Avatar Image" />');
+      $('#avatar').append('<img height="128" width="128" class = "rounded-circle" src=' + playerInfo.avatar + ' alt="Avatar Image" />');
     }
-    $('#username').append(userInfo.username);
-    var date = new Date(userInfo.registrationdate)
+    $('#username').append(playerInfo.username);
+    var date = new Date(playerInfo.registrationdate)
     $('#reg-date').append('Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
-    if(userInfo.premium){
+    if(playerInfo.premium){
       $('#premium').append('<img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">\
       <h5><p><b>Active</b></p></h5>');
       $('#points').append('<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">\
-      <h5><b>' + userInfo.wecasualpoints + '</b></h5>');
+      <h5><b>' + playerInfo.wecasualpoints + '</b></h5>');
     }
     else{
       $('#premium').append('<img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">\
@@ -64,28 +65,37 @@ $(document).ready(function() {
 
     }
 
-    if(userInfo.team){
-      $('#team').append('<a href="/dota/teams"><b> ' + userInfo['Team Name'] + '</b></a>');
+    if(playerInfo.team){
+      $('#team').append('<a href="/dota/teams"><b> ' + playerInfo['Team Name'] + '</b></a>');
     }
     else{
       $('#team').append('<b> No Team</b>');
     }
 
-    $('#games-played').append('<b> ' + userInfo.totalgames + '</b>')
+    $('#games-played').append('<b> ' + playerInfo.totalgames + '</b>');
 
-    if(userInfo['Friends']){
-      userInfo['Friends'].forEach(function(ele){
-        var friend = users[userIds.indexOf(ele)]
-        $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + friend['Avatar'] + '></th><td>' + friend['Username'] + '</td></tr>');
-      });
-    }
-    else{
-      $("#friends-list").append('<tr><th scope="row">No Friends</th><td>:(</td></tr>')
-    }
-
-
+    $.ajax({
+      type: 'POST',
+      url: '/profile/getFriends',
+      data: {playerid: selectedPlayerid},
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          friend = res.data;
+          if(friend.length){
+            friend.forEach(function(ele){
+              $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>');
+            });
+          }
+          else{
+            $("#friends-list").append('<tr><th scope="row">No Friends</th><td>:(</td></tr>')
+          }
+        }
+      }
+    });
   });
-
 });
 
 function search() {

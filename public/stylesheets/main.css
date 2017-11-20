@@ -367,11 +367,13 @@ input[type=text], select, textarea {
 }
 
 .card{
-  border-radius: 0rem;
+  border-radius: 0.4rem!important;
   -webkit-box-shadow: 8px 10px 10px 0px rgba(0,0,0,0.08);
   -moz-box-shadow: 8px 10px 10px 0px rgba(0,0,0,0.08);
   box-shadow: 8px 10px 10px 0px rgba(0,0,0,0.08);
 }
+
+
 .card-header{
   background-color: #e6e6e6;
 }
