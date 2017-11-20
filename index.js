@@ -256,9 +256,10 @@ app.post(contactRoute.submit.route, ensureRealm, contactRoute.submit.handler);
 
 //profile route
 app.post(profileRoute.getFriends.route, ensureRealm, profileRoute.getFriends.handler);
+app.post(profileRoute.getFriendReq.route, ensureRealm, profileRoute.getFriendReq.handler);
 app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend.handler);
 app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
-app.post(profileRoute.sendFriendRequest.route, ensureRealm, profileRoute.sendFriendRequest.handler);
+app.post(profileRoute.sendFriendReq.route, ensureRealm, profileRoute.sendFriendReq.handler);
 app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
 // app.post(profileRoute.updateUser.route, ensureAuthenticated, profileRoute.updateUser.handler);
 
