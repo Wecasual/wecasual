@@ -51,9 +51,9 @@ function getAllUsers(pool, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM player WHERE status != $1';
+      var queryString = 'SELECT * FROM player WHERE status != $1 AND status != $2';
       // console.log(queryString);
-      var values = ["Not Registered"];
+      var values = ["Not Registered", "League of Legends"];
       client.query(queryString, values, function(err, result){
         client.release();
         if(err){

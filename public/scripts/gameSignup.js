@@ -69,11 +69,21 @@ $(document).ready(function(){
               team = 'Team 2';
             }
           }
-          $('#my-game-list').append('<tr><td>' +
-          game.name + '</td><td>' +
-          game.gametime + '</td><td>' +
-          game.team1Slots + '</td> <td>' + game.team2Slots + '</td><td>' + team + '</td><td>' +
-          game.discordroom + '</td></tr>');
+          if(game.pubsession){
+            $('#my-game-list').append('<tr><td>' +
+            game.name + '</td><td>' +
+            game.gametime + '</td><td>' +
+            game.team1Slots + '</td> <td>N/A</td><td>' + team + '</td><td>' +
+            game.discordroom + '</td></tr>');
+          }
+          else{
+            $('#my-game-list').append('<tr><td>' +
+            game.name + '</td><td>' +
+            game.gametime + '</td><td>' +
+            game.team1Slots + '</td> <td>' + game.team2Slots + '</td><td>' + team + '</td><td>' +
+            game.discordroom + '</td></tr>');
+          }
+
         });
 
       }
