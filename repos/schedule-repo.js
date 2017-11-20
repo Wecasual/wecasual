@@ -1,9 +1,33 @@
-function gameSignup(pool, game_id, info, table, callback){
-  pool(table).update(game_id, info, function(err) {
-    if (err) { callback && callback(err)}
-    else { callback && callback(null); }
+function gameSignup(pool, playerid, gameid, team, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'INSERT INTO playergame (playerid, gameid, team) VALUES ($1, $2, $3)';
+      var values = [playerid, gameid, team];
+      //WHERE game.gametime > NOW() '
+      // console.log(queryString);
+      client.query(queryString, values, function(err){
+        client.release();
+        if(err){
+          callback && callback(err);
+        }
+        else {
+          // console.log(result.rows[0]);
+          // console.log(games);
+          callback && callback(null);
+        }
+      });
+    }
   });
 }
+// function gameSignup(pool, game_id, info, table, callback){
+//   pool(table).update(game_id, info, function(err) {
+//     if (err) { callback && callback(err)}
+//     else { callback && callback(null); }
+//   });
+// }
 
 function scheduleGame(pool, info, table, callback){
   pool(table).create(info, function(err, record) {

@@ -16,21 +16,21 @@ $(document).ready(function(){
         alert(res.error);
       }
       else if(res.success){
-        console.log(res.data);
+        // console.log(res.data);
         res.data.otherGames.forEach(function(game){
           if(game.pubsession){
             $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.gameid + '|' +
             game.team1 + '|' + game.team2 + '|' + "false" + '"></label></td><td>' +
             game.name + '</td><td>' +
             game.gametime + '</td><td>' +
-            game.team1Slots + '</td><td>' + game.team2Slots + '</td></tr>');
+            game.team1Slots + '</td><td>N/A</td></tr>');
           }
           else{
             $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.gameid + '|' +
             game.team1 + '|' + game.team2 + '|' + "false" + '"></label></td><td>' +
             game.name + '</td><td>' +
             game.gametime + '</td><td>' +
-            game.team1Slots + '</td><td>N/A</td></tr>');
+            game.team1Slots + '</td><td>' + game.team2Slots + '</td></tr>');
           }
 
         });
