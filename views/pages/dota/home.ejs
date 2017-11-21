@@ -305,7 +305,13 @@
           <div class="card rounded p-4 mt-3">
             <h3 class = "mb-0" id="my-schedule">Schedule</h3>
             <hr>
-            <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+            <div class="calendar-wrapper">
+              <button id="btnPrev" type="button">Prev</button>
+            	<button id="btnNext" type="button">Next</button>
+              <div id="divCal"></div>
+            </div>
+
+            <!-- <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
           </div>
         </div>
         <!-- END HOME -->
@@ -419,6 +425,8 @@
     </div> <!-- BIG COL -->
   </div> <!--ROW-->
 </div> <!-- CONTAINER -->
+<script src="../../scripts/calendar.js"></script>
+<!-- <script src="../../scripts/populateCalendar.js"></script> -->
 <script src="../../scripts/friends.js"></script>
 <script src="../../scripts/gameSignup.js"></script>
 <script src="../../scripts/scheduleGame.js"></script>

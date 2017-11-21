@@ -248,6 +248,7 @@ app.post(scheduleRoute.getSingleGame.route, ensureRealm, ensureAuthenticated, sc
 app.post(scheduleRoute.getAllSchedule.route, ensureRealm, ensureAuthenticated, scheduleRoute.getAllSchedule.handler);
 app.post(scheduleRoute.gameSignup.route, ensureRealm, ensureAuthenticated, scheduleRoute.gameSignup.handler);
 app.post(scheduleRoute.scheduleGame.route, ensureRealm, ensureAuthenticated, scheduleRoute.scheduleGame.handler);
+app.post(scheduleRoute.getRangeSchedule.route, ensureRealm, ensureAuthenticated, scheduleRoute.getRangeSchedule.handler);
 
 
 //contact route
