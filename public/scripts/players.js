@@ -24,7 +24,6 @@ $(document).ready(function() {
           $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="player-btn">' + ele.username + '</a></li>')
           playerid.push(ele.playerid);
         });
-
       }
     }
   });

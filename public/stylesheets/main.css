@@ -496,14 +496,17 @@ a.active{
   background:#fff;
 
 }
+
 table.table-calendar {
   clear:both;
   width:100%;
-  min-height: 700px;;
   border:1px solid #d1d1d1;
-  border-radius:3px;
+  border-radius:5px;
   border-collapse:collapse;
   color:#555;
+  background-color: #f1f1f1;
+  border-spacing: 4px;
+  border-collapse: separate;
 }
 
 td.days {
@@ -514,37 +517,45 @@ td.days {
   /*border-right:1px solid #d1d1d1;
   border-top:1px solid #d1d1d1;*/
   width:14.28%; /* 14.28% = 100% / 7 */
+  background-color: #f1f1f1;
 }
 
 td.calendar {
-  height:48px;
   text-align: center;
   vertical-align: middle;
   border-right:1px solid #d1d1d1;
   border-top:1px solid #d1d1d1;
+  border-radius:5px;
   width:14.28%; /* 14.28% = 100% / 7 */
+
 }
 td.not-current {
   color:#aaa;
   text-align: left;
   vertical-align: top;
 }
-td.normal {
+td.normal, td.today {
+  height:130px;
   text-align: left;
   vertical-align: top;
 }
+
+td.normal {
+  background-color: #e5e5e5;
+}
+
 td.today {
-  text-align: left;
-  vertical-align: top;
-  /*font-weight:700;*/
-  /*color:#ff9da2;*/
+
+  font-weight:700;
+  color:#ff9da2;
   /*font-size:1.5em;*/
-  background-color: #eee;
+  background-color: #fff;
   border:1px solid #d1d1d1;
 }
 
-.calendar-game {
-  border-radius: 0.2rem!important;
+
+.calendar-card {
+  border-radius: 5px!important;
   -webkit-box-shadow: unset;
   -moz-box-shadow: unset;
   box-shadow: unset;
@@ -552,34 +563,20 @@ td.today {
 
 .calendar-game-time {
   font-size: .8em;
-  color: #aaa
+  color: #888
 }
 
 thead td.calendar {
   border:none;
   color:#555;
+  text-align: left;
   /*text-transform:uppercase;*/
-  font-size:1.5em;
-}
-#btnPrev {
-  float:left;
-  margin-bottom:20px;
-  &:before {
-    content:'\f104';
-    font-family:Questrial;
-    padding-right:4px;
-  }
-}
-#btnNext {
-  float:right;
-  margin-bottom:20px;
-  &:after {
-    content:'\f105';
-    font-family:Questrial;
-    padding-left:4px;
-  }
+  font-size:1.0em;
+  padding-top: 5px;
+  padding-left: 5px;
 }
 #btnPrev, #btnNext {
+  float:left;
   background:transparent;
   border:none;
   outline:none;
@@ -589,6 +586,7 @@ thead td.calendar {
   font-family:"Questrial", sans-serif;
   /*text-transform:uppercase;*/
   transition:all 0.2s ease;
+  margin-bottom:20px;
 }
 
 #btnPrev:hover {
