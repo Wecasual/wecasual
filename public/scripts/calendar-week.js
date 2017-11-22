@@ -1,3 +1,4 @@
+var games;
 //Calendar stuff
 var Cal = function(divId) {
   //Store div id
@@ -132,6 +133,12 @@ $(document).ready(function(){
     c.previousWeek();
     getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
   });
+  $(document).on('click', '.calendar-card', function(){
+    var game = getGame(this.id.substring(7, this.id.length));
+    console.log(game);
+    //Make ajax call to get users contained in team rosters
+    //Display game info and users
+  });
 });
 
 function getRangeSchedule(startYear, startMonth, weekStart, weeks){
@@ -150,13 +157,25 @@ function getRangeSchedule(startYear, startMonth, weekStart, weeks){
         alert(res.error);
       }
       else if(res.success){
-        res.data.forEach(function(game){
+        games = res.data;
+        games.forEach(function(game){
           var elementid = '#' + game.gametime.substring(0, 10).replace(/\//g, '-');
           $(elementid).append('<div id="gameid-' + game.gameid + '"class="card rounded calendar-card m-1 pl-1"><div class="calendar-game-time">' + game.gametime.substring(10, 18) + '</div><div>' + game.name + '</div></div>');
         });
       }
     }
   });
+}
+function getGame(gameid){
+  var i = 0;
+  do{
+    if(games[i].gameid == gameid){
+      return games[i];
+    }
+    i++;
+  }while(i < games.length);
+  return -1;
+
 }
 
 function addZero(num){

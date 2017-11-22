@@ -538,10 +538,11 @@ td.normal, td.today {
   height:130px;
   text-align: left;
   vertical-align: top;
+    background-color: #e5e5e5;
 }
 
 td.normal {
-  background-color: #e5e5e5;
+  /*background-color: #e5e5e5;*/
 }
 
 td.today {
@@ -549,7 +550,7 @@ td.today {
   font-weight:700;
   color:#ff9da2;
   /*font-size:1.5em;*/
-  background-color: #fff;
+  /*background-color: #eee;*/
   border:1px solid #d1d1d1;
 }
 
@@ -559,6 +560,11 @@ td.today {
   -webkit-box-shadow: unset;
   -moz-box-shadow: unset;
   box-shadow: unset;
+  background-color: #fff;
+}
+.calendar-card:hover {
+  border-color: #888;
+  cursor:pointer;
 }
 
 .calendar-game-time {
