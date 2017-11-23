@@ -285,7 +285,7 @@ app.get('/dota', ensureRealm, function(req, res) {
     profileRoute.updateUser(req, res, function(err){
       if(err){
         console.log(err);
-        res.redirect('500');
+        res.redirect('/logout');
       }
       else{
         res.render('pages/dota/home', { user: req.user, message: message, realm: req.session.realm});
