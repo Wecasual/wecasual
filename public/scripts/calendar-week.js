@@ -135,7 +135,22 @@ $(document).ready(function(){
   });
   $(document).on('click', '.calendar-card', function(){
     var game = getGame(this.id.substring(7, this.id.length));
-    console.log(game);
+    $.ajax({
+      type: 'POST',
+      url: '/profile/getUsers',
+      data: {
+        team1: JSON.stringify(game.team1),
+        team2: JSON.stringify(game.team2)
+      },
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          console.log(res.data);
+        }
+      }
+    });
     //Make ajax call to get users contained in team rosters
     //Display game info and users
   });

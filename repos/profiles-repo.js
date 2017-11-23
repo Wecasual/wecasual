@@ -246,6 +246,29 @@ function declineFriendReq(pool, playerid, reqid, callback){
   });
 }
 
+function getUsers(pool, userids, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT * FROM player WHERE playerid = ANY($1)';
+      // console.log(queryString);
+      var values = [userids]
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          // console.log(result.rows);
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
+
 module.exports = pool => {
   return {
     userLogin: userLogin.bind(null, pool),
@@ -256,6 +279,7 @@ module.exports = pool => {
     getFriendReq: getFriendReq.bind(null, pool),
     sendFriendReq: sendFriendReq.bind(null, pool),
     acceptFriendReq: acceptFriendReq.bind(null, pool),
-    declineFriendReq: declineFriendReq.bind(null, pool)
+    declineFriendReq: declineFriendReq.bind(null, pool),
+    getUsers: getUsers.bind(null, pool)
   }
 }

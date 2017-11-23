@@ -262,6 +262,7 @@ app.post(profileRoute.acceptFriend.route, ensureRealm, profileRoute.acceptFriend
 app.post(profileRoute.declineFriend.route, ensureRealm, profileRoute.declineFriend.handler);
 app.post(profileRoute.sendFriendReq.route, ensureRealm, profileRoute.sendFriendReq.handler);
 app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.handler);
+app.post(profileRoute.getUsers.route, ensureRealm, profileRoute.getUsers.handler);
 // app.post(profileRoute.updateUser.route, ensureAuthenticated, profileRoute.updateUser.handler);
 
 
