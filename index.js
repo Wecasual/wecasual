@@ -485,15 +485,15 @@ function renderPost(req, res) {
 
 //Error handling
 //Handle 404
-// app.use(function(req, res) {
-//   res.status(404)
-//   res.render('pages/error', {errorMessage: "404: Page not Found"});
-//   //.send('404: Page not Found');
-// });
-//
-// // Handle 500
-// app.use(function(error, req, res, next) {
-//   res.status(500)
-//   res.render('pages/error', {errorMessage: "500: Internal Server Error"});
-//   //.send('500: Internal Server Error');
-// });
+app.use(function(req, res) {
+  res.status(404)
+  res.render('pages/error', {errorMessage: "404: Page not Found"});
+  //.send('404: Page not Found');
+});
+
+// Handle 500
+app.use(function(error, req, res, next) {
+  res.status(500)
+  res.render('pages/error', {errorMessage: "500: Internal Server Error"});
+  //.send('500: Internal Server Error');
+});

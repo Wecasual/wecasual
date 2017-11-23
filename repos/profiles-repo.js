@@ -5,8 +5,8 @@ function userLogin(pool, profile, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'INSERT INTO player (username, discordid, avatar) VALUES ($1, $2, $3) ON CONFLICT (discordid) DO UPDATE SET (username, avatar) = ($1, $3) RETURNING *';
-      var values = [profile.username, profile.id, 'https://cdn.discordapp.com/avatars/' + profile.id + '/' + profile.avatar + '.png'];
+      var queryString = 'INSERT INTO player (username, discordid, avatar, status) VALUES ($1, $2, $3, $4) ON CONFLICT (discordid) DO UPDATE SET (username, avatar) = ($1, $3) RETURNING *';
+      var values = [profile.username, profile.id, 'https://cdn.discordapp.com/avatars/' + profile.id + '/' + profile.avatar + '.png', "Not Registered"];
       // console.log(queryString);
       client.query(queryString, values, function(err, result){
         client.release();
@@ -45,13 +45,13 @@ function getUser(pool, playerid, callback){
 }
 
 //Return all users that are not "Not Registered"
-function getAllUsers(pool, callback){
+function getAllUsers(pool, select, callback){
   pool.connect(function(err, client) {
     if(err){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM player WHERE status != $1 AND status != $2';
+      var queryString = 'SELECT ' + select + ' FROM player WHERE status != $1 AND status != $2 ORDER BY username';
       // console.log(queryString);
       var values = ["Not Registered", "League of Legends"];
       client.query(queryString, values, function(err, result){
@@ -246,15 +246,15 @@ function declineFriendReq(pool, playerid, reqid, callback){
   });
 }
 
-function getUsers(pool, userids, callback){
+function getUsers(pool, select, userids, callback){
   pool.connect(function(err, client) {
     if(err){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM player WHERE playerid = ANY($1)';
+      var queryString = 'SELECT ' + select + ' FROM player WHERE playerid = ANY($1)';
       // console.log(queryString);
-      var values = [userids]
+      var values = [userids];
       client.query(queryString, values, function(err, result){
         client.release();
         if(err){

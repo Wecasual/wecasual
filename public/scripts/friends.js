@@ -43,7 +43,7 @@ $(document).ready(function() {
                 else if(res.success){
                   player = res.data;
                   player.forEach(function(ele){
-                    if(friendid.indexOf(ele.playerid) == -1){// && ele.playerid != id
+                    if(friendid.indexOf(ele.playerid) == -1 && ele.playerid != id){
                       $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="friend-request-send">' + ele.username + '</a></li>')
                       playerid.push(ele.playerid);
                     }

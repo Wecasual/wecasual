@@ -133,29 +133,59 @@ $(document).ready(function(){
     c.previousWeek();
     getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
   });
+
+  //Display game info when a game is clicked on
   $(document).on('click', '.calendar-card', function(){
+    $('.game-info-opacity').fadeIn('fast');
+    $('.game-info').slideDown('fast');
     var game = getGame(this.id.substring(7, this.id.length));
+    
+    //Add header
+    $('#game-title')[0].innerHTML = game.name;
+    $('#game-time')[0].innerHTML = game.gametime;
+    $('#team1-slots')[0].innerHTML = game.team1Slots;
+    $('#team2-slots')[0].innerHTML = game.team2Slots;
+
     $.ajax({
       type: 'POST',
       url: '/profile/getUsers',
-      data: {
-        team1: JSON.stringify(game.team1),
-        team2: JSON.stringify(game.team2)
-      },
+      data: JSON.stringify({
+        team1: game.team1,
+        team2: game.team2
+      }),
+      contentType: 'application/json',
       success: function(res){
         if(!res.success){
           alert(res.error);
         }
         else if(res.success){
-          console.log(res.data);
+          //Add teams
+          for(var i = 1; i <= 2; i++){
+            html = "";
+            res.data["team" + i].forEach(function(player){
+              if(player.avatar.includes("null")){//If player doesn't haven't avatar display default discord avatar
+                html += '<div class="card-roster mb-1 p-1"><img height="20" width="20"  class = "rounded-circle" src=/images/avatar-default.png alt"Avatar"> ' + player.username + '</div>';
+              }
+              else{
+                html += '<div class="card-roster mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + player.avatar + ' alt"Avatar"> ' + player.username + '</div>';
+              }
+            });
+            $('#team' + i + '-roster')[0].innerHTML = html;
+          }
         }
       }
     });
-    //Make ajax call to get users contained in team rosters
-    //Display game info and users
   });
+
+  //Close game info dialog when click outside of box
+  $(document).on('click', '.game-info-opacity', function(){
+    $('.game-info-opacity').fadeOut('fast');
+    $('.game-info').slideUp('fast');
+  });
+
 });
 
+//Return games within a date range starting from startYear/startMonth/weekStart to weekStart+7*weeks (2 weeks from weekStart)
 function getRangeSchedule(startYear, startMonth, weekStart, weeks){
   var dStart = new Date(startYear, startMonth, weekStart);
   var dEnd = new Date(startYear, startMonth, weekStart);
@@ -181,6 +211,8 @@ function getRangeSchedule(startYear, startMonth, weekStart, weeks){
     }
   });
 }
+
+//Find game by gameid in games array
 function getGame(gameid){
   var i = 0;
   do{
@@ -193,6 +225,7 @@ function getGame(gameid){
 
 }
 
+//Add a 0 before a date if it is a one digit number
 function addZero(num){
   if(num.toString().length < 2){
     return "0" + num.toString();
