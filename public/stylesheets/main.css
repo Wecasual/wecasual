@@ -484,6 +484,9 @@ a.active{
   }
 }
 
+.calendar-container {
+  overflow-y:hidden;
+}
 /*.calendar-wrapper {*/
   /*width:360px;*/
   /*width: 100%;*/
@@ -596,7 +599,7 @@ thead td.calendar {
 }
 
 #game-time{
-  float:right;
+  /*float:right;*/
 }
 
 .game-info {
