@@ -1,13 +1,5 @@
 $(document).ready(function(){
-  var pathname = window.location.pathname;
-  var table;
   var username = $("#username").html();
-  if(pathname == "/dota"){
-    table = "Schedule-Dota";
-  }
-  else if(pathname == "/lol"){
-    table = "Schedule-LoL";
-  }
   $('#schedule-game').bootstrapValidator({
     feedbackIcons: {
       valid: 'glyphicon glyphicon-ok',
@@ -49,7 +41,6 @@ $(document).ready(function(){
         time: $('#time').val(),
         discordRoom: $('#discordRoom').find(":selected").text(),
         announce: $('#announce').is(":checked"),
-        table: table,
         username: username},
       success: function(res){
         if(!res.success){
@@ -63,6 +54,7 @@ $(document).ready(function(){
           $('#discordRoom').val("1");
           $('#announce')[0].checked = true;
           alert(res.message);
+          location.reload();
         }
       }
     });

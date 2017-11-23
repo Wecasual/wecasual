@@ -1,12 +1,12 @@
 $(document).ready(function() {
   //Get friends and friend requests
-  var friendsList;
-  var friendRequests;
-  var friendIds = new Array();
-  var friendRequestIds = new Array();
-  var userId = $("#userid").html();
-  var users;
-  var userIds = new Array();
+  var friend;
+  var friendid = new Array();
+  var friendRequest;
+  var friendRequestid = new Array();
+  var id = $("#userid").html();
+  var player;
+  var playerid = new Array();
   var $loading = $('.loading-ring').hide();
   var retrievedFriends = false;
   $(document)
@@ -22,28 +22,53 @@ $(document).ready(function() {
       $.ajax({
         type: 'POST',
         url: '/profile/getFriends',
-        data: {id: userId},
+        data: {playerid: id},
         success: function(res){
           if(!res.success){
             alert(res.error);
           }
           else if(res.success){
-            friendsList = res.data.friendsList;
-            friendRequests = res.data.friendRequests;
-            users = res.data.users;
-            friendsList.forEach(function(ele){
-              $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Username'] + '</td></tr>')
-              friendIds.push(ele['Id']);
+            friend = res.data;
+            friend.forEach(function(ele){
+              $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
+              friendid.push(ele.friendid);
             });
-            friendRequests.forEach(function(ele){
-              $("#friend-requests").append('<tr id="' + ele['Id'] + '"><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + ele['Avatar'] + '></th><td>' + ele['Username'] +
+            $.ajax({
+              type: 'POST',
+              url: '/profile/getAllUsers',
+              success: function(res){
+                if(!res.success){
+                  alert(res.error);
+                }
+                else if(res.success){
+                  player = res.data;
+                  player.forEach(function(ele){
+                    if(friendid.indexOf(ele.playerid) == -1 && ele.playerid != id){
+                      $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="friend-request-send">' + ele.username + '</a></li>')
+                      playerid.push(ele.playerid);
+                    }
+                  });
+                }
+              }
+            });
+          }
+        }
+      });
+      $.ajax({
+        type: 'POST',
+        url: '/profile/getFriendReq',
+        data: {playerid: id},
+        success: function(res){
+          if(!res.success){
+            alert(res.error);
+          }
+          else if(res.success){
+            friendRequest = res.data;
+            friendRequest.forEach(function(ele){
+              $("#friend-requests").append('<tr id="' + ele.playerid + '"><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username +
               '</td><td><button type="button" class="btn btn-success">&#10004;</button></td>\
               <td><button type="button" class="btn btn-danger">&#10008;</button></td></tr>');
-              friendRequestIds.push(ele['Id']);
-            });
-            users.forEach(function(ele){
-              $("#user-list").append('<li><a href="#" id="' + ele['Id'] + '" class="friend-request-send">' + ele['Username'] + '</a></li>')
-              userIds.push(ele['Id']);
+              friendRequestid.push(ele.playerid);
             });
           }
         }
@@ -51,62 +76,41 @@ $(document).ready(function() {
     }
   });
   $(document).on('click', '.btn-success', function(){
-    var index = friendRequestIds.indexOf($(this).closest('tr').attr('id'));
-    //Get data for new friend
-    var newFriend = friendRequests[index];
+    reqid = $(this).closest('tr').attr('id');
     $.ajax({
       type: 'POST',
       url: '/profile/acceptFriend',
       contentType: 'application/json',
-      data: JSON.stringify({id: userId,
-      friendIds: friendIds,
-      friendRequestIds: friendRequestIds,
-      friendRequests: friendRequests,
-      index: index}),
+      data: JSON.stringify({
+        playerid: id,
+        reqid: reqid
+      }),
       success: function(res){
         if(!res.success){
           alert(res.error);
         }
         else if(res.success){
-          $('#' + friendRequestIds[index]).remove();
-          $("#friends-list").append('<tr><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + newFriend['Avatar'] + '></th><td>' + newFriend['Username'] + '</td></tr>')
-          friendIds.push(friendRequestIds[index]);
-          if(friendRequestIds.length == 1){
-            friendRequests = [];
-            friendRequestIds = [];
-          }
-          else{
-            friendRequests.splice(index, 1);
-            friendRequestIds.splice(index, 1);
-          }
-          friendsList.push(newFriend);
+          location.reload();
         }
       }
     });
   });
   $(document).on('click', '.btn-danger', function(){
-    var index = friendRequestIds.indexOf($(this).closest('tr').attr('id'));
+    reqid = $(this).closest('tr').attr('id');
     $.ajax({
       type: 'POST',
       url: '/profile/declineFriend',
       contentType: 'application/json',
-      data: JSON.stringify({id: userId,
-      friendRequestIds: friendRequestIds,
-      index: index}),
+      data: JSON.stringify({
+        playerid: id,
+        reqid: reqid
+      }),
       success: function(res){
         if(!res.success){
           alert(res.error);
         }
         else if(res.success){
-          $('#' + friendRequestIds[index]).remove();
-          if(friendRequestIds.length == 1){
-            friendRequests = [];
-            friendRequestIds = [];
-          }
-          else{
-            friendRequests.splice(index, 1);
-            friendRequestIds.splice(index, 1);
-          }
+          location.reload();
         }
       }
     });
@@ -114,14 +118,12 @@ $(document).ready(function() {
   $(document).on('click', '.friend-request-send', function(){
     if(confirm("Send friend request?")){
       var requestId = this.id;
-      var currentRequests = users[userIds.indexOf(requestId)]['Friend Requests'];
       $.ajax({
         type: 'POST',
-        url: '/profile/sendFriendRequest',
+        url: '/profile/sendFriendReq',
         contentType: 'application/json',
-        data: JSON.stringify({id: requestId,
-        requesterId: userId,
-        currentRequests: currentRequests}),
+        data: JSON.stringify({playerid: requestId,
+        reqid: id}),
         success: function(res){
           if(!res.success){
             alert(res.error);

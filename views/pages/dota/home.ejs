@@ -19,8 +19,8 @@
     });
   </script>
 <%}%>
-<div style="display:none" id="userid"><%=user['Id']%></div>
-<div style="display:none" id="username"><%=user['Username']%></div>
+<div style="display:none" id="userid"><%=user.playerid%></div>
+<div style="display:none" id="username"><%=user.username%></div>
 
 
 
@@ -29,7 +29,7 @@
   <h2 class = "text-center">
     <div class="row">
 
-      <%if(!user['Premium']){%>
+      <%if(!user.premium){%>
       <a class="patreon-bg col-md-6 hvr-fade" href="https://www.patreon.com/wecasual" target="_blank">
         <img class="rounded" alt="patreon-logo" width="128" height="64" src="/images/patreon-logo.png">
         <span class = "explain-words align-middle">Get Wecasual Premium!</span>
@@ -41,7 +41,7 @@
       </a>
       <%}%>
 
-      <%if(user['Status'] == 'Not in Discord'){%>
+      <%if(user.status == 'Not in Discord'){%>
       <a class="discord-bg col-md-6 hvr-fade hvr-fade-discord" href="https://discord.gg/xGKTNzv" target="_blank">
         <img class="rounded" alt="patreon-logo" width="64" height="64" src="/images/discord-logo-white.png">
         <span class = "explain-words align-middle">Join the Discord</span>
@@ -74,9 +74,9 @@
           <li class="list-group-item p-0  text-left mt-0">
             <!-- AVATAR AND NAMES -->
             <div class="m-3 text-center">
-              <img height="128" width="128" class = "rounded-circle" src='<%= user['Avatar'] %>' alt='Your Avatar Image' />
+              <img height="128" width="128" class = "rounded-circle" src='<%= user.avatar %>' alt='Your Avatar Image' />
               <h2>
-                <span class="align-bottom text-1.3em"><%= user['Username'] %></span>
+                <span class="align-bottom text-1.3em"><%= user.username %></span>
               </h2>
               <hr>
             </div>
@@ -86,7 +86,7 @@
               <div class="col-md-6">
                 <div class="p-1">
                   <h5>Wecasual Premium </h5>
-                  <%if(!user['Premium']){%>
+                  <%if(!user.premium){%>
                     <img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">
                     <h5><p><b>Not Active</b></p></h5>
                   <%}else{%>
@@ -101,12 +101,12 @@
                 <div class="p-1">
                   <h5>Wecasual Points</h5>
 
-                  <%if(!user['Premium']){%>
+                  <%if(!user.premium){%>
                     <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-small.png">
                     <h5><b>N/A</b></h5>
                   <%}else{%>
                     <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">
-                    <h5><b><%= user['Wecasual Points'] %></b></h5>
+                    <h5><b><%= user.wecasualpoints %></b></h5>
                   <%}%>
                 </div>
               </div>
@@ -115,7 +115,7 @@
             <!-- Team -->
             <div class="m-3">
               <h5>Team:
-                <%if(user['Team']){%>
+                <%if(user.team){%>
                 <a href="/dota/teams"><b><%= user['Team Name'] %></b></a>
                 <%}else{%>
                   <b>No team</b>
@@ -124,7 +124,7 @@
             </div>
             <!-- Total Games -->
             <div class="m-3">
-              <h5>Games played: <b><%= user['Total Games'] %></b></h5>
+              <h5>Games played: <b><%= user.totalgames%></b></h5>
             </div>
 
           </li>
@@ -229,10 +229,10 @@
                     <h5>Select a Team</h5>
                     <div class="form-group ">
                       <div class="radio">
-                        <label><input type="radio" name="team" value="Team 1"> Team 1</label>
+                        <label><input type="radio" name="team" value="1"> Team 1</label>
                       </div>
                       <div class="radio">
-                        <label><input id="team2" type="radio" name="team" value="Team 2"> Team 2</label>
+                        <label><input id="team2" type="radio" name="team" value="2"> Team 2</label>
                       </div>
                     </div>
                     <div class="form-group ">
@@ -305,7 +305,41 @@
           <div class="card rounded p-4 mt-3">
             <h3 class = "mb-0" id="my-schedule">Schedule</h3>
             <hr>
-            <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+              <div class="pre-scrollable calendar-container">
+                <div class="game-info-opacity"></div>
+                <div class="card rounded game-info p-2">
+                  <div class="game-info-header p-2">
+                    <span id="game-title"></span>
+                    <div id="game-time"></div>
+                  </div>
+                  <div class="game-info-body row">
+                    <div class="col-md-6">
+
+                      <div class="p-2">
+                        Team 1
+                        <span id="team1-slots"></span>
+                        <div id="team1-roster">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+
+                      <div class="p-2">
+                        Team 2
+                        <span id="team2-slots"></span>
+                        <div id="team2-roster">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table-calendar" id="divCal">
+
+                </table>
+              </div>
+            <!-- <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
           </div>
         </div>
         <!-- END HOME -->
@@ -419,6 +453,8 @@
     </div> <!-- BIG COL -->
   </div> <!--ROW-->
 </div> <!-- CONTAINER -->
+<script src="../../scripts/calendar-week.js"></script>
+<!-- <script src="../../scripts/populateCalendar.js"></script> -->
 <script src="../../scripts/friends.js"></script>
 <script src="../../scripts/gameSignup.js"></script>
 <script src="../../scripts/scheduleGame.js"></script>
