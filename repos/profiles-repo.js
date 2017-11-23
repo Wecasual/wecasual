@@ -1,123 +1,285 @@
-function userLogin(base, profile, callback){
-  getUser(base, profile.id, function(err, record){
-    if (err) { callback && callback(err, null)}
-    else{
-      if(!record){
-        createUser(base, profile, function(err, new_record){
-          if (err) { callback && callback(err, null)}
-          else{
-            // console.log(user);
-            new_record.fields['Id'] = new_record.id;
-            callback && callback(null, new_record.fields);
-          }
-        });
-      }
-      else{
-        // console.log(record);
-        updateUser(base, {"Username": profile.username, "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png", "Id": record.id}, record.id, function(err, new_record_fields){
-          if (err) { callback && callback(err, null)}
-          else{
-            callback && callback(null, new_record_fields);
-          }
-        });
-      }
+//Update or create row for user logging in
+function userLogin(pool, profile, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
     }
-  })
-}
-
-function getUser(base, id, callback){
-  var found = false;
-  base('Users').select({
-      // Selecting the first 3 records in Value by Stage:
-      view: "Grid View"
-  }).eachPage(function page(records, fetchNextPage) {
-      // This function (`page`) will get called for each page of records.
-      records.forEach(function(record) {
-        if(record.get('Discord Id') == id){
-          found = true;
-          callback && callback(null, record);
+    else{
+      var queryString = 'INSERT INTO player (username, discordid, avatar, status) VALUES ($1, $2, $3, $4) ON CONFLICT (discordid) DO UPDATE SET (username, avatar) = ($1, $3) RETURNING *';
+      var values = [profile.username, profile.id, 'https://cdn.discordapp.com/avatars/' + profile.id + '/' + profile.avatar + '.png', "Not Registered"];
+      // console.log(queryString);
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          callback && callback(null, result.rows[0]);
         }
       });
-      // To fetch the next page of records, call `fetchNextPage`.
-      // If there are more records, `page` will get called again.
-      // If there are no more records, `done` will get called.
-      fetchNextPage();
-
-  }, function done(err) {
-    if(!found){
-      callback && callback(null, null);
     }
-    if (err) { callback && callback(err, null) }
   });
 }
 
-function getUserByRowId(base, id, callback){
-  base('Users').find(id, function(err, record) {
-    if (err) { callback && callback(err, null)}
+//Return user by playerid
+function getUser(pool, playerid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
     else{
-      callback && callback(null, record.fields);
-    }
-  });
-}
-
-function getAllUsers(base, callback){
-  var users = new Array();
-  base('Users').select({
-      // Selecting the first 3 records in Value by Stage:
-      view: "Grid View"
-  }).eachPage(function page(records, fetchNextPage) {
-      // This function (`page`) will get called for each page of records.
-      records.forEach(function(ele){
-        if(ele.fields['Status'] != "Not Registered"){
-          ele.fields['Email'] = null; //Remove email for security reasons
-          users.push(ele.fields);
+      var queryString = 'SELECT * FROM player WHERE playerid = ' + playerid;
+      // console.log(queryString);
+      client.query(queryString, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          // console.log(result.rows[0]);
+          callback && callback(null, result.rows[0]);
         }
       });
-      // To fetch the next page of records, call `fetchNextPage`.
-      // If there are more records, `page` will get called again.
-      // If there are no more records, `done` will get called.
-      fetchNextPage();
-
-  }, function done(err) {
-    if (err) { callback && callback(err, null) }
-    else{ callback && callback(null, users) }
-  });
-}
-
-function createUser(base, profile, callback){
-  base('Users').create({
-  "Username": profile.username,
-  "Discord Id": profile.id,
-  "Status": "Not Registered",
-  "Avatar": "https://cdn.discordapp.com/avatars/" + profile.id + "/" + profile.avatar + ".png",
-  "Original Username": profile.username
-  }, function(err, record) {
-    if (err) { callback && callback(err, null)}
-    else{
-      callback && callback(null, record);
     }
   });
 }
 
-function updateUser(base, info, id, callback){
-  base('Users').update(id, info, function(err, record) {
-    if (err) { callback && callback(err, null)}
+//Return all users that are not "Not Registered"
+function getAllUsers(pool, select, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
     else{
-      callback && callback(null, record.fields);
+      var queryString = 'SELECT ' + select + ' FROM player WHERE status != $1 AND status != $2 ORDER BY username';
+      // console.log(queryString);
+      var values = ["Not Registered", "League of Legends"];
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          // console.log(result.rows);
+          callback && callback(null, result.rows);
+        }
+      });
     }
   });
 }
 
+//info: Info to update
+//Formatted as an array of objects [{field: "email", value: "example@example.com"}, {field: "paid", value: true}];
+//ANY STRING FIELD VALUES MUST BE IN QUOTES
+//id: id of user that info is being updated for
+//*note* this does not update req.user information. It only updates the database
+function updateUser(pool, info, playerid, callback){
+  pool.connect(function(err, client){
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      // console.log(info);
+      var queryString = 'UPDATE player SET ';
+      var values = new Array();
+      for(var i = 0; i < info.length; i++){
+        queryString = queryString + info[i].field + ' = $' + (i+1);
+        values.push(info[i].value);
+        if(i < info.length -1){
+           queryString = queryString + ', ';
+        }
+      }
+      queryString = queryString + ' WHERE playerid = ' + playerid;
+      // console.log(queryString);
+      // console.log(values);
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err);
+        }
+        else{
+          callback && callback();
+        }
+      });
+    }
+  });
+}
 
+//Return all friends for player with playerid = playerid
+function getFriends(pool, playerid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT * FROM player LEFT OUTER JOIN playerfriend ON player.playerid = playerfriend.friendid WHERE playerfriend.playerid = $1';
+      var values = [playerid];
+      // console.log(queryString);
+      // console.log(values);
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
 
-module.exports = base => {
+//Return all friend requests for player with playerid = id
+function getFriendReq(pool, playerid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT * FROM player LEFT OUTER JOIN playerfrreq ON player.playerid = playerfrreq.reqid WHERE playerfrreq.playerid = $1';
+      var values = [playerid];
+      // console.log(queryString);
+      // console.log(values);
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          // console.log(result.rows[0]);
+          // console.log(games);
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
+
+function sendFriendReq(pool, playerid, reqid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'INSERT INTO playerfrreq (playerid, reqid) VALUES ($1, $2)';
+      var values = [playerid, reqid]
+      // console.log(queryString);
+      client.query(queryString, values, function(err){
+        client.release();
+        if(err){
+          callback && callback(err);
+        }
+        else {
+          callback && callback(null);
+        }
+      });
+    }
+  });
+}
+
+function acceptFriendReq(pool, playerid, reqid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      //Insert friend row for player
+      var queryString = 'INSERT INTO playerfriend (playerid, friendid) VALUES ($1, $2)';
+      var values = [playerid, reqid]
+      // console.log(queryString);
+      client.query(queryString, values, function(err){
+        if(err){
+          client.release();
+          callback && callback(err);
+        }
+        else {
+          //Insert friend row for the friend
+          var queryString = 'INSERT INTO playerfriend (playerid, friendid) VALUES ($1, $2)';
+          var values = [reqid, playerid]
+          // console.log(queryString);
+          client.query(queryString, values, function(err){
+            if(err){
+              client.release();
+              callback && callback(err);
+            }
+            else {
+              //Remove friend request
+              var queryString = 'DELETE FROM  playerfrreq WHERE playerid = $1 AND reqid = $2';
+              var values = [playerid, reqid]
+              // console.log(queryString);
+              client.query(queryString, values, function(err){
+                client.release();
+                if(err){
+                  callback && callback(err);
+                }
+                else {
+                  callback && callback(null);
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+function declineFriendReq(pool, playerid, reqid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'DELETE FROM  playerfrreq WHERE playerid = $1 AND reqid = $2';
+      var values = [playerid, reqid]
+      // console.log(queryString);
+      client.query(queryString, values, function(err){
+        client.release();
+        if(err){
+          callback && callback(err);
+        }
+        else {
+          callback && callback(null);
+        }
+      });
+    }
+  });
+}
+
+function getUsers(pool, select, userids, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT ' + select + ' FROM player WHERE playerid = ANY($1)';
+      // console.log(queryString);
+      var values = [userids];
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          // console.log(result.rows);
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
+
+module.exports = pool => {
   return {
-    userLogin: userLogin.bind(null, base),
-    updateUser: updateUser.bind(null, base),
-    getUser: getUser.bind(null, base),
-    getUserByRowId: getUserByRowId.bind(null, base),
-    getAllUsers: getAllUsers.bind(null, base)
-    // getUser: getUser.bind(null, base)
-    // getAllUsers: getAllUsers.bind(null, pool)
+    userLogin: userLogin.bind(null, pool),
+    updateUser: updateUser.bind(null, pool),
+    getAllUsers: getAllUsers.bind(null, pool),
+    getUser: getUser.bind(null, pool),
+    getFriends: getFriends.bind(null, pool),
+    getFriendReq: getFriendReq.bind(null, pool),
+    sendFriendReq: sendFriendReq.bind(null, pool),
+    acceptFriendReq: acceptFriendReq.bind(null, pool),
+    declineFriendReq: declineFriendReq.bind(null, pool),
+    getUsers: getUsers.bind(null, pool)
   }
 }

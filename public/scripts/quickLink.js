@@ -1,18 +1,16 @@
 $(document).ready(function(){
   var pathname = window.location.pathname;
   var url = window.location.href;
-  var id = url.split('=')[1];
+  var gameid = url.split('=')[1];
   var domain = url.split('schedule')[0];
-  var table;
   var realm;
   if(pathname == "/schedule/dota/quickLink"){
-    table = "Schedule-Dota";
     realm = "dota"
   }
   $.ajax({
     type: 'POST',
     url: '/schedule/getSingleGame',
-    data: JSON.stringify({table: table, id: id}),
+    data: JSON.stringify({gameid: gameid}),
     contentType: 'application/json',
     success: function(res){
       if(!res.success){
@@ -22,19 +20,19 @@ $(document).ready(function(){
       else if(res.success){
         // console.log(res.data);
         game = res.data;
-        if(game.fields['Pub Session']){
-          $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + "true" + '"></label></td><td>' +
-          game.fields.Game + '</td><td>' +
-          game.fields['Game Time'] + '</td><td>' +
-          game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
+        if(game.pubsession){
+          $('#game-list').append('<tr><td><label><input class="pub" type="radio" name="game" value="' + game.gameid + '|' +
+          game.team1 + '|' + game.team2 + '|' + "true" + '"></label></td><td>' +
+          game.name + '</td><td>' +
+          game.gametime + '</td><td>' +
+          game.team1Slots + '</td><td>N/A</td></tr>');
         }
         else{
-          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.id + '|' +
-          game.fields['Team 1'] + '|' + game.fields['Team 2'] + '|' + table + '|' + "true" + '"></label></td><td>' +
-          game.fields.Game + '</td><td>' +
-          game.fields['Game Time'] + '</td><td>' +
-          game.fields['Team 1 Slots'] + '</td><td>' + game.fields['Team 2 Slots'] + '</td></tr>');
+          $('#game-list').append('<tr><td><label><input type="radio" name="game" value="' + game.gameid + '|' +
+          game.team1 + '|' + game.team2 + '|' + "true" + '"></label></td><td>' +
+          game.name + '</td><td>' +
+          game.gametime + '</td><td>' +
+          game.team1Slots + '</td><td>' + game.team2Slots + '</td></tr>');
         }
         $('#game-signup').bootstrapValidator({
           feedbackIcons: {
