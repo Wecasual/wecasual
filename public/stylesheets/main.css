@@ -5,6 +5,7 @@
 body{
   background-color: #fafafa !important;
   font-family: 'Questrial', sans-serif !important;
+  color: #555;
 }
 .text-1.3em{
   font-size: 1.3em;
@@ -375,7 +376,8 @@ input[type=text], select, textarea {
 
 
 .card-header{
-  background-color: #e6e6e6;
+  /*background-color: #e6e6e6;*/
+  background-color: #f1f1f1;
 }
 
 a.active{
@@ -404,10 +406,14 @@ a.active{
 
 .pink-btn{
   border: 0px solid #555;
+  background-color:#ff9da2;
+}
+.pink-btn:hover{
+  background-color:#F96854;
 }
 
 
-#user-search {
+#user-search, #team-search, #prev-team-search {
     background-image: url('/images/search-icon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -419,14 +425,14 @@ a.active{
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#user-list {
+#user-list, .team-list, .prev-team-list {
     /* Remove default list styling */
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#user-list li a {
+#user-list li a, .team-list li a, .prev-team-list li a {
     border: 1px solid #ddd; /* Add a border to all links */
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6; /* Grey background color */
@@ -437,8 +443,8 @@ a.active{
     display: block; /* Make it into a block element to fill the whole list */
 }
 
-#user-list li a:hover:not(.header) {
-    background-color: #eee; /* Add a hover effect to all links, except for headers */
+#user-list li a:hover:not(.header), .team-list li a:hover:not(.header), .prev-team-list li a:hover:not(.header) {
+    background-color: #ff9da2; /* Add a hover effect to all links, except for headers */
 }
 
 .sidebar{
@@ -468,6 +474,9 @@ a.active{
   transition: all .25s ease-out;
 }
 
+.btn-success:hover, .btn-danger:hover {
+  cursor: pointer;
+}
 /*Home page end*/
 
 /*Calendar*/
@@ -613,6 +622,7 @@ thead td.calendar {
   height: 70%;
   width: 60%;
   background-color: #f1f1f1;
+  overflow-x: hidden;
   /*Display over everything else*/
   z-index: 10;
 }
@@ -630,7 +640,7 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-roster {
+.card-player {
   width:100%;
   border:1px solid #d1d1d1;
   border-radius:5px;
@@ -638,7 +648,20 @@ thead td.calendar {
   background-color: #fff;
 }
 
+.roster-link{
+  text-decoration:none !important;
+}
+.card-player:hover{
+  background-color:#ff9da2;
+  cursor: pointer;
+  /*#F96854;*/
+}
+
 #team1-slots, #team2-slots {
+  float: right;
+}
+
+#signup-link {
   float: right;
 }
 
@@ -646,13 +669,13 @@ thead td.calendar {
 
 
 /*Players page*/
-.loading-ring {
+/*.loading-ring {
     display:    none;
     position:   absolute;
     height:     100%;
     width:      100%;
     background: url('http://i.stack.imgur.com/FhHRx.gif') no-repeat;
-}
+}*/
 /*Player page end*/
 
 

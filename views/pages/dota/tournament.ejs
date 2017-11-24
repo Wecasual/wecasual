@@ -1,0 +1,141 @@
+<% include ../../partials/header.ejs %>
+<% include ../../partials/navbar.ejs %>
+<%if(user){%>
+  <div style="display:none" id="teamid"><%=user.activeTeam[0].teamid%></div>
+<%}%>
+
+<div class="container-fluid top-spacer">
+  <div class="card-header display-4 text-center">
+    Tournament
+  </div>
+  <div class="ml-3 my-3">
+    <h3>The next tournament is <b>Nov. 25th</b> </h3>
+    <h3>Read the details <a href="https://docs.google.com/document/d/1RQllSSb_Kw3sbWeu1WwxKI30jAWPsp-anxpmJSyZFqo/edit?usp=sharing" target="_blank">here</a> </h3>
+  </div>
+
+  <div class="row mt-0">
+    <div class="col-lg-4">
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Active Teams</h3>
+            <p class ="mb-0">Click a team for more information</p>
+            <!-- <input type="text" id="team-search" class="team-search" onkeyup="search()" placeholder="Search for a team.."> -->
+            <div class="card-body pre-scrollable friend-search">
+              <!-- <div class="loading-ring"></div> -->
+              <ul id="team-list" class="team-list">
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Inactive Teams</h3>
+            <p class ="mb-0">Click a team for more information</p>
+            <!-- <input type="text" id="prev-team-search" class="team-search"  onkeyup="search()" placeholder="Search for a team.."> -->
+            <div class="card-body pre-scrollable friend-search">
+              <!-- <div class="loading-ring"></div> -->
+              <ul id="prev-team-list" class="team-list">
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <div class="card rounded my-3">
+        <ul class="list-group list-group-flush mt-0">
+          <li class="list-group-item p-0  text-left mt-0">
+            <!-- TEAM LOGO AND TEAM NAME -->
+            <div class="m-3 text-center">
+              <!-- TEAM LOGO -->
+              <div id="teamlogo" class="mb-3"></div>
+              <h2>
+              <!-- TEAM NAME -->
+              <div class="align-bottom text-1.3em" id="teamname"></div>
+              </h2>
+              <!-- <h6> -->
+              <!-- REG DATE -->
+              <!-- <span class="align-bottom" id="reg-date"></span> -->
+              <!-- </h6> -->
+              <hr>
+            </div>
+            <!-- POINTS AND PREMIUM -->
+            <!-- <div class="row m-3 text-center">
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Premium</h5>
+                  <div id="premium">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Points</h5>
+                  <div id="points">
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Team -->
+            <!-- <div class="m-3">
+              <h5>Team:<span id="team"></span></h5>
+            </div>
+            Total Games
+            <div class="m-3">
+              <h5>Games played:<span id="games-played"></span></h5>
+            </div> -->
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Active Roster</h3>
+            <div class="card-body pre-scrollable">
+            <div id="roster">
+
+            </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Previous Players</h3>
+            <div class="card-body pre-scrollable">
+            <div id="inactiveRoster">
+
+            </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> <!--ROW-->
+    <!-- <div class="card rounded p-3">
+      <iframe class="airtable-embed" src="https://airtable.com/embed/shr15AD1K3nDdxdEz?backgroundColor=purple"
+      frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div> -->
+
+
+    <div class="card-header display-4 text-center mt-5">
+      Wecasual Tournament Winners
+    </div>
+
+
+    <div class="card text-center rounded p-3">
+      <h1>Team monkaS: November 11th, 2017</h1>
+      <img class = "card mt-3 img-fluid mx-auto d-block rounded" alt="monkaS victory card" src="/images/monkaS-victory.png" height="55%" width="55%">
+    </div>
+</div>
+<script src="../../scripts/teams.js"></script>
+<% include ../../partials/footer.ejs %>
