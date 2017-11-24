@@ -5,6 +5,7 @@
 body{
   background-color: #fafafa !important;
   font-family: 'Questrial', sans-serif !important;
+  color: #555;
 }
 .text-1.3em{
   font-size: 1.3em;
@@ -375,7 +376,8 @@ input[type=text], select, textarea {
 
 
 .card-header{
-  background-color: #e6e6e6;
+  /*background-color: #e6e6e6;*/
+  background-color: #f1f1f1;
 }
 
 a.active{
@@ -651,6 +653,7 @@ thead td.calendar {
 }
 .card-player:hover{
   background-color:#ff9da2;
+  cursor: pointer;
   /*#F96854;*/
 }
 
