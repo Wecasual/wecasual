@@ -86,9 +86,10 @@ discordBot.init(admins);
 
 var profilesRepo = require('./repos/profiles-repo')(pool);
 var scheduleRepo = require('./repos/schedule-repo')(pool);
+var teamRepo = require('./repos/team-repo')(pool);
 var contactRepo = require('./repos/contact-repo')(base);
 
-var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var profileRoute = require('./lib/routes/profile-route')(profilesRepo, teamRepo);
 var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);

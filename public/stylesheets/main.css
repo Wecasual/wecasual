@@ -404,6 +404,10 @@ a.active{
 
 .pink-btn{
   border: 0px solid #555;
+  background-color:#ff9da2;
+}
+.pink-btn:hover{
+  background-color:#F96854;
 }
 
 
@@ -613,6 +617,7 @@ thead td.calendar {
   height: 70%;
   width: 60%;
   background-color: #f1f1f1;
+  overflow-x: hidden;
   /*Display over everything else*/
   z-index: 10;
 }
@@ -639,6 +644,10 @@ thead td.calendar {
 }
 
 #team1-slots, #team2-slots {
+  float: right;
+}
+
+#signup-link {
   float: right;
 }
 

@@ -115,8 +115,8 @@
             <!-- Team -->
             <div class="m-3">
               <h5>Team:
-                <%if(user.team){%>
-                <a href="/dota/teams"><b><%= user['Team Name'] %></b></a>
+                <%if(user.activeTeam[0]){%>
+                <a href="/dota/teams"><b><%= user.activeTeam[0].teamname %></b></a>
                 <%}else{%>
                   <b>No team</b>
                 <%}%>
@@ -135,7 +135,7 @@
       <div class="card rounded my-3">
         <ul class="list-group list-group-flush mt-0">
           <li class="list-group-item p-0  text-center mt-0">
-            <a class="m-3 pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+            <a class="m-3 pink-btn btn btn-primary mb-2 dropdown" href="#readBeforePlaying" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
               <h5 class = "mb-0">How to Wecasual<span class="down-caret"></span></h5>
             </a>
 
@@ -175,7 +175,7 @@
       <!-- <div class="card rounded my-3">
         <ul class="list-group list-group-flush mt-0">
           <li class="list-group-item p-0  text-left mt-0">
-            <a class="m-3 pink-btn btn btn-primary mb-2 join-league-btn" href="https://airtable.com/shrtP1DYNpqdA5eZP" target="_blank" style="background-color: #f00">
+            <a class="m-3 pink-btn btn btn-primary mb-2" href="https://airtable.com/shrtP1DYNpqdA5eZP" target="_blank" style="background-color: #f00">
               <h5 class = "mb-0">Sign up for the Wecasual tournament!</h5>
             </a>
             <div class="m-3">
@@ -202,7 +202,7 @@
           <div class="card rounded">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <a class="pink-btn btn btn-primary mb-2 dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
                   <h4 class = "mb-0">Game Signup<span class="down-caret"></span></h4>
                 </a>
                 <p class ="mb-0">Sign up for an existing game, all members welcome!</p>
@@ -254,7 +254,7 @@
           <div class="card rounded mt-3">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 join-league-btn dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <a class="pink-btn btn btn-primary mb-2 dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
                   <h4 class = "mb-0">Schedule a Game<span class="down-caret"></span></h4>
                 </a>
                 <p class ="mb-0">Schedule your own game time</p>
@@ -310,7 +310,9 @@
                 <div class="card rounded game-info p-2">
                   <div class="game-info-header p-2">
                     <span id="game-title"></span>
+                    <span id="signup-link"></span>
                     <div id="game-time"></div>
+
                   </div>
                   <div class="game-info-body row">
                     <div class="col-md-6">

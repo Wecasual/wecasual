@@ -8,13 +8,13 @@ function userLogin(pool, profile, callback){
       var queryString = 'INSERT INTO player (username, discordid, avatar, status) VALUES ($1, $2, $3, $4) ON CONFLICT (discordid) DO UPDATE SET (username, avatar) = ($1, $3) RETURNING *';
       var values = [profile.username, profile.id, 'https://cdn.discordapp.com/avatars/' + profile.id + '/' + profile.avatar + '.png', "Not Registered"];
       // console.log(queryString);
-      client.query(queryString, values, function(err, result){
-        client.release();
+      client.query(queryString, values, function(err, player){
         if(err){
+          client.release();
           callback && callback(err, null);
         }
         else {
-          callback && callback(null, result.rows[0]);
+          appendTeamInfo(client, player.rows[0], callback);
         }
       });
     }
@@ -27,19 +27,45 @@ function getUser(pool, playerid, callback){
     if(err){
       callback && callback(err);
     }
-    else{
+    else{//Get player info
       var queryString = 'SELECT * FROM player WHERE playerid = ' + playerid;
       // console.log(queryString);
-      client.query(queryString, function(err, result){
-        client.release();
+      client.query(queryString, function(err, player){
         if(err){
+          client.release();
           callback && callback(err, null);
         }
-        else {
-          // console.log(result.rows[0]);
-          callback && callback(null, result.rows[0]);
+        else {//Get team info for all teams player belongs to
+          appendTeamInfo(client, player.rows[0], callback);
         }
       });
+    }
+  });
+}
+
+function appendTeamInfo(client, user, callback){
+  var queryString = 'SELECT * FROM team JOIN playerteam ON team.teamid = playerteam.teamid WHERE playerteam.playerid = $1';
+  var values = [user.playerid];
+  // console.log(queryString);
+  client.query(queryString, values, function(err, team){
+    client.release();
+    if(err){
+      callback && callback(err, null);
+    }
+    else{
+      //Format info
+      user.activeTeam = new Array();
+      user.nonActiveTeam = new Array();
+      for(var i = 0; i<team.rows.length; i++){
+        if(team.rows[i].active){
+          user.activeTeam.push(team.rows[i]);
+        }
+        else{
+          user.nonActiveTeam.push(team.rows[i]);
+        }
+      }
+      console.log(user);
+      callback && callback(null, user);
     }
   });
 }

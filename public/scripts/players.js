@@ -41,7 +41,7 @@ $(document).ready(function() {
     $('#friends-list').empty();
 
     //Append  user info to each div
-    if(playerInfo.avatar.includes('null')){
+    if(playerInfo.avatar.includes('null')){//Set avatar to default avatar if player doesn't have one
       $('#avatar').append('<img height="128" width="128" class = "rounded-circle" src=/images/avatar-default.png alt="Avatar Image" />');
     }
     else{
