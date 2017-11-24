@@ -139,13 +139,13 @@ $(document).ready(function(){
     $('.game-info-opacity').fadeIn('fast');
     $('.game-info').slideDown('fast');
     var game = getGame(this.id.substring(7, this.id.length));
-    
+
     //Add header
     $('#game-title')[0].innerHTML = game.name;
     $('#game-time')[0].innerHTML = game.gametime;
     $('#team1-slots')[0].innerHTML = game.team1Slots;
     $('#team2-slots')[0].innerHTML = game.team2Slots;
-
+    $('#signup-link')[0].innerHTML = '<a class="pink-btn btn btn-primary" href="/schedule/dota/quickLink?id=' + game.gameid + '">Play in this game</a>'
     $.ajax({
       type: 'POST',
       url: '/profile/getUsers',
@@ -163,11 +163,12 @@ $(document).ready(function(){
           for(var i = 1; i <= 2; i++){
             html = "";
             res.data["team" + i].forEach(function(player){
-              if(player.avatar.includes("null")){//If player doesn't haven't avatar display default discord avatar
-                html += '<div class="card-roster mb-1 p-1"><img height="20" width="20"  class = "rounded-circle" src=/images/avatar-default.png alt"Avatar"> ' + player.username + '</div>';
+              var avatar = player.avatar;
+              if(avatar.includes('null')){
+                avatar='/images/avatar-default.png';
               }
               else{
-                html += '<div class="card-roster mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + player.avatar + ' alt"Avatar"> ' + player.username + '</div>';
+                html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
               }
             });
             $('#team' + i + '-roster')[0].innerHTML = html;

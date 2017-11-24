@@ -29,10 +29,19 @@ $(document).ready(function() {
           }
           else if(res.success){
             friend = res.data;
-            friend.forEach(function(ele){
-              $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
-              friendid.push(ele.friendid);
+            var html = "";
+            friend.forEach(function(fr){
+              var avatar = fr.avatar;
+              if(avatar.includes('null')){
+                avatar='/images/avatar-default.png';
+              }
+              html += '<a class="roster-link" href="dota/players?playerid=' + fr.friendid +
+              '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+              fr.username + '</div></a>';
+              // $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
+              friendid.push(fr.friendid);
             });
+            $("#friends-list")[0].innerHTML = html;
             $.ajax({
               type: 'POST',
               url: '/profile/getAllUsers',
@@ -64,19 +73,36 @@ $(document).ready(function() {
           }
           else if(res.success){
             friendRequest = res.data;
-            friendRequest.forEach(function(ele){
-              $("#friend-requests").append('<tr id="' + ele.playerid + '"><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username +
-              '</td><td><button type="button" class="btn btn-success">&#10004;</button></td>\
-              <td><button type="button" class="btn btn-danger">&#10008;</button></td></tr>');
-              friendRequestid.push(ele.playerid);
+            var html = "";
+            friendRequest.forEach(function(frReq){
+              var avatar = frReq.avatar;
+              if(avatar.includes('null')){
+                avatar='/images/avatar-default.png';
+              }
+              html += '<div class="row mb-1"><div class="col-md-8"><a class="roster-link" href="dota/players?playerid=' + frReq.reqid +
+              '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+              frReq.username + '</div></a></div><div class="col-md-2"><button id="req-' + frReq.reqid + '" type="button" class="btn btn-success">&#10004;</button></div><div class="col-md-2">\
+              <button id="req-' + frReq.reqid + '" type="button" class="btn btn-danger">&#10008;</button></div></div>';
+              // html += '<tr><td><a class="roster-link" href="dota/players?playerid=' + frReq.playerid +
+              // '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+              // frReq.username + '</div></a></td><td><button type="button" class="btn btn-success">&#10004;</button></td><td>\
+              // <button type="button" class="btn btn-danger">&#10008;</button></td></tr>';
             });
+            $('#friend-requests')[0].innerHTML = html;
+          //   friendRequest.forEach(function(ele){
+          //     $("#friend-requests").append('<tr id="' + ele.playerid + '"><th scope="row"><img height="46" width="46" class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username +
+          //     '</td><td><button type="button" class="btn btn-success">&#10004;</button></td>\
+          //     <td><button type="button" class="btn btn-danger">&#10008;</button></td></tr>');
+          //     friendRequestid.push(ele.playerid);
+          //   });
+          // }
           }
         }
       });
     }
   });
   $(document).on('click', '.btn-success', function(){
-    reqid = $(this).closest('tr').attr('id');
+    reqid = this.id.substring(4, this.id.length);
     $.ajax({
       type: 'POST',
       url: '/profile/acceptFriend',
@@ -96,7 +122,7 @@ $(document).ready(function() {
     });
   });
   $(document).on('click', '.btn-danger', function(){
-    reqid = $(this).closest('tr').attr('id');
+    reqid = this.id.substring(4, this.id.length);
     $.ajax({
       type: 'POST',
       url: '/profile/declineFriend',

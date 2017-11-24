@@ -3,17 +3,17 @@ function init(bot, admins){
       console.log('Logged in as %s - %s\n', bot.username, bot.id);
   });
 
-  bot.on('message', function(user, userID, channelID, message, event) {
-    if(admins.includes(userID)){
-      if (message.includes("~weeka")) {
-        var info = message.split(";")
-        bot.sendMessage({
-            to: channelID,
-            message: "@here Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! <http://wecasual.gg/schedule/dota/quickLink?id=" + info[4] + ">"
-        });
-      }
-    }
-  });
+  // bot.on('message', function(user, userID, channelID, message, event) {
+  //   if(admins.includes(userID)){
+  //     if (message.includes("~weeka")) {
+  //       var info = message.split(";")
+  //       bot.sendMessage({
+  //           to: channelID,
+  //           message: "@here Click here to signup for " + info[1] + " on " + info[2] + " at " + info[3] + "! <http://wecasual.gg/schedule/dota/quickLink?id=" + info[4] + ">"
+  //       });
+  //     }
+  //   }
+  // });
 
   bot.on('guildMemberAdd', function(event) {
     bot.sendMessage({
