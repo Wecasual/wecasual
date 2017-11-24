@@ -116,7 +116,7 @@
             <div class="m-3">
               <h5>Team:
                 <%if(user.activeTeam[0]){%>
-                <a href="/dota/tournament"><b><%= user.activeTeam[0].teamname %></b></a>
+                <a href="/dota/tournament?teamid=<%= user.activeTeam[0].teamid%>"><b><%= user.activeTeam[0].teamname %></b></a>
                 <%}else{%>
                   <b>No team</b>
                 <%}%>
@@ -386,7 +386,10 @@
                   <li class="list-group-item">
                     <h3>Friends</h3>
                     <div class="card-body pre-scrollable">
-                      <table class="table table-striped">
+                      <div id="friends-list">
+
+                      </div>
+                      <!-- <table class="table table-striped">
                         <thead>
                             <tr>
                               <th></th>
@@ -395,7 +398,7 @@
                         </thead>
                         <tbody id="friends-list">
                         </tbody>
-                      </table>
+                      </table> -->
                     </div>
                   </li>
                 </ul>
@@ -410,7 +413,10 @@
                     <h3>Friend Requests</h3>
                     <p class = "mb-0">People who want to add you as a friend</p>
                     <div class="card-body pre-scrollable">
-                      <table class="table table-striped">
+                      <div id="friend-requests">
+
+                      </div>
+                      <!-- <table class="table table-striped">
                         <thead>
                             <tr>
                               <th></th>
@@ -421,7 +427,7 @@
                         </thead>
                         <tbody id="friend-requests">
                         </tbody>
-                      </table>
+                      </table> -->
                     </div>
                   </li>
                 </ul>
@@ -436,7 +442,7 @@
                 <p class ="mb-0">Click to send a friend request</p>
                 <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
                 <div class="card-body pre-scrollable friend-search">
-                  <div class="loading-ring"></div>
+                  <!-- <div class="loading-ring"></div> -->
                   <ul id="user-list">
                   </ul>
                 </div>

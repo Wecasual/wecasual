@@ -94,7 +94,7 @@ var loginRoute = require('./lib/routes/login-route')();
 var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
-var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
+var teamRoute = require('./lib/routes/team-route')(teamRepo);
 
 
 
@@ -266,6 +266,10 @@ app.post(profileRoute.getAllUsers.route, ensureRealm, profileRoute.getAllUsers.h
 app.post(profileRoute.getUsers.route, ensureRealm, profileRoute.getUsers.handler);
 app.post(profileRoute.getUser.route, ensureRealm, profileRoute.getUser.handler);
 // app.post(profileRoute.updateUser.route, ensureAuthenticated, profileRoute.updateUser.handler);
+
+//team route
+app.post(teamRoute.getAllTeams.route, teamRoute.getAllTeams.handler);
+app.post(teamRoute.getTeam.route, teamRoute.getTeam.handler);
 
 
 

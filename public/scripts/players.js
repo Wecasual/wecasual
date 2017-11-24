@@ -2,6 +2,9 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   var url = window.location.href;
   var playerid = url.split('=')[1];
+  if(!playerid){
+    playerid = $("#userid").html();
+  }
   if(playerid){
     populatePlayer(playerid);
   }
@@ -43,7 +46,7 @@ function populatePlayer(playerid){
   // $('#points').empty();
   // $('#team').empty();
   // $('#games-played').empty();
-  $('#friends-list').empty();
+  // $('#friends-list').empty();
 
   //Get info  for selected player
   $.ajax({
@@ -57,12 +60,11 @@ function populatePlayer(playerid){
       else if(res.success){
         var player = res.data;
         //Append  user info to each div
-        if(player.avatar.includes('null')){//Set avatar to default avatar if player doesn't have one
-          $('#avatar')[0].innerHTML = '<img height="128" width="128" class = "rounded-circle" src=/images/avatar-default.png alt="Avatar Image" />';
+        var avatar = player.avatar;
+        if(avatar.includes('null')){
+          avatar='/images/avatar-default.png';
         }
-        else{
-          $('#avatar')[0].innerHTML = '<img height="128" width="128" class = "rounded-circle" src=' + player.avatar + ' alt="Avatar Image" />';
-        }
+        $('#avatar')[0].innerHTML = '<img height="128" width="128" class = "rounded-circle" src=' + avatar + ' alt="Avatar Image" />';
         $('#username')[0].innerHTML = player.username;
         var date = new Date(player.registrationdate)
         $('#reg-date')[0].innerHTML = 'Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
@@ -81,7 +83,7 @@ function populatePlayer(playerid){
         }
 
         if(player.activeTeam[0]){
-          $('#team')[0].innerHTML = '<a href="/dota/tournament"><b> ' + player.activeTeam[0].teamname + '</b></a>';
+          $('#team')[0].innerHTML = '<a href="/dota/tournament?teamid=' + player.activeTeam[0].teamid + '" target="_blank"><b> ' + player.activeTeam[0].teamname + '</b></a>';
         }
         else{
           $('#team')[0].innerHTML = '<b> No Team</b>';
@@ -104,12 +106,20 @@ function populatePlayer(playerid){
       else if(res.success){
         friend = res.data;
         if(friend.length){
-          friend.forEach(function(friendEle){
-            $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + friendEle.avatar + '></th><td>' + friendEle.username + '</td></tr>');
+          var html = "";
+          friend.forEach(function(fr){
+            var avatar = fr.avatar;
+            if(avatar.includes('null')){
+              avatar='/images/avatar-default.png';
+            }
+            html += '<a id="' + fr.friendid + '"class="player-btn roster-link"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+            fr.username + '</div></a>';
+            // $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
           });
+          $("#friends-list")[0].innerHTML = html;
         }
         else{
-          $("#friends-list").append('<tr><th scope="row">No Friends</th><td>:(</td></tr>')
+          $("#friends-list")[0].innerHTML = '<tr><th scope="row">No Friends</th><td>:(</td></tr>';
         }
       }
     }

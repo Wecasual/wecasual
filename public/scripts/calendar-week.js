@@ -163,11 +163,12 @@ $(document).ready(function(){
           for(var i = 1; i <= 2; i++){
             html = "";
             res.data["team" + i].forEach(function(player){
-              if(player.avatar.includes("null")){//If player doesn't haven't avatar display default discord avatar
-                html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-roster mb-1 p-1"><img height="20" width="20"  class = "rounded-circle" src=/images/avatar-default.png alt"Avatar"> ' + player.username + '</div></a>';
+              var avatar = player.avatar;
+              if(avatar.includes('null')){
+                avatar='/images/avatar-default.png';
               }
               else{
-                html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-roster mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + player.avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
+                html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
               }
             });
             $('#team' + i + '-roster')[0].innerHTML = html;

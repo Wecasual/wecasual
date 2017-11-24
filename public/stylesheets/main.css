@@ -411,7 +411,7 @@ a.active{
 }
 
 
-#user-search {
+#user-search, #team-search {
     background-image: url('/images/search-icon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -423,14 +423,14 @@ a.active{
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#user-list {
+#user-list, #team-list {
     /* Remove default list styling */
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#user-list li a {
+#user-list li a, #team-list li a {
     border: 1px solid #ddd; /* Add a border to all links */
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6; /* Grey background color */
@@ -441,7 +441,7 @@ a.active{
     display: block; /* Make it into a block element to fill the whole list */
 }
 
-#user-list li a:hover:not(.header) {
+#user-list li a:hover:not(.header), #team-list li a:hover:not(.header) {
     background-color: #ff9da2; /* Add a hover effect to all links, except for headers */
 }
 
@@ -472,6 +472,9 @@ a.active{
   transition: all .25s ease-out;
 }
 
+.btn-success:hover, .btn-danger:hover {
+  cursor: pointer;
+}
 /*Home page end*/
 
 /*Calendar*/
@@ -635,7 +638,7 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-roster {
+.card-player {
   width:100%;
   border:1px solid #d1d1d1;
   border-radius:5px;
@@ -646,7 +649,7 @@ thead td.calendar {
 .roster-link{
   text-decoration:none !important;
 }
-.card-roster:hover{
+.card-player:hover{
   background-color:#ff9da2;
   /*#F96854;*/
 }
@@ -663,13 +666,13 @@ thead td.calendar {
 
 
 /*Players page*/
-.loading-ring {
+/*.loading-ring {
     display:    none;
     position:   absolute;
     height:     100%;
     width:      100%;
     background: url('http://i.stack.imgur.com/FhHRx.gif') no-repeat;
-}
+}*/
 /*Player page end*/
 
 

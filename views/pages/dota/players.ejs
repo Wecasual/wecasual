@@ -1,6 +1,10 @@
 <% include ../../partials/header.ejs %>
 <% include ../../partials/navbar.ejs %>
 
+<%if(user){%>
+  <div style="display:none" id="userid"><%=user.playerid%></div>
+<%}%>
+
 <div class="container-fluid top-spacer">
   <div class="card-header display-4 text-center">
     Players
@@ -16,7 +20,7 @@
             <p class ="mb-0">Click a player for more information</p>
             <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
             <div class="card-body pre-scrollable friend-search">
-              <div class="loading-ring"></div>
+              <!-- <div class="loading-ring"></div> -->
               <ul id="user-list">
               </ul>
             </div>
@@ -80,7 +84,10 @@
           <li class="list-group-item">
             <h3>Friends</h3>
             <div class="card-body pre-scrollable">
-              <table class="table table-striped">
+              <div id="friends-list">
+
+              </div>
+              <!-- <table class="table table-striped">
                 <thead>
                     <tr>
                       <th></th>
@@ -89,7 +96,7 @@
                 </thead>
                 <tbody id="friends-list">
                 </tbody>
-              </table>
+              </table> -->
             </div>
           </li>
         </ul>
