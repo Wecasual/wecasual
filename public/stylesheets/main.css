@@ -442,7 +442,7 @@ a.active{
 }
 
 #user-list li a:hover:not(.header) {
-    background-color: #eee; /* Add a hover effect to all links, except for headers */
+    background-color: #ff9da2; /* Add a hover effect to all links, except for headers */
 }
 
 .sidebar{
@@ -641,6 +641,14 @@ thead td.calendar {
   border-radius:5px;
   color:#555;
   background-color: #fff;
+}
+
+.roster-link{
+  text-decoration:none !important;
+}
+.card-roster:hover{
+  background-color:#ff9da2;
+  /*#F96854;*/
 }
 
 #team1-slots, #team2-slots {

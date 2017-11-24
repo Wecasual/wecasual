@@ -43,6 +43,7 @@ function getUser(pool, playerid, callback){
   });
 }
 
+//Gets team info for specified user and adds it to the user object. Used in getUser and userLogin
 function appendTeamInfo(client, user, callback){
   var queryString = 'SELECT * FROM team JOIN playerteam ON team.teamid = playerteam.teamid WHERE playerteam.playerid = $1';
   var values = [user.playerid];
@@ -64,7 +65,6 @@ function appendTeamInfo(client, user, callback){
           user.nonActiveTeam.push(team.rows[i]);
         }
       }
-      console.log(user);
       callback && callback(null, user);
     }
   });
