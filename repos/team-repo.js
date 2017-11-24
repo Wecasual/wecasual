@@ -53,13 +53,13 @@ function appendPlayerInfo(client, team, callback){
     else {
       //Format info
       team.activeRoster = new Array();
-      team.nonActiveRoster = new Array();
+      team.inactiveRoster = new Array();
       for(var i = 0; i<player.rows.length; i++){
         if(player.rows[i].active){
           team.activeRoster.push(player.rows[i]);
         }
         else{
-          team.nonActiveRoster.push(player.rows[i]);
+          team.inactiveRoster.push(player.rows[i]);
         }
       }
       callback && callback(null, team);

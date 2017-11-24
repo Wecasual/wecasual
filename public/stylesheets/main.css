@@ -411,7 +411,7 @@ a.active{
 }
 
 
-#user-search, #team-search {
+#user-search, #team-search, #prev-team-search {
     background-image: url('/images/search-icon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -423,14 +423,14 @@ a.active{
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#user-list, #team-list {
+#user-list, .team-list, .prev-team-list {
     /* Remove default list styling */
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#user-list li a, #team-list li a {
+#user-list li a, .team-list li a, .prev-team-list li a {
     border: 1px solid #ddd; /* Add a border to all links */
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6; /* Grey background color */
@@ -441,7 +441,7 @@ a.active{
     display: block; /* Make it into a block element to fill the whole list */
 }
 
-#user-list li a:hover:not(.header), #team-list li a:hover:not(.header) {
+#user-list li a:hover:not(.header), .team-list li a:hover:not(.header), .prev-team-list li a:hover:not(.header) {
     background-color: #ff9da2; /* Add a hover effect to all links, except for headers */
 }
 

@@ -10,17 +10,29 @@
   </div>
   <div class="row mt-5">
     <div class="col-lg-4">
-      <h5 class="text-center my-1">
-        <b>Search for a team</b>
-      </h5>
       <div class="card rounded mt-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
+            <h3>Active Teams</h3>
             <p class ="mb-0">Click a team for more information</p>
-            <input type="text" id="team-search" onkeyup="search()" placeholder="Search for a team..">
+            <!-- <input type="text" id="team-search" class="team-search" onkeyup="search()" placeholder="Search for a team.."> -->
             <div class="card-body pre-scrollable friend-search">
               <!-- <div class="loading-ring"></div> -->
-              <ul id="team-list">
+              <ul id="team-list" class="team-list">
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card rounded mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h3>Inactive Teams</h3>
+            <p class ="mb-0">Click a team for more information</p>
+            <!-- <input type="text" id="prev-team-search" class="team-search"  onkeyup="search()" placeholder="Search for a team.."> -->
+            <div class="card-body pre-scrollable friend-search">
+              <!-- <div class="loading-ring"></div> -->
+              <ul id="prev-team-list" class="team-list">
               </ul>
             </div>
           </li>
@@ -95,7 +107,7 @@
           <li class="list-group-item">
             <h3>Previous Players</h3>
             <div class="card-body pre-scrollable">
-            <div id="nonActiveRoster">
+            <div id="inactiveRoster">
 
             </div>
             </div>
