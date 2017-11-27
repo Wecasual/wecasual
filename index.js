@@ -239,9 +239,9 @@ app.get(loginRoute.logout.route, loginRoute.logout.handler);
 //signup route
 app.get(signupRoute.signup.route, ensureRealm, signupRoute.signup.handler);
 app.get(signupRoute.dotaSignup.route, ensureRealm, signupRoute.dotaSignup.handler);
-app.get(signupRoute.lolSignup.route, ensureRealm, signupRoute.lolSignup.handler);
+// app.get(signupRoute.lolSignup.route, ensureRealm, signupRoute.lolSignup.handler);
 app.post(signupRoute.submit.route, ensureRealm, ensureAuthenticated, signupRoute.submit.handler);
-app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
+// app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
 //schedule route
 app.get(scheduleRoute.dotaQuickLink.route, ensureRealm, ensureAuthenticated, scheduleRoute.dotaQuickLink.handler);
