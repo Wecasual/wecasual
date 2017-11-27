@@ -19,7 +19,7 @@ var pg = require('pg');
 // var pg = require('pg');
 
 //Butter
-var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
+// var butter = require('buttercms')('1df90da7cb8d018960e1e922c67506357c568652');
 
 //Airtable
 var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base('appj7HjmgCn8ctYDU');
@@ -333,9 +333,9 @@ app.get('/dota/thank-you-signup', ensureRealm, ensureAuthenticated, function(req
 });
 
 // //butter
-app.get('/blog', ensureRealm, renderHome)
-app.get('/blog/p/:page', ensureRealm, renderHome)
-app.get('/blog/:slug', ensureRealm, renderPost)
+// app.get('/blog', ensureRealm, renderHome)
+// app.get('/blog/p/:page', ensureRealm, renderHome)
+// app.get('/blog/:slug', ensureRealm, renderPost)
 
 //Steam login route
 // app.get(loginRouteDota.logout.route, loginRouteDota.logout.handler);
@@ -460,33 +460,33 @@ function ensureRealm(req, res, next) {
 
 
 //Butter display
-function renderHome(req, res) {
-  var page = req.params.page || 1;
-
-  butter.post.list({page_size: 10, page: page}).then(function(resp) {
-    res.render('pages/blog', {
-      user: req.user,
-      posts: resp.data.data,
-      next_page: resp.data.meta.next_page,
-      previous_page: resp.data.meta.previous_page,
-      realm: req.session.realm
-    })
-  })
-}
-
-function renderPost(req, res) {
-  var slug = req.params.slug;
-
-  butter.post.retrieve(slug).then(function(resp) {
-    res.render('pages/post', {
-      user: req.user,
-      title: resp.data.data.title,
-      post: resp.data.data,
-      published: new Date(resp.data.data.published),
-      realm: req.session.realm
-    })
-  })
-}
+// function renderHome(req, res) {
+//   var page = req.params.page || 1;
+//
+//   butter.post.list({page_size: 10, page: page}).then(function(resp) {
+//     res.render('pages/blog', {
+//       user: req.user,
+//       posts: resp.data.data,
+//       next_page: resp.data.meta.next_page,
+//       previous_page: resp.data.meta.previous_page,
+//       realm: req.session.realm
+//     })
+//   })
+// }
+//
+// function renderPost(req, res) {
+//   var slug = req.params.slug;
+//
+//   butter.post.retrieve(slug).then(function(resp) {
+//     res.render('pages/post', {
+//       user: req.user,
+//       title: resp.data.data.title,
+//       post: resp.data.data,
+//       published: new Date(resp.data.data.published),
+//       realm: req.session.realm
+//     })
+//   })
+// }
 
 
 //Error handling

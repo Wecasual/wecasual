@@ -56,13 +56,13 @@ function appendTeamInfo(client, user, callback){
     else{
       //Format info
       user.activeTeam = new Array();
-      user.nonActiveTeam = new Array();
+      user.inactiveTeam = new Array();
       for(var i = 0; i<team.rows.length; i++){
         if(team.rows[i].active){
           user.activeTeam.push(team.rows[i]);
         }
         else{
-          user.nonActiveTeam.push(team.rows[i]);
+          user.inactiveTeam.push(team.rows[i]);
         }
       }
       callback && callback(null, user);

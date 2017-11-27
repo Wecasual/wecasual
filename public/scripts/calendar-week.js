@@ -64,7 +64,7 @@ Cal.prototype.showWeek = function(y, m, d) {
 
   //Create end date for week
   var dEnd = new Date(y, m, d);
-  dEnd.setDate(dEnd.getDate()+7*this.weeks);
+  dEnd.setDate(dEnd.getDate()+7*this.weeks-1);
 
 
   var html = '';

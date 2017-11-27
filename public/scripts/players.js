@@ -82,11 +82,21 @@ function populatePlayer(playerid){
 
         }
 
-        if(player.activeTeam[0]){
+        if(player.activeTeam.length != 0){
           $('#team')[0].innerHTML = '<a href="/dota/tournament?teamid=' + player.activeTeam[0].teamid + '" target="_blank"><b> ' + player.activeTeam[0].teamname + '</b></a>';
         }
         else{
           $('#team')[0].innerHTML = '<b> No Team</b>';
+        }
+        if(player.inactiveTeam.length != 0){
+          var html = '<a href="/dota/tournament?teamid=' + player.inactiveTeam[0].teamid + '" target="_blank"><b> ' + player.inactiveTeam[0].teamname + '</b></a>';
+          for(var i = 1; i < player.inactiveTeam.length; i++){
+            html += ', <a href="/dota/tournament?teamid=' + player.inactiveTeam[i].teamid + '" target="_blank"><b> ' + player.inactiveTeam[i].teamname + '</b></a>'
+          }
+          $('#prev-team')[0].innerHTML = html;
+        }
+        else{
+          $('#prev-team')[0].innerHTML = '<b> No previous teams</b>';
         }
 
         $('#games-played')[0].innerHTML = '<b> ' + player.totalgames + '</b>';
@@ -119,7 +129,7 @@ function populatePlayer(playerid){
           $("#friends-list")[0].innerHTML = html;
         }
         else{
-          $("#friends-list")[0].innerHTML = '<tr><th scope="row">No Friends</th><td>:(</td></tr>';
+          $("#friends-list")[0].innerHTML = '<div>No Friends :(</div>';
         }
       }
     }
