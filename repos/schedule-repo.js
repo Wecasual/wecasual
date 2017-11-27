@@ -52,7 +52,7 @@ function scheduleGame(pool, info, callback){
           callback && callback(err, null);
         }
         else {
-          var queryString = 'UPDATE player SET wecasualpoints = wecasualpoints + 300 WHERE playerid = $1';
+          var queryString = 'UPDATE player SET wecasualpoints = wecasualpoints + 200 WHERE playerid = $1';
           var values = [info.playerid];
           client.query(queryString, values, function(err){
             client.release();
