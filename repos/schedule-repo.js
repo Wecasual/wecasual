@@ -21,7 +21,7 @@ function gameSignup(pool, playerid, gameid, team, quickLink, callback){
               }
             });
           }
-          var queryString = 'UPDATE player SET totalgames = totalgames + 1 WHERE playerid = $1';
+          var queryString = 'UPDATE player SET totalgames = totalgames + 1, wecasualpoints = wecasualpoints + 100 WHERE playerid = $1';
           var values = [playerid];
           client.query(queryString, values, function(err){
             client.release();
@@ -47,14 +47,22 @@ function scheduleGame(pool, info, callback){
       var queryString = 'INSERT INTO game (name, gametime, discordroom, pubsession) VALUES ($1, $2, $3, $4) RETURNING *';
       var values = [info.name, info.gametime, info.discordroom, info.pubsession];
       client.query(queryString, values, function(err, result){
-        client.release();
         if(err){
+          client.release();
           callback && callback(err, null);
         }
         else {
-          // console.log(result.rows[0]);
-          // console.log(games);
-          callback && callback(null, result.rows[0]);
+          var queryString = 'UPDATE player SET wecasualpoints = wecasualpoints + 300 WHERE playerid = $1';
+          var values = [info.playerid];
+          client.query(queryString, values, function(err){
+            client.release();
+            if(err){
+              callback && callback(err);
+            }
+            else{
+              callback && callback(null, result.rows[0]);
+            }
+          });
         }
       });
     }

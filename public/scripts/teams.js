@@ -64,7 +64,7 @@ function populateTeam(teamid){
       }
       else if(res.success){
         var team = res.data;
-        console.log(team);
+        // console.log(team);
         //Append  team info to each div
         var teamlogo = team.teamlogo;
         if(!teamlogo){

@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var username = $("#username").html();
+  var playerid = $("#userid").html();
   $('#schedule-game').bootstrapValidator({
     feedbackIcons: {
       valid: 'glyphicon glyphicon-ok',
@@ -41,7 +42,8 @@ $(document).ready(function(){
         time: $('#time').val(),
         discordRoom: $('#discordRoom').find(":selected").text(),
         announce: $('#announce').is(":checked"),
-        username: username},
+        username: username,
+        playerid: playerid},
       success: function(res){
         if(!res.success){
           alert(res.error);
