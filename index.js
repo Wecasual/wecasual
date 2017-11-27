@@ -110,13 +110,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // HTTPS redirect (Comment if not working locally)
-// app.use(function(req, res, next) {
-//     if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
-//         res.redirect('https://' + req.get('Host') + req.url);
-//     }
-//     else
-//         next();
-// });
+app.use(function(req, res, next) {
+    if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
+        res.redirect('https://' + req.get('Host') + req.url);
+    }
+    else
+        next();
+});
 
 //Session middleware
 app.use(cookieSession({
@@ -239,9 +239,9 @@ app.get(loginRoute.logout.route, loginRoute.logout.handler);
 //signup route
 app.get(signupRoute.signup.route, ensureRealm, signupRoute.signup.handler);
 app.get(signupRoute.dotaSignup.route, ensureRealm, signupRoute.dotaSignup.handler);
-app.get(signupRoute.lolSignup.route, ensureRealm, signupRoute.lolSignup.handler);
+// app.get(signupRoute.lolSignup.route, ensureRealm, signupRoute.lolSignup.handler);
 app.post(signupRoute.submit.route, ensureRealm, ensureAuthenticated, signupRoute.submit.handler);
-app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
+// app.post(signupRoute.submitSkillLevel.route, ensureRealm, ensureAuthenticated, signupRoute.submitSkillLevel.handler);
 
 //schedule route
 app.get(scheduleRoute.dotaQuickLink.route, ensureRealm, ensureAuthenticated, scheduleRoute.dotaQuickLink.handler);
