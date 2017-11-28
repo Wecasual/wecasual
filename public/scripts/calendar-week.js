@@ -146,6 +146,7 @@ $(document).ready(function(){
     $('#team1-slots')[0].innerHTML = game.team1Slots;
     $('#team2-slots')[0].innerHTML = game.team2Slots;
     $('#signup-link')[0].innerHTML = '<a class="pink-btn btn btn-primary" href="/schedule/dota/quickLink?id=' + game.gameid + '">Play in this game</a>'
+    // console.log(game);
     $.ajax({
       type: 'POST',
       url: '/profile/getUsers',
@@ -167,9 +168,7 @@ $(document).ready(function(){
               if(avatar.includes('null')){
                 avatar='/images/avatar-default.png';
               }
-              else{
-                html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
-              }
+              html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
             });
             $('#team' + i + '-roster')[0].innerHTML = html;
           }
