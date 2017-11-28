@@ -87,6 +87,7 @@ discordBot.init(admins);
 var profilesRepo = require('./repos/profiles-repo')(pool);
 var scheduleRepo = require('./repos/schedule-repo')(pool);
 var teamRepo = require('./repos/team-repo')(pool);
+var challengeRepo = require('./repos/challenge-repo')(pool);
 var contactRepo = require('./repos/contact-repo')(base);
 
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
@@ -95,6 +96,7 @@ var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
 var teamRoute = require('./lib/routes/team-route')(teamRepo);
+var challengeRoute = require('./lib/routes/challenge-route')(challengeRepo);
 
 
 
@@ -283,6 +285,8 @@ app.post(profileRoute.getUser.route, ensureRealm, profileRoute.getUser.handler);
 app.post(teamRoute.getAllTeams.route, teamRoute.getAllTeams.handler);
 app.post(teamRoute.getTeam.route, teamRoute.getTeam.handler);
 
+//challenge route
+app.post(challengeRoute.getChallenge.route, challengeRoute.getChallenge.handler);
 
 
 //==========Dota Routes==========
