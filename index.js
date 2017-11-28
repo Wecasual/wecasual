@@ -231,6 +231,15 @@ app.get('/', function(req, res){
   }
 });
 
+//Home page ejs
+app.post('/profile.ejs', function(req, res){
+  res.sendFile('views/pages/dota/profile.ejs', {root: __dirname });
+});
+app.post('/play.ejs', function(req, res){
+  res.sendFile('views/pages/dota/play.ejs', {root: __dirname });
+});
+
+
 //login route
 app.get(loginRoute.authDiscord.route, ensureRealm, passport.authenticate('discord'));
 app.get(loginRoute.authDiscordCallback.route, ensureRealm, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
@@ -491,15 +500,15 @@ function ensureRealm(req, res, next) {
 
 //Error handling
 //Handle 404
-app.use(function(req, res) {
-  res.status(404)
-  res.render('pages/error', {errorMessage: "404: Page not Found"});
-  //.send('404: Page not Found');
-});
-
-// Handle 500
-app.use(function(error, req, res, next) {
-  res.status(500)
-  res.render('pages/error', {errorMessage: "500: Internal Server Error"});
-  //.send('500: Internal Server Error');
-});
+// app.use(function(req, res) {
+//   res.status(404)
+//   res.render('pages/error', {errorMessage: "404: Page not Found"});
+//   //.send('404: Page not Found');
+// });
+//
+// // Handle 500
+// app.use(function(error, req, res, next) {
+//   res.status(500)
+//   res.render('pages/error', {errorMessage: "500: Internal Server Error"});
+//   //.send('500: Internal Server Error');
+// });

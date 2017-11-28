@@ -9,14 +9,14 @@ $(document).ready(function() {
     populatePlayer(playerid);
   }
   //Get all user playerids and usernames
-  var $loading = $('.loading-ring').hide();
-  $(document)
-    .ajaxStart(function () {
-      $loading.show();
-    })
-    .ajaxStop(function () {
-      $loading.hide();
-    });
+  // var $loading = $('.loading-ring').hide();
+  // $(document)
+  //   .ajaxStart(function () {
+  //     $loading.show();
+  //   })
+  //   .ajaxStop(function () {
+  //     $loading.hide();
+  //   });
   $.ajax({
     type: 'POST',
     url: '/profile/getAllUsers',

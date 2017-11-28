@@ -1,4 +1,9 @@
 $(document).ready(function(){
+  var username = $("#username").html();
+  var playerid = $("#userid").html();
+
+  //=====SIGN UP FOR A GAME======
+  //Available games to sign up for
   $.ajax({
     type: 'POST',
     url: '/schedule/getAllSchedule',
@@ -23,7 +28,6 @@ $(document).ready(function(){
             game.gametime + '</td><td>' +
             game.team1Slots + '</td><td>' + game.team2Slots + '</td></tr>');
           }
-
         });
         $('#game-signup').bootstrapValidator({
           feedbackIcons: {
@@ -48,36 +52,12 @@ $(document).ready(function(){
             }
           }
         });
-        res.data.myGames.forEach(function(game){
-          var team;
-          if(game.team1){
-            if(game.team1.includes(res.data.playerid)){
-              team = 'Team 1';
-            }
-          }
-          if(game.team2){
-            if(game.team2.includes(res.data.playerid)){
-              team = 'Team 2';
-            }
-          }
-          if(game.pubsession){
-            $('#my-game-list').append('<tr><td>' +
-            game.name + '</td><td>' +
-            game.gametime + '</td><td>' +
-            game.team1Slots + '</td> <td>N/A</td><td>' + team + '</td><td>' +
-            game.discordroom + '</td></tr>');
-          }
-          else{
-            $('#my-game-list').append('<tr><td>' +
-            game.name + '</td><td>' +
-            game.gametime + '</td><td>' +
-            game.team1Slots + '</td> <td>' + game.team2Slots + '</td><td>' + team + '</td><td>' +
-            game.discordroom + '</td></tr>');
-          }
-        });
       }
     }
   });
+
+  //=====SCHEDULE A GAME======
+  //Toggle team 2 radio button if a pub session is selected
   $(document).on('change', 'input:radio[name="game"]', function(){
     if(this.className == 'pub'){
       $('#team2').prop('checked', false);
@@ -87,5 +67,66 @@ $(document).ready(function(){
     else{
       $('#team2').attr('disabled', false);
     }
+  });
+
+  $('#schedule-game').bootstrapValidator({
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      gameType: {
+        validators: {
+          notEmpty: {
+            message: 'Required'
+          }
+        }
+      },
+      date: {
+        validators: {
+          notEmpty: {
+            message: 'Required'
+          }
+        }
+      },
+      time: {
+        validators: {
+          notEmpty: {
+            message: 'Required'
+          }
+        }
+      }
+    }
+  }).on('success.form.bv', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: $('#schedule-game').attr('action'),
+      data: {
+        gameType: $('#gameType').val(),
+        pubSession: $('#pubSession').is(":checked"),
+        date: $('#date').val(),
+        time: $('#time').val(),
+        discordRoom: $('#discordRoom').find(":selected").text(),
+        announce: $('#announce').is(":checked"),
+        username: username,
+        playerid: playerid},
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          $('#gameType').val("");
+          $('#pubSession')[0].checked = false;
+          $('#date').val("");
+          $('#time').val("21:00");
+          $('#discordRoom').val("1");
+          $('#announce')[0].checked = true;
+          alert(res.message);
+          location.reload();
+        }
+      }
+    });
   });
 });
