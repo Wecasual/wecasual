@@ -138,7 +138,7 @@ function getFriends(pool, playerid, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM player LEFT OUTER JOIN playerfriend ON player.playerid = playerfriend.friendid WHERE playerfriend.playerid = $1';
+      var queryString = 'SELECT player.playerid, player.avatar, player.username FROM player LEFT OUTER JOIN playerfriend ON player.playerid = playerfriend.friendid WHERE playerfriend.playerid = $1';
       var values = [playerid];
       // console.log(queryString);
       // console.log(values);

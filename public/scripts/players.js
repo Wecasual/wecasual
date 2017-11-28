@@ -122,7 +122,7 @@ function populatePlayer(playerid){
             if(avatar.includes('null')){
               avatar='/images/avatar-default.png';
             }
-            html += '<a id="' + fr.friendid + '"class="player-btn roster-link"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+            html += '<a id="' + fr.playerid + '"class="player-btn roster-link"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
             fr.username + '</div></a>';
             // $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
           });

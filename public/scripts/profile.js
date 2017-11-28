@@ -22,47 +22,6 @@ $(document).ready(function() {
     retrievedFriends = true;
     $.ajax({
       type: 'POST',
-      url: '/profile/getFriends',
-      data: {playerid: playerid},
-      success: function(res){
-        if(!res.success){
-          alert(res.error);
-        }
-        else if(res.success){
-          var html = "";
-          res.data.forEach(function(fr){
-            var avatar = fr.avatar;
-            if(avatar.includes('null')){
-              avatar='/images/avatar-default.png';
-            }
-            html += '<a class="roster-link" href="dota/players?playerid=' + fr.friendid +
-            '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
-            fr.username + '</div></a>';
-            friendid.push(fr.friendid);
-          });
-          $("#friends-list")[0].innerHTML = html;
-          $.ajax({
-            type: 'POST',
-            url: '/profile/getAllUsers',
-            success: function(res){
-              if(!res.success){
-                alert(res.error);
-              }
-              else if(res.success){
-                res.data.forEach(function(ele){
-                  if(friendid.indexOf(ele.playerid) == -1 && ele.playerid != playerid){
-                    $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="friend-request-send">' + ele.username + '</a></li>')
-                    playerids.push(ele.playerid);
-                  }
-                });
-              }
-            }
-          });
-        }
-      }
-    });
-    $.ajax({
-      type: 'POST',
       url: '/profile/getFriendReq',
       data: {playerid: playerid},
       success: function(res){
@@ -80,8 +39,50 @@ $(document).ready(function() {
             '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
             frReq.username + '</div></a></div><div class="col-md-2"><button id="req-' + frReq.reqid + '" type="button" class="btn btn-success">&#10004;</button></div><div class="col-md-2">\
             <button id="req-' + frReq.reqid + '" type="button" class="btn btn-danger">&#10008;</button></div></div>';
+            friendRequestid.push(frReq.reqid);
           });
           $('#friend-requests')[0].innerHTML = html;
+        }
+      }
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/profile/getFriends',
+      data: {playerid: playerid},
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          var html = "";
+          res.data.forEach(function(fr){
+            var avatar = fr.avatar;
+            if(avatar.includes('null')){
+              avatar='/images/avatar-default.png';
+            }
+            html += '<a class="roster-link" href="dota/players?playerid=' + fr.playerid +
+            '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
+            fr.username + '</div></a>';
+            friendid.push(fr.playerid);
+          });
+          $("#friends-list")[0].innerHTML = html;
+          $.ajax({
+            type: 'POST',
+            url: '/profile/getAllUsers',
+            success: function(res){
+              if(!res.success){
+                alert(res.error);
+              }
+              else if(res.success){
+                res.data.forEach(function(ele){
+                  if(friendid.indexOf(ele.playerid) == -1 && friendRequestid.indexOf(ele.playerid) == -1 && ele.playerid != playerid){
+                    $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="friend-request-send">' + ele.username + '</a></li>')
+                    playerids.push(ele.playerid);
+                  }
+                });
+              }
+            }
+          });
         }
       }
     });
