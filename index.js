@@ -238,6 +238,9 @@ app.post('/profile.ejs', function(req, res){
 app.post('/play.ejs', function(req, res){
   res.sendFile('views/pages/dota/play.ejs', {root: __dirname });
 });
+app.post('/challenges.ejs', function(req, res){
+  res.sendFile('views/pages/dota/challenges.ejs', {root: __dirname });
+});
 
 
 //login route
