@@ -4,6 +4,12 @@ $(document).ready(function(){
   var playerChallengeid = new Array();
   var selectedChallenge;
 
+  /*Note
+  yc - your challenges
+  tac - take a challenge
+  cc - completed challenges
+  */
+
   //Get all player challenges
   //Get all other available challenges
   $.ajax({
@@ -47,58 +53,38 @@ $(document).ready(function(){
 
   //Populate challenge info on click
   $(document).on('click', '.tac-card', function(){
-    selectedChallenge = this.id.split('-')[1];
-    var challenge = getChallenge(selectedChallenge, availChallenge);
-    $('#tac-opacity').fadeIn('fast');
-    $('#tac-info').slideDown('fast');
-    $('#tac-name')[0].innerHTML = challenge.name;
-    $('#tac-desc')[0].innerHTML = challenge.description;
-    $('#tac-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+    showCard('tac', availChallenge, this.id);
     $('#tac-button')[0].innerHTML = '<div  class="pink-btn btn btn-primary text-center mt-3" id="challenge-signup">Take this challenge</div>';
   });
 
   //Close challenge info dialog when click outside of box
   $(document).on('click', '#tac-opacity', function(){
-    $('#tac-opacity').fadeOut('fast');
-    $('#tac-info').slideUp('fast');
+    hideCard('tac');
   });
 
+  //Take a challenge
   $(document).on('click', '#challenge-signup', function(){
     console.log(selectedChallenge);
   });
 
   //Populate challenge info on click
   $(document).on('click', '.yc-card', function(){
-    selectedChallenge = this.id.split('-')[1];
-    var challenge =getChallenge(selectedChallenge, playerChallenge);
-    $('#yc-opacity').fadeIn('fast');
-    $('#yc-info').slideDown('fast');
-    $('#yc-name')[0].innerHTML = challenge.name;
-    $('#yc-desc')[0].innerHTML = challenge.description;
-    $('#yc-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+    showCard('yc', playerChallenge, this.id);
   });
 
   //Close challenge info dialog when click outside of box
   $(document).on('click', '#yc-opacity', function(){
-    $('#yc-opacity').fadeOut('fast');
-    $('#yc-info').slideUp('fast');
+    hideCard('yc');
   });
 
 //Populate challenge info on click
   $(document).on('click', '.cc-card', function(){
-    selectedChallenge = this.id.split('-')[1];
-    var challenge = getChallenge(selectedChallenge, playerChallenge);
-    $('#cc-opacity').fadeIn('fast');
-    $('#cc-info').slideDown('fast');
-    $('#cc-name')[0].innerHTML = challenge.name;
-    $('#cc-desc')[0].innerHTML = challenge.description;
-    $('#cc-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+    showCard('cc', playerChallenge, this.id);
   });
 
   //Close challenge info dialog when click outside of box
   $(document).on('click', '#cc-opacity', function(){
-    $('#cc-opacity').fadeOut('fast');
-    $('#cc-info').slideUp('fast');
+    hideCard('cc');
   });
 });
 
@@ -112,4 +98,24 @@ function getChallenge(challengeid, array){
     i++;
   }while(i < array.length);
   return -1;
+}
+
+
+//Populate a card in specified list (yc, tac, or cc)
+function showCard(list, array, id){
+  selectedChallenge = id.split('-')[1];
+  var challenge = getChallenge(selectedChallenge, array);
+  $('#' + list + '-container').css('min-height', '200px');
+  $('#' + list + '-opacity').fadeIn('fast');
+  $('#' + list + '-info').slideDown('fast');
+  $('#' + list + '-name')[0].innerHTML = challenge.name;
+  $('#' + list + '-desc')[0].innerHTML = challenge.description;
+  $('#' + list + '-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+}
+
+//Hide a card in specified list (yc, tac, or cc)
+function hideCard(list){
+  $('#' + list + '-container').css('min-height', '');
+  $('#' + list + '-opacity').fadeOut('fast');
+  $('#' + list + '-info').slideUp('fast');
 }

@@ -680,6 +680,10 @@ thead td.calendar {
 .challenge-points {
   float: right;
 }
+
+#yc-container, #tac-container, #cc-container {
+  
+}
 /*End Challenge*/
 
 /*Players page*/
