@@ -1,41 +1,73 @@
-<!-- GAME SIGNUP -->
-<div class="card rounded">
+<!--YOUR CHALLENGES -->
+<div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#yourChallenges" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#yourChallengesDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h4 class = "mb-0">Your Challenges<span class="down-caret"></span></h4>
       </a>
-      <div class="collapse card-body" id="yourChallenges">
-      </div>
     </li>
   </ul>
+  <div class="collapse card-body" id="yourChallengesDropdown">
+    <div class="pre-scrollable">
+      <div class="challenge-info-opacity" id="yc-opacity"></div>
+      <div class="card rounded challenge-info p-2 text-center" id="yc-info">
+        <h5 clsas="mt-2" id="yc-name"></h5>
+        <div class="mt-3 p-1 rounded" id="yc-desc"></div>
+        <div class="mt-3" id="yc-reward"></div>
+      </div>
+      <div id="yourChallenges">
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- TAKE A CHALLENGE -->
 <div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#takeAChallenge" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#takeAChallengeDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h4 class = "mb-0">Take a Challenge<span class="down-caret"></span></h4>
       </a>
-      <div class="collapse card-body" id="takeAChallenge">
-
-      </div>
     </li>
   </ul>
+  <div class="collapse card-body" id="takeAChallengeDropdown">
+    <div class="pre-scrollable">
+      <div class="challenge-info-opacity" id="tac-opacity"></div>
+      <div class="card rounded challenge-info p-2 text-center" id="tac-info">
+        <h5 clsas="mt-2" id="tac-name"></h5>
+        <div class="mt-3 p-1 rounded" id="tac-desc"></div>
+        <div class="mt-3" id="tac-reward"></div>
+        <div id="tac-button"></div>
+      </div>
+      <div id="takeAChallenge">
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- COMPLETED CHALLENGES -->
 <div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#completedChallenges" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#completedChallengesDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h4 class = "mb-0">Completed Challenges<span class="down-caret"></span></h4>
       </a>
-      <div class="collapse card-body" id="completedChallenges">
-
-      </div>
     </li>
   </ul>
+  <div class="collapse card-body" id="completedChallengesDropdown">
+    <div class="pre-scrollable">
+      <div class="challenge-info-opacity" id="cc-opacity"></div>
+      <div class="card rounded challenge-info p-2 text-center" id="cc-info">
+        <h5 clsas="mt-2" id="cc-name"></h5>
+        <div class="mt-3 p-1 rounded" id="cc-desc"></div>
+        <div class="mt-3" id="cc-reward"></div>
+      </div>
+      <div id="completedChallenges">
+
+      </div>
+    </div>
+  </div>
 </div>
 <script src="../../scripts/challenges.js"></script>
