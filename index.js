@@ -244,6 +244,21 @@ app.post('/challenges.ejs', function(req, res){
   res.sendFile('views/pages/dota/challenges.ejs', {root: __dirname });
 });
 
+//Home page scripts
+app.get('/schedule.js', function(req, res){
+  res.sendFile('public/scripts/schedule.js', {root: __dirname });
+});
+app.get('/calendar-week.js', function(req, res){
+  res.sendFile('public/scripts/calendar-week.js', {root: __dirname });
+});
+app.get('/profile.js', function(req, res){
+  res.sendFile('public/scripts/profile.js', {root: __dirname });
+});
+app.get('/challenges.js', function(req, res){
+  res.sendFile('public/scripts/challenges.js', {root: __dirname });
+});
+
+
 
 //login route
 app.get(loginRoute.authDiscord.route, ensureRealm, passport.authenticate('discord'));

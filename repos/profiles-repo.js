@@ -181,6 +181,27 @@ function getFriendReq(pool, playerid, callback){
   });
 }
 
+function getSentFriendReq(pool, playerid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT * FROM player LEFT OUTER JOIN playerfrreq ON player.playerid = playerfrreq.playerid WHERE playerfrreq.reqid = $1';
+      var values = [playerid];
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
+
 function sendFriendReq(pool, playerid, reqid, callback){
   pool.connect(function(err, client) {
     if(err){
@@ -250,14 +271,14 @@ function acceptFriendReq(pool, playerid, reqid, callback){
   });
 }
 
-function declineFriendReq(pool, playerid, reqid, callback){
+function declineFriendReq(pool, playerfrreqid, callback){
   pool.connect(function(err, client) {
     if(err){
       callback && callback(err);
     }
     else{
-      var queryString = 'DELETE FROM  playerfrreq WHERE playerid = $1 AND reqid = $2';
-      var values = [playerid, reqid]
+      var queryString = 'DELETE FROM  playerfrreq WHERE playerfrreqid = $1';
+      var values = [playerfrreqid];
       // console.log(queryString);
       client.query(queryString, values, function(err){
         client.release();
@@ -303,6 +324,7 @@ module.exports = pool => {
     getUser: getUser.bind(null, pool),
     getFriends: getFriends.bind(null, pool),
     getFriendReq: getFriendReq.bind(null, pool),
+    getSentFriendReq: getSentFriendReq.bind(null, pool),
     sendFriendReq: sendFriendReq.bind(null, pool),
     acceptFriendReq: acceptFriendReq.bind(null, pool),
     declineFriendReq: declineFriendReq.bind(null, pool),

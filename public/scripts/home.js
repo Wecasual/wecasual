@@ -17,6 +17,8 @@ $(document).ready(function() {
         url: '/play.ejs',
         success: function(res){
           $("#list-play").html(res);
+          $.getScript('/schedule.js');
+          $.getScript('/calendar-week.js');
         }
       });
     }
@@ -31,6 +33,7 @@ $(document).ready(function() {
         url: '/profile.ejs',
         success: function(res){
           $("#list-profile").html(res);
+          $.getScript('/profile.js');
         }
       });
     }
@@ -45,15 +48,20 @@ $(document).ready(function() {
         url: '/challenges.ejs',
         success: function(res){
           $("#list-challenges").html(res);
+          $.getScript('/challenges.js', function(data, textStatus){
+            if(textStatus == "success"){
+
+            }
+          });
         }
       });
     }
   }
 
-  if(tab === "profile"){
+  if(tab.indexOf("profile")!=-1){
     $('#list-profile-list').tab('show');
   }
-  else if(tab === "challenges"){
+  else if(tab.indexOf("challenges")!=-1){
     $('#list-challenges-list').tab('show');
   }
   else{
