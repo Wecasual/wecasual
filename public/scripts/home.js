@@ -58,11 +58,16 @@ $(document).ready(function() {
     }
   }
 
-  if(tab.indexOf("profile")!=-1){
-    $('#list-profile-list').tab('show');
-  }
-  else if(tab.indexOf("challenges")!=-1){
-    $('#list-challenges-list').tab('show');
+  if(tab){
+    if(tab.indexOf("profile")!=-1){
+      $('#list-profile-list').tab('show');
+    }
+    else if(tab.indexOf("challenges")!=-1){
+      $('#list-challenges-list').tab('show');
+    }
+    else{
+      $('#list-play-list').tab('show');
+    }
   }
   else{
     $('#list-play-list').tab('show');
