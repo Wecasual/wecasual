@@ -1,5 +1,5 @@
 var games;
-//Calendar stuff
+//Create calendar object
 var Cal = function(divId) {
   //Store div id
   this.divId = divId;
@@ -30,8 +30,7 @@ var Cal = function(divId) {
   this.weeks = 2;
 };
 
-
-// Goes to next month
+// Goes to next week
 Cal.prototype.nextWeek = function() {
   var d = new Date(this.currYear, this.currMonth, this.weekStart);
   d.setDate(d.getDate()+7*this.weeks);
@@ -41,7 +40,7 @@ Cal.prototype.nextWeek = function() {
   this.showcurr();
 };
 
-// Goes to previous month
+// Goes to previous week
 Cal.prototype.previousWeek = function() {
   var d = new Date(this.currYear, this.currMonth, this.weekStart);
   d.setDate(d.getDate()-7*this.weeks);
@@ -51,12 +50,12 @@ Cal.prototype.previousWeek = function() {
   this.showcurr();
 };
 
-// Show current month
+// Show current week
 Cal.prototype.showcurr = function() {
   this.showWeek(this.currYear, this.currMonth, this.weekStart);
 };
 
-// Show month (year, month)
+// Show week (year, month)
 Cal.prototype.showWeek = function(y, m, d) {
 
   //Create start date for week
@@ -117,73 +116,71 @@ Cal.prototype.showWeek = function(y, m, d) {
   document.getElementById(this.divId).innerHTML = html;
 };
 
-// Start on load
-$(document).ready(function(){
-  // Start calendar
-  var c = new Cal("divCal");
-  c.showcurr();
+//EVENT LISTENERS
+// Start calendar
+var c = new Cal("divCal");
+c.showcurr();
+getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
+
+// Bind next and previous button clicks
+$(document).on('click', '#btnNext', function() {
+  c.nextWeek();
   getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
+});
+$(document).on('click', '#btnPrev', function() {
+  c.previousWeek();
+  getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
+});
 
-  // Bind next and previous button clicks
-  $(document).on('click', '#btnNext', function() {
-    c.nextWeek();
-    getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
-  });
-  $(document).on('click', '#btnPrev', function() {
-    c.previousWeek();
-    getRangeSchedule(c.currYear, c.currMonth, c.weekStart, c.weeks);
-  });
+//Display game info when a game is clicked on
+$(document).on('click', '.calendar-card', function(){
+  $('.game-info-opacity').fadeIn('fast');
+  $('.game-info').slideDown('fast');
+  var game = getGame(this.id.substring(7, this.id.length));
 
-  //Display game info when a game is clicked on
-  $(document).on('click', '.calendar-card', function(){
-    $('.game-info-opacity').fadeIn('fast');
-    $('.game-info').slideDown('fast');
-    var game = getGame(this.id.substring(7, this.id.length));
-
-    //Add header
-    $('#game-title')[0].innerHTML = game.name;
-    $('#game-time')[0].innerHTML = game.gametime;
-    $('#team1-slots')[0].innerHTML = game.team1Slots;
-    $('#team2-slots')[0].innerHTML = game.team2Slots;
-    $('#signup-link')[0].innerHTML = '<a class="pink-btn btn btn-primary" href="/schedule/dota/quickLink?id=' + game.gameid + '">Play in this game</a>'
-    // console.log(game);
-    $.ajax({
-      type: 'POST',
-      url: '/profile/getUsers',
-      data: JSON.stringify({
-        team1: game.team1,
-        team2: game.team2
-      }),
-      contentType: 'application/json',
-      success: function(res){
-        if(!res.success){
-          alert(res.error);
-        }
-        else if(res.success){
-          //Add teams
-          for(var i = 1; i <= 2; i++){
-            html = "";
-            res.data["team" + i].forEach(function(player){
-              var avatar = player.avatar;
-              if(avatar.includes('null')){
-                avatar='/images/avatar-default.png';
-              }
-              html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
-            });
-            $('#team' + i + '-roster')[0].innerHTML = html;
-          }
+  //Add header
+  $('#game-title').html(game.name);
+  $('#game-time').html(game.gametime);
+  $('#team1-slots').html(game.team1Slots);
+  $('#team2-slots').html(game.team2Slots);
+  $('#signup-link').html('<a class="pink-btn btn btn-primary" href="/schedule/dota/quickLink?id=' + game.gameid + '">Play in this game</a>');
+  // console.log(game);
+  $.ajax({
+    type: 'POST',
+    url: '/profile/getUsers',
+    data: JSON.stringify({
+      team1: game.team1,
+      team2: game.team2
+    }),
+    contentType: 'application/json',
+    success: function(res){
+      if(!res.success){
+        alert(res.error);
+      }
+      else if(res.success){
+        //Add teams
+        for(var i = 1; i <= 2; i++){
+          html = "";
+          res.data["team" + i].forEach(function(player){
+            var avatar = player.avatar;
+            if(avatar.includes('null')){
+              avatar='/images/avatar-default.png';
+            }
+            html += '<a class="roster-link" href="dota/players?playerid=' + player.playerid + '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' + player.username + '</div></a>';
+          });
+          $('#team' + i + '-roster').html(html);
         }
       }
-    });
+    }
   });
-
-  //Close game info dialog when click outside of box
-  $(document).on('click', '.game-info-opacity', function(){
-    $('.game-info-opacity').fadeOut('fast');
-    $('.game-info').slideUp('fast');
-  });
-
 });
+
+//Close game info dialog when click outside of box
+$(document).on('click', '.game-info-opacity', function(){
+  $('.game-info-opacity').fadeOut('fast');
+  $('.game-info').slideUp('fast');
+});
+
 
 //Return games within a date range starting from startYear/startMonth/weekStart to weekStart+7*weeks (2 weeks from weekStart)
 function getRangeSchedule(startYear, startMonth, weekStart, weeks){

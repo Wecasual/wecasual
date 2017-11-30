@@ -55,8 +55,6 @@
 
     </div>
   </h2>
-
-
   <div class="row mt-5">
     <div class="col-lg-3">
       <h5 class="text-center my-1">
@@ -64,8 +62,9 @@
       </h5>
       <hr class = "my-1">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active text-center" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Play</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-play-list" data-toggle="list" href="#list-play" role="tab" aria-controls="play">Play</a>
         <a class="list-group-item list-group-item-action text-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-challenges-list" data-toggle="list" href="#list-challenges" role="tab" aria-controls="challenges">Challenges</a>
       </div>
 
       <!-- PROFILE INFO -->
@@ -101,13 +100,13 @@
                 <div class="p-1">
                   <h5>Wecasual Points</h5>
 
-                  <%if(!user.premium){%>
+                  <!-- <%if(!user.premium){%>
                     <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-small.png">
                     <h5><b>N/A</b></h5>
-                  <%}else{%>
+                  <%}else{%> -->
                     <img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">
                     <h5><b><%= user.wecasualpoints %></b></h5>
-                  <%}%>
+                  <!-- <%}%> -->
                 </div>
               </div>
             </div>
@@ -189,281 +188,30 @@
         </ul>
       </div> -->
       <!-- END TOURNAMENT -->
-
     </div>
-
-
 
     <div class="col-lg-9">
       <div class="tab-content" id="nav-tabContent">
-        <!-- HOME -->
-        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-          <!-- GAME SIGNUP -->
-          <div class="card rounded">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                  <h4 class = "mb-0">Game Signup<span class="down-caret"></span></h4>
-                </a>
-                <p class ="mb-0">Sign up for an existing game, all members welcome!</p>
-                <div class="collapse card-body" id="gameSignup">
-
-                  <form id="game-signup" method="post" action="/schedule/gameSignup">
-                    <div class="form-group ">
-                      <div class="card-body pre-scrollable pre-scrollable-mini">
-                        <table class="table table-striped">
-                          <thead>
-                              <tr>
-                                <th></th>
-                                <th>Game</th>
-                                <th>Time</th>
-                                <th>Team 1 Slots</th>
-                                <th>Team 2 Slots</th>
-                              </tr>
-                          </thead>
-                          <tbody id="game-list">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <h5>Select a Team</h5>
-                    <div class="form-group ">
-                      <div class="radio">
-                        <label><input type="radio" name="team" value="1"> Team 1</label>
-                      </div>
-                      <div class="radio">
-                        <label><input id="team2" type="radio" name="team" value="2"> Team 2</label>
-                      </div>
-                    </div>
-                    <div class="form-group ">
-                      <input type="submit" value="Sign up" class = "btn btn-secondary">
-                    </div>
-                  </form>
-                  <hr>
-                  <ul>
-                    <li>If you sign up you MUST ATTEND.</li>
-                    <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
-                  </ul>
-                </div>
-
-              </li>
-            </ul>
-          </div>
-
-          <!-- SCHEDULE A GAME -->
-          <div class="card rounded mt-3">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <a class="pink-btn btn btn-primary mb-2 dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                  <h4 class = "mb-0">Schedule a Game<span class="down-caret"></span></h4>
-                </a>
-                <p class ="mb-0">Schedule your own game time</p>
-                <div class="collapse card-body" id="scheduleAGame">
-                  <form id="schedule-game" method="post" action="/schedule/scheduleGame">
-                    <h5>Game Type</h5>
-                    <label>Ex. Captains Mode, Pub Session, ARDM</label>
-                    <div class="form-group ">
-                      <input type="text" name="gameType" placeholder="Game type" id="gameType">
-                    </div>
-                    <br>
-                    <h5>Pub Session</h5>
-                    <div class="form-group ">
-                        <label><input type="checkbox" name="pubSession" id="pubSession"> Check if this is a pub session and you are only looking for a 5 stack</label>
-                    </div>
-                    <br>
-                    <h5>Date and Time</h5>
-                    <label>Please schedule times in EST to keep things consistent</label>
-                    <div class="form-group ">
-                      <input type="date" name="date" value="" id="date">
-                      <input type="time" name="time" value="21:00" id="time">
-                    </div>
-                    <br>
-                    <h5>Discord Room</h5>
-                    <label>Please select a room that isn't in use at the time you are scheduling the game for</label>
-                    <div class="form-group">
-                      <select name="discordRoom" id="discordRoom">
-                        <option value = "1" selected="selected">The Hoven</option>
-                        <option value = "2" >Icewrack</option>
-                        <option value = "3" >Knollen</option>
-                      </select>
-                    </div>
-                    <br>
-                    <h5>Announce on Discord</h5>
-                    <div class="form-group ">
-                        <label><input type="checkbox" name="announce" checked id="announce"> Check if you want a signup link posted to the Discord</label>
-                    </div>
-                    <div class="form-group ">
-                      <input type="submit" value="Schedule Game" class = "btn btn-secondary">
-                    </div>
-                  </form>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- SCHEUDLE -->
-          <div class="card rounded p-4 mt-3">
-            <h3 class = "mb-0" id="my-schedule">Schedule</h3>
-            <hr>
-              <div class="pre-scrollable calendar-container">
-                <div class="game-info-opacity"></div>
-                <div class="card rounded game-info p-2">
-                  <div class="game-info-header p-2">
-                    <span id="game-title"></span>
-                    <span id="signup-link"></span>
-                    <div id="game-time"></div>
-
-                  </div>
-                  <div class="game-info-body row">
-                    <div class="col-md-6">
-
-                      <div class="p-2">
-                        Team 1
-                        <span id="team1-slots"></span>
-                        <div id="team1-roster">
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-
-                      <div class="p-2">
-                        Team 2
-                        <span id="team2-slots"></span>
-                        <div id="team2-roster">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <table class="table-calendar" id="divCal">
-
-                </table>
-              </div>
-            <!-- <iframe class="airtable-embed" id="airtable-schedule" src="https://airtable.com/embed/shrOdXUN6J3hiyYtv?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
-          </div>
+        <div class="tab-pane fade show active" id="list-play" role="tabpanel" aria-labelledby="list-play-list">
+          <!-- INSERT PLAY EJS -->
         </div>
-        <!-- END HOME -->
-        <!-- PROFILE -->
         <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-          <!-- YOUR GAMES -->
-          <div class="card rounded mt-3">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <h3 class = "mb-0">Your Games</h3>
-                <div class="card-body pt-0">
-                  <div class=" pre-scrollable">
-                    <table class="table table-striped">
-                      <thead>
-                          <tr>
-                            <th>Game</th>
-                            <th>Time</th>
-                            <th>Team 1 Slots</th>
-                            <th>Team 2 Slots</th>
-                            <th>Your Team</th>
-                            <th>Discord Room</th>
-                          </tr>
-                      </thead>
-                      <tbody id="my-game-list">
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- <h5 class = "ml-1 mt-1"><i>Games with insufficient players 24 hours before game time will be cancelled (You will be notified)</i></h5> -->
-                  <ul>
-                    <li>Games with insufficient players 24 hours before game time will be cancelled (You will be notified).</li>
-                    <li>If you want to cancel a sign up you must email us at robert@wecasual.gg or message us on Discord 24 hours before the game.</li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <!-- FRIEND LIST -->
-          <div class="row">
-            <div class="col-md-6 col">
-              <div class="card rounded mt-3">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <h3>Friends</h3>
-                    <div class="card-body pre-scrollable">
-                      <div id="friends-list">
-
-                      </div>
-                      <!-- <table class="table table-striped">
-                        <thead>
-                            <tr>
-                              <th></th>
-                              <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="friends-list">
-                        </tbody>
-                      </table> -->
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- FRIEND REQUESTS -->
-            <div class="col-md-6 col">
-              <div class="card rounded mt-3">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <h3>Friend Requests</h3>
-                    <p class = "mb-0">People who want to add you as a friend</p>
-                    <div class="card-body pre-scrollable">
-                      <div id="friend-requests">
-
-                      </div>
-                      <!-- <table class="table table-striped">
-                        <thead>
-                            <tr>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="friend-requests">
-                        </tbody>
-                      </table> -->
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- ADD FRIENDS -->
-          <div class="card rounded mt-3">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <h3>Add a friend</h3>
-                <p class ="mb-0">Click to send a friend request</p>
-                <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
-                <div class="card-body pre-scrollable friend-search">
-                  <!-- <div class="loading-ring"></div> -->
-                  <ul id="user-list">
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-
-
-        </div><!-- END PROFILE -->
+          <!-- INSERT PROFILE EJS -->
+        </div>
+        <div class="tab-pane fade" id="list-challenges" role="tabpanel" aria-labelledby="list-challenges-list">
+          <!-- INSERT CHALLENGES EJS -->
+        </div>
         <!-- RULES -->
-        <div class="tab-pane fade" id="list-rules" role="tabpanel" aria-labelledby="list-rules-list">
+        <!-- <div class="tab-pane fade" id="list-rules" role="tabpanel" aria-labelledby="list-rules-list">
 
-        </div><!-- END RULES -->
+        </div> -->
+        <!-- END RULES -->
       </div>
     </div> <!-- BIG COL -->
   </div> <!--ROW-->
 </div> <!-- CONTAINER -->
-<script src="../../scripts/calendar-week.js"></script>
+
 <!-- <script src="../../scripts/populateCalendar.js"></script> -->
-<script src="../../scripts/friends.js"></script>
-<script src="../../scripts/gameSignup.js"></script>
-<script src="../../scripts/scheduleGame.js"></script>
+<!-- <script src="../../scripts/gameSignup.js"></script> -->
+<script src="../../scripts/home.js"></script>
 <% include ../../partials/footer.ejs %>
