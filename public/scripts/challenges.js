@@ -53,7 +53,7 @@ $(document).ready(function(){
 
   //Populate challenge info on click
   $(document).on('click', '.tac-card', function(){
-    showCard('tac', availChallenge, this.id);
+    selectedChallenge = showCard('tac', availChallenge, this.id);
     $('#tac-button')[0].innerHTML = '<div  class="pink-btn btn btn-primary text-center mt-3" id="challenge-signup">Take this challenge</div>';
   });
 
@@ -64,12 +64,27 @@ $(document).ready(function(){
 
   //Take a challenge
   $(document).on('click', '#challenge-signup', function(){
-    console.log(selectedChallenge);
+    $.ajax({
+      type: 'POST',
+      url: '/challenge/acceptChallenge',
+      data: {
+        challengeid: selectedChallenge
+      },
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          location.reload();
+        }
+      }
+    });
   });
 
   //Populate challenge info on click
   $(document).on('click', '.yc-card', function(){
-    showCard('yc', playerChallenge, this.id);
+    selectedChallenge = showCard('yc', playerChallenge, this.id);
+    $('#yc-button')[0].innerHTML = '<div  class="pink-btn btn btn-primary text-center mt-3" id="challenge-complete">Mark as complete</div>';
   });
 
   //Close challenge info dialog when click outside of box
@@ -77,9 +92,29 @@ $(document).ready(function(){
     hideCard('yc');
   });
 
+  $(document).on('click', '#challenge-complete', function(){
+    var wecasualpoints = getChallenge(selectedChallenge, playerChallenge).wecasualpoints;
+    $.ajax({
+      type: 'POST',
+      url: '/challenge/completeChallenge',
+      data: {
+        challengeid: selectedChallenge,
+        wecasualpoints: wecasualpoints
+      },
+      success: function(res){
+        if(!res.success){
+          alert(res.error);
+        }
+        else if(res.success){
+          location.reload();
+        }
+      }
+    });
+  });
+
 //Populate challenge info on click
   $(document).on('click', '.cc-card', function(){
-    showCard('cc', playerChallenge, this.id);
+    selectedChallenge = showCard('cc', playerChallenge, this.id);
   });
 
   //Close challenge info dialog when click outside of box
@@ -103,7 +138,7 @@ function getChallenge(challengeid, array){
 
 //Populate a card in specified list (yc, tac, or cc)
 function showCard(list, array, id){
-  selectedChallenge = id.split('-')[1];
+  var selectedChallenge = id.split('-')[1];
   var challenge = getChallenge(selectedChallenge, array);
   $('#' + list + '-container').css('min-height', '200px');
   $('#' + list + '-opacity').fadeIn('fast');
@@ -111,6 +146,16 @@ function showCard(list, array, id){
   $('#' + list + '-name')[0].innerHTML = challenge.name;
   $('#' + list + '-desc')[0].innerHTML = challenge.description;
   $('#' + list + '-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+  if(list != 'cc'){
+    var date = new Date(challenge.startdate);
+    date.setDate(date.getDate()+7);
+    $('#' + list + '-expiry')[0].innerHTML = 'Expires: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+  }
+  else{
+    var date = new Date(challenge.completeddate);
+    $('#' + list + '-expiry')[0].innerHTML = 'Completed: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+  }
+  return selectedChallenge;
 }
 
 //Hide a card in specified list (yc, tac, or cc)

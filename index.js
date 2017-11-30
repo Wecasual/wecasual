@@ -287,6 +287,8 @@ app.post(teamRoute.getTeam.route, teamRoute.getTeam.handler);
 
 //challenge route
 app.post(challengeRoute.getChallenge.route, challengeRoute.getChallenge.handler);
+app.post(challengeRoute.acceptChallenge.route, challengeRoute.acceptChallenge.handler);
+app.post(challengeRoute.completeChallenge.route, challengeRoute.completeChallenge.handler);
 
 
 //==========Dota Routes==========
