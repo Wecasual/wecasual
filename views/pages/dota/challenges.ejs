@@ -1,29 +1,36 @@
 <!--YOUR CHALLENGES -->
+<div class="challenge-info-opacity" id="challenge-opacity"></div>
+<div class="card rounded challenge-info p-2 text-center" id="challenge-info">
+  <h5 class="mt-2" id="challenge-name"></h5>
+  <div class="mt-3 p-2 rounded text-left" id="challenge-desc"></div>
+  <div class="mt-3" id="challenge-reward"></div>
+  <div class="mt-3" id="challenge-expiry"></div>
+  <div id="challenge-actions"></div>
+  <div id="challenge-complete-form-container">
+    <hr>
+    <p>Input the match id for the match the challenge was completed in<br>The match id can be found in the match overview</p>
+    <form id="challenge-complete-form" method="post" action="/challenge/completeChallenge">
+      <div class="form-group ">
+        <input type="text" name="matchid" placeholder="Match id" id="matchid">
+      </div>
+      <div class="form-group ">
+        <input type="submit" value="Mark as complete" class = "pink-btn-validate btn btn-secondary text-center mt-1 mb-1">
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <h3>Your Challenges</h3>
-      <!-- <a class="pink-btn btn btn-primary mb-2 dropdown" href="#yourChallengesDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-        <h4 class = "mb-0">Your Challenges<span class="down-caret"></span></h4>
-      </a> -->
       <div class="pre-scrollable" id="yc-container">
-        <div class="challenge-info-opacity" id="yc-opacity"></div>
-        <div class="card rounded challenge-info p-2 text-center" id="yc-info">
-          <h5 clsas="mt-2" id="yc-name"></h5>
-          <div class="mt-3 p-1 rounded" id="yc-desc"></div>
-          <div class="mt-3" id="yc-reward"></div>
-          <div class="mt-3" id="yc-expiry"></div>
-          <div id="yc-button"></div>
-        </div>
         <div id="yourChallenges">
 
         </div>
       </div>
     </li>
   </ul>
-  <!-- <div class="collapse card-body" id="yourChallengesDropdown"> -->
-
-  <!-- </div> -->
 </div>
 
 <!-- TAKE A CHALLENGE -->
@@ -31,27 +38,13 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <h3>Take a Challenge</h3>
-      <!-- <a class="pink-btn btn btn-primary mb-2 dropdown" href="#takeAChallengeDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-        <h4 class = "mb-0">Take a Challenge<span class="down-caret"></span></h4>
-      </a> -->
       <div class="pre-scrollable" id="tac-container">
-        <div class="challenge-info-opacity" id="tac-opacity"></div>
-        <div class="card rounded challenge-info p-2 text-center" id="tac-info">
-          <h5 clsas="mt-2" id="tac-name"></h5>
-          <div class="mt-3 p-1 rounded" id="tac-desc"></div>
-          <div class="mt-3" id="tac-reward"></div>
-          <div class="mt-3" id="tac-expiry"></div>
-          <div id="tac-button"></div>
-        </div>
         <div id="takeAChallenge">
 
         </div>
       </div>
     </li>
   </ul>
-  <!-- <div class="collapse card-body" id="takeAChallengeDropdown"> -->
-
-  <!-- </div> -->
 </div>
 
 <!-- COMPLETED CHALLENGES -->
@@ -63,13 +56,6 @@
       </a>
       <div class="collapse card-body" id="completedChallengesDropdown">
         <div class="pre-scrollable" id="cc-container">
-          <div class="challenge-info-opacity" id="cc-opacity"></div>
-          <div class="card rounded challenge-info p-2 text-center" id="cc-info">
-            <h5 clsas="mt-2" id="cc-name"></h5>
-            <div class="mt-3 p-1 rounded" id="cc-desc"></div>
-            <div class="mt-3" id="cc-reward"></div>
-            <div class="mt-3" id="cc-expiry"></div>
-          </div>
           <div id="completedChallenges">
 
           </div>

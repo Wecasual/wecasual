@@ -404,14 +404,17 @@ a.active{
   text-decoration: none;
 }
 
-.pink-btn{
+.pink-btn, .pink-btn-validate{
   border: 0px solid #555;
   background-color:#ff9da2;
 }
-.pink-btn:hover{
+.pink-btn:hover, .pink-btn-validate:hover:enabled{
   background-color:#F96854;
   cursor: pointer;
 }
+
+
+
 
 
 #user-search, #team-search, #prev-team-search {
@@ -612,7 +615,7 @@ thead td.calendar {
   /*float:right;*/
 }
 
-.game-info, .challenge-info {
+.game-info {
   display: none;
   position: absolute;
   left: 0;
@@ -668,22 +671,33 @@ thead td.calendar {
 /*Start Challenge*/
 
 /*Challenge descriptions*/
-#tac-desc, #yc-desc, #cc-desc {
+#challenge-desc {
   background-color: #fff;
 }
 
-.challenge-info {
-  top: 2%;
-  height: 90%;
+.game-info, .challenge-info {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  background-color: #f1f1f1;
+  overflow-x: hidden;
+  /*Display over everything else*/
+  z-index: 10;
 }
 
 .challenge-points {
   float: right;
 }
 
-#yc-container, #tac-container, #cc-container {
-  
+#challenge-complete-form-container {
+  display: none;
 }
+
 /*End Challenge*/
 
 /*Players page*/

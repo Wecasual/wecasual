@@ -54,12 +54,8 @@ $(document).ready(function(){
   //Populate challenge info on click
   $(document).on('click', '.tac-card', function(){
     selectedChallenge = showCard('tac', availChallenge, this.id);
-    $('#tac-button')[0].innerHTML = '<div  class="pink-btn btn btn-primary text-center mt-3" id="challenge-signup">Take this challenge</div>';
-  });
-
-  //Close challenge info dialog when click outside of box
-  $(document).on('click', '#tac-opacity', function(){
-    hideCard('tac');
+    var html = '<div  class="pink-btn btn btn-primary text-center mt-2 mb-1" id="challenge-signup">Take this challenge</div>';
+    $('#challenge-actions').html(html);
   });
 
   //Take a challenge
@@ -84,22 +80,52 @@ $(document).ready(function(){
   //Populate challenge info on click
   $(document).on('click', '.yc-card', function(){
     selectedChallenge = showCard('yc', playerChallenge, this.id);
-    $('#yc-button')[0].innerHTML = '<div  class="pink-btn btn btn-primary text-center mt-3" id="challenge-complete">Mark as complete</div>';
+    $('#challenge-complete-form-container').show();
   });
 
-  //Close challenge info dialog when click outside of box
-  $(document).on('click', '#yc-opacity', function(){
-    hideCard('yc');
-  });
-
-  $(document).on('click', '#challenge-complete', function(){
+  //Setup challenge complete form validator
+  $('#challenge-complete-form').bootstrapValidator({
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      matchid: {
+        validators: {
+          notEmpty: {
+            message: 'Input the match id for the match the challenge was completed in'
+          },
+          integer: {
+            message: 'Invalid match id'
+          },
+          stringLength: {
+            message: 'Invalid match id',
+            min: 10,
+            max: 10
+          }
+        }
+      }
+    }
+  })
+  .on('error.field.bv', function(e, data) {
+    data.element
+      .data('bv.messages')
+      // Hide all the messages
+      .find('.help-block[data-bv-for="' + data.field + '"]').hide()
+      // Show only message associated with current validator
+      .filter('[data-bv-validator="' + data.validator + '"]').show();
+  })
+  .on('success.form.bv', function(e){
+    e.preventDefault();
     var wecasualpoints = getChallenge(selectedChallenge, playerChallenge).wecasualpoints;
     $.ajax({
       type: 'POST',
       url: '/challenge/completeChallenge',
       data: {
         challengeid: selectedChallenge,
-        wecasualpoints: wecasualpoints
+        wecasualpoints: wecasualpoints,
+        matchid: $('#matchid').val()
       },
       success: function(res){
         if(!res.success){
@@ -112,15 +138,19 @@ $(document).ready(function(){
     });
   });
 
-//Populate challenge info on click
+
+  //Populate challenge info on click
   $(document).on('click', '.cc-card', function(){
     selectedChallenge = showCard('cc', playerChallenge, this.id);
   });
 
   //Close challenge info dialog when click outside of box
-  $(document).on('click', '#cc-opacity', function(){
-    hideCard('cc');
+  $(document).on('click', '#challenge-opacity', function(){
+    $('#challenge-opacity').fadeOut('fast');
+    $('#challenge-info').slideUp('fast');
+    $('#challenge-complete-form-container').hide();
   });
+
 });
 
 //Find challenge by challengeid in speicified array
@@ -140,27 +170,19 @@ function getChallenge(challengeid, array){
 function showCard(list, array, id){
   var selectedChallenge = id.split('-')[1];
   var challenge = getChallenge(selectedChallenge, array);
-  $('#' + list + '-container').css('min-height', '200px');
-  $('#' + list + '-opacity').fadeIn('fast');
-  $('#' + list + '-info').slideDown('fast');
-  $('#' + list + '-name')[0].innerHTML = challenge.name;
-  $('#' + list + '-desc')[0].innerHTML = challenge.description;
-  $('#' + list + '-reward')[0].innerHTML = '<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points";
+  $('#challenge-name').html(challenge.name);
+  $('#challenge-desc').html(challenge.description);
+  $('#challenge-reward').html('<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points");
   if(list != 'cc'){
     var date = new Date(challenge.startdate);
     date.setDate(date.getDate()+7);
-    $('#' + list + '-expiry')[0].innerHTML = 'Expires: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+    $('#challenge-expiry').html('Expires: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate());
   }
   else{
     var date = new Date(challenge.completeddate);
-    $('#' + list + '-expiry')[0].innerHTML = 'Completed: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+    $('#challenge-expiry').html('Completed: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate());
   }
+  $('#challenge-opacity').fadeIn('fast');
+  $('#challenge-info').slideDown('fast');
   return selectedChallenge;
-}
-
-//Hide a card in specified list (yc, tac, or cc)
-function hideCard(list){
-  $('#' + list + '-container').css('min-height', '');
-  $('#' + list + '-opacity').fadeOut('fast');
-  $('#' + list + '-info').slideUp('fast');
 }
