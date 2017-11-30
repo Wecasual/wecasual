@@ -87,6 +87,7 @@ discordBot.init(admins);
 var profilesRepo = require('./repos/profiles-repo')(pool);
 var scheduleRepo = require('./repos/schedule-repo')(pool);
 var teamRepo = require('./repos/team-repo')(pool);
+var challengeRepo = require('./repos/challenge-repo')(pool);
 var contactRepo = require('./repos/contact-repo')(base);
 
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
@@ -95,6 +96,7 @@ var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
 var teamRoute = require('./lib/routes/team-route')(teamRepo);
+var challengeRoute = require('./lib/routes/challenge-route')(challengeRepo);
 
 
 
@@ -231,6 +233,18 @@ app.get('/', function(req, res){
   }
 });
 
+//Home page ejs
+app.post('/profile.ejs', function(req, res){
+  res.sendFile('views/pages/dota/profile.ejs', {root: __dirname });
+});
+app.post('/play.ejs', function(req, res){
+  res.sendFile('views/pages/dota/play.ejs', {root: __dirname });
+});
+app.post('/challenges.ejs', function(req, res){
+  res.sendFile('views/pages/dota/challenges.ejs', {root: __dirname });
+});
+
+
 //login route
 app.get(loginRoute.authDiscord.route, ensureRealm, passport.authenticate('discord'));
 app.get(loginRoute.authDiscordCallback.route, ensureRealm, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
@@ -271,6 +285,10 @@ app.post(profileRoute.getUser.route, ensureRealm, profileRoute.getUser.handler);
 app.post(teamRoute.getAllTeams.route, teamRoute.getAllTeams.handler);
 app.post(teamRoute.getTeam.route, teamRoute.getTeam.handler);
 
+//challenge route
+app.post(challengeRoute.getChallenge.route, challengeRoute.getChallenge.handler);
+app.post(challengeRoute.acceptChallenge.route, challengeRoute.acceptChallenge.handler);
+app.post(challengeRoute.completeChallenge.route, challengeRoute.completeChallenge.handler);
 
 
 //==========Dota Routes==========
@@ -491,15 +509,15 @@ function ensureRealm(req, res, next) {
 
 //Error handling
 //Handle 404
-app.use(function(req, res) {
-  res.status(404)
-  res.render('pages/error', {errorMessage: "404: Page not Found"});
-  //.send('404: Page not Found');
-});
-
-// Handle 500
-app.use(function(error, req, res, next) {
-  res.status(500)
-  res.render('pages/error', {errorMessage: "500: Internal Server Error"});
-  //.send('500: Internal Server Error');
-});
+// app.use(function(req, res) {
+//   res.status(404)
+//   res.render('pages/error', {errorMessage: "404: Page not Found"});
+//   //.send('404: Page not Found');
+// });
+//
+// // Handle 500
+// app.use(function(error, req, res, next) {
+//   res.status(500)
+//   res.render('pages/error', {errorMessage: "500: Internal Server Error"});
+//   //.send('500: Internal Server Error');
+// });

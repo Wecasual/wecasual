@@ -1,5 +1,5 @@
 var games;
-//Calendar stuff
+//Create calendar object
 var Cal = function(divId) {
   //Store div id
   this.divId = divId;
@@ -30,8 +30,7 @@ var Cal = function(divId) {
   this.weeks = 2;
 };
 
-
-// Goes to next month
+// Goes to next week
 Cal.prototype.nextWeek = function() {
   var d = new Date(this.currYear, this.currMonth, this.weekStart);
   d.setDate(d.getDate()+7*this.weeks);
@@ -41,7 +40,7 @@ Cal.prototype.nextWeek = function() {
   this.showcurr();
 };
 
-// Goes to previous month
+// Goes to previous week
 Cal.prototype.previousWeek = function() {
   var d = new Date(this.currYear, this.currMonth, this.weekStart);
   d.setDate(d.getDate()-7*this.weeks);
@@ -51,12 +50,12 @@ Cal.prototype.previousWeek = function() {
   this.showcurr();
 };
 
-// Show current month
+// Show current week
 Cal.prototype.showcurr = function() {
   this.showWeek(this.currYear, this.currMonth, this.weekStart);
 };
 
-// Show month (year, month)
+// Show week (year, month)
 Cal.prototype.showWeek = function(y, m, d) {
 
   //Create start date for week
@@ -182,7 +181,6 @@ $(document).ready(function(){
     $('.game-info-opacity').fadeOut('fast');
     $('.game-info').slideUp('fast');
   });
-
 });
 
 //Return games within a date range starting from startYear/startMonth/weekStart to weekStart+7*weeks (2 weeks from weekStart)
