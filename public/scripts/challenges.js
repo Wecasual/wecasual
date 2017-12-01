@@ -3,6 +3,7 @@ var availChallenge;
 var playerChallenge;
 var playerChallengeid = new Array();
 var selectedChallenge;
+var playerid = $("#userid").html();
 
 /*Note
 yc - your challenges
@@ -35,8 +36,19 @@ $.ajax({
 
         playerChallengeid.push(challenge.challengeid);
       });
-      $('#yourChallenges').html(ychtml);
-      $('#completedChallenges').html(cchtml);
+      if(ychtml){
+        $('#yourChallenges').html(ychtml);
+      }
+      else{
+        $('#yourChallenges').html('<p>You have not taken any challenges</p>');
+      }
+      if(cchtml){
+        $('#completedChallenges').html(cchtml);
+      }
+      else{
+        $('#completedChallenges').html('<p>You have not completed any challenges</p>');
+      }
+
 
       availChallenge = res.data.availChallenge;
       tachtml = "";//Populate takeAChallenge list
@@ -46,7 +58,13 @@ $.ajax({
           '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
         }
       });
-      $('#takeAChallenge').html(tachtml);
+      if(tachtml){
+        $('#takeAChallenge').html(tachtml);
+      }
+      else{
+        $('#takeAChallenge').html('<p>There are currently no available challenges</p>');
+      }
+
     }
   }
 });
@@ -80,7 +98,33 @@ $(document).on('click', '#challenge-signup', function(){
 //Populate challenge info on click
 $(document).on('click', '.yc-card', function(){
   selectedChallenge = showCard('yc', playerChallenge, this.id);
+  var challenge = getChallenge(selectedChallenge, playerChallenge);
+  var dStart = new Date(challenge.startdate);
+  var dEnd = new Date();
   $('#challenge-complete-form-container').show();
+  $.ajax({
+    type: 'POST',
+    url: 'schedule/getRangeSchedule',
+    data: {
+      startDate: dStart.getFullYear() + '/' + (dStart.getMonth()+1) + '/' + dStart.getDate() + 'T00:00:00 -0500',
+      endDate: dEnd.getFullYear() + '/' + (dEnd.getMonth()+1) + '/' + dEnd.getDate() + 'T00:00:00 -0500'
+    },
+    success: function(res){
+      if(!res.success){
+        alert(res.error);
+      }
+      else if(res.success){
+        var html = '<option value="" disabled selected>Select a game</option>';
+        res.data.forEach(function(game){
+          if((game.team1.indexOf(parseInt(playerid)) != -1 || game.team2.indexOf(parseInt(playerid)) != -1) && checkGame(game.gameid, playerChallenge)){
+              html += '<option value = "' + game.gameid + '" >' + game.name + ' - ' + game.gametime + '</option>';
+          }
+        });
+        $('#challenge-game').html(html);
+      }
+      //
+    }
+  });
 });
 
 //Setup challenge complete form validator
@@ -91,21 +135,28 @@ $('#challenge-complete-form').bootstrapValidator({
     validating: 'glyphicon glyphicon-refresh'
   },
   fields: {
-    matchid: {
+    challengeGame: {
       validators: {
         notEmpty: {
-          message: 'Input the match id for the match the challenge was completed in'
-        },
-        integer: {
-          message: 'Invalid match id'
-        },
-        stringLength: {
-          message: 'Invalid match id',
-          min: 10,
-          max: 10
+          message: 'Select the game the challenge was completed in'
         }
       }
     }
+    // matchid: {
+    //   validators: {
+    //     notEmpty: {
+    //       message: 'Input the match id for the match the challenge was completed in'
+    //     },
+    //     integer: {
+    //       message: 'Invalid match id'
+    //     },
+    //     stringLength: {
+    //       message: 'Invalid match id',
+    //       min: 10,
+    //       max: 10
+    //     }
+    //   }
+    // }
   }
 })
 .on('error.field.bv', function(e, data) {
@@ -125,7 +176,7 @@ $('#challenge-complete-form').bootstrapValidator({
     data: {
       challengeid: selectedChallenge,
       wecasualpoints: wecasualpoints,
-      matchid: $('#matchid').val()
+      gameid: $('#challenge-game').val()
     },
     success: function(res){
       if(!res.success){
@@ -163,6 +214,16 @@ function getChallenge(challengeid, array){
   return -1;
 }
 
+function checkGame(gameid, array){
+  var i = 0;
+  do{
+    if(array[i].gameid == gameid){
+      return false;
+    }
+    i++;
+  }while(i < array.length);
+  return true;
+}
 
 //Populate a card in specified list (yc, tac, or cc)
 function showCard(list, array, id){
@@ -173,7 +234,7 @@ function showCard(list, array, id){
   $('#challenge-reward').html('<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points");
   if(list != 'cc'){
     var date = new Date(challenge.startdate);
-    date.setDate(date.getDate()+7);
+    date.setDate(date.getDate()+14);
     $('#challenge-expiry').html('Expires: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate());
   }
   else{

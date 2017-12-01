@@ -2,11 +2,14 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   var url = window.location.href;
   var teamid = url.split('=')[1];
-  if(!teamid){
-    teamid = $("#teamid").html();
-  }
+  // if(!teamid){
+  //   teamid = $("#teamid").html();
+  // }
   if(teamid){
     populateTeam(teamid);
+  }
+  else{
+    populateTeam(1);
   }
   //Get all user playerids and usernames
   // var $loading = $('.loading-ring').hide();
@@ -51,7 +54,7 @@ function populateTeam(teamid){
   // $('#points').empty();
   // $('#team').empty();
   // $('#games-played').empty();
-  $('#roster').empty();
+  // $('#roster').empty();
 
   //Get info  for selected team
   $.ajax({
