@@ -234,7 +234,7 @@ function showCard(list, array, id){
   $('#challenge-reward').html('<img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + " Wecasual Points");
   if(list != 'cc'){
     var date = new Date(challenge.startdate);
-    date.setDate(date.getDate()+7);
+    date.setDate(date.getDate()+14);
     $('#challenge-expiry').html('Expires: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate());
   }
   else{
