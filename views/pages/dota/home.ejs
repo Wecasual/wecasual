@@ -73,7 +73,12 @@
           <li class="list-group-item p-0  text-left mt-0">
             <!-- AVATAR AND NAMES -->
             <div class="m-3 text-center">
-              <img height="128" width="128" class = "rounded-circle" src='<%= user.avatar %>' alt='Your Avatar Image' />
+              <% if(user.avatar.includes('null')){ %>
+                <img height="128" width="128" class = "rounded-circle" src='/images/avatar-default.png' alt='Your Avatar Image' />    
+              <% } else { %>
+                <img height="128" width="128" class = "rounded-circle" src='<%= user.avatar %>' alt='Your Avatar Image' />
+              <% } %>
+
               <h2>
                 <span class="align-bottom text-1.3em"><%= user.username %></span>
               </h2>

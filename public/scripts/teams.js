@@ -2,9 +2,9 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   var url = window.location.href;
   var teamid = url.split('=')[1];
-  if(!teamid){
-    teamid = $("#teamid").html();
-  }
+  // if(!teamid){
+  //   teamid = $("#teamid").html();
+  // }
   if(teamid){
     populateTeam(teamid);
   }
