@@ -8,7 +8,7 @@
   <div id="challenge-actions"></div>
   <div id="challenge-complete-form-container">
     <hr>
-    <p>Input the match id for the match the challenge was completed in<br>The match id can be found in the match overview</p>
+    <p>Select the game the challenge was completed in</p>
     <form id="challenge-complete-form" method="post" action="/challenge/completeChallenge">
       <div class="form-group ">
         <!-- <input type="text" name="matchid" placeholder="Match id" id="matchid"> -->
@@ -30,6 +30,7 @@
       <a class="pink-btn btn btn-primary mb-2 dropdown" href="#yourChallengesDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h5 class = "mb-0">Your Challenges<span class="down-caret"></span></h5>
       </a>
+      <p>Mark challenges as complete by specifying the Wecasual game it was completed in</p>
       <div class="collapse card-body" id="yourChallengesDropdown">
         <div class="pre-scrollable" id="yc-container">
           <div id="yourChallenges">
@@ -48,6 +49,7 @@
       <a class="pink-btn btn btn-primary mb-2 dropdown" href="#takeAChallengeDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h5 class = "mb-0">Take a Challenge<span class="down-caret"></span></h5>
       </a>
+      <p>Take a challenge to complete in a schedule Wecasual game</p>
       <div class="collapse card-body" id="takeAChallengeDropdown">
         <div class="pre-scrollable" id="tac-container">
           <div id="takeAChallenge">
@@ -66,6 +68,7 @@
       <a class="pink-btn btn btn-primary mb-2 dropdown" href="#completedChallengesDropdown" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
         <h5 class = "mb-0">Completed Challenges<span class="down-caret"></span></h5>
       </a>
+      <p>View your previously completed challenges</p>
       <div class="collapse card-body" id="completedChallengesDropdown">
         <div class="pre-scrollable" id="cc-container">
           <div id="completedChallenges">

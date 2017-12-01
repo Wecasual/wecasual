@@ -36,8 +36,19 @@ $.ajax({
 
         playerChallengeid.push(challenge.challengeid);
       });
-      $('#yourChallenges').html(ychtml);
-      $('#completedChallenges').html(cchtml);
+      if(ychtml){
+        $('#yourChallenges').html(ychtml);
+      }
+      else{
+        $('#yourChallenges').html('<p>You have not taken any challenges</p>');
+      }
+      if(cchtml){
+        $('#completedChallenges').html(cchtml);
+      }
+      else{
+        $('#completedChallenges').html('<p>You have not completed any challenges</p>');
+      }
+
 
       availChallenge = res.data.availChallenge;
       tachtml = "";//Populate takeAChallenge list
@@ -47,7 +58,13 @@ $.ajax({
           '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
         }
       });
-      $('#takeAChallenge').html(tachtml);
+      if(tachtml){
+        $('#takeAChallenge').html(tachtml);
+      }
+      else{
+        $('#takeAChallenge').html('<p>There are currently no available challenges</p>');
+      }
+
     }
   }
 });
