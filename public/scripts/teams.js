@@ -8,6 +8,9 @@ $(document).ready(function() {
   if(teamid){
     populateTeam(teamid);
   }
+  else{
+    populateTeam(1);
+  }
   //Get all user playerids and usernames
   // var $loading = $('.loading-ring').hide();
   // $(document)
@@ -51,7 +54,7 @@ function populateTeam(teamid){
   // $('#points').empty();
   // $('#team').empty();
   // $('#games-played').empty();
-  $('#roster').empty();
+  // $('#roster').empty();
 
   //Get info  for selected team
   $.ajax({

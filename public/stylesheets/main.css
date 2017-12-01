@@ -711,7 +711,17 @@ thead td.calendar {
 }*/
 /*Player page end*/
 
-
+/*Tournament Start*/
+#carouselTournament {
+  background-color: #555;
+}
+/*.carousel-inner > .carousel-item > img {
+    margin: 0 auto;
+}*/
+/*.carousel-container {
+  height: 500px;
+}*/
+/*Tournament End*/
 
 /*Quick link signup*/
 
