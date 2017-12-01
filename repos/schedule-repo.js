@@ -21,7 +21,7 @@ function gameSignup(pool, playerid, gameid, team, quickLink, callback){
               }
             });
           }
-          var queryString = 'UPDATE player SET totalgames = totalgames + 1, wecasualpoints = wecasualpoints + 100 WHERE playerid = $1';
+          var queryString = 'UPDATE player SET totalgames = totalgames + 1, wecasualpoints = wecasualpoints + 100 WHERE playerid = $1 AND premium = true';
           var values = [playerid];
           client.query(queryString, values, function(err){
             client.release();
@@ -52,7 +52,7 @@ function scheduleGame(pool, info, callback){
           callback && callback(err, null);
         }
         else {
-          var queryString = 'UPDATE player SET wecasualpoints = wecasualpoints + 200 WHERE playerid = $1';
+          var queryString = 'UPDATE player SET wecasualpoints = wecasualpoints + 200 WHERE playerid = $1 AND premium = true';
           var values = [info.playerid];
           client.query(queryString, values, function(err){
             client.release();
