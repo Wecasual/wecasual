@@ -11,7 +11,11 @@
     <p>Input the match id for the match the challenge was completed in<br>The match id can be found in the match overview</p>
     <form id="challenge-complete-form" method="post" action="/challenge/completeChallenge">
       <div class="form-group ">
-        <input type="text" name="matchid" placeholder="Match id" id="matchid">
+        <!-- <input type="text" name="matchid" placeholder="Match id" id="matchid"> -->
+        <select name="challengeGame" id="challenge-game">
+
+
+        </select>
       </div>
       <div class="form-group ">
         <input type="submit" value="Mark as complete" class = "pink-btn-validate btn btn-secondary text-center mt-1 mb-1">

@@ -60,14 +60,14 @@ function acceptChallenge(pool, playerid, challengeid, callback){
   });
 }
 
-function completeChallenge(pool, playerid, challengeid, wecasualpoints, matchid, callback){
+function completeChallenge(pool, playerid, challengeid, wecasualpoints, gameid, callback){
   pool.connect(function(err, client) {
     if(err){
       callback && callback(err);
     }
     else{
-      var queryString = 'UPDATE playerchallenge SET (completed, completeddate, matchid) = (TRUE, NOW(), $3) WHERE playerid = $1 AND challengeid = $2';
-      var values = [playerid, challengeid, matchid];
+      var queryString = 'UPDATE playerchallenge SET (completed, completeddate, gameid) = (TRUE, NOW(), $3) WHERE playerid = $1 AND challengeid = $2';
+      var values = [playerid, challengeid, gameid];
       client.query(queryString, values, function(err){
         if(err){
           client.release();
