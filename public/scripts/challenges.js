@@ -101,6 +101,7 @@ $(document).on('click', '.yc-card', function(){
   var challenge = getChallenge(selectedChallenge, playerChallenge);
   var dStart = new Date(challenge.startdate);
   var dEnd = new Date();
+  dEnd.setDate(dEnd.getDate()+1);
   $('#challenge-complete-form-container').show();
   $.ajax({
     type: 'POST',
