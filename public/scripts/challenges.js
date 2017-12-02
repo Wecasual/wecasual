@@ -102,6 +102,7 @@ $(document).on('click', '.yc-card', function(){
   var dStart = new Date(challenge.startdate);
   var dEnd = new Date();
   dEnd.setDate(dEnd.getDate()+1);
+  dStart.setDate(dStart.getDate()+1);
   $('#challenge-complete-form-container').show();
   $.ajax({
     type: 'POST',
