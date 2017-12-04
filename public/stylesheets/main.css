@@ -632,7 +632,7 @@ thead td.calendar {
   z-index: 10;
 }
 
-.game-info-opacity, .challenge-info-opacity{
+.game-info-opacity, .challenge-info-opacity, .item-info-opacity{
   display: none;
   position: absolute;
   width: 100%;
@@ -645,7 +645,7 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-player, .challenge-card {
+.card-player, .challenge-card , .item-card{
   width:100%;
   border:1px solid #d1d1d1;
   border-radius:5px;
@@ -656,7 +656,7 @@ thead td.calendar {
 .roster-link{
   text-decoration:none !important;
 }
-.card-player:hover, .challenge-card:hover{
+.card-player:hover, .challenge-card:hover, .item-card:hover{
   background-color:#ff9da2;
   cursor: pointer;
   /*#F96854;*/
@@ -669,14 +669,14 @@ thead td.calendar {
 
 /*End Calendar*/
 
-/*Start Challenge*/
+/*Start Challenge and Item*/
 
 /*Challenge descriptions*/
-#challenge-desc {
+#challenge-desc, #item-desc {
   background-color: #fff;
 }
 
-.game-info, .challenge-info {
+.game-info, .challenge-info, .item-info {
   display: none;
   position: absolute;
   left: 0;
@@ -691,7 +691,7 @@ thead td.calendar {
   z-index: 10;
 }
 
-.challenge-points {
+.challenge-points, .item-points {
   float: right;
 }
 

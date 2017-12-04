@@ -2,6 +2,7 @@ $(document).ready(function() {
   var retrievedPlay = false;
   var retrievedProfile = false;
   var retrievedChallenges = false;
+  var retrievedShop = false;
 
   var url = window.location.href;
   var tab = url.split('?')[1];
@@ -48,11 +49,23 @@ $(document).ready(function() {
         url: '/challenges.ejs',
         success: function(res){
           $("#list-challenges").html(res);
-          $.getScript('/challenges.js', function(data, textStatus){
-            if(textStatus == "success"){
+          $.getScript('/challenges.js');
+        }
+      });
+    }
+  }
 
-            }
-          });
+  var shop = function(){
+    history.pushState(null, '', '/dota?shop');
+    if(!retrievedShop){
+      retrievedShop = true;
+      $.ajax({
+        async: true,
+        type: 'POST',
+        url: '/shop.ejs',
+        success: function(res){
+          $("#list-shop").html(res);
+          $.getScript('/shop.js');
         }
       });
     }
@@ -65,6 +78,9 @@ $(document).ready(function() {
     else if(tab.indexOf("challenges")!=-1){
       $('#list-challenges-list').tab('show');
     }
+    else if(tab.indexOf("shop")!=-1){
+      $('#list-shop-list').tab('show');
+    }
     else{
       $('#list-play-list').tab('show');
     }
@@ -76,4 +92,5 @@ $(document).ready(function() {
   $('#list-play-list').on('shown.bs.tab', play);
   $('#list-profile-list').on('shown.bs.tab', profile);
   $('#list-challenges-list').on('shown.bs.tab', challenges);
+  $('#list-shop-list').on('shown.bs.tab', shop);
 });
