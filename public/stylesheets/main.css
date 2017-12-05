@@ -647,7 +647,7 @@ thead td.calendar {
 
 .card-player, .challenge-card , .item-card{
   width:100%;
-  border:1px solid #d1d1d1;
+  border:1px solid #d1d1d1;/*light gray*/
   border-radius:5px;
   color:#555;
   background-color: #fff;
@@ -657,7 +657,7 @@ thead td.calendar {
   text-decoration:none !important;
 }
 .card-player:hover, .challenge-card:hover, .item-card:hover{
-  background-color:#ff9da2;
+  background-color:#ff9da2;/*pink*/
   cursor: pointer;
   /*#F96854;*/
 }
@@ -671,8 +671,12 @@ thead td.calendar {
 
 /*Start Challenge and Item*/
 .item-card-premium {
-  border-color: #f8e084;
+  border-color: #f8e084;/*gold*/
   border-width: medium;
+}
+
+.item-card-redeemed {
+  background-color: #d1d1d1;/*gray*/
 }
 
 #item-container, #item-purchased-container {

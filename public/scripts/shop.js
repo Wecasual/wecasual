@@ -52,15 +52,28 @@ $.ajax({
       playerItem = res.data;
       var html ='';
       playerItem.forEach(function(item){
-        html += '<div class="item-card item-card-purchased p-1 mb-1" id="item-' + item.itemid + '">\
-        <div class="row">\
-          <div class="col-md-8">\
-            <img height="30" width="30" src=' + item.icon + '> ' + item.name + '\
-          </div>\
-          <div class="col-md-4">\
-            <div class="pull-right"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + item.wecasualpoints + '</div>\
-          </div>\
-        </div></div>';
+        if(item.redeemed){
+          html += '<div class="item-card item-card-redeemed item-card-buy p-1 mb-1" id="item-' + item.itemid + '">\
+          <div class="row">\
+            <div class="col-md-8">\
+              <img height="30" width="30" src=' + item.icon + '> ' + item.name + '\
+            </div>\
+            <div class="col-md-4">\
+              <div class="pull-right">Redeemed&nbsp;&nbsp;<img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + item.wecasualpoints + '</div>\
+            </div>\
+          </div></div>';
+        }
+        else{
+          html += '<div class="item-card item-card-purchased p-1 mb-1" id="item-' + item.itemid + '">\
+          <div class="row">\
+            <div class="col-md-8">\
+              <img height="30" width="30" src=' + item.icon + '> ' + item.name + '\
+            </div>\
+            <div class="col-md-4">\
+              <div class="pull-right"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + item.wecasualpoints + '</div>\
+            </div>\
+          </div></div>';
+        }
         // html += ' <div class="item-card item-card-purchased p-1 mb-1" id="item-' + item.itemid + '"><img height="30" width="30" src=' + item.icon + '> ' + item.name + '</div>';
       });
       $('#item-purchased-container').html(html);
