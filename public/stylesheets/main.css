@@ -670,6 +670,10 @@ thead td.calendar {
 /*End Calendar*/
 
 /*Start Challenge and Item*/
+.item-card-premium {
+  border-color: #f8e084;
+  border-width: medium;
+}
 
 /*Challenge descriptions*/
 #challenge-desc, #item-desc {

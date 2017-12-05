@@ -12,8 +12,14 @@ $.ajax({
       item = res.data;
       var html ='';
       item.forEach(function(item){
-        html += ' <div class="item-card p-1 mb-1" id="item-' + item.itemid + '"><img height="30" width="30" src=' + item.icon + '> ' + item.name +
-        '<div class="item-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + item.wecasualpoints + '</div></div>';
+        if(item.premium){
+          html += ' <div class="item-card item-card-premium p-1 mb-1" id="item-' + item.itemid + '"><img height="30" width="30" src=' + item.icon + '> ' + item.name +
+          '<div class="item-points">Premium&nbsp;&nbsp;<img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + item.wecasualpoints + '</div></div>';
+        }
+        else{
+          html += ' <div class="item-card p-1 mb-1" id="item-' + item.itemid + '"><img height="30" width="30" src=' + item.icon + '> ' + item.name +
+          '<div class="item-points"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + item.wecasualpoints + '</div></div>';
+        }
       });
       $('#item-container').html(html);
     }
@@ -22,6 +28,7 @@ $.ajax({
 
 //Close item info dialog when click outside of box
 $(document).on('click', '#item-opacity', function(){
+  $('#buy-error').html("");
   $('#item-opacity').fadeOut('fast');
   $('#item-info').slideUp('fast');
 });
@@ -43,7 +50,7 @@ $(document).on('click', '#item-buy', function(){
     data: selectedItem,
     success: function(res){
       if(!res.success){
-        alert(res.error);
+        $('#buy-error').html(res.error);
       }
       else if(res.success){
         location.reload();
