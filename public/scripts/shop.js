@@ -53,7 +53,7 @@ $.ajax({
       var html ='';
       playerItem.forEach(function(item){
         if(item.redeemed){
-          html += '<div class="item-card item-card-redeemed item-card-buy p-1 mb-1" id="item-' + item.itemid + '">\
+          html += '<div class="item-card item-card-redeemed item-card-purchased p-1 mb-1" id="item-' + item.itemid + '">\
           <div class="row">\
             <div class="col-md-8">\
               <img height="30" width="30" src=' + item.icon + '> ' + item.name + '\
