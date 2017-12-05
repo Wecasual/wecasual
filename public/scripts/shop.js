@@ -71,7 +71,7 @@ $.ajax({
 //Close item info dialog when click outside of box
 $(document).on('click', '#item-opacity', function(){
   $('#item-cost').html("");
-  $('#item-actions').html("");
+  $('#item-other').html("");
   $('#buy-error').html("");
   $('#item-opacity').fadeOut('fast');
   $('#item-info').slideUp('fast');
@@ -83,7 +83,7 @@ $(document).on('click', '.item-card-buy', function(){
   $('#item-name').html('<img height="30" width="30" src=' + selectedItem.icon + '> ' + selectedItem.name);
   $('#item-desc').html(selectedItem.description);
   $('#item-cost').html('<img height="20" width="39" src=/images/coins-gold-dark.png> ' + selectedItem.wecasualpoints + " Wecasual Points");
-  $('#item-actions').html('<div class="pink-btn btn btn-primary text-center mt-2 mb-1" id="item-buy">Buy</div><div><small class="" id="buy-error"></small></div>');
+  $('#item-other').html('<div class="pink-btn btn btn-primary text-center mt-2 mb-1" id="item-buy">Buy</div><div><small class="" id="buy-error"></small></div>');
   $('#item-opacity').fadeIn('fast');
   $('#item-info').slideDown('fast');
 });
@@ -93,6 +93,8 @@ $(document).on('click', '.item-card-purchased', function(){
   selectedItem = getItem(selectedItemid, playerItem);
   $('#item-name').html('<img height="30" width="30" src=' + selectedItem.icon + '> ' + selectedItem.name);
   $('#item-desc').html(selectedItem.description);
+  date = new Date(selectedItem.purchasedate)
+  $('#item-other').html('Purchased: ' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate());
   $('#item-opacity').fadeIn('fast');
   $('#item-info').slideDown('fast');
 });
