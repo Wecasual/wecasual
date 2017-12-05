@@ -4,17 +4,35 @@
   <h5 class="mt-2" id="item-name"></h5>
   <div class="mt-3 p-2 rounded text-left" id="item-desc"></div>
   <div class="mt-3" id="item-cost"></div>
-  <div  class="pink-btn btn btn-primary text-center mt-2 mb-1" id="item-buy">Buy</div>
-  <div><small class="" id="buy-error"></small></div>
+  <div id="item-actions"></div>
 </div>
 
-<div class="card rounded mt-3">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <h3>Shop</h3>
-      <div class="pre-scrollable" id="item-container">
 
-      </div>
-    </li>
-  </ul>
+<div class="row">
+  <div class="col-md-6 col">
+    <div class="card rounded mt-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h3>Shop</h3>
+          <div class="pre-scrollable" >
+            <div class="row" id="item-container">
+
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6 col">
+    <div class="card rounded mt-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h3>Your Purchases</h3>
+          <div class="pre-scrollable" id="item-purchased-container">
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

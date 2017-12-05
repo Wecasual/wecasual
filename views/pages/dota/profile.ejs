@@ -73,12 +73,16 @@
 <div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <h3>Add a friend</h3>
-      <p class ="mb-0">Click to send a friend request</p>
-      <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
-      <div class="card-body pre-scrollable friend-search">
-        <ul id="user-list">
-        </ul>
+      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#addAFriend" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+        <h4 class = "mb-0">Add a Friend<span class="down-caret"></span></h4>
+      </a>
+      <div class="collapse card-body" id="addAFriend">
+        <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
+        <p class ="mb-0">Click to send a friend request</p>
+        <div class="card-body pre-scrollable friend-search">
+          <ul id="user-list">
+          </ul>
+        </div>
       </div>
     </li>
   </ul>

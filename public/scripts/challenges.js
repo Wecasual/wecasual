@@ -26,12 +26,30 @@ $.ajax({
       var cchtml = "";//Populate completeChallenges list
       playerChallenge.forEach(function(challenge){
         if(!challenge.completed){
-          ychtml += ' <div class="challenge-card p-1 mb-1 yc-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
-          '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
+          ychtml += '<div class="challenge-card yc-card p-1 mb-1" id="challenge-' + challenge.challengeid + '">\
+          <div class="row">\
+            <div class="col-md-8">\
+              ' + challenge.name + '\
+            </div>\
+            <div class="col-md-4">\
+              <div class="pull-right"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + challenge.wecasualpoints + '</div>\
+            </div>\
+          </div></div>';
+          // ychtml += ' <div class="challenge-card p-1 mb-1 yc-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
+          // '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
         }
         else{
-          cchtml += ' <div class="challenge-card p-1 mb-1 cc-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
-          '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
+          cchtml += '<div class="challenge-card cc-card p-1 mb-1" id="challenge-' + challenge.challengeid + '">\
+          <div class="row">\
+            <div class="col-md-8">\
+              ' + challenge.name + '\
+            </div>\
+            <div class="col-md-4">\
+              <div class="pull-right"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + challenge.wecasualpoints + '</div>\
+            </div>\
+          </div></div>';
+          // cchtml += ' <div class="challenge-card p-1 mb-1 cc-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
+          // '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
         }
 
         playerChallengeid.push(challenge.challengeid);
@@ -54,8 +72,17 @@ $.ajax({
       tachtml = "";//Populate takeAChallenge list
       availChallenge.forEach(function(challenge){
         if(playerChallengeid.indexOf(challenge.challengeid) == -1){
-          tachtml += ' <div class="challenge-card p-1 mb-1 tac-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
-          '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
+          tachtml += '<div class="challenge-card tac-card p-1 mb-1" id="challenge-' + challenge.challengeid + '">\
+          <div class="row">\
+            <div class="col-md-8">\
+              ' + challenge.name + '\
+            </div>\
+            <div class="col-md-4">\
+              <div class="pull-right"><img height="20" width="39" src=/images/coins-gold-dark.png>&nbsp;&nbsp;' + challenge.wecasualpoints + '</div>\
+            </div>\
+          </div></div>';
+          // tachtml += ' <div class="challenge-card p-1 mb-1 tac-card" id="challenge-' + challenge.challengeid + '">' + challenge.name +
+          // '<div class="challenge-points"><img height="20" width="39" src=/images/coins-gold-dark.png> ' + challenge.wecasualpoints + '</div></div>';
         }
       });
       if(tachtml){

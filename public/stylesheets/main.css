@@ -498,7 +498,7 @@ a.active{
   }
 }
 
-.calendar-container {
+.calendar-container{
   overflow-y:hidden;
 }
 /*.calendar-wrapper {*/
@@ -675,6 +675,10 @@ thead td.calendar {
   border-width: medium;
 }
 
+#item-container, #item-purchased-container {
+  overflow-x: hidden;
+}
+
 /*Challenge descriptions*/
 #challenge-desc, #item-desc {
   background-color: #fff;
@@ -695,9 +699,9 @@ thead td.calendar {
   z-index: 10;
 }
 
-.challenge-points, .item-points {
+/*.challenge-points, .item-points {
   float: right;
-}
+}*/
 
 #challenge-complete-form-container {
   display: none;

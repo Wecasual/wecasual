@@ -315,6 +315,7 @@ app.post(challengeRoute.completeChallenge.route, challengeRoute.completeChalleng
 //item route
 app.post(itemRoute.buyItem.route, itemRoute.buyItem.handler);
 app.post(itemRoute.getItem.route, itemRoute.getItem.handler);
+app.post(itemRoute.getPlayerItem.route, itemRoute.getPlayerItem.handler);
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {

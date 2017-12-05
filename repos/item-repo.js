@@ -54,9 +54,31 @@ function getItem(pool, callback){
   });
 }
 
+function getPlayerItem(pool, playerid, callback){
+  pool.connect(function(err, client) {
+    if(err){
+      callback && callback(err);
+    }
+    else{
+      var queryString = 'SELECT * FROM item JOIN playeritem ON item.itemid = playeritem.itemid WHERE playeritem.playerid = $1';
+      var values = [playerid];
+      client.query(queryString, values, function(err, result){
+        client.release();
+        if(err){
+          callback && callback(err, null);
+        }
+        else {
+          callback && callback(null, result.rows);
+        }
+      });
+    }
+  });
+}
+
 module.exports = pool => {
   return{
     buyItem: buyItem.bind(null, pool),
-    getItem: getItem.bind(null, pool)
+    getItem: getItem.bind(null, pool),
+    getPlayerItem: getPlayerItem.bind(null, pool)
   }
 }
