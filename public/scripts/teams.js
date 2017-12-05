@@ -2,11 +2,14 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   var url = window.location.href;
   var teamid = url.split('=')[1];
-  if(!teamid){
-    teamid = $("#teamid").html();
-  }
+  // if(!teamid){
+  //   teamid = $("#teamid").html();
+  // }
   if(teamid){
     populateTeam(teamid);
+  }
+  else{
+    populateTeam(1);
   }
   //Get all user playerids and usernames
   // var $loading = $('.loading-ring').hide();
@@ -51,7 +54,7 @@ function populateTeam(teamid){
   // $('#points').empty();
   // $('#team').empty();
   // $('#games-played').empty();
-  $('#roster').empty();
+  // $('#roster').empty();
 
   //Get info  for selected team
   $.ajax({
@@ -70,32 +73,8 @@ function populateTeam(teamid){
         if(!teamlogo){
           teamlogo = '/images/teamlogo-placeholder.png';
         }
-        $('#teamlogo')[0].innerHTML = '<img height=150 width=250 src=' + teamlogo + ' alt="Team Logo" />';
-        $('#teamname')[0].innerHTML = team.teamname;
-        // var date = new Date(player.registrationdate)
-        // $('#reg-date')[0].innerHTML = 'Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-        // if(player.premium){
-        //   $('#premium')[0].innerHTML = '<img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">\
-        //   <h5><p><b>Active</b></p></h5>';
-        //   $('#points')[0].innerHTML = '<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">\
-        //   <h5><b>' + player.wecasualpoints + '</b></h5>';
-        // }
-        // else{
-        //   $('#premium')[0].innerHTML = '<img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">\
-        //   <h5><p><b>Not Active</b></p></h5>';
-        //   $('#points')[0].innerHTML = '<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-small.png">\
-        //   <h5><b>N/A</b></h5>';
-        //
-        // }
-
-        // if(player.activeTeam[0]){
-        //   $('#team')[0].innerHTML = '<a href="/dota/tournament"><b> ' + player.activeTeam[0].teamname + '</b></a>';
-        // }
-        // else{
-        //   $('#team')[0].innerHTML = '<b> No Team</b>';
-        // }
-        //
-        // $('#games-played')[0].innerHTML = '<b> ' + player.totalgames + '</b>';
+        $('#teamlogo').html('<img height=150 width=250 src=' + teamlogo + ' alt="Team Logo" />');
+        $('#teamname').html(team.teamname);
         var html = "";
         team.activeRoster.forEach(function(player){
           var avatar = player.avatar;
@@ -106,7 +85,7 @@ function populateTeam(teamid){
           '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
           player.username + '</div></a>';
         });
-        $("#roster")[0].innerHTML = html;
+        $("#roster").html(html);
         html = "";
         team.inactiveRoster.forEach(function(player){
           var avatar = player.avatar;
@@ -117,7 +96,7 @@ function populateTeam(teamid){
           '" target="_blank"><div class="card-player mb-1 p-1"><img height="20" width="20" class = "rounded-circle" src=' + avatar + ' alt"Avatar"> ' +
           player.username + '</div></a>';
         });
-        $("#inactiveRoster")[0].innerHTML = html;
+        $("#inactiveRoster").html(html);
       }
     }
   });

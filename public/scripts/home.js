@@ -2,6 +2,7 @@ $(document).ready(function() {
   var retrievedPlay = false;
   var retrievedProfile = false;
   var retrievedChallenges = false;
+  var retrievedShop = false;
 
   var url = window.location.href;
   var tab = url.split('?')[1];
@@ -17,6 +18,8 @@ $(document).ready(function() {
         url: '/play.ejs',
         success: function(res){
           $("#list-play").html(res);
+          $.getScript('/schedule.js');
+          $.getScript('/calendar-week.js');
         }
       });
     }
@@ -31,6 +34,7 @@ $(document).ready(function() {
         url: '/profile.ejs',
         success: function(res){
           $("#list-profile").html(res);
+          $.getScript('/profile.js');
         }
       });
     }
@@ -45,16 +49,41 @@ $(document).ready(function() {
         url: '/challenges.ejs',
         success: function(res){
           $("#list-challenges").html(res);
+          $.getScript('/challenges.js');
         }
       });
     }
   }
 
-  if(tab === "profile"){
-    $('#list-profile-list').tab('show');
+  var shop = function(){
+    history.pushState(null, '', '/dota?shop');
+    if(!retrievedShop){
+      retrievedShop = true;
+      $.ajax({
+        async: true,
+        type: 'POST',
+        url: '/shop.ejs',
+        success: function(res){
+          $("#list-shop").html(res);
+          $.getScript('/shop.js');
+        }
+      });
+    }
   }
-  else if(tab === "challenges"){
-    $('#list-challenges-list').tab('show');
+
+  if(tab){
+    if(tab.indexOf("profile")!=-1){
+      $('#list-profile-list').tab('show');
+    }
+    else if(tab.indexOf("challenges")!=-1){
+      $('#list-challenges-list').tab('show');
+    }
+    else if(tab.indexOf("shop")!=-1){
+      $('#list-shop-list').tab('show');
+    }
+    else{
+      $('#list-play-list').tab('show');
+    }
   }
   else{
     $('#list-play-list').tab('show');
@@ -63,4 +92,5 @@ $(document).ready(function() {
   $('#list-play-list').on('shown.bs.tab', play);
   $('#list-profile-list').on('shown.bs.tab', profile);
   $('#list-challenges-list').on('shown.bs.tab', challenges);
+  $('#list-shop-list').on('shown.bs.tab', shop);
 });

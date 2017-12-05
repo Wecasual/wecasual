@@ -1,10 +1,5 @@
 <% include ../../partials/header.ejs %>
 <% include ../../partials/navbar.ejs %>
-<%if(user){%>
-  <%if(user.activeTeam){%>
-    <div style="display:none" id="teamid"><%=user.activeTeam[0].teamid%></div>
-  <%}%>
-<%}%>
 
 <div class="container-fluid top-spacer">
   <div class="card-header display-4 text-center">
@@ -127,17 +122,47 @@
       <iframe class="airtable-embed" src="https://airtable.com/embed/shr15AD1K3nDdxdEz?backgroundColor=purple"
       frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
     </div> -->
+  <div class="card text-center rounded p-3 mt-3">
+    <div class="card-header display-4 text-center">
+      <h3>Wecasual Tournament Winners</h3>
+    </div>
+    <div id="carouselTournament" class="carousel slide" data-ride="carousel">
+      <!-- <ol class="carousel-indicators">
+        <li data-target="#carouselTournament" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselTournament" data-slide-to="1"></li>
+      </ol> -->
+      <div class="carousel-inner carousel-container" role="listbox">
+        <div class="carousel-item active">
+          <img class="d-block img-fluid mx-auto" src="/images/pttg-victory.jpg" alt="ptts victory card">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block img-fluid mx-auto" src="/images/monkaS-victory.jpg" alt="monkaS victory card">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselTournament" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselTournament" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
 
 
-    <div class="card-header display-4 text-center mt-5">
-      Wecasual Tournament Winners
+
+    <!-- <div class="card text-center rounded p-3">
+      <h1>Team PuhTayToh Gawdz: November 26th, 2017</h1>
+      <img class = "card mt-3 img-fluid mx-auto d-block rounded" alt="ptts victory card" src="/images/pttg-victory.jpg" height="55%" width="55%">
     </div>
 
 
     <div class="card text-center rounded p-3">
       <h1>Team monkaS: November 11th, 2017</h1>
-      <img class = "card mt-3 img-fluid mx-auto d-block rounded" alt="monkaS victory card" src="/images/monkaS-victory.png" height="55%" width="55%">
-    </div>
+      <img class = "card mt-3 img-fluid mx-auto d-block rounded" alt="monkaS victory card" src="/images/monkaS-victory.jpg" height="55%" width="55%">
+    </div> -->
+
 </div>
 <script src="../../scripts/teams.js"></script>
 <% include ../../partials/footer.ejs %>

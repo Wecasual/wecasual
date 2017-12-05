@@ -22,7 +22,7 @@
         </div>
         <!-- <h5 class = "ml-1 mt-1"><i>Games with insufficient players 24 hours before game time will be cancelled (You will be notified)</i></h5> -->
         <ul>
-          <li>Games with insufficient players 24 hours before game time will be cancelled (You will be notified).</li>
+          <!-- <li>Games with insufficient players 24 hours before game time will be cancelled (You will be notified).</li> -->
           <li>If you want to cancel a sign up you must email us at robert@wecasual.gg or message us on Discord 24 hours before the game.</li>
         </ul>
       </div>
@@ -40,16 +40,6 @@
             <div id="friends-list">
 
             </div>
-            <!-- <table class="table table-striped">
-              <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                  </tr>
-              </thead>
-              <tbody id="friends-list">
-              </tbody>
-            </table> -->
           </div>
         </li>
       </ul>
@@ -62,23 +52,17 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <h3>Friend Requests</h3>
-          <p class = "mb-0">People who want to add you as a friend</p>
+          <p class = "mb-0">Incoming friend requests</p>
           <div class="card-body pre-scrollable">
             <div id="friend-requests">
 
             </div>
-            <!-- <table class="table table-striped">
-              <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-              </thead>
-              <tbody id="friend-requests">
-              </tbody>
-            </table> -->
+          </div>
+          <p class = "mb-0">Your sent requests</p>
+          <div class="card-body pre-scrollable">
+            <div id="sent-friend-requests">
+
+            </div>
           </div>
         </li>
       </ul>
@@ -89,14 +73,18 @@
 <div class="card rounded mt-3">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <h3>Add a friend</h3>
-      <p class ="mb-0">Click to send a friend request</p>
-      <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
-      <div class="card-body pre-scrollable friend-search">
-        <ul id="user-list">
-        </ul>
+      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#addAFriend" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+        <h4 class = "mb-0">Add a Friend<span class="down-caret"></span></h4>
+      </a>
+      <div class="collapse card-body" id="addAFriend">
+        <input type="text" id="user-search" onkeyup="search()" placeholder="Search for a user..">
+        <p class ="mb-0">Click to send a friend request</p>
+        <div class="card-body pre-scrollable friend-search">
+          <ul id="user-list">
+          </ul>
+        </div>
       </div>
     </li>
   </ul>
 </div>
-<script src="../../scripts/profile.js"></script>
+<!-- <script src="../../scripts/profile.js"></script> -->

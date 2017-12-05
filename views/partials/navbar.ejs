@@ -32,7 +32,12 @@
     </span>
 
     <% } else{ %>
-      <span><img height="44" width="44" class = "rounded-circle mr-1" src='<%= user.avatar %>' alt='Your Avatar Image' /></span>
+      <% if(user.avatar.includes('null')){ %>
+        <span><img height="44" width="44" class = "rounded-circle mr-1" src='/images/avatar-default.png' alt='Your Avatar Image' /></span>
+      <% } else { %>
+        <span><img height="44" width="44" class = "rounded-circle mr-1" src='<%= user.avatar %>' alt='Your Avatar Image' /></span>
+      <% } %>
+
     <%} %>
     <span class = "align-middle">Home</span>
   </a>

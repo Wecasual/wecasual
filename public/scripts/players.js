@@ -38,16 +38,6 @@ $(document).ready(function() {
 });
 
 function populatePlayer(playerid){
-  //Remove any current info. Do for all divs
-  // $('#avatar').empty();
-  // $('#username').empty();
-  // $('#reg-date').empty();
-  // $('#premium').empty();
-  // $('#points').empty();
-  // $('#team').empty();
-  // $('#games-played').empty();
-  // $('#friends-list').empty();
-
   //Get info  for selected player
   $.ajax({
     type: 'POST',
@@ -64,42 +54,39 @@ function populatePlayer(playerid){
         if(avatar.includes('null')){
           avatar='/images/avatar-default.png';
         }
-        $('#avatar')[0].innerHTML = '<img height="128" width="128" class = "rounded-circle" src=' + avatar + ' alt="Avatar Image" />';
-        $('#username')[0].innerHTML = player.username;
+        $('#avatar').html('<img height="128" width="128" class = "rounded-circle" src=' + avatar + ' alt="Avatar Image" />');
+        $('#username').html(player.username);
         var date = new Date(player.registrationdate)
-        $('#reg-date')[0].innerHTML = 'Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+        $('#reg-date').html('Member since: ' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
         if(player.premium){
-          $('#premium')[0].innerHTML = '<img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">\
-          <h5><p><b>Active</b></p></h5>';
-          $('#points')[0].innerHTML = '<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">\
-          <h5><b>' + player.wecasualpoints + '</b></h5>';
+          $('#premium').html('<img class="rounded mb-2" alt="wecasual-premium-image-active" width="64" height="64" src="/images/premium-active.png">\
+          <h5><p><b>Active</b></p></h5>');
         }
         else{
-          $('#premium')[0].innerHTML = '<img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">\
-          <h5><p><b>Not Active</b></p></h5>';
-          $('#points')[0].innerHTML = '<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-small.png">\
-          <h5><b>N/A</b></h5>';
-
+          $('#premium').html('<img class="rounded mb-2" alt="wecasual-premium-image-non-active" width="64" height="64" src="/images/premium-non-active.png">\
+          <h5><p><b>Not Active</b></p></h5>');
         }
+        $('#points').html('<img class="rounded mb-3" alt="wecasual-points-image" width="107" height="55" src="/images/coins-gold-dark.png">\
+        <h5><b>' + player.wecasualpoints + '</b></h5>');
 
         if(player.activeTeam.length != 0){
-          $('#team')[0].innerHTML = '<a href="/dota/tournament?teamid=' + player.activeTeam[0].teamid + '" target="_blank"><b> ' + player.activeTeam[0].teamname + '</b></a>';
+          $('#team').html('<a href="/dota/tournament?teamid=' + player.activeTeam[0].teamid + '" target="_blank"><b> ' + player.activeTeam[0].teamname + '</b></a>');
         }
         else{
-          $('#team')[0].innerHTML = '<b> No Team</b>';
+          $('#team').html('<b> No Team</b>');
         }
         if(player.inactiveTeam.length != 0){
           var html = '<a href="/dota/tournament?teamid=' + player.inactiveTeam[0].teamid + '" target="_blank"><b> ' + player.inactiveTeam[0].teamname + '</b></a>';
           for(var i = 1; i < player.inactiveTeam.length; i++){
             html += ', <a href="/dota/tournament?teamid=' + player.inactiveTeam[i].teamid + '" target="_blank"><b> ' + player.inactiveTeam[i].teamname + '</b></a>'
           }
-          $('#prev-team')[0].innerHTML = html;
+          $('#prev-team').html(html);
         }
         else{
-          $('#prev-team')[0].innerHTML = '<b> No previous teams</b>';
+          $('#prev-team').html('<b> No previous teams</b>');
         }
 
-        $('#games-played')[0].innerHTML = '<b> ' + player.totalgames + '</b>';
+        $('#games-played').html('<b> ' + player.totalgames + '</b>');
       }
     }
   });
@@ -126,10 +113,10 @@ function populatePlayer(playerid){
             fr.username + '</div></a>';
             // $("#friends-list").append('<tr><th scope="row"><img height="46" width="46"class="rounded-circle" src=' + ele.avatar + '></th><td>' + ele.username + '</td></tr>')
           });
-          $("#friends-list")[0].innerHTML = html;
+          $("#friends-list").html(html);
         }
         else{
-          $("#friends-list")[0].innerHTML = '<div>No Friends :(</div>';
+          $("#friends-list").html('<div>No Friends :(</div>');
         }
       }
     }
