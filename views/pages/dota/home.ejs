@@ -27,41 +27,14 @@
 
 <div class="container-fluid top-spacer-small">
   <h2 class = "text-center">
-    <div class="row">
-
-      <%if(!user.premium){%>
-      <a class="patreon-bg col-md-6 hvr-fade" href="https://www.patreon.com/wecasual" target="_blank">
-        <img class="rounded" alt="patreon-logo" width="128" height="64" src="/images/patreon-logo.png">
-        <span class = "explain-words align-middle">Get Wecasual Premium!</span>
-      </a>
-      <%}else{%>
-      <a class="patreon-bg col-md-6 hvr-fade" href="https://www.patreon.com/wecasual" target="_blank">
-        <img class="rounded" alt="patreon-logo" width="128" height="64" src="/images/patreon-logo.png">
-        <span class = "explain-words align-middle">You have Premium! &#10004; </span>
-      </a>
-      <%}%>
-
-      <%if(user.status == 'Not in Discord'){%>
-      <a class="discord-bg col-md-6 hvr-fade hvr-fade-discord" href="https://discord.gg/xGKTNzv" target="_blank">
-        <img class="rounded" alt="patreon-logo" width="64" height="64" src="/images/discord-logo-white.png">
-        <span class = "explain-words align-middle">Join the Discord</span>
-      </a>
-      <%}else{%>
-      <a class="discord-bg col-md-6 hvr-fade hvr-fade-discord" href="https://discord.gg/xGKTNzv" target="_blank">
-        <img class="rounded" alt="patreon-logo" width="64" height="64" src="/images/discord-logo-white.png">
-        <span class = "explain-words align-middle">Joined the Discord &#10004; </span>
-      </a>
-      <%}%>
-
-    </div>
     <!-- Quote Carousel -->
-    <div id="carouselQuote" class="carousel slide mt-3" data-ride="carousel">
+    <div id="carouselQuote" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner carousel-container" role="listbox" data-toggle="tooltip" data-placement="top" title="Add your own quote by purchasing a quote item in the shop!">
         <div class="carousel-item active">
-          <div class="card p-1"><h5><i>"I am a beacon of knowledge blazing out across a black sea of ignorance"</i> - Carl</h5></div>
+          <div class="card p-1 mt-3"><h5><i>"I am a beacon of knowledge blazing out across a black sea of ignorance"</i> - Carl</h5></div>
         </div>
         <div class="carousel-item">
-          <div class="card p-1"><h5><i>"Go the shop page to get your quote here!"</i> - Wecasual</h5></div>
+          <div class="card p-1 mt-3"><h5><i>"Go the shop page to get your quote here!"</i> - Wecasual</h5></div>
         </div>
       </div>
     </div>
@@ -94,9 +67,31 @@
               <h2>
                 <span class="align-bottom text-1.3em"><%= user.username %></span>
               </h2>
-              <hr>
+              <!-- <hr> -->
             </div>
+            <%if(!user.premium){%>
+            <a class="patreon-bg col-md-12 hvr-fade text-center" href="https://www.patreon.com/wecasual" target="_blank">
+              <img class="rounded" alt="patreon-logo" width="64" height="32" src="/images/patreon-logo.png">
+              <span class = "explain-words align-middle">Get Wecasual Premium!</span>
+            </a>
+            <%}else{%>
+            <a class="patreon-bg col-md-12 hvr-fade text-center" href="https://www.patreon.com/wecasual" target="_blank">
+              <img class="rounded" alt="patreon-logo" width="64" height="32" src="/images/patreon-logo.png">
+              <span class = "explain-words align-middle">You have Premium! &#10004; </span>
+            </a>
+            <%}%>
 
+            <%if(user.status == 'Not in Discord'){%>
+            <a class="discord-bg col-md-12 hvr-fade hvr-fade-discord text-center" href="https://discord.gg/xGKTNzv" target="_blank">
+              <img class="rounded" alt="patreon-logo" width="32" height="32" src="/images/discord-logo-white.png">
+              <span class = "explain-words align-middle">Join the Discord</span>
+            </a>
+            <%}else{%>
+            <a class="discord-bg col-md-12 hvr-fade hvr-fade-discord text-center" href="https://discord.gg/xGKTNzv" target="_blank">
+              <img class="rounded" alt="patreon-logo" width="32" height="32" src="/images/discord-logo-white.png">
+              <span class = "explain-words align-middle">Joined the Discord &#10004; </span>
+            </a>
+            <%}%>
             <!-- POINTS AND PREMIUM -->
             <div class="row m-3 text-center">
               <div class="col-md-6">
