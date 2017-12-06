@@ -392,6 +392,9 @@ a.active{
 
 /*Home page*/
 
+.carousel-item div h5 {
+  margin-bottom: 0;
+}
 
 .discord-bg{
   background-color: #7289DA !important;

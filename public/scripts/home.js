@@ -93,4 +93,11 @@ $(document).ready(function() {
   $('#list-profile-list').on('shown.bs.tab', profile);
   $('#list-challenges-list').on('shown.bs.tab', challenges);
   $('#list-shop-list').on('shown.bs.tab', shop);
+
+  //Set quote carousel interval
+  $('.carousel').carousel({
+    interval: 5000
+  });
+  //Enable tooltip
+  $('[data-toggle="tooltip"]').tooltip();
 });
