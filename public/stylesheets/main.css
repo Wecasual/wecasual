@@ -358,7 +358,9 @@ input[type=text], select, textarea {
 .pre-scrollable-mini{
   max-height: 350px;
 }
-
+.pre-scrollable-medium{
+  max-height: 500px;
+}
 .collapse-text{
   color: #555;
   text-decoration: none;

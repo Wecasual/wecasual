@@ -117,13 +117,13 @@ $('#schedule-game').bootstrapValidator({
         alert(res.error);
       }
       else if(res.success){
-        $('#gameType').val("");
-        $('#pubSession')[0].checked = false;
-        $('#date').val("");
-        $('#time').val("21:00");
-        $('#discordRoom').val("1");
-        $('#announce')[0].checked = true;
-        alert(res.message);
+        // $('#gameType').val("");
+        // $('#pubSession')[0].checked = false;
+        // $('#date').val("");
+        // $('#time').val("21:00");
+        // $('#discordRoom').val("1");
+        // $('#announce')[0].checked = true;
+        // alert(res.message);
         location.reload();
       }
     }
