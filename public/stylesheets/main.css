@@ -358,7 +358,9 @@ input[type=text], select, textarea {
 .pre-scrollable-mini{
   max-height: 350px;
 }
-
+.pre-scrollable-medium{
+  max-height: 500px;
+}
 .collapse-text{
   color: #555;
   text-decoration: none;
@@ -390,6 +392,9 @@ a.active{
 
 /*Home page*/
 
+.carousel-item div h5 {
+  margin-bottom: 0;
+}
 
 .discord-bg{
   background-color: #7289DA !important;
@@ -498,7 +503,7 @@ a.active{
   }
 }
 
-.calendar-container {
+.calendar-container{
   overflow-y:hidden;
 }
 /*.calendar-wrapper {*/
@@ -632,7 +637,7 @@ thead td.calendar {
   z-index: 10;
 }
 
-.game-info-opacity, .challenge-info-opacity{
+.game-info-opacity, .challenge-info-opacity, .item-info-opacity{
   display: none;
   position: absolute;
   width: 100%;
@@ -645,9 +650,9 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-player, .challenge-card {
+.card-player, .challenge-card , .item-card{
   width:100%;
-  border:1px solid #d1d1d1;
+  border:1px solid #d1d1d1;/*light gray*/
   border-radius:5px;
   color:#555;
   background-color: #fff;
@@ -656,8 +661,8 @@ thead td.calendar {
 .roster-link{
   text-decoration:none !important;
 }
-.card-player:hover, .challenge-card:hover{
-  background-color:#ff9da2;
+.card-player:hover, .challenge-card:hover, .item-card:hover{
+  background-color:#ff9da2;/*pink*/
   cursor: pointer;
   /*#F96854;*/
 }
@@ -669,14 +674,26 @@ thead td.calendar {
 
 /*End Calendar*/
 
-/*Start Challenge*/
+/*Start Challenge and Item*/
+.item-card-premium {
+  border-color: #f8e084;/*gold*/
+  border-width: medium;
+}
+
+.item-card-redeemed {
+  background-color: #d1d1d1;/*gray*/
+}
+
+#item-container, #item-purchased-container {
+  overflow-x: hidden;
+}
 
 /*Challenge descriptions*/
-#challenge-desc {
+#challenge-desc, #item-desc {
   background-color: #fff;
 }
 
-.game-info, .challenge-info {
+.game-info, .challenge-info, .item-info {
   display: none;
   position: absolute;
   left: 0;
@@ -691,9 +708,9 @@ thead td.calendar {
   z-index: 10;
 }
 
-.challenge-points {
+/*.challenge-points, .item-points {
   float: right;
-}
+}*/
 
 #challenge-complete-form-container {
   display: none;

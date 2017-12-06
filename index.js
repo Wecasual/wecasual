@@ -88,6 +88,7 @@ var profilesRepo = require('./repos/profiles-repo')(pool);
 var scheduleRepo = require('./repos/schedule-repo')(pool);
 var teamRepo = require('./repos/team-repo')(pool);
 var challengeRepo = require('./repos/challenge-repo')(pool);
+var itemRepo = require('./repos/item-repo')(pool);
 var contactRepo = require('./repos/contact-repo')(base);
 
 var profileRoute = require('./lib/routes/profile-route')(profilesRepo);
@@ -96,6 +97,7 @@ var signupRoute = require('./lib/routes/signup-route')(profilesRepo);
 var scheduleRoute = require('./lib/routes/schedule-route')(scheduleRepo, discordBot);
 var contactRoute = require('./lib/routes/contact-route')(contactRepo);
 var teamRoute = require('./lib/routes/team-route')(teamRepo);
+var itemRoute = require('./lib/routes/item-route')(itemRepo);
 var challengeRoute = require('./lib/routes/challenge-route')(challengeRepo);
 
 
@@ -112,13 +114,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // HTTPS redirect (Comment if not working locally)
-app.use(function(req, res, next) {
-    if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
-        res.redirect('https://' + req.get('Host') + req.url);
-    }
-    else
-        next();
-});
+// app.use(function(req, res, next) {
+//     if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
+//         res.redirect('https://' + req.get('Host') + req.url);
+//     }
+//     else
+//         next();
+// });
 
 //Session middleware
 app.use(cookieSession({
@@ -243,6 +245,9 @@ app.post('/play.ejs', function(req, res){
 app.post('/challenges.ejs', function(req, res){
   res.sendFile('views/pages/dota/challenges.ejs', {root: __dirname });
 });
+app.post('/shop.ejs', function(req, res){
+  res.sendFile('views/pages/dota/shop.ejs', {root: __dirname });
+})
 
 //Home page scripts
 app.get('/schedule.js', function(req, res){
@@ -257,7 +262,9 @@ app.get('/profile.js', function(req, res){
 app.get('/challenges.js', function(req, res){
   res.sendFile('public/scripts/challenges.js', {root: __dirname });
 });
-
+app.get('/shop.js', function(req, res){
+  res.sendFile('public/scripts/shop.js', {root: __dirname });
+});
 
 
 //login route
@@ -305,6 +312,10 @@ app.post(challengeRoute.getChallenge.route, challengeRoute.getChallenge.handler)
 app.post(challengeRoute.acceptChallenge.route, challengeRoute.acceptChallenge.handler);
 app.post(challengeRoute.completeChallenge.route, challengeRoute.completeChallenge.handler);
 
+//item route
+app.post(itemRoute.buyItem.route, itemRoute.buyItem.handler);
+app.post(itemRoute.getItem.route, itemRoute.getItem.handler);
+app.post(itemRoute.getPlayerItem.route, itemRoute.getPlayerItem.handler);
 
 //==========Dota Routes==========
 app.get('/dota', ensureRealm, function(req, res) {
@@ -524,15 +535,15 @@ function ensureRealm(req, res, next) {
 
 //Error handling
 //Handle 404
-// app.use(function(req, res) {
-//   res.status(404)
-//   res.render('pages/error', {errorMessage: "404: Page not Found"});
-//   //.send('404: Page not Found');
-// });
-//
-// // Handle 500
-// app.use(function(error, req, res, next) {
-//   res.status(500)
-//   res.render('pages/error', {errorMessage: "500: Internal Server Error"});
-//   //.send('500: Internal Server Error');
-// });
+app.use(function(req, res) {
+  res.status(404)
+  res.render('pages/error', {errorMessage: "404: Page not Found"});
+  //.send('404: Page not Found');
+});
+
+// Handle 500
+app.use(function(error, req, res, next) {
+  res.status(500)
+  res.render('pages/error', {errorMessage: "500: Internal Server Error"});
+  //.send('500: Internal Server Error');
+});

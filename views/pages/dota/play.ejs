@@ -1,105 +1,116 @@
 <!-- GAME SIGNUP -->
-<div class="card rounded">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-        <h4 class = "mb-0">Game Signup<span class="down-caret"></span></h4>
-      </a>
-      <p class ="mb-0">Sign up for an existing game, all members welcome!</p>
-      <div class="collapse card-body" id="gameSignup">
+<div class="row">
+  <div class="col-md-6">
+    <div class="card rounded mt-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a class="pink-btn btn btn-primary mb-2 dropdown" href="#gameSignup" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+            <h4 class = "mb-0">Game Signup<span class="down-caret"></span></h4>
+          </a>
+          <!-- <h3>Game Signup</h3> -->
+          <p class ="mb-0">Click to sign up for an existing game, all members welcome!</p>
+          <div class="collapse card-body" id="gameSignup">
 
-        <form id="game-signup" method="post" action="/schedule/gameSignup">
-          <div class="form-group ">
-            <div class="card-body pre-scrollable pre-scrollable-mini">
-              <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <th></th>
-                      <th>Game</th>
-                      <th>Time</th>
-                      <th>Team 1 Slots</th>
-                      <th>Team 2 Slots</th>
-                    </tr>
-                </thead>
-                <tbody id="game-list">
-                </tbody>
-              </table>
-            </div>
+            <form id="game-signup" method="post" action="/schedule/gameSignup">
+              <div class="form-group ">
+                <div class="card-body pre-scrollable pre-scrollable-mini">
+                  <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Game</th>
+                          <th>Time</th>
+                          <th>Team 1 Slots</th>
+                          <th>Team 2 Slots</th>
+                        </tr>
+                    </thead>
+                    <tbody id="game-list">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <h5 class="text-center" id="no-games"></h5>
+              <h5>Select a Team</h5>
+              <div class="form-group ">
+                <div class="radio">
+                  <label><input type="radio" name="team" value="1"> Team 1</label>
+                </div>
+                <div class="radio">
+                  <label><input id="team2" type="radio" name="team" value="2"> Team 2</label>
+                </div>
+              </div>
+              <div class="form-group ">
+                <input type="submit" value="Sign up" class = "btn pink-btn btn-secondary">
+              </div>
+            </form>
+            <hr>
+            <ul>
+              <li>If you sign up you MUST ATTEND.</li>
+              <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
+            </ul>
           </div>
-          <h5>Select a Team</h5>
-          <div class="form-group ">
-            <div class="radio">
-              <label><input type="radio" name="team" value="1"> Team 1</label>
-            </div>
-            <div class="radio">
-              <label><input id="team2" type="radio" name="team" value="2"> Team 2</label>
-            </div>
-          </div>
-          <div class="form-group ">
-            <input type="submit" value="Sign up" class = "btn btn-secondary">
-          </div>
-        </form>
-        <hr>
-        <ul>
-          <li>If you sign up you MUST ATTEND.</li>
-          <li>You can sign up as 6/5. You will be the official sub if someone drops.</li>
-        </ul>
-      </div>
 
-    </li>
-  </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <!-- SCHEDULE A GAME -->
+    <div class="card rounded mt-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a class="pink-btn btn btn-primary mb-2 dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+            <h4 class = "mb-0">Schedule a Game<span class="down-caret"></span></h4>
+          </a>
+          <!-- <h3>Schedule a Game</h3> -->
+          <p class ="mb-0">Click to schedule your own game time</p>
+          <div class="collapse card-body" id="scheduleAGame">
+            <form id="schedule-game" method="post" action="/schedule/scheduleGame" class="pre-scrollable pre-scrollable-medium">
+              <h5>Game Type</h5>
+              <label>Ex. Captains Mode, Pub Session, ARDM</label>
+              <div class="form-group ">
+                <input type="text" name="gameType" placeholder="Game type" id="gameType">
+              </div>
+              <br>
+              <h5>Pub Session</h5>
+              <div class="form-group ">
+                  <label><input type="checkbox" name="pubSession" id="pubSession"> Check if this is a pub session and you are only looking for a 5 stack</label>
+              </div>
+              <br>
+              <h5>Date and Time</h5>
+              <label>Please schedule times in EST to keep things consistent</label>
+              <div class="form-group ">
+                <input type="date" name="date" value="" id="date">
+                <input type="time" name="time" value="21:00" id="time">
+              </div>
+              <br>
+              <h5>Discord Room</h5>
+              <label>Please select a room that isn't in use at the time you are scheduling the game for</label>
+              <div class="form-group">
+                <select name="discordRoom" id="discordRoom">
+                  <option value = "1" selected="selected">The Hoven</option>
+                  <option value = "2" >Icewrack</option>
+                  <option value = "3" >Knollen</option>
+                </select>
+              </div>
+              <br>
+              <h5>Announce on Discord</h5>
+              <div class="form-group ">
+                  <label><input type="checkbox" name="announce" checked id="announce"> Check if you want a signup link posted to the Discord</label>
+              </div>
+              <div class="form-group ">
+                <input type="submit" value="Schedule Game" class = "pink-btn-validate btn btn-secondary">
+              </div>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<!-- SCHEDULE A GAME -->
-<div class="card rounded mt-3">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <a class="pink-btn btn btn-primary mb-2 dropdown" href="#scheduleAGame" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-        <h4 class = "mb-0">Schedule a Game<span class="down-caret"></span></h4>
-      </a>
-      <p class ="mb-0">Schedule your own game time</p>
-      <div class="collapse card-body" id="scheduleAGame">
-        <form id="schedule-game" method="post" action="/schedule/scheduleGame">
-          <h5>Game Type</h5>
-          <label>Ex. Captains Mode, Pub Session, ARDM</label>
-          <div class="form-group ">
-            <input type="text" name="gameType" placeholder="Game type" id="gameType">
-          </div>
-          <br>
-          <h5>Pub Session</h5>
-          <div class="form-group ">
-              <label><input type="checkbox" name="pubSession" id="pubSession"> Check if this is a pub session and you are only looking for a 5 stack</label>
-          </div>
-          <br>
-          <h5>Date and Time</h5>
-          <label>Please schedule times in EST to keep things consistent</label>
-          <div class="form-group ">
-            <input type="date" name="date" value="" id="date">
-            <input type="time" name="time" value="21:00" id="time">
-          </div>
-          <br>
-          <h5>Discord Room</h5>
-          <label>Please select a room that isn't in use at the time you are scheduling the game for</label>
-          <div class="form-group">
-            <select name="discordRoom" id="discordRoom">
-              <option value = "1" selected="selected">The Hoven</option>
-              <option value = "2" >Icewrack</option>
-              <option value = "3" >Knollen</option>
-            </select>
-          </div>
-          <br>
-          <h5>Announce on Discord</h5>
-          <div class="form-group ">
-              <label><input type="checkbox" name="announce" checked id="announce"> Check if you want a signup link posted to the Discord</label>
-          </div>
-          <div class="form-group ">
-            <input type="submit" value="Schedule Game" class = "pink-btn-validate btn btn-secondary">
-          </div>
-        </form>
-      </div>
-    </li>
-  </ul>
-</div>
+
+
 
 <!-- SCHEUDLE -->
 <div class="card rounded p-4 mt-3">
