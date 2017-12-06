@@ -60,7 +60,7 @@ function getPlayerItem(pool, playerid, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM item JOIN playeritem ON item.itemid = playeritem.itemid WHERE playeritem.playerid = $1';
+      var queryString = 'SELECT * FROM item JOIN playeritem ON item.itemid = playeritem.itemid WHERE playeritem.playerid = $1 ORDER BY purchasedate';
       var values = [playerid];
       client.query(queryString, values, function(err, result){
         client.release();
