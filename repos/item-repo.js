@@ -40,7 +40,7 @@ function getItem(pool, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM item';
+      var queryString = 'SELECT * FROM item ORDER BY wecasualpoints';
       client.query(queryString, function(err, result){
         client.release();
         if(err){
