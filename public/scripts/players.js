@@ -26,9 +26,29 @@ $(document).ready(function() {
       }
       else if(res.success){
         var player = res.data;
+        var html = "";
+        var first = true;
         player.forEach(function(ele){
           $("#user-list").append('<li><a href="#" id="' + ele.playerid + '" class="player-btn">' + ele.username + '</a></li>')
+          if(ele.premium){
+            if(first){
+              html +='<div class="carousel-item player-btn active" id="' + ele.playerid + '">\
+                        <div class="card-player mb-1 p-1">\
+                          <h5><img height="40" width="40" class="rounded-circle" src=' + ele.avatar + ' alt="Avatar Image">&nbsp;&nbsp;' + ele.username + '</h5>\
+                        </div>\
+                      </div>';
+              first = false;
+            }
+            else{
+              html +='<div class="carousel-item player-btn" id="' + ele.playerid + '">\
+                        <div class="card-player mb-1 p-1">\
+                          <h5><img height="40" width="40" class="rounded-circle" src=' + ele.avatar + ' alt="Avatar Image">&nbsp;&nbsp;' + ele.username + '</h5>\
+                        </div>\
+                      </div>';
+            }
+          }
         });
+        $('.carousel-inner').html(html);
       }
     }
   });
@@ -120,6 +140,10 @@ function populatePlayer(playerid){
         }
       }
     }
+  });
+
+  $('.carousel').carousel({
+    interval: 2000
   });
 }
 
