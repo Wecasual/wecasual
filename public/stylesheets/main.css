@@ -650,7 +650,7 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-player, .challenge-card , .item-card{
+.card-player, .challenge-card , .item-card, .premium-card{
   width:100%;
   border:1px solid #d1d1d1;/*light gray*/
   border-radius:5px;
@@ -726,6 +726,7 @@ thead td.calendar {
     width:      100%;
     background: url('http://i.stack.imgur.com/FhHRx.gif') no-repeat;
 }*/
+
 /*Player page end*/
 
 /*Tournament Start*/
