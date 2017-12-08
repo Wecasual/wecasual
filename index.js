@@ -267,6 +267,23 @@ app.get('/shop.js', function(req, res){
 });
 
 
+//How to Wecasual page ejs
+app.post('/start.ejs', function(req, res){
+  res.sendFile('views/pages/start.ejs', {root: __dirname });
+});
+app.post('/FAQ.ejs', function(req, res){
+  res.sendFile('views/pages/FAQ.ejs', {root: __dirname });
+});
+app.post('/general-rules.ejs', function(req, res){
+  res.sendFile('views/pages/general-rules.ejs', {root: __dirname });
+});
+app.post('/gamemode-rules.ejs', function(req, res){
+  res.sendFile('views/pages/gamemode-rules.ejs', {root: __dirname });
+})
+
+
+
+
 //login route
 app.get(loginRoute.authDiscord.route, ensureRealm, passport.authenticate('discord'));
 app.get(loginRoute.authDiscordCallback.route, ensureRealm, passport.authenticate('discord', {failureRedirect: '/'}), loginRoute.authDiscordCallback.handler);
@@ -348,12 +365,16 @@ app.get('/about', ensureRealm, function(req, res){
   res.render('pages/about', { user: req.user, realm: req.session.realm});
 });
 
-app.get('/FAQ', ensureRealm, function(req, res){
-  res.render('pages/FAQ', { user: req.user, realm: req.session.realm});
-});
+// app.get('/FAQ', ensureRealm, function(req, res){
+//   res.render('pages/FAQ', { user: req.user, realm: req.session.realm});
+// });
 
-app.get('/dota/rules', ensureRealm, function(req, res){
-  res.render('pages/dota/rules', { user: req.user, realm: req.session.realm});
+// app.get('/dota/rules', ensureRealm, function(req, res){
+//   res.render('pages/dota/rules', { user: req.user, realm: req.session.realm});
+// });
+
+app.get('/how-to-wecasual', ensureRealm, function(req, res){
+  res.render('pages/how-to-wecasual', { user: req.user, realm: req.session.realm});
 });
 
 app.get('/dota/schedule', ensureRealm, function(req, res){
