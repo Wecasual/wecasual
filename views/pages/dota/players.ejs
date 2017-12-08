@@ -6,9 +6,40 @@
 <%}%>
 
 <div class="container-fluid top-spacer">
-  <div class="card-header display-4 text-center">
-    Players
+  <!-- <div class="card text-center rounded p-1"> -->
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <h5 class="premium-card p-1">
+          <img height="40" width="40" src="/images/premium-active.png"> Wecasual Premium Members:
+        </h5>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner carousel-container" role="listbox">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+          <a class=" rounded patreon-bg col-md-12 hvr-fade text-center p-2" href="https://www.patreon.com/wecasual" target="_blank">
+            <img class="rounded" alt="patreon-logo" width="64" height="32" src="/images/patreon-logo.png">
+          <%if(user){%>
+            <%if(!user.premium){%>
+              <span class = "explain-words align-middle">Get Wecasual Premium!</span>
+            <%}else{%>
+              <span class = "explain-words align-middle">You have Premium! &#10004; </span>
+            <%}%>
+          <%} else{%>
+              <span class = "explain-words align-middle">Get Wecasual Premium!</span>
+          <%}%>
+          </a>
+      </div>
+    <!-- </div> -->
   </div>
+
+
+  <!-- <div class="card-header display-4 text-center">
+    Players
+  </div> -->
   <div class="row">
     <div class="col-lg-4">
       <div class="card rounded mt-3">

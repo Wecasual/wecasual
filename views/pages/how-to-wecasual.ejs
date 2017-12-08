@@ -1,0 +1,78 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/navbar.ejs %>
+<div class="container-fluid top-spacer-small">
+  <div class="row">
+    <div class="col-lg-3">
+      <h5 class="text-center my-1 mt-4">
+        <b>How to Wecasual</b>
+      </h5>
+      <hr class = "my-1">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action text-center" id="list-start-list" data-toggle="list" href="#list-start" role="tab" aria-controls="start">Start Here!</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-FAQ-list" data-toggle="list" href="#list-FAQ" role="tab" aria-controls="FAQ">FAQ</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-general-rules-list" data-toggle="list" href="#list-general-rules" role="tab" aria-controls="general-rules">General Rules</a>
+        <a class="list-group-item list-group-item-action text-center" id="list-gamemode-rules-list" data-toggle="list" href="#list-gamemode-rules" role="tab" aria-controls="gamemode-rules">Gamemode Rules</a>
+      </div>
+
+      <!-- PROFILE INFO -->
+      <!-- <div class="card rounded my-3">
+        <ul class="list-group list-group-flush mt-0">
+          <li class="list-group-item p-0  text-left mt-0">
+
+            <div class="m-3 text-center">
+              AVATAR AND NAME
+            </div>
+
+            <div class="row m-3 text-center">
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Premium </h5>
+
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-1">
+                  <h5>Wecasual Points</h5>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="m-3">
+              <h5>Team:
+              </h5>
+            </div>
+
+            <div class="m-3">
+              <h5>Games played: </h5>
+            </div>
+
+          </li>
+        </ul>
+      </div> -->
+
+  </div>
+
+    <div class="col-lg-9">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-start" role="tabpanel" aria-labelledby="list-start-list">
+          <!-- INSERT START EJS -->
+        </div>
+        <div class="tab-pane fade" id="list-FAQ" role="tabpanel" aria-labelledby="list-FAQ-list">
+          <!-- INSERT FAQ EJS -->
+        </div>
+        <div class="tab-pane fade" id="list-general-rules" role="tabpanel" aria-labelledby="list-general-rules-list">
+          <!-- INSERT general-rules EJS -->
+        </div>
+        <div class="tab-pane fade" id="list-gamemode-rules" role="tabpanel" aria-labelledby="list-gamemode-rules-list">
+          <!-- INSERT gamemode-rules EJS -->
+        </div>
+      </div>
+    </div> <!-- BIG COL -->
+  </div> <!--ROW-->
+</div> <!-- CONTAINER -->
+
+<script src="../scripts/how-to-wecasual.js"></script>
+
+<% include ../partials/footer.ejs %>
