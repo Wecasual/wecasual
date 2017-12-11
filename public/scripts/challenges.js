@@ -228,6 +228,7 @@ $(document).on('click', '.cc-card', function(){
 $(document).on('click', '#challenge-opacity', function(){
   $('#challenge-opacity').fadeOut('fast');
   $('#challenge-info').slideUp('fast');
+  $('#challenge-actions').html('');
   $('#challenge-complete-form-container').hide();
 });
 
