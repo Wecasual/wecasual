@@ -282,6 +282,12 @@ app.post('/gamemode-rules.ejs', function(req, res){
 })
 
 
+//How to Wecasual page scripts
+app.get('/gamemode-rules.js', function(req, res){
+  res.sendFile('public/scripts/gamemode-rules.js', {root: __dirname });
+});
+
+
 
 
 //login route

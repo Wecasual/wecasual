@@ -479,6 +479,10 @@ a.active{
   transition: all .25s ease-in;
 }
 
+.down-caret-dark {
+  border-color: #555555 transparent transparent transparent;
+}
+
 .open-caret {
   transform: rotate(180deg);
   transition: all .25s ease-out;
@@ -650,7 +654,7 @@ thead td.calendar {
   z-index: 9;
 }
 
-.card-player, .challenge-card , .item-card, .premium-card{
+.card-player, .challenge-card , .item-card, .inner-card{
   width:100%;
   border:1px solid #d1d1d1;/*light gray*/
   border-radius:5px;
@@ -740,6 +744,45 @@ thead td.calendar {
   height: 500px;
 }*/
 /*Tournament End*/
+
+/*How to Wecasual Start*/
+.blue-card, .green-card, .purple-card, .red-card, .yellow-card {
+  color: #fff;
+  border-width: 0;
+}
+.colour-container > div > a{
+  text-decoration: none !important;
+}
+
+.blue-card {
+  background-color: #55F;
+}
+.green-card {
+  background-color: #5F5;
+}
+.purple-card {
+  background-color: #F5F;
+}
+.red-card {
+  background-color: #F55;
+}
+.white-card {
+  background-color: #FFF;
+  color: #555;
+}
+.yellow-card {
+  background-color: #FF5;
+}
+.page-link {
+  position: relative;
+  visibility: hidden;
+}
+
+.page-link > a {
+  position: absolute;
+  top: -70px;
+}
+/*How to Wecasual End*/
 
 /*Quick link signup*/
 
