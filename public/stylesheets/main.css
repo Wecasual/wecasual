@@ -479,6 +479,10 @@ a.active{
   transition: all .25s ease-in;
 }
 
+.down-caret-dark {
+  border-color: #555555 transparent transparent transparent;
+}
+
 .open-caret {
   transform: rotate(180deg);
   transition: all .25s ease-out;
@@ -745,6 +749,7 @@ thead td.calendar {
 .blue-card, .green-card, .purple-card, .red-card, .yellow-card {
   color: #fff;
   border-width: 0;
+  text-decoration: none !important;
 }
 .blue-card {
   background-color: #55F;
@@ -764,6 +769,15 @@ thead td.calendar {
 }
 .yellow-card {
   background-color: #FF5;
+}
+.page-link {
+  position: relative;
+  visibility: hidden;
+}
+
+.page-link > a {
+  position: absolute;
+  top: -70px;
 }
 /*How to Wecasual End*/
 

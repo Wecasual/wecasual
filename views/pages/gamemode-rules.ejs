@@ -7,17 +7,22 @@
 
           <h3 class="card-title text-center">Game Modes</h3>
           <hr>
-          <div class="">
-          <a href="#same-colour-heroes">Same Colour Heroes</a>
+          <div class="text-center">
+          <a href="#same-colour-heroes"><h5>Same Colour Heroes</h5></a>
           </div>
-          <div class="">
-          <a href="#letter-draft">Letter Draft</a>
+          <div class="text-center">
+          <a href="#letter-draft"><h5>Letter Draft</h5></a>
           </div>
-          <div class="">
-          <a href="#carries-only">Carries Only</a>
+          <div class="text-center">
+          <a href="#audience-mode"><h5>Audience Mode</h5></a>
           </div>
-
-          <h3 class="card-title mt-4 text-center"><a name="same-colour-heroes"></a>Same Colour Heroes</h3>
+          <!-- <div class="text-center">
+          <a href="#carries-only"><h5>Carries Only</h5></a>
+          </div> -->
+          <div class="page-link">
+            <a name="same-colour-heroes"></a>
+          </div>
+          <h3 class="card-title mt-2 text-center">Same Colour Heroes</h3>
           <hr>
           <h5>Number of Players</h5>
           <p>5v5</p>
@@ -31,51 +36,140 @@
             <li>After a team’s first pick they must say what colour they are in all chat</li>
             <li>The rest of the draft is normal, except teams must only pick heroes of their chosen colour</li>
           </ul>
-          <h5>Colours</h5>
+          <h5 class="mt-2">Hero Colours</h5>
           <div class="row">
             <div class="col-md-4">
-                <div class="inner-card text-center blue-card">
-                  Blue
+              <a class="dropdown" href="#blue" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center blue-card mt-2 mb-2">
+                  Blue<span class="down-caret"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card blue-card" id="blue">
 
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="inner-card text-center green-card">
-                  Green
+              <a class="dropdown" href="#green" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center green-card mt-2 mb-2">
+                  Green<span class="down-caret"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card green-card" id="green">
+
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="inner-card text-center purple-card">
-                  Purple
+              <a class="dropdown" href="#purple" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center purple-card mt-2 mb-2">
+                  Purple<span class="down-caret"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card purple-card" id="purple">
+
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-                <div class="inner-card text-center red-card">
-                  Red
+              <a class="dropdown" href="#red" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center red-card mt-2 mb-2">
+                  Red<span class="down-caret"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card red-card" id="red">
 
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="inner-card text-center white-card">
-                  White
+              <a class="dropdown" href="#white" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center white-card mt-2 mb-2">
+                  White<span class="down-caret down-caret-dark"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card white-card" id="white">
+
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="inner-card text-center yellow-card">
-                  Yellow
+              <a class="dropdown" href="#yellow" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                <div class="inner-card text-center yellow-card mt-2 mb-2">
+                  Yellow<span class="down-caret"></span>
                 </div>
+              </a>
+              <div class="collapse inner-card yellow-card" id="yellow">
+
+              </div>
             </div>
           </div>
 
-          <h3 class="card-title mt-4 text-center"> <a name="letter-draft"></a>Letter Draft</h3>
+          <div class="page-link">
+            <a name="letter-draft"></a>
+          </div>
+          <h3 class="card-title mt-2 text-center">Letter Draft</h3>
           <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Number of Players</h5>
+              <p>5v5</p>
+              <h5>Game Mode</h5>
+              <p>Captains Mode</p>
+              <h5>Rules</h5>
+              <ul>
+                <li>Teams must create their draft from heroes starting with the same letter</li>
+                <li>Teams pick two different letters to pick their heroes from</li>
+                <li>Letter picking will be determined by a mini-draft with “letter bans” and “letter picks”</li>
+                <li>Team will have 30 sec to pick or ban each letter (No reserve time)</li>
+                <li>A letter can only be picked or banned once</li>
+                <li>The draft will take place in Discord, and pick order will be determined by a coin toss</li>
+                <li>After the Letters have been chosen the Captains Mode draft will be used to pick heroes</li>
+                <li>The previous coin toss will be used to determine pick order</li>
+                <li>There will be no bans. Instead teams will ban heroes that start with letters not picked by a team. (Example: If team 1 has letters A and C, and team 2 has M and W then teams will ban heroes that DON’T start with A,C,M, or W)</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h5>Letter Draft Order</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Letter <b>ban</b></td><td>Wait</td></tr>
+                  <tr><td>Wait</td><td>Letter <b>ban</b></td></tr>
+                  <tr><td>Letter <b>ban</b></td><td>Wait</td></tr>
+                  <tr><td>Wait</td><td>Letter <b>ban</b></td></tr>
+                  <tr><td>Letter <b>pick</b></td><td>Wait</td></tr>
+                  <tr><td>Wait</td><td>Letter <b>pick</b></td></tr>
+                  <tr><td>Wait</td><td>Letter <b>pick</b></td></tr>
+                  <tr><td>Letter <b>pick</b></td><td>Wait</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
+          <div class="page-link">
+            <a name="audience-mode"></a>
+          </div>
+          <h3 class="card-title mt-2 text-center"><a name="audience-mode"></a>Audience Mode</h3>
+          <hr>
+          <h5>Number of Players</h5>
+          <p>5v5 (Minimum 1 person watching)</p>
+          <h5>Game Mode</h5>
+          <p>Captains Mode</p>
+          <h5>Rules</h5>
+          <ul>
+            <li>Teams will have the drafts decided by players who are watching the game</li>
+            <li>Audience members will take turns picking and banning heroes in a rotation</li>
+            <li>Audience members may pick or ban for either team</li>
+            <li>All Chat is permitted for the audience (no harmful language or flaming)</li>
+            <li>Players be aware that the audience may all chat gg, so do not stop playing if that does happen</li>
 
+          </ul>
+<!--
           <h3 class="card-title mt-4 text-center"> <a name="carries-only"></a>Carries Only</h3>
-          <hr>
-
+          <hr> -->
       </div>
     </li>
   </ul>
