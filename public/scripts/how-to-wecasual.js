@@ -62,6 +62,7 @@ $(document).ready(function() {
         url: '/gamemode-rules.ejs',
         success: function(res){
           $("#list-gamemode-rules").html(res);
+          $.getScript('/gamemode-rules.js');
         }
       });
     }
