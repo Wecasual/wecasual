@@ -749,8 +749,11 @@ thead td.calendar {
 .blue-card, .green-card, .purple-card, .red-card, .yellow-card {
   color: #fff;
   border-width: 0;
+}
+.colour-container > div > a{
   text-decoration: none !important;
 }
+
 .blue-card {
   background-color: #55F;
 }
