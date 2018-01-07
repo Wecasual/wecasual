@@ -25,7 +25,7 @@ function getAvailableChallenge(pool, callback){
       callback && callback(err);
     }
     else{
-      var queryString = 'SELECT * FROM challenge WHERE NOW() < startdate + interval \'2 week\'';
+      var queryString = 'SELECT * FROM challenge';// WHERE NOW() < startdate + interval \'2 week\'';
       client.query(queryString, function(err, result){
         client.release();
         if(err){
