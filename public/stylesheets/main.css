@@ -759,6 +759,7 @@ thead td.calendar {
 }
 .green-card {
   background-color: #5F5;
+  color: #555;
 }
 .purple-card {
   background-color: #F5F;
@@ -772,6 +773,7 @@ thead td.calendar {
 }
 .yellow-card {
   background-color: #FF5;
+  color: #555;
 }
 .page-link {
   position: relative;
